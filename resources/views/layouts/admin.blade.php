@@ -18,18 +18,18 @@
 
 </head>
 <body>
-<section>
-    @include('modulos.cabecera')
-</section>
-<section>
-    @yield('content')
-</section>
-<div class="footer">
-    <div class="row">
-        <div class="col-lg-12" >
-            &copy;  2017 Diseño de Sistema I| Design by: <a href="" style="color:#fff;" target="_blank">Clinica de Radiologia e Imagenes</a>
+    <section>
+        @include('modulos.cabecera')
+    </section>
+    <section>
+        @yield('content')
+    </section>
+    <div class="footer">
+        <div class="row">
+            <div class="col-lg-12" >
+                &copy;  2017 Diseño de Sistema I| Design by: <a href="" style="color:#fff;" target="_blank">Clinica de Radiologia e Imagenes</a>
+            </div>
         </div>
-    </div>
     </div>
     <!-- /. WRAPPER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->

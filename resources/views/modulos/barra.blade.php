@@ -1,6 +1,6 @@
 
 <!-- /. NAV TOP  -->
-    <nav class="navbar-default navbar-side" role="navigation">
+<nav class="navbar-default navbar-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="main-menu">
             <li>
@@ -18,7 +18,7 @@
             <li>
                 <a href=""><i class="glyphicon glyphicon-search"></i>Asignacion de Usuarios a Roles</a>
             </li>
-            
+
         </ul>
     </div>
 
