@@ -8,11 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>SITEMA DE RADIOLOGIA</title>
+    <title>SISTEMA DE RADIOLOGIA</title>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- GOOGLE FONT -->
-    <link href="css/custom2.css" rel="stylesheet" />
+    <link href="{{ ('css/custom2.css')}}" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
 </head>

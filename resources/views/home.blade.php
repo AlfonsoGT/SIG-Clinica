@@ -1,17 +1,25 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    You are logged in!
-                </div>
-            </div>
-        </div>
+<div id="page-wrapper" >
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-lg-12">
+               <h2>Clinica de Radiologia e Imagenes</h2>   
+           </div>
+       </div>              
+       <!-- /. ROW  -->
+       <div class="row">
+        <div class="col-lg-12 ">
+            <div class="alert alert-info">
+               <strong>Bienvenido al Sistema de la Clinica </strong>Indicaciones
+           </div>
+       </div>
     </div>
-</div>
+    <!-- /. ROW  --> 
+    <!-- /. ROW  --> 
+    </div>
+    <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
 @endsection
