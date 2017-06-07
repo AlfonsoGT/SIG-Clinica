@@ -1,68 +1,34 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+     <meta name="generator" content="Sistema de Radiologia e Imagenes">
+    <link rel="shortcut icon" href="{{ ('img/clinica.png')}}" type="image/x-icon">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>SISTEMA DE RADIOLOGIA</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,400&amp;subset=cyrillic,latin,greek,vietnamese">
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <!-- GOOGLE FONT -->
-    <link href="{{ ('css/custom2.css')}}" rel="stylesheet" />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-
+    <link href="{{ ('css/bootstrap.min.css')}}" rel="stylesheet" />
+    <link href="{{ ('css/animate.min.css')}}" rel="stylesheet" />
+     <link href="{{ ('css/style.css')}}" rel="stylesheet" />
+     <link href="{{ ('css/mbr-additional.css')}}" rel="stylesheet" />
 </head>
 <body>
-    <div id="page-inner">
-
-        <div class="collapse navbar-collapse" id="app-navbar-collapse">
-            <!-- Left Side Of Navbar -->
-            <ul class="nav navbar-nav">
-                &nbsp;
-            </ul>
-            <div class="navbar-header">
-                <a class="navbar-brand" href="">
-                    <img src="img/logo2.png">
-                </a>
-            </div>
-            <!-- Right Side Of Navbar -->
-            <ul class="nav navbar-nav navbar-right">
-                <!-- Authentication Links -->
-                @if (Auth::guest())
-                <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
-                <li><a href="{{ route('register') }}">Registrarse</a></li>
-                @else
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        {{ Auth::user()->name }} <span class="caret"></span>
-                    </a>
-
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                            Logout
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                    </li>
-                </ul>
-            </li>
-            @endif
-        </ul>
+    <section>
+        @include('modulos.cabecera')
+    </section>
+    <section class="engine"><a rel="external">Clinica de Radiologia e Imagenes</a></section><section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background" id="header4-6" style="background-image: url({{ ('img/fondo.png')}}");>
+   <div class="mbr-box__magnet mbr-box__magnet--sm-padding mbr-box__magnet--center-center mbr-after-navbar">
+    @yield('content')
     </div>
-    <div>
-        @yield('content')
-    </div>
-<!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
-<script src="js/custom2.js"></script>
+    </section>
+    <section>
+        @include('modulos.pie')
+    </section>
+   
 </body>
 </html>
