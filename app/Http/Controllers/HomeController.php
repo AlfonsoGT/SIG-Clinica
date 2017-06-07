@@ -23,6 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('partes.home');
+    }
+
+    public function crearPaciente()
+    {
+        return view('partes.crearPaciente');
     }
 }

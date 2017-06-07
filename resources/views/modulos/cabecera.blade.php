@@ -18,7 +18,7 @@
                             <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('register') }}">REGISTRESE</a></li></ul>                            
                              @else
                               <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="">VER EXPEDIENTE</a></li>  
-                              <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="">INGRESAR PACIENTE</a></li>  
+                              <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('crearPaciente') }}">INGRESAR PACIENTE</a></li>  
                              <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">SALIR</a></li>
                              <li class="mbr-navbar__item"><a href="{{ url('/home') }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> {{ Auth::user()->name }} </a></li>
                               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
