@@ -19,7 +19,12 @@
 
 					<form class="form-horizontal" role="form" method="POST" action="{{ route('crearPaciente') }}">
 						{{ csrf_field() }}
-
+						<div class="form-group">
+							<label for="duiPaciente" class="col-md-4 control-label">DUI Paciente</label>
+							<div class="col-md-6">
+								<input id="primerNombre" type="text" class="form-control" name="duiPaciente" value="{{ old('duiPaciente') }}" required autofocus>
+							</div>
+						</div>
 						<div class="form-group">
 							<label for="primerNombre" class="col-md-4 control-label">Primer Nombre</label>
 							<div class="col-md-6">
@@ -56,11 +61,38 @@
 								<input id="numeroCelular" type="text" class="form-control" name="numeroCelular" value="{{ old('numeroCelular') }}" required autofocus>
 							</div>
 						</div>
-						<label for="numeroTelefonico" class="col-md-4 control-label">Numero Telefonico</label>
-						<div class="col-md-6">
-							<input id="numeroTelefonico" type="text" class="form-control" name="numeroTelefonico" value="{{ old('numeroTelefonico') }}" required autofocus>
-						</div>
 
+						<div class="form-group">
+							<label for="duiEncargador" class="col-md-4 control-label">DUI de Encargado</label>
+							<div class="col-md-6">
+								<input id="duiEncargado" type="text" class="form-control" name="duiEncargado" value="{{ old('duiEncargado') }}" required autofocus>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="nombreEncargado" class="col-md-4 control-label">Nombre deEncargado</label>
+							<div class="col-md-6">
+								<input id="duiEncargado" type="text" class="form-control" name="nombreEncargado" value="{{ old('nombreEncargado') }}" required autofocus>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="sexo" class="col-md-4 control-label">Sexo</label>
+							<div class="col-md-6">
+								 <select class="form-control" name="sexo" id="sexo" onchange="ocul()">
+                                            <option  value=''>Femenino</option>
+                                            <option  value=''>Masculino</option>
+                                    </select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="procedencia" class="col-md-4 control-label">Procedencia</label>
+							<div class="col-md-6">
+								 <select class="form-control" name="procedencia" id="procedencia" onchange="ocul()">
+                                            <option  value=''>Facultad de Medicina</option>
+                                            <option  value=''>Facultad de Odontologia</option>
+                                    </select>
+							</div>
+						</div>
+						
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-success">
