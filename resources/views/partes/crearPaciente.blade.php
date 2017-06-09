@@ -17,7 +17,7 @@
 					<!--Mensaje de error -->
 					<div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-					<form class="form-horizontal" role="form" method="POST" action="{{ route('crearPaciente') }}">
+					<form class="form-horizontal" role="form" method="POST" action="{{ url( 'pacientes' ) }}">
 						{{ csrf_field() }}
 						<div class="form-group">
 							<label for="duiPaciente" class="col-md-4 control-label">DUI Paciente</label>
@@ -40,7 +40,7 @@
 						<div class="form-group">
 							<label for="primerApellido" class="col-md-4 control-label">Primer Apellido</label>
 							<div class="col-md-6">
-								<input id="primerapellido" type="text" class="form-control" name="primerapellido" value="{{ old('primerApellido') }}" required autofocus>
+								<input id="primerApellido" type="text" class="form-control" name= "primerApellido" value="{{ old('primerApellido') }}" required autofocus>
 							</div>
 						</div>
 						<div class="form-group">
@@ -63,23 +63,23 @@
 						</div>
 
 						<div class="form-group">
-							<label for="duiEncargador" class="col-md-4 control-label">DUI de Encargado</label>
+							<label for="duiEncargado" class="col-md-4 control-label">DUI de Encargado</label>
 							<div class="col-md-6">
 								<input id="duiEncargado" type="text" class="form-control" name="duiEncargado" value="{{ old('duiEncargado') }}" required autofocus>
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="nombreEncargado" class="col-md-4 control-label">Nombre deEncargado</label>
+							<label for="nombreEncargado" class="col-md-4 control-label">Nombre de Encargado</label>
 							<div class="col-md-6">
-								<input id="duiEncargado" type="text" class="form-control" name="nombreEncargado" value="{{ old('nombreEncargado') }}" required autofocus>
+								<input id="nombreEncargado" type="text" class="form-control" name="nombreEncargado" value="{{ old('nombreEncargado') }}" required autofocus>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="sexo" class="col-md-4 control-label">Sexo</label>
 							<div class="col-md-6">
 								 <select class="form-control" name="sexo" id="sexo" onchange="ocul()">
-                                            <option  value=''>Femenino</option>
-                                            <option  value=''>Masculino</option>
+                                            <option  value='1'>Femenino</option>
+                                            <option  value='2'>Masculino</option>
                                     </select>
 							</div>
 						</div>
@@ -87,8 +87,8 @@
 							<label for="procedencia" class="col-md-4 control-label">Procedencia</label>
 							<div class="col-md-6">
 								 <select class="form-control" name="procedencia" id="procedencia" onchange="ocul()">
-                                            <option  value=''>Facultad de Medicina</option>
-                                            <option  value=''>Facultad de Odontologia</option>
+                                            <option  value='1'>Facultad de Medicina</option>
+                                            <option  value='2'>Facultad de Odontologia</option>
                                     </select>
 							</div>
 						</div>

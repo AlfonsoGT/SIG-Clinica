@@ -20,3 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/crearPaciente', 'HomeController@crearPaciente')->name('crearPaciente');
+
+//Pacientes
+Route::resource('pacientes', 'PacienteController');
