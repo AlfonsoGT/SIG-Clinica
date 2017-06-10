@@ -1,3 +1,9 @@
+<?php
+    use App\Sexo;
+    use App\Procedencia;
+?>
+
+
 @extends('layouts.app')
 
 @section('content')
@@ -78,8 +84,9 @@
 							<label for="sexo" class="col-md-4 control-label">Sexo</label>
 							<div class="col-md-6">
 								 <select class="form-control" name="sexo" id="sexo" onchange="ocul()">
-                                            <option  value='1'>Femenino</option>
-                                            <option  value='2'>Masculino</option>
+								 @foreach(Sexo::all() as $sexo)
+                                            <option  value='{{ $sexo->idSexo }}'> {{ $sexo->nombre_sexo }} </option>
+                                        @endforeach
                                     </select>
 							</div>
 						</div>
@@ -87,8 +94,9 @@
 							<label for="procedencia" class="col-md-4 control-label">Procedencia</label>
 							<div class="col-md-6">
 								 <select class="form-control" name="procedencia" id="procedencia" onchange="ocul()">
-                                            <option  value='1'>Facultad de Medicina</option>
-                                            <option  value='2'>Facultad de Odontologia</option>
+                                            @foreach(Procedencia::all() as $procedencia)
+                                            <option  value='{{ $sexo->idSexo }}'> {{ $procedencia->nombre_procedencia }} </option>
+                                        @endforeach
                                     </select>
 							</div>
 						</div>

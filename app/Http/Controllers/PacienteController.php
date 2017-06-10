@@ -41,6 +41,14 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'primerNombre' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'segundoNombre' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'primerApellido'=> 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'segundoApellido'=> 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'nombreEncargado' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+        ]);
+        try{
         //
         $paciente = new Paciente();
         $paciente->duiPaciente = $request->duiPaciente;
@@ -52,18 +60,13 @@ class PacienteController extends Controller
         $paciente->numeroCelular = $request->numeroCelular;
         $paciente->duiEncargado = $request->duiEncargado;
         $paciente->nombreEncargado = $request->nombreEncargado;
-        $idSexo =  $request->sexo;
-        $id_sexo = DB::table('sexo')
-        ->where('idSexo','=',$idSexo)
-        ->value('idSexo');
-        $paciente->idSexo = $id_sexo;
-        $idProcedencia =  $request->procedencia;
-        $id_procedencia = DB::table('procedencia')
-        ->where('idProcedencia','=',$idProcedencia)
-        ->value('idProcedencia');
-        $paciente->idProcedencia = $id_procedencia;
+        $paciente->idSexo = $request->sexo;
+        $paciente->idProcedencia = $request->procedencia;
         $paciente->save();
         return Redirect::to('crearPaciente');
+        }catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
     }
 
     /**
