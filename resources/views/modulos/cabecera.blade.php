@@ -4,7 +4,7 @@
             <div class="mbr-navbar__container">
                 <div class="mbr-navbar__column mbr-navbar__column--s mbr-navbar__brand">
                     <span class="mbr-navbar__brand-link mbr-brand mbr-brand--inline">
-                        <span class="mbr-brand__logo"><img src="{{ ('img/logo1.png')}}" class="mbr-navbar__brand-img mbr-brand__img" ></span>
+                        <span class="mbr-brand__logo"><img src="{{ asset('img/logo1.png')}}" class="mbr-navbar__brand-img mbr-brand__img" ></span>
                         <span class="mbr-brand__name"><a class="mbr-brand__name text-white">ADMINISTRACIÓN DE CLINICA&nbsp;</a></span>
                     </span>
                 </div>
@@ -17,10 +17,10 @@
                             <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}">INICIAR SESIÓN</a></li>  
                             <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('register') }}">REGISTRESE</a></li></ul>                            
                              @else
-                              <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="">VER EXPEDIENTE</a></li>  
-                              <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('crearPaciente') }}">INGRESAR PACIENTE</a></li>  
+                              <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_pacientes.index') }}">VER EXPEDIENTE</a></li>  
+                              <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_pacientes.create') }}">INGRESAR PACIENTE</a></li>  
                              <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">SALIR</a></li>
-                             <li class="mbr-navbar__item"><a href="{{ url('/home') }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> {{ Auth::user()->name }} </a></li>
+                             <li class="mbr-navbar__item"><a href="{{ route('home') }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> {{ Auth::user()->name }} </a></li>
                               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                         </form>

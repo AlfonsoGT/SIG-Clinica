@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Redirect;
 
 use App\Paciente;
 
+use Exception;
+
+
 class PacienteController extends Controller
 {
     /**
@@ -17,9 +20,11 @@ class PacienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $path = '/admin_pacientes';
     public function index()
     {
-        //
+        $pacientes = Paciente::all();
+        return view($this->path.'/admin_pacientes')->with('pacientes',$pacientes);
     }
 
     /**
@@ -29,8 +34,12 @@ class PacienteController extends Controller
      */
     public function create()
     {
-        //
+        return view($this->path.'/crearPaciente');
          
+    }
+    public function home()
+    {
+        return view($this->path.'/home');
     }
 
     /**
@@ -66,7 +75,7 @@ class PacienteController extends Controller
         $paciente->idSexo = $request->sexo;
         $paciente->idProcedencia = $request->procedencia;
         $paciente->save();
-        return Redirect::to('crearPaciente');
+        return redirect($this->path);
         }catch(Exception $e){
             return "Fatal error - ".$e->getMessage();
         }

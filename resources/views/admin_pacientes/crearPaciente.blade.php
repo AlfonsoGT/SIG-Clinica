@@ -32,7 +32,7 @@
 					<!--Mensaje de error -->
 					<div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-					<form class="form-horizontal" role="form" method="POST" action="{{ url( 'pacientes' ) }}">
+					<form class="form-horizontal" role="form" method="POST" action="{{ url( '/admin_pacientes' ) }}">
 						{{ csrf_field() }}
 						<div class="form-group">
 							<label for="duiPaciente" class="col-md-4 control-label">DUI Paciente</label>
