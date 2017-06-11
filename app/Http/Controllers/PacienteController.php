@@ -47,6 +47,9 @@ class PacienteController extends Controller
             'primerApellido'=> 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
             'segundoApellido'=> 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
             'nombreEncargado' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'duiPaciente' => 'required|max:10|min:10|unique:pacientes',
+            'duiEncargado' => 'required|max:10|min:10|unique:pacientes',
+            'numeroCelular' => 'required|max:8|min:8',
         ]);
         try{
         //
