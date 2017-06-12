@@ -22,7 +22,7 @@ use App\Paciente;
 						 <table class="table table-striped table-hover table-bordered">
 							<thead>
 								<tr>
-								   <th class="text-center">ID Paciente</th>
+								   <th class="text-center">ID</th>
 									<th class="text-center">DUI Paciente</th>
 									<th class="text-center">Primer Nombre</th>
 									<th class="text-center">Segundo Nombre</th>
@@ -38,7 +38,7 @@ use App\Paciente;
 								</tr>
 							</thead>
 							<tbody>
-							@foreach($pacientes as $paciente)
+							@foreach($pacientes as $paciente) 
 										<tr>
 											<td class="text-center"> {{ $paciente->id }} </td>
 											<td class="text-center"> {{ $paciente->duiPaciente }} </td>
@@ -50,11 +50,11 @@ use App\Paciente;
 											<td class="text-center"> {{ $paciente->numeroCelular }} </td>
 											<td class="text-center"> {{ $paciente->duiEncargado}} </td>
 											<td class="text-center"> {{ $paciente->nombreEncargado}} </td>
-											<td class="text-center"> {{ $paciente->idSexo }} </td>
-											<td class="text-center"> {{ $paciente->idProcedencia }} </td>
+											<td class="text-center"> {{ $paciente->nombre_sexo }} </td>
+											<td class="text-center"> {{ $paciente->nombre_procedencia }} </td>
 											<td>
-											<a href="{{ route('admin_pacientes.edit',$paciente->idPaciente) }}" class="btn btn-info btn-sm">Editar</a>
-											<form method="POST" action="{{ route('admin_pacientes.destroy', $paciente->idPaciente) }} " style='display: inline;'>
+											<a href="{{ route('admin_pacientes.edit',$paciente->id) }}" class="btn btn-info btn-sm">Editar</a>
+											<form method="POST" action="{{ route('admin_pacientes.destroy', $paciente->id) }} " style='display: inline;'>
 											<input type="hidden" name="_method" value="DELETE">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
 											<button type="submit" class="btn btn-danger btn-sm">Borrar</button></form>

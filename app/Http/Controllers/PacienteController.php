@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Redirect;
 
 use App\Paciente;
 
+use App\Sexo;
+use App\procedencias;
+
 use Exception;
 
 
@@ -23,7 +26,11 @@ class PacienteController extends Controller
     private $path = '/admin_pacientes';
     public function index()
     {
-        $pacientes = Paciente::all();
+        $pacientes = DB::table('pacientes')
+            ->join('sexo', 'pacientes.idSexo', '=', 'sexo.idSexo')
+            ->join('procedencia', 'pacientes.idProcedencia', '=', 'procedencia.idProcedencia')
+            ->select('pacientes.*', 'sexo.nombre_sexo', 'procedencia.nombre_procedencia')
+            ->get();
         return view($this->path.'/admin_pacientes')->with('pacientes',$pacientes);
     }
 
@@ -34,7 +41,9 @@ class PacienteController extends Controller
      */
     public function create()
     {
-        return view($this->path.'/crearPaciente');
+        $sexos = DB::table('sexo')->select('idSexo', 'nombre_sexo')->get();
+        $procedencias = DB::table('procedencia')->select('idProcedencia', 'nombre_procedencia')->get();
+        return view($this->path.'/crearPaciente')->with('sexos',$sexos)->with('procedencias',$procedencias);
 
     }
     public function home()
@@ -100,7 +109,15 @@ class PacienteController extends Controller
      */
     public function edit($id)
     {
-        //
+        try{
+             $paciente = Paciente::findOrFail($id);
+             $sexos = DB::table('sexo')->select('idSexo', 'nombre_sexo')->get();
+             $procedencias = DB::table('procedencia')->select('idProcedencia', 'nombre_procedencia')->get();
+
+            return view($this->path.'/editarPaciente')->with("paciente",$paciente)->with('sexos',$sexos)->with('procedencias',$procedencias);
+        }catch(Exception $e){
+            return "Error al intentar modificar al Paciente".$e->getMessage();
+        }
     }
 
     /**
@@ -112,7 +129,36 @@ class PacienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'primerNombre' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'segundoNombre' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'primerApellido'=> 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'segundoApellido'=> 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'nombreEncargado' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'duiPaciente' => 'required|max:10|min:10|regex:/^\d{8}-\d$/',
+            'duiEncargado' => 'required|max:10|min:10|regex:/^\d{8}-\d$/',
+            'numeroCelular' => 'required|max:8|min:8',
+        ]);
+        try{
+            //
+        $paciente = Paciente::findOrFail($id);
+        $paciente->duiPaciente = $request->duiPaciente;
+        $paciente->primerNombre = $request->primerNombre;
+        $paciente->segundoNombre = $request->segundoNombre;
+        $paciente->primerApellido = $request->primerApellido;
+        $paciente->segundoApellido = $request->segundoApellido;
+        $paciente->fechaNacimiento = $request->fechaNacimiento;
+        $paciente->numeroCelular = $request->numeroCelular;
+        $paciente->duiEncargado = $request->duiEncargado;
+        $paciente->nombreEncargado = $request->nombreEncargado;
+        $paciente->idSexo = $request->sexo;
+        $paciente->idProcedencia = $request->procedencia;
+        $paciente->save();
+        return redirect($this->path);
+        }catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
+
     }
 
     /**
@@ -123,6 +169,12 @@ class PacienteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $paciente = Paciente::findOrFail($id);
+            $paciente->delete();
+            return redirect($this->path);
+        }catch(Exception $e){
+            return "No se pudo eliminar el Usuario Especificado";
+        }
     }
 }
