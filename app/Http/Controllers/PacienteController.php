@@ -35,7 +35,7 @@ class PacienteController extends Controller
     public function create()
     {
         return view($this->path.'/crearPaciente');
-         
+
     }
     public function home()
     {
@@ -56,8 +56,8 @@ class PacienteController extends Controller
             'primerApellido'=> 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
             'segundoApellido'=> 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
             'nombreEncargado' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
-            'duiPaciente' => 'required|max:10|min:10|unique:pacientes',
-            'duiEncargado' => 'required|max:10|min:10|unique:pacientes',
+            'duiPaciente' => 'required|max:10|min:10|regex:/^\d{8}-\d$/',
+            'duiEncargado' => 'required|max:10|min:10|regex:/^\d{8}-\d$/',
             'numeroCelular' => 'required|max:8|min:8',
         ]);
         try{
