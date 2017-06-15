@@ -111,10 +111,11 @@ class PacienteController extends Controller
     {
         try{
              $paciente = Paciente::findOrFail($id);
-             $sexos = DB::table('sexo')->select('idSexo', 'nombre_sexo')->get();
-             $procedencias = DB::table('procedencia')->select('idProcedencia', 'nombre_procedencia')->get();
-
-            return view($this->path.'/editarPaciente')->with("paciente",$paciente)->with('sexos',$sexos)->with('procedencias',$procedencias);
+             $sexoPaciente= DB::table('sexo')->where('idSexo',$paciente->idSexo)->select('idSexo','nombre_sexo')->get();
+             $sexoDiferente =DB::table('sexo')->where('idSexo','<>',$paciente->idSexo)->select('idSexo','nombre_sexo')->get();
+             $procedenciaPaciente =DB::table('procedencia')->where('idProcedencia',$paciente->idProcedencia)->select('nombre_procedencia','idProcedencia')->get();
+             $procedenciaDiferente =DB::table('procedencia')->where('idProcedencia','<>',$paciente->idProcedencia)->select('idProcedencia','nombre_procedencia')->get();
+            return view($this->path.'/editarPaciente')->with("paciente",$paciente)->with('sexoPaciente',$sexoPaciente)->with('sexoDiferente',$sexoDiferente)->with('procedenciaPaciente',$procedenciaPaciente)->with('procedenciaDiferente',$procedenciaDiferente);
         }catch(Exception $e){
             return "Error al intentar modificar al Paciente".$e->getMessage();
         }

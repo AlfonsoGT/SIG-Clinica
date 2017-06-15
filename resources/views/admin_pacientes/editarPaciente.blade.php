@@ -17,64 +17,108 @@
 
 					<!--Mensaje de error -->
 					<div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-
-					<form class="form-horizontal" role="form" method="POST" action="admin_pacientes/{{$paciente->id}}">
+					<form class="form-horizontal" role="form" method="POST" action="/admin_pacientes/{{$paciente->id}}">
 						<input type="hidden" name="_method" value="PUT">
                          <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-						<div class="form-group">
+						<div class="form-group {{ $errors->has('duiPaciente') ? ' has-error' : '' }}">
 							<label for="duiPaciente" class="col-md-4 control-label">DUI Paciente</label>
 							<div class="col-md-6">
 								<input id="primerNombre" type="text" class="form-control" name="duiPaciente" value="{{ $paciente->duiPaciente }}">
+								 @if ($errors->has('duiPaciente'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('duiPaciente') }}</strong>
+                                                </span>
+                                 @endif
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group {{ $errors->has('primerNombre') ? ' has-error' : '' }}">
 							<label for="primerNombre" class="col-md-4 control-label">Primer Nombre</label>
 							<div class="col-md-6">
 								<input id="primerNombre" type="text" class="form-control" name="primerNombre" value="{{ $paciente->primerNombre }}" >
+								@if ($errors->has('primerNombre'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('primerNombre') }}</strong>
+                                                </span>
+                                 @endif
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group {{ $errors->has('segundoNombre') ? ' has-error' : '' }}">
 							<label for="segundoNombre" class="col-md-4 control-label">Segundo Nombre</label>
 							<div class="col-md-6">
 								<input id="segundoNombre" type="text" class="form-control" name="segundoNombre" value="{{ $paciente->segundoNombre }}">
+								@if ($errors->has('segundoNombre'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('segundoNombre') }}</strong>
+                                                </span>
+                                 @endif
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group  {{ $errors->has('primerApellido') ? ' has-error' : '' }}">
 							<label for="primerApellido" class="col-md-4 control-label">Primer Apellido</label>
 							<div class="col-md-6">
 								<input id="primerApellido" type="text" class="form-control" name= "primerApellido" value="{{ $paciente->primerApellido }} ">
+								@if ($errors->has('primerApellido'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('primerApellido') }}</strong>
+                                                </span>
+                                 @endif
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group {{ $errors->has('segundoApellido') ? ' has-error' : '' }}">
 							<label for="segundoApellido" class="col-md-4 control-label">Segundo Apellido</label>
 							<div class="col-md-6">
 								<input id="segundoApellido" type="text" class="form-control" name="segundoApellido" value="{{ $paciente->segundoApellido}}">
+								@if ($errors->has('segundoApellido'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('segundoApellido') }}</strong>
+                                                </span>
+                                 @endif
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group {{ $errors->has('fechaNacimiento') ? ' has-error' : '' }}">
 							<label for="fechaNacimiento" class="col-md-4 control-label">Fecha nacimiento</label>
 							<div class="col-md-6">
 								<input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" value="{{ $paciente->fechaNacimiento }}">
+								@if ($errors->has('fechaNacimiento'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('fechaNacimiento') }}</strong>
+                                                </span>
+                                 @endif
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group {{ $errors->has('numeroCelular') ? ' has-error' : '' }}">
 							<label for="numeroCelular" class="col-md-4 control-label">Numero Telefonico</label>
 							<div class="col-md-6">
 								<input id="numeroCelular" type="text" class="form-control" name="numeroCelular" value="{{ $paciente->numeroCelular }}">
+								@if ($errors->has('numeroCelular'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('numeroCelular') }}</strong>
+                                                </span>
+                                 @endif
 							</div>
 						</div>
 
-						<div class="form-group">
+						<div class="form-group {{ $errors->has('duiEncargado') ? ' has-error' : '' }}">
 							<label for="duiEncargado" class="col-md-4 control-label">DUI de Encargado</label>
 							<div class="col-md-6">
 								<input id="duiEncargado" type="text" class="form-control" name="duiEncargado" value="{{ $paciente->duiEncargado }}" >
+								@if ($errors->has('duiEncargado'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('duiEncargado') }}</strong>
+                                                </span>
+                                 @endif
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group {{ $errors->has('nombreEncargado') ? ' has-error' : '' }}">
 							<label for="nombreEncargado" class="col-md-4 control-label">Nombre de Encargado</label>
 							<div class="col-md-6">
 								<input id="nombreEncargado" type="text" class="form-control" name="nombreEncargado" value="{{ $paciente->nombreEncargado }}">
+								@if ($errors->has('nombreEncargado'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('nombreEncargado') }}</strong>
+                                                </span>
+                                 @endif
 							</div>
 						</div>
 						<div class="form-group">
@@ -82,10 +126,12 @@
 							<div class="col-md-6">
 							<!--lista desplegable -->
 								 <select class="form-control" name="sexo" id="sexo" onchange="ocul()">
-                                   @foreach($sexos as $sexo)
-                                            <option  value='{{ $sexo->idSexo }}'> {{ $sexo->nombre_sexo }} </option>
-                                        @endforeach
-                                 
+                                   @foreach($sexoPaciente as $sexo)
+                                            <option  value='{{ $sexo->idSexo}}'> {{ $sexo->nombre_sexo }} </option>
+                                    @endforeach
+                                    @foreach($sexoDiferente as $sexo)
+                                            <option  value='{{ $sexo->idSexo}}'> {{ $sexo->nombre_sexo }} </option>
+                                    @endforeach
                                   </select>
 							</div>
 						</div>
@@ -94,9 +140,12 @@
 							<div class="col-md-6">
 							<!--lista desplegable -->
 								 <select class="form-control" name="procedencia" id="procedencia" onchange="ocul()">
-                                   @foreach($procedencias as $procedencia)
-                                            <option  value='{{ $procedencia->idProcedencia }}'> {{ $procedencia->nombre_procedencia }} </option>
-                                        @endforeach
+                                   @foreach($procedenciaPaciente as $procedencia)
+                                            <option  value='{{ $procedencia->idProcedencia}}'> {{ $procedencia->nombre_procedencia }} </option>
+                                      @endforeach
+                                    @foreach($procedenciaDiferente as $procedencia)
+                                            <option  value='{{ $procedencia->idProcedencia}}'> {{ $procedencia->nombre_procedencia }} </option>
+                                      @endforeach
                                     </select>
 							</div>
 						</div>

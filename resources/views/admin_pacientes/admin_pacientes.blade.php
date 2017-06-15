@@ -1,8 +1,3 @@
-<?php
-use App\Paciente;
-
-?>
-
 @extends('layouts.app')
 
 @section('content')
