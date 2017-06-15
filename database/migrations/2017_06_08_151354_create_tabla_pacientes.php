@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Validation\Rule;
 
 class CreateTablaPacientes extends Migration
 {
@@ -15,14 +16,14 @@ class CreateTablaPacientes extends Migration
     {
       Schema::create('pacientes', function (Blueprint $table) {
         $table->increments('id');
-          $table->string('duiPaciente')->nullable(), unique();
+          $table->string('duiPaciente')->unique();
           $table->string('primerNombre');
           $table->string('segundoNombre');
           $table->string('primerApellido');
           $table->string('segundoApellido');
           $table->date('fechaNacimiento');
           $table->string('numeroCelular')->nullable();
-          $table->string('duiEncargado')->nullable(), unique();
+          $table->string('duiEncargado')->unique();
           $table->string('nombreEncargado')->nullable();
           $table->integer('idSexo')->unsigned();
           $table->foreign('idSexo')->references('idSexo')->on('sexo');
@@ -32,6 +33,8 @@ class CreateTablaPacientes extends Migration
 
       });
     }
+
+  
 //
     /**
      * Reverse the migrations.
