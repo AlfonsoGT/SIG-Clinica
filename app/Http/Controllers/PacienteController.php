@@ -24,13 +24,18 @@ class PacienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $path = '/admin_pacientes';
+    
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function index()
     {
         $pacientes = DB::table('pacientes')
             ->join('sexo', 'pacientes.idSexo', '=', 'sexo.idSexo')
             ->join('procedencia', 'pacientes.idProcedencia', '=', 'procedencia.idProcedencia')
             ->select('pacientes.*', 'sexo.nombre_sexo', 'procedencia.nombre_procedencia')
-            ->get();
+            ->orderBy('id', 'asc')
+            ->paginate(5);
         return view($this->path.'/admin_pacientes')->with('pacientes',$pacientes);
     }
 

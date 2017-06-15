@@ -28,7 +28,8 @@
 					<div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
 					<form class="form-horizontal" role="form" method="POST" action="{{ url( '/admin_pacientes' ) }}">
-						{{ csrf_field() }}
+						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
+
 						<div class="form-group {{ $errors->has('duiPaciente') ? ' has-error' : '' }}">
 							<label for="duiPaciente" class="col-md-4 control-label">DUI Paciente</label>
 							<div class="col-md-6">

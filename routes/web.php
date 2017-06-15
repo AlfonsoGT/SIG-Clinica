@@ -16,7 +16,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
 Route::get('/home', 'PacienteController@home')->name('home');
 
-//esta deberia ser la unica que deberia ir
-Route::resource('/admin_pacientes','PacienteController');
+ Route::resource('/admin_pacientes','PacienteController');
+
+

@@ -58,6 +58,8 @@
 							@endforeach
 							</tbody>
 						</table>
+                       {!! $pacientes->render() !!}
+
 					</div>
 				</div>
 			</div>
