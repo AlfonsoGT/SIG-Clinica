@@ -16,7 +16,7 @@ class CreateTablaPacientes extends Migration
     {
       Schema::create('pacientes', function (Blueprint $table) {
         $table->increments('id');
-          $table->string('duiPaciente')->unique();
+          $table->string('duiPaciente')->unique(); //evitar duplicidad en DUI
           $table->string('primerNombre');
           $table->string('segundoNombre');
           $table->string('primerApellido');

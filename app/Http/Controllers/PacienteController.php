@@ -72,7 +72,8 @@ class PacienteController extends Controller
             //'nombreEncargado' => 'max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
            // 'duiPaciente' => 'required|max:10|min:10|regex:/^\d{8}-\d$/',
             //'duiEncargado' => 'max:10|min:10|regex:/^\d{8}-\d$/',
-                
+            
+            //Evitar duplicidad en DUI    
             'duiPaciente'    => 'unique:pacientes',
             'numeroCelular' => 'required|max:8|min:8',
         ]);
