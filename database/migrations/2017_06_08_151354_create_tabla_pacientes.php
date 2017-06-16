@@ -16,14 +16,14 @@ class CreateTablaPacientes extends Migration
     {
       Schema::create('pacientes', function (Blueprint $table) {
         $table->increments('id');
-          $table->string('duiPaciente')->unique(); //evitar duplicidad en DUI
+          $table->string('duiPaciente')->unique()->nullable(); //evitar duplicidad en DUI
           $table->string('primerNombre');
           $table->string('segundoNombre');
           $table->string('primerApellido');
           $table->string('segundoApellido');
           $table->date('fechaNacimiento');
           $table->string('numeroCelular')->nullable();
-          $table->string('duiEncargado')->unique();
+          $table->string('duiEncargado')->unique()->nullable();
           $table->string('nombreEncargado')->nullable();
           $table->integer('idSexo')->unsigned();
           $table->foreign('idSexo')->references('idSexo')->on('sexo');
