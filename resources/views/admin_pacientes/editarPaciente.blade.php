@@ -6,12 +6,12 @@
 	<div class="alert alert-info" role="alert">
 		<strong>Actualizar datos del Paciente</strong>
    </div>
-	<div class="container">    
-		<div id="loginbox" style="margin-top:30px">                    
+	<div class="container">
+		<div id="loginbox" style="margin-top:30px">
 			<div class="panel panel-primary" >
 				<div class="panel-heading">
 					<div class="panel-title">Editar Datos del Paciente</div>
-				</div>     
+				</div>
 
 				<div style="padding-top:30px" class="panel-body" >
 
@@ -149,7 +149,7 @@
                                     </select>
 							</div>
 						</div>
-						
+
 						<div class="form-group">
                                 <div class="col-lg-offset-4 col-lg-2">
                                     <button type="submit" class="btn btn-info">Guardar</button>

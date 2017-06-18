@@ -24,10 +24,13 @@ class PacienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $path = '/admin_pacientes';
-    
-    public function __construct(){
-        $this->middleware('auth');
-    }
+
+    //Referencia al middleware adminMiddleware
+  public function __construct(){
+       $this->middleware('auth');
+       $this->middleware('secretaria');
+ }
+
     public function index()
     {
         $pacientes = DB::table('pacientes')
@@ -53,7 +56,7 @@ class PacienteController extends Controller
     }
     public function home()
     {
-        return view($this->path.'/home');
+        return view($this->path.'/homeSecretaria');
     }
 
     /**
@@ -69,14 +72,10 @@ class PacienteController extends Controller
             'segundoNombre' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
             'primerApellido'=> 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
             'segundoApellido'=> 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
-            //'nombreEncargado' => 'max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
-           // 'duiPaciente' => 'required|max:10|min:10|regex:/^\d{8}-\d$/',
-        
-            
-            //Evitar duplicidad en DUI    
-            'duiPaciente'    => 'unique:pacientes',
-            'duiEncargado' => 'unique:pacientes',
-            'numeroCelular' => 'required|max:8|min:8',
+            'nombreEncargado' => 'max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'duiPaciente' => 'max:10|min:10|regex:/^\d{8}-\d$/',
+            'duiEncargado' => 'max:10|min:10|regex:/^\d{8}-\d$/',
+            'numeroCelular' => 'required|max:8|min:8|regex:/^[0-9]*$/',
         ]);
         try{
         //
@@ -144,13 +143,10 @@ class PacienteController extends Controller
             'segundoNombre' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
             'primerApellido'=> 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
             'segundoApellido'=> 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
-            //'nombreEncargado' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
-           // 'duiPaciente' => 'required|max:10|min:10|regex:/^\d{8}-\d$/',
-           // 'duiEncargado' => 'required|max:10|min:10|regex:/^\d{8}-\d$/',
-            
-            'duiPaciente'    => 'unique:pacientes',
-            'duiEncargado' => 'unique:pacientes',
-            'numeroCelular' => 'required|max:8|min:8',
+            'nombreEncargado' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'duiPaciente' => 'required|max:10|min:10|regex:/^\d{8}-\d$/',
+            'duiEncargado' => 'required|max:10|min:10|regex:/^\d{8}-\d$/',
+            'numeroCelular' => 'required|max:8|min:8|regex:/^[0-9]*$/',
         ]);
         try{
             //
@@ -187,7 +183,7 @@ class PacienteController extends Controller
             $paciente->delete();
             return redirect($this->path);
         }catch(Exception $e){
-            return "No se pudo eliminar el Usuario Especificado";
+            return "No se pudo eliminar el Paciente Especificado";
         }
     }
 }
