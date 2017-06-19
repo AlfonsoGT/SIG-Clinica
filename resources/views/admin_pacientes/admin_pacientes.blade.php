@@ -5,6 +5,9 @@
 	<div class="alert alert-info">
 		<strong>Lista de Pacientes</strong>
 	</div>
+	@if(session()->has('msj'))
+	<div class="alert alert-success" role="alert">{{session('msj')}}</div>
+	@endif
 	<div class="container" id="panelAdminPacientes">
 		<div class="row">
 			<div class="panel panel-default">
@@ -17,7 +20,7 @@
 						 <table class="table table-striped table-hover table-bordered">
 							<thead>
 								<tr>
-								   <th class="text-center">ID</th>
+								  
 									<th class="text-center">DUI Paciente</th>
 									<th class="text-center">Primer Nombre</th>
 									<th class="text-center">Segundo Nombre</th>
@@ -33,9 +36,9 @@
 								</tr>
 							</thead>
 							<tbody>
-							@foreach($pacientes as $paciente) 
+							@foreach($pacientes as $paciente)
 										<tr>
-											<td class="text-center"> {{ $paciente->id }} </td>
+											
 											<td class="text-center"> {{ $paciente->duiPaciente }} </td>
 											<td class="text-center"> {{ $paciente->primerNombre }} </td>
 											<td class="text-center"> {{ $paciente->segundoNombre }} </td>
@@ -52,7 +55,7 @@
 											<form method="POST" action="{{ route('admin_pacientes.destroy', $paciente->id) }} " style='display: inline;'>
 											<input type="hidden" name="_method" value="DELETE">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
-											<button type="submit" class="btn btn-danger btn-sm">Borrar</button></form>
+											<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('está seguro que desea eliminar?')">Borrar</button></form>
 											</td>
 										</tr>
 							@endforeach

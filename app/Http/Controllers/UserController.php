@@ -71,9 +71,14 @@ class UserController extends Controller
       $user->username=$request->username;
       $user->id_rol=$request->id_rol;
       $user->password= bcrypt($request->password);
-      $user->save();
 
-      return redirect($this->path);
+      if($user->save()){
+      return redirect($this->path)->with('msj','Usuario Registrado');
+      }else{
+        return back()->with();
+      }
+
+
       }catch(Exception $e){
           return "Fatal error - ".$e->getMessage();
       }
@@ -98,7 +103,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-      
+
 
         try{
              $user = User::findOrFail($id);
@@ -134,8 +139,12 @@ class UserController extends Controller
         $user->password=bcrypt($request->password);
       }
 
-
-      $user->save();
+//guardado y envío de confirmacion
+      if($user->save()){
+      return redirect($this->path)->with('msj','Usuario modificado');
+      }else{
+        return back()->with();
+      }
 
 
 

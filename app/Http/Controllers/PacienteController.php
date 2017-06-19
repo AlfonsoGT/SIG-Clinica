@@ -91,8 +91,15 @@ class PacienteController extends Controller
         $paciente->nombreEncargado = $request->nombreEncargado;
         $paciente->idSexo = $request->sexo;
         $paciente->idProcedencia = $request->procedencia;
-        $paciente->save();
-        return redirect($this->path);
+
+        //guardado y envío de mensaje de confirmacion
+        if($paciente->save()){
+        return redirect($this->path)->with('msj','Paciente Registrado');
+        }else{
+          return back()->with();
+        }
+
+      return redirect($this->path);
         }catch(Exception $e){
             return "Fatal error - ".$e->getMessage();
         }
@@ -162,7 +169,15 @@ class PacienteController extends Controller
         $paciente->nombreEncargado = $request->nombreEncargado;
         $paciente->idSexo = $request->sexo;
         $paciente->idProcedencia = $request->procedencia;
-        $paciente->save();
+
+        if($paciente->save()){
+        return redirect($this->path)->with('msj','Paciente modificado');
+        }else{
+          return back()->with();
+        }
+
+
+
         return redirect($this->path);
         }catch(Exception $e){
             return "Fatal error - ".$e->getMessage();
