@@ -44,7 +44,7 @@
 						<div class="form-group {{ $errors->has('primerNombre') ? ' has-error' : '' }}">
 							<label for="primerNombre" class="col-md-4 control-label">Primer Nombre</label>
 							<div class="col-md-6">
-								<input id="primerNombre" type="text" class="form-control" name="primerNombre" value="{{ old('primernombre') }}" autocomplete="off" required autofocus>
+								<input id="primerNombre" type="text" class="form-control" name= "primerNombre" value="{{ old('primerNombre') }}" autocomplete="off" required autofocus>
 								@if ($errors->has('primerNombre'))
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('primerNombre') }}</strong>
@@ -55,7 +55,7 @@
 						<div class="form-group {{ $errors->has('segundoNombre') ? ' has-error' : '' }}">
 							<label for="segundoNombre" class="col-md-4 control-label">Segundo Nombre</label>
 							<div class="col-md-6">
-								<input id="segundoNombre" type="text" class="form-control" name="segundoNombre" value="{{ old('segundonombre') }}" autocomplete="off" required autofocus>
+								<input id="segundoNombre" type="text" class="form-control" name= "segundoNombre" value="{{ old('segundoNombre') }}" autocomplete="off" required autofocus>
 								@if ($errors->has('segundoNombre'))
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('segundoNombre') }}</strong>

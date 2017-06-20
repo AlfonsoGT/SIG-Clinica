@@ -5,7 +5,7 @@
 <div class="alert alert-info">
 <strong>Bienvenido al Sistema de la Clinica </strong>Indicaciones para Secretaria
 </div>
-<section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="features1-12" style="background-color:#CCCCFF ">
+<section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="features1-12" style="background-color:#F0F8FF ">
     
     
     <div class="mbr-section__container container mbr-section__container--std-top-padding" style="padding-top: 93px;">
