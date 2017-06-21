@@ -29,7 +29,7 @@ class UserController extends Controller
       $users = DB::table('users')
           ->join('roles', 'users.id_rol', '=', 'roles.id_rol')
           ->select('users.id','users.name', 'users.username', 'roles.nombre_rol')
-          ->orderBy('id', 'asc')
+          ->orderBy('id', 'desc')
           ->paginate(7);
           return view($this->path.'/admin_users')->with('users',$users);
     }

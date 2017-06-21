@@ -37,7 +37,7 @@ class PacienteController extends Controller
             ->join('sexo', 'pacientes.idSexo', '=', 'sexo.idSexo')
             ->join('procedencia', 'pacientes.idProcedencia', '=', 'procedencia.idProcedencia')
             ->select('pacientes.*', 'sexo.nombre_sexo', 'procedencia.nombre_procedencia')
-            ->orderBy('id', 'asc')
+            ->orderBy('id', 'desc')
             ->paginate(5);
         return view($this->path.'/admin_pacientes')->with('pacientes',$pacientes);
     }
