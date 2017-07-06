@@ -22,7 +22,7 @@
 						 <table class="table table-striped table-hover table-bordered">
 							<thead>
 								<tr>
-                  
+
 									<th class="text-center">Nombre de usuario</th>
 									<th class="text-center">Username</th>
 									<th class="text-center">Rol Asignado</th>
@@ -32,7 +32,7 @@
 							<tbody>
 							@foreach($users as $user)
 										<tr>
-                      
+
 											<td class="text-center"> {{ $user->name}} </td>
 											<td class="text-center"> {{ $user->username }} </td>
 											<td class="text-center"> {{ $user->nombre_rol }} </td>

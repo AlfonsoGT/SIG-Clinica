@@ -60,7 +60,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
       $this->validate($request,[
-        'name' => 'required|string|max:255',
+        'name' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
         'username' => 'required|string|max:255|unique:users',
         'password' => 'required|string|min:6',
 
@@ -72,15 +72,40 @@ class UserController extends Controller
       $user->id_rol=$request->id_rol;
       $user->password= bcrypt($request->password);
 
+      if($user->id_rol==1){ //id administrador
+        $user->nivel_1=true;
+        $user->nivel_2=true;
+        $user->nivel_3=true;
+      } elseif ($user->id_rol==2) { //id lic radiologo
+        $user->nivel_1=false;
+        $user->nivel_2=true;
+        $user->nivel_3=true;
+      }elseif ($user->id_rol==3) { // id secretaria
+      $user->nivel_1=true;
+      $user->nivel_2=false;
+      $user->nivel_3=false;
+    }else{ //para cualquier rol futuro deberán asignarse manualmente los permisos
+        $user->nivel_1=false;
+        $user->nivel_2=false;
+        $user->nivel_3=false;
+      }
+
+
+
+
+
+
+
       if($user->save()){
       return redirect($this->path)->with('msj','Usuario Registrado');
       }else{
-        return back()->with();
+        return back()->with('msj2','Usuario no registrado, es posible que el username ya se encuentre registrado');
       }
 
 
       }catch(Exception $e){
-          return "Fatal error - ".$e->getMessage();
+          //return "Fatal error - ".$e->getMessage();
+          return back()->with('msj2','Usuario no registrado, es posible que el username ya se encuentre registrado');
       }
     }
 
@@ -92,7 +117,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+      $user = User::findOrFail($id);
+      $users = DB::table('users')
+      ->join('roles','users.idRol','=','roles.idRol')
+      ->select('users.*','roles.nombre_rol')->where('users.id',$user->id)
+      ->get();
     }
 
     /**
@@ -125,6 +154,8 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
       $this->validate($request,[
+        'name' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+        'username' => 'required|string|max:255',
 
       ]);
       try{
@@ -143,14 +174,12 @@ class UserController extends Controller
       if($user->save()){
       return redirect($this->path)->with('msj','Usuario modificado');
       }else{
-        return back()->with();
+        return back()->with('msj2','Usuario no registrado, es posible que el username ya se encuentre registrado');
       }
-
-
-
       return redirect($this->path);
       }catch(Exception $e){
-          return "Fatal error - ".$e->getMessage();
+    return "Fatal error - ".$e->getMessage();
+
       }
 
     }

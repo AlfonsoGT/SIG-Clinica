@@ -38,7 +38,7 @@ class PacienteController extends Controller
             ->join('procedencia', 'pacientes.idProcedencia', '=', 'procedencia.idProcedencia')
             ->select('pacientes.*', 'sexo.nombre_sexo', 'procedencia.nombre_procedencia')
             ->orderBy('id', 'desc')
-            ->paginate(5);
+            ->paginate(7);
         return view($this->path.'/admin_pacientes')->with('pacientes',$pacientes);
     }
 
@@ -99,9 +99,9 @@ class PacienteController extends Controller
           return back()->with();
         }
 
-      return redirect($this->path);
         }catch(Exception $e){
-            return "Fatal error - ".$e->getMessage();
+            //return "Fatal error - ".$e->getMessage();
+            return back()->with('msj2','Paciente no registrado, es posible que el DUI PACIENTE ya se encuentra registrado');
         }
     }
 
@@ -113,7 +113,13 @@ class PacienteController extends Controller
      */
     public function show($id)
     {
-        //
+         $paciente = Paciente::findOrFail($id);
+      $pacientes = DB::table('pacientes')
+          ->join('sexo', 'pacientes.idSexo', '=', 'sexo.idSexo')
+          ->join('procedencia', 'pacientes.idProcedencia', '=', 'procedencia.idProcedencia')
+          ->select('pacientes.*', 'sexo.nombre_sexo', 'procedencia.nombre_procedencia')->where('pacientes.id',$paciente->id)
+          ->get();
+    return view($this->path.'/perfilPaciente')->with('pacientes',$pacientes);
     }
 
     /**
@@ -135,7 +141,18 @@ class PacienteController extends Controller
             return "Error al intentar modificar al Paciente".$e->getMessage();
         }
     }
-
+// funcion para generar perfil de paciente
+ /**   public function profile($id)
+    {
+      $paciente = Paciente::findOrFail($id);
+      $pacientes = DB::table('pacientes')
+          ->join('sexo', 'pacientes.idSexo', '=', 'sexo.idSexo')
+          ->join('procedencia', 'pacientes.idProcedencia', '=', 'procedencia.idProcedencia')
+          ->select('pacientes.*', 'sexo.nombre_sexo', 'procedencia.nombre_procedencia')->where('pacientes.id',$paciente->id)
+          ->paginate(1);
+    return view($this->path.'/perfilPaciente')->with('pacientes',$pacientes);
+    }
+    */
     /**
      * Update the specified resource in storage.
      *
@@ -180,7 +197,8 @@ class PacienteController extends Controller
 
         return redirect($this->path);
         }catch(Exception $e){
-            return "Fatal error - ".$e->getMessage();
+            //return "Fatal error - ".$e->getMessage();
+            return back()->with('msj2','Paciente no modificado, es posible que el DUI PACIENTE ya se encuentra registrado');
         }
 
     }

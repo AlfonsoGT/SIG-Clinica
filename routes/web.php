@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/homeAdministrador', 'UserController@home')->name('homeAdministrador');
+/*Route::get('/perfilPaciente/{id}', 'PacienteController@profile')->name('perfilPaciente');*/
 Route::get('/homeSecretaria', 'PacienteController@home')->name('homeSecretaria');
 Route::resource('/admin_pacientes','PacienteController');
 Route::resource('/admin_users','UserController');

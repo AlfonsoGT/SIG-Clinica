@@ -2,6 +2,9 @@
 
 @section('content')
 
+@if(session()->has('msj2'))
+<div class="alert alert-success" role="alert">{{session('msj2')}}</div>
+@endif
 
 <div class="container">
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
@@ -15,7 +18,7 @@
                 <!--Mensaje de error -->
                 <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url( '/admin_users' ) }}">
+                    <form class="form-horizontal" role="form" method="POST" action="/admin_users">
                         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
 
 

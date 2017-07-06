@@ -22,6 +22,9 @@ class CreateUsersTable extends Migration
           $table->timestamps();
           $table->integer('id_rol')->unsigned();
             $table->foreign('id_rol')->references('id_rol')->on('roles');
+            $table->boolean('nivel_1')->default(false);
+            $table->boolean('nivel_2')->default(false);
+            $table->boolean('nivel_3')->default(false);
         });
     }
 

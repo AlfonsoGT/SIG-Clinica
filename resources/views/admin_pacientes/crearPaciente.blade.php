@@ -14,6 +14,13 @@
     @endforeach
     </ul>
     @endif
+		@if(session()->has('msj2'))
+		<div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
+		@endif
+
+
+<script type="text/javascript" src="{{ asset('js/validarCamposEdad.js')}}"></script>
+
 </div>
 	<div class="container">
 		<div id="loginbox" style="margin-top:30px">
@@ -29,11 +36,11 @@
 
 					<form class="form-horizontal" role="form" method="POST" action="{{ url( '/admin_pacientes' ) }}">
 						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
-						
+
 						<div class="form-group {{ $errors->has('duiPaciente') ? ' has-error' : '' }}">
 							<label for="duiPaciente" class="col-md-4 control-label">DUI Paciente</label>
 							<div class="col-md-6">
-								<input id="primerNombre" type="text" class="form-control" name="duiPaciente" value="{{ old('duiPaciente') }}" autocomplete="off">
+								<input id="duiPaciente" type="text" class="form-control" name="duiPaciente" value="{{ old('duiPaciente') }}" autocomplete="off">
 								@if ($errors->has('duiPaciente'))
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('duiPaciente') }}</strong>
@@ -88,7 +95,7 @@
 						<div class="form-group {{ $errors->has('fechaNacimiento') ? ' has-error' : '' }}">
 							<label for="fechaNacimiento" class="col-md-4 control-label">Fecha nacimiento</label>
 							<div class="col-md-6">
-								<input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" value="{{ old('fechaNacimiento') }}" required autofocus>
+								<input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" value="{{ old('fechaNacimiento') }}" onblur="calcularEdad();" required autofocus>
 								@if ($errors->has('fechaNacimiento'))
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('fechaNacimiento') }}</strong>

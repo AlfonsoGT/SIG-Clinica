@@ -20,38 +20,29 @@
 						 <table class="table table-striped table-hover table-bordered">
 							<thead>
 								<tr>
-								  
+
 									<th class="text-center">DUI Paciente</th>
-									<th class="text-center">Primer Nombre</th>
-									<th class="text-center">Segundo Nombre</th>
-									<th class="text-center">Primer Apellido</th>
-									<th class="text-center">Segundo Apellido</th>
+									<th class="text-center">Nombre de Paciente</th>
 									<th class="text-center">Fecha de Nacimiento</th>
-									<th class="text-center">Numero Celular</th>
-									<th class="text-center">DUI Encargado</th>
-									<th class="text-center">Nombre Encargado</th>
-									<th class="text-center">Sexo</th>
 									<th class="text-center">Procedencia</th>
+									<th class="text-center">Dui Encargado</th>
+									<th class="text-center">Nombre Encargado</th>
 									<th class="text-center">Acciones</th>
 								</tr>
 							</thead>
 							<tbody>
 							@foreach($pacientes as $paciente)
 										<tr>
-											
-											<td class="text-center"> {{ $paciente->duiPaciente }} </td>
-											<td class="text-center"> {{ $paciente->primerNombre }} </td>
-											<td class="text-center"> {{ $paciente->segundoNombre }} </td>
-											<td class="text-center"> {{ $paciente->primerApellido }} </td>
-											<td class="text-center"> {{ $paciente->segundoApellido}} </td>
+
+											<td class="text-center">{{ $paciente->duiPaciente }}</a> </td>
+											<td class="text-center"> {{ $paciente->primerNombre }} {{ $paciente->segundoNombre }} {{ $paciente->primerApellido }} {{ $paciente->segundoApellido}}</td>
 											<td class="text-center"> {{ $paciente->fechaNacimiento }} </td>
-											<td class="text-center"> {{ $paciente->numeroCelular }} </td>
+											<td class="text-center"> {{ $paciente->nombre_procedencia }} </td>
 											<td class="text-center"> {{ $paciente->duiEncargado}} </td>
 											<td class="text-center"> {{ $paciente->nombreEncargado}} </td>
-											<td class="text-center"> {{ $paciente->nombre_sexo }} </td>
-											<td class="text-center"> {{ $paciente->nombre_procedencia }} </td>
 											<td>
 											<a href="{{ route('admin_pacientes.edit',$paciente->id) }}" class="btn btn-info btn-sm">Editar</a>
+											<a href="{{ route('admin_pacientes.show',$paciente->id) }}" class="btn btn-success">Ver</a>
 											<form method="POST" action="{{ route('admin_pacientes.destroy', $paciente->id) }} " style='display: inline;'>
 											<input type="hidden" name="_method" value="DELETE">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">

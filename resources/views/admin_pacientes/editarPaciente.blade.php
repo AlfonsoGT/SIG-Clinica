@@ -2,6 +2,9 @@
 @extends('layouts.app')
 
 @section('content')
+@if(session()->has('msj2'))
+<div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
+@endif
 <section>
 	<div class="alert alert-info" role="alert">
 		<strong>Actualizar datos del Paciente</strong>
