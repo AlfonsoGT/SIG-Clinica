@@ -69,7 +69,7 @@
 			@endforeach
 			</tbody>
 		</table>
-
+<a href="{{ route('admin_pacientes.edit',$paciente->id) }}" class="btn btn-info btn-sm">Editar información</a>
 <!--tabla 3-->
 
 <div class="panel-heading"><strong>Examenes Almacenados del paciente</strong></div>

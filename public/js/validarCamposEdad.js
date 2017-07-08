@@ -56,5 +56,5 @@ function poner() {
 					$('#duiPaciente').prop("readOnly", true);
 					$('#duiEncargado').prop("required", true);
 					$('#nombreEncargado').prop("required", true);
-          $('#duiPaciente').val('');
+        
         }

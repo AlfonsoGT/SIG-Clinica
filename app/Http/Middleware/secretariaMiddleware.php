@@ -20,7 +20,7 @@ class secretariaMiddleware
      */
     public function handle($request, Closure $next)
     {
-      if($this->auth->user()->id_rol!=2){
+      if($this->auth->user()->nivel_1==false){
 
         Session::flash('message-error','sin privilegios');
         return redirect()->to('homeAdministrador');

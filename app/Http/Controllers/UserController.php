@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Redirect;
@@ -21,8 +19,8 @@ class UserController extends Controller
 
      //Referencia al middleware adminMiddleware
      public function __construct(){
-       $this->middleware('auth');
-      $this->middleware('admin');
+     $this->middleware('auth');
+     $this->middleware('admin',['except'=>'show']);
   }
     public function index()
     {
@@ -95,7 +93,6 @@ class UserController extends Controller
 
 
 
-
       if($user->save()){
       return redirect($this->path)->with('msj','Usuario Registrado');
       }else{
@@ -117,11 +114,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
-      $user = User::findOrFail($id);
-      $users = DB::table('users')
-      ->join('roles','users.idRol','=','roles.idRol')
-      ->select('users.*','roles.nombre_rol')->where('users.id',$user->id)
-      ->get();
+        $user = User::findOrFail($id);
+        $users = DB::table('users')
+        ->join('roles','users.id_Rol','=','roles.id_Rol')
+        ->select('users.*','roles.nombre_rol')->where('users.id',$user->id)
+        ->get();
+        return view($this->path.'/perfilUser')->with('users',$users);
     }
 
     /**
@@ -138,7 +136,7 @@ class UserController extends Controller
              $user = User::findOrFail($id);
              $rolUser= DB::table('roles')->where('id_rol',$user->id_rol)->select('id_rol','nombre_rol')->get();
              $rolDiferente =DB::table('roles')->where('id_rol','<>',$user->id_rol)->select('id_rol','nombre_rol')->get();;
-  return view($this->path.'/editarUsuario')->with("user",$user)->with('rolUser',$rolUser)->with('rolDiferente',$rolDiferente);
+             return view($this->path.'/editarUsuario')->with("user",$user)->with('rolUser',$rolUser)->with('rolDiferente',$rolDiferente);
         }catch(Exception $e){
             return "Error al intentar modificar al Usuario".$e->getMessage();
         }

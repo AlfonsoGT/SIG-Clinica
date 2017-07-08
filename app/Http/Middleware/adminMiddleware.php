@@ -23,7 +23,7 @@ public function __construct(Guard $auth){
     public function handle($request, Closure $next)
     {
 
-        if($this->auth->user()->id_rol!=1){
+        if($this->auth->user()->nivel_3==false){
 
           Session::flash('message-error','sin privilegios');
           return redirect()->to('homeSecretaria');

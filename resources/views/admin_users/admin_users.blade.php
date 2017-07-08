@@ -39,6 +39,7 @@
 											<td>
 											<a href="{{ route('admin_users.edit',$user->id) }}" class="btn btn-info btn-sm">Editar</a>
 											<form method="POST" action="{{ route('admin_users.destroy', $user->id) }} " style='display: inline;'>
+												<a href="{{ route('admin_users.show',$user->id) }}" class="btn btn-success">Ver</a>
 											<input type="hidden" name="_method" value="DELETE">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
 											<button type="submit" class="btn btn-danger btn-sm"onclick="return confirm('está seguro que desea eliminar?')">Borrar</button></form>
@@ -47,8 +48,7 @@
 							@endforeach
 							</tbody>
 						</table>
-
-
+						{!! $users->render() !!}
 					</div>
 				</div>
 			</div>

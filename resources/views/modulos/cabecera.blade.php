@@ -26,7 +26,7 @@
                                     </ul>
                                 </div>
                                 <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">SALIR</a></li>
-                                <li class="mbr-navbar__item"><a href="{{ route('homeSecretaria') }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> {{ Auth::user()->name }} </a></li>
+                                <li class="mbr-navbar__item"><a href="{{ route('admin_users.show',Auth::user()->id) }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> {{ Auth::user()->name }} </a></li>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
@@ -45,7 +45,7 @@
                               </div>
 
                               <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">SALIR</a></li>
-                              <li class="mbr-navbar__item"><a href="{{ route('homeAdministrador') }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> {{ Auth::user()->name }} </a></li>
+                              <li class="mbr-navbar__item"><a href="{{ route('admin_users.show',Auth::user()->id) }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> {{ Auth::user()->name }} </a></li>
                               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                   {{ csrf_field() }}
                               </form>
@@ -62,7 +62,7 @@
                                             </ul>
                                         </div>
                                         <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">SALIR</a></li>
-                                        <li class="mbr-navbar__item"><a href="{{ route('homeSecretaria') }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> {{ Auth::user()->name }} </a></li>
+                                        <li class="mbr-navbar__item"><a href="{{ route('admin_users.show',Auth::user()->id) }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> {{ Auth::user()->name }} </a></li>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
@@ -88,7 +88,7 @@
 
 
                             <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">SALIR</a></li>
-                                        <li class="mbr-navbar__item"><a href="{{ route('homeSecretaria') }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> {{ Auth::user()->name }} </a></li>
+                                        <li class="mbr-navbar__item"><a href="{{ route('admin_users.show',Auth::user()->id) }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> {{ Auth::user()->name }} </a></li>
                                           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                               {{ csrf_field() }}
                                             </form>
@@ -113,7 +113,7 @@
 
 
                   <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">SALIR</a></li>
-                              <li class="mbr-navbar__item"><a href="{{ route('homeSecretaria') }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> {{ Auth::user()->name }} </a></li>
+                              <li class="mbr-navbar__item"><a href="{{ route('admin_users.show',Auth::user()->id) }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> {{ Auth::user()->name }} </a></li>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                   </form>
