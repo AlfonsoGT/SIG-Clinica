@@ -23,5 +23,6 @@ class procedenciaSeeder extends Seeder
       DB::table('procedencia')->insert(['nombre_procedencia'=>'Facultad Multidisciplinaria de Occidente']);
       DB::table('procedencia')->insert(['nombre_procedencia'=>'Facultad Multidisciplinaria Oriental']);
       DB::table('procedencia')->insert(['nombre_procedencia'=>'Facultad Multidisciplinaria Paracentral']);
+      DB::table('procedencia')->insert(['nombre_procedencia'=>'Facultad Multidisciplinaria Paracentral']);
     }
 }
