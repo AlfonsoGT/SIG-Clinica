@@ -11,6 +11,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+       // Seeds con información por default (no descomentar)
+      //$this->call(sexoSeeder::class);
+      //  $this->call(procedenciaSeeder::class);
+     //$this->call(rolDefaultSeeder::class);
+     //  $this->call(userAdministradorDefault::class);
+
+
+    // Seeders para pruebas con información (no descomentar)
+
+        //$this->call(pacientes::class);
+
     }
 }
