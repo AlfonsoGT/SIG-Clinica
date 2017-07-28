@@ -2,9 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-@if(session()->has('msj2'))
-<div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
-@endif
+
 <section>
 	<div class="alert alert-info" role="alert">
 		<strong>Actualizar datos del Paciente</strong>
@@ -15,12 +13,28 @@
 				<div class="panel-heading">
 					<div class="panel-title">Editar Datos del Paciente</div>
 				</div>
+				@if (count($errors) > 0)
+					<div class="alert alert-danger" role="alert">
+						<ul>
+							@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+							@endforeach
+						</ul>
+						@endif
+						@if(session()->has('msj2'))
+							<div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
+						@endif
+
+
+						<script type="text/javascript" src="{{ asset('js/validarCamposEdad.js')}}"></script>
+
+					</div
 
 				<div style="padding-top:30px" class="panel-body" >
 
 					<!--Mensaje de error -->
 					<div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-					<form class="form-horizontal" role="form" method="POST" action="/admin_pacientes/{{$paciente->id}}">
+					<form class="form-horizontal" role="form" method="POST" action="/admin_pacientes/{{$paciente->idPaciente}}">
 						<input type="hidden" name="_method" value="PUT">
                          <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
 
@@ -155,10 +169,10 @@
 
 						<div class="form-group">
                                 <div class="col-lg-offset-4 col-lg-2">
-                                    <button type="submit" class="btn btn-info">Guardar</button>
+                                    <button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-floppy-disk"></span>Guardar Cambios</button>
                                 </div>
                                 <div class="col-lg-4">
-                                    <a href="{{ url('/admin_pacientes') }}" class="btn btn-danger">Cancelar</a>
+                                    <a href="{{ url('/admin_pacientes') }}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span>Cancelar</a>
                                 </div>
                             </div>
 					</form>

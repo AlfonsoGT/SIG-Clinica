@@ -27,18 +27,19 @@ class PacienteController extends Controller
 
     //Referencia al middleware adminMiddleware
   public function __construct(){
-       $this->middleware('auth');
-       $this->middleware('secretaria');
+     //$this->middleware('auth');
+    //  $this->middleware('secretaria');
  }
 
-    public function index()
+    public function index(Request $request)
     {
-        $pacientes = DB::table('pacientes')
+
+        $pacientes = Paciente::busqueda($request->busqueda)
+            ->orderBy('idPaciente', 'desc')
             ->join('sexo', 'pacientes.idSexo', '=', 'sexo.idSexo')
             ->join('procedencia', 'pacientes.idProcedencia', '=', 'procedencia.idProcedencia')
             ->select('pacientes.*', 'sexo.nombre_sexo', 'procedencia.nombre_procedencia')
-            ->orderBy('id', 'desc')
-            ->paginate(7);
+            ->paginate(10);
         return view($this->path.'/admin_pacientes')->with('pacientes',$pacientes);
     }
 
@@ -111,15 +112,26 @@ class PacienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idPaciente)
     {
-         $paciente = Paciente::findOrFail($id);
+      $paciente = Paciente::findOrFail($idPaciente);
       $pacientes = DB::table('pacientes')
           ->join('sexo', 'pacientes.idSexo', '=', 'sexo.idSexo')
           ->join('procedencia', 'pacientes.idProcedencia', '=', 'procedencia.idProcedencia')
-          ->select('pacientes.*', 'sexo.nombre_sexo', 'procedencia.nombre_procedencia')->where('pacientes.id',$paciente->id)
+          ->select('pacientes.*', 'sexo.nombre_sexo', 'procedencia.nombre_procedencia')->where('pacientes.idPaciente',
+              $paciente->idPaciente)
           ->get();
-    return view($this->path.'/perfilPaciente')->with('pacientes',$pacientes);
+    $reservaciones= DB::table('citas')->select('citas.fechaCita','citas.horaCita','tipoExamen.nombreTipoExamen',
+        'reservacion.numeroRecibo','reservacion.fechaPago','reservacion.referencia','regionAnatomica.nombreRegionAnatomica',
+        'reservacion.idPaciente','reservacion.idReservacion','reservacion.idPaciente','citas.habilitado')
+        ->orderBy('idReservacion', 'desc')
+        ->join('tipoExamen','tipoExamen.idTipoExamen','=','citas.idTipoExamen')
+        ->join('reservacion','citas.idCita','=','reservacion.idCita')
+        ->join('pacientes','pacientes.idPaciente','=','reservacion.idPaciente')
+        ->join('regionAnatomica','reservacion.idRegionAnatomica','=','regionAnatomica.idRegionAnatomica')
+        ->where('reservacion.idPaciente','=',$idPaciente)
+        ->paginate(5);
+    return view($this->path.'/perfilPaciente')->with('pacientes',$pacientes)->with('reservaciones',$reservaciones);
     }
 
     /**
@@ -128,15 +140,19 @@ class PacienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($idPaciente)
     {
         try{
-             $paciente = Paciente::findOrFail($id);
+             $paciente = Paciente::findOrFail($idPaciente);
              $sexoPaciente= DB::table('sexo')->where('idSexo',$paciente->idSexo)->select('idSexo','nombre_sexo')->get();
              $sexoDiferente =DB::table('sexo')->where('idSexo','<>',$paciente->idSexo)->select('idSexo','nombre_sexo')->get();
-             $procedenciaPaciente =DB::table('procedencia')->where('idProcedencia',$paciente->idProcedencia)->select('nombre_procedencia','idProcedencia')->get();
-             $procedenciaDiferente =DB::table('procedencia')->where('idProcedencia','<>',$paciente->idProcedencia)->select('idProcedencia','nombre_procedencia')->get();
-            return view($this->path.'/editarPaciente')->with("paciente",$paciente)->with('sexoPaciente',$sexoPaciente)->with('sexoDiferente',$sexoDiferente)->with('procedenciaPaciente',$procedenciaPaciente)->with('procedenciaDiferente',$procedenciaDiferente);
+             $procedenciaPaciente =DB::table('procedencia')->where('idProcedencia',$paciente->idProcedencia)
+                 ->select('nombre_procedencia','idProcedencia')->get();
+             $procedenciaDiferente =DB::table('procedencia')->where('idProcedencia','<>',$paciente->idProcedencia)
+                 ->select('idProcedencia','nombre_procedencia')->get();
+            return view($this->path.'/editarPaciente')->with("paciente",$paciente)->with('sexoPaciente',$sexoPaciente)
+                ->with('sexoDiferente',$sexoDiferente)->with('procedenciaPaciente',$procedenciaPaciente)
+                ->with('procedenciaDiferente',$procedenciaDiferente);
         }catch(Exception $e){
             return "Error al intentar modificar al Paciente".$e->getMessage();
         }
@@ -215,8 +231,11 @@ class PacienteController extends Controller
             $paciente = Paciente::findOrFail($id);
             $paciente->delete();
             return redirect($this->path);
+
         }catch(Exception $e){
             return "No se pudo eliminar el Paciente Especificado";
         }
     }
+
+
 }

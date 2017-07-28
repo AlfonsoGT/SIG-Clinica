@@ -16,13 +16,13 @@
 
 
     return [
-      'duiPaciente'=>str_random(10),
-       'primerNombre'=>$faker->name,
-       'segundoNombre'=>$faker->name,
-      'primerApellido'=>$faker->name,
-       'segundoApellido'=>$faker->name,
-       'fechaNacimiento'=>date('Y-m-d'),
-      'numeroCelular'=>'78747522',
+      'duiPaciente'=>$faker->unique()->bothify($string = '########-#'),
+       'primerNombre'=>$faker->firstName,
+       'segundoNombre'=>$faker->firstName,
+      'primerApellido'=>$faker->lastName,
+       'segundoApellido'=>$faker->lastName,
+       'fechaNacimiento'=>$faker->dateTime,
+      'numeroCelular'=>$faker->bothify($string = '########'),
       'duiEncargado'=>null,
        'nombreEncargado'=>null,
       'idSexo'=>$faker->randomElement(['1','2']),

@@ -6,6 +6,9 @@
 	<div class="alert alert-info" role="alert">
 		<strong>Perfil del Paciente</strong>
    </div>
+   @if(session()->has('msj'))
+  <div class="alert alert-success" role="alert">{{session('msj')}}</div>
+	@endif
 	<div class="container">
 		<div id="loginbox" style="margin-top:30px">
 			<div class="panel panel-primary" >
@@ -69,39 +72,64 @@
 			@endforeach
 			</tbody>
 		</table>
-<a href="{{ route('admin_pacientes.edit',$paciente->id) }}" class="btn btn-info btn-sm">Editar información</a>
+<a href="{{ route('admin_pacientes.edit',$paciente->idPaciente) }}" class="btn btn-info btn-sm">
+	<span class="glyphicon glyphicon-pencil"></span>Editar información</a>
+<a href="{{ route('tomarIdPaciente',$paciente->idPaciente) }}" class="btn btn-info btn-sm" id="asignar">
+	<span class="glyphicon glyphicon-wrench"></span>Asignar Cita</a>
+<a href="{{ url('/admin_pacientes') }}" class="btn btn-warning btn-sm">
+<span class="glyphicon glyphicon-list-alt"></span>Regresar a Expedientes</a>
 <!--tabla 3-->
-
 <div class="panel-heading"><strong>Examenes Almacenados del paciente</strong></div>
 		<table class="table table-striped table-hover table-bordered">
 		 <thead>
 			 <tr>
 
-				 <th class="text-center">Examen</th>
-				 <th class="text-center">Examen</th>
-				 <th class="text-center">Examen</th>
-				 <th class="text-center">Examen</th>
-				 <th class="text-center">Examen</th>
-				 <th class="text-center">Examen</th>
+				 <th class="text-center">Fecha de Cita</th>
+				 <th class="text-center">Hora de Cita</th>
+				 <th class="text-center">Tipo de Examen</th>
+				 <th class="text-center">Región Anatomica</th>
+				 <th class="text-center">Acciones</th>
 			 </tr>
 		 </thead>
 		 <tbody>
-
+		 @foreach($reservaciones as $reservacion)
 					 <tr>
 
-						 <td class="text-center"><a href=""> </a> </td>
-						 <td class="text-center">  </td>
-						 <td class="text-center"> </td>
-						 <td class="text-center"> </td>
-						 <td class="text-center">  </td>
-						 <td class="text-center">  </td>
+						 <td class="text-center"> {{ $reservacion->fechaCita }} </td>
+						 <td class="text-center"> {{ $reservacion->horaCita }} </td>
+						 <td class="text-center"> {{ $reservacion->nombreTipoExamen }}</td>
+						 <td class="text-center"> {{ $reservacion->nombreRegionAnatomica}} </td>
+						 <td>
+						 @if( $reservacion->habilitado == 1)
+						<a href="/tomarIdPacienteUpdate/{{$paciente->idPaciente}},{{$reservacion->idReservacion}}" class="btn btn-info btn-sm">
+						<span class="glyphicon glyphicon-pencil"></span>Editar</a>
+						 <a href="{{ route('admin_reservaciones.show',$reservacion->idReservacion) }}" class="btn btn-success btn-sm">
+						<span class="glyphicon glyphicon-eye-open"></span>Ver</a>
+						<form method="GET" action="/tomarIdPacienteEliminar/{{$paciente->idPaciente}},{{$reservacion->idReservacion}} " style='display: inline;'>
+						<input type="hidden" name="_method" value="DELETE">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('está seguro que desea eliminar?')">
+						<span class="glyphicon glyphicon-trash"></span>Borrar</button></form>
+						@else
+						 <a href="{{ route('admin_reservaciones.show',$reservacion->idReservacion) }}" class="btn btn-success btn-sm">
+						<span class="glyphicon glyphicon-eye-open"></span>Ver</a>
+						@endif
+						</td>
 					 </tr>
+		@endforeach
 		 </tbody>
 		</table>
+		 {!! $reservaciones->render() !!}
 
-
+                       <div class="form-group">
+                                <div class="col-lg-offset-4 col-lg-2">
+                                     
+                                </div>
+                                
+                            </div>
 
 	</div>
 	</div>
 </section>
+
 @endsection

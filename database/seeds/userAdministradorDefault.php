@@ -12,13 +12,10 @@ class userAdministradorDefault extends Seeder
     public function run()
     {
     App\User::create([
-      'name'=>'Administrador',
+      'name'=>'administrador',
       'password'=>bcrypt('123456'),
-      'username'=>'Administrador',
-      'id_rol'=>'1',
-      'nivel_1'=>true,
-      'nivel_2'=>true,
-      'nivel_3'=>true,
+      'username'=>'administrador',
     ]);
+    DB::table('role_user')->insert(['role_id'=>'1','user_id'=>'1']);
     }
 }

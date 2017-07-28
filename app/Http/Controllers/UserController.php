@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use App\User;
 
@@ -19,15 +19,15 @@ class UserController extends Controller
 
      //Referencia al middleware adminMiddleware
      public function __construct(){
-     $this->middleware('auth');
-     $this->middleware('admin',['except'=>'show']);
+    //$this->middleware('auth');
+    //$this->middleware('admin',['except'=>'show']);
   }
-    public function index()
+    public function index(Request $request)
     {
-      $users = DB::table('users')
-          ->join('roles', 'users.id_rol', '=', 'roles.id_rol')
-          ->select('users.id','users.name', 'users.username', 'roles.nombre_rol')
+      $users =  User::busqueda($request->busqueda)
           ->orderBy('id', 'desc')
+          //->join('roles', 'users.id_rol', '=', 'roles.id_rol')
+          ->select('users.id','users.name', 'users.username')
           ->paginate(7);
           return view($this->path.'/admin_users')->with('users',$users);
     }
@@ -39,7 +39,7 @@ class UserController extends Controller
      */
     public function create()
     {
-          $roles=DB::table('roles')->select('id_rol', 'nombre_rol')->get();
+          $roles=DB::table('roles')->select('id', 'name')->get();
           return view($this->path.'/crearUsuario')->with('roles',$roles);
     }
 
@@ -67,31 +67,7 @@ class UserController extends Controller
      $user = new User();
       $user->name = $request->name;
       $user->username=$request->username;
-      $user->id_rol=$request->id_rol;
       $user->password= bcrypt($request->password);
-
-      if($user->id_rol==1){ //id administrador
-        $user->nivel_1=true;
-        $user->nivel_2=true;
-        $user->nivel_3=true;
-      } elseif ($user->id_rol==2) { //id lic radiologo
-        $user->nivel_1=false;
-        $user->nivel_2=true;
-        $user->nivel_3=true;
-      }elseif ($user->id_rol==3) { // id secretaria
-      $user->nivel_1=true;
-      $user->nivel_2=false;
-      $user->nivel_3=false;
-    }else{ //para cualquier rol futuro deberán asignarse manualmente los permisos
-        $user->nivel_1=false;
-        $user->nivel_2=false;
-        $user->nivel_3=false;
-      }
-
-
-
-
-
 
       if($user->save()){
       return redirect($this->path)->with('msj','Usuario Registrado');
@@ -101,7 +77,6 @@ class UserController extends Controller
 
 
       }catch(Exception $e){
-          //return "Fatal error - ".$e->getMessage();
           return back()->with('msj2','Usuario no registrado, es posible que el username ya se encuentre registrado');
       }
     }
@@ -116,10 +91,21 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $users = DB::table('users')
-        ->join('roles','users.id_Rol','=','roles.id_Rol')
-        ->select('users.*','roles.nombre_rol')->where('users.id',$user->id)
-        ->get();
-        return view($this->path.'/perfilUser')->with('users',$users);
+        ->select('users.*')->where('users.id',$user->id)->get();
+
+
+        //roles para el combobox
+        $roles=DB::table('roles')->select('*')
+          ->whereNotIn('roles.id', DB::table('role_user')
+          ->select('role_user.role_id')->where('role_user.user_id', '=', $user->id))->get();
+
+        // roles para la tabla de roles asignados
+              $rolesAsignados= DB::table('role_user')
+              ->join('roles','role_user.role_id','=','roles.id')
+              ->select('roles.*')->where('role_user.user_id',$user->id)->get();
+
+
+        return view($this->path.'/perfilUser')->with('users',$users)->with('roles',$roles)->with('rolesAsignados',$rolesAsignados);
     }
 
     /**
@@ -134,9 +120,8 @@ class UserController extends Controller
 
         try{
              $user = User::findOrFail($id);
-             $rolUser= DB::table('roles')->where('id_rol',$user->id_rol)->select('id_rol','nombre_rol')->get();
-             $rolDiferente =DB::table('roles')->where('id_rol','<>',$user->id_rol)->select('id_rol','nombre_rol')->get();;
-             return view($this->path.'/editarUsuario')->with("user",$user)->with('rolUser',$rolUser)->with('rolDiferente',$rolDiferente);
+
+             return view($this->path.'/editarUsuario')->with("user",$user);
         }catch(Exception $e){
             return "Error al intentar modificar al Usuario".$e->getMessage();
         }
@@ -154,6 +139,7 @@ class UserController extends Controller
       $this->validate($request,[
         'name' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
         'username' => 'required|string|max:255',
+       'password' => 'nullable|confirmed|string|min:6',
 
       ]);
       try{
@@ -161,7 +147,6 @@ class UserController extends Controller
       $user = User::findOrFail($id);
       $user->name = $request->name;
       $user->username = $request->username;
-      $user->id_rol = $request->id_rol;
 
 //validacion de nueva contraseña para campo no vacío
       if($request->password != null){
@@ -198,4 +183,61 @@ class UserController extends Controller
             return "No se pudo eliminar el Usuario Especificado";
         }
     }
+
+
+
+    public function asignarRol(Request $request,$id){
+    $user = User::findOrFail($id);
+    $idrol= $request->rol_asignado;
+    $user->assignRole($idrol);
+    $user->save();
+    return redirect()->action('UserController@show',['id' => $user->id]);
+    }
+
+
+    public function revocarRol($iduser,$idrol){
+
+    $user = User::find($iduser);
+    $user->revokeRole($idrol);
+    $user->save();
+    return redirect()->action('UserController@show',['id' => $iduser]);
+    }
+
+
+    public function editPassword($id)
+    {
+                   try{
+                  $user = User::findOrFail($id);
+                  return view($this->path.'/editarPassword')->with("user",$user);
+             }catch(Exception $e){
+                 return "Error al intentar modificar al Usuario".$e->getMessage();
+             }
+
+    }
+
+
+public function actualizarPassword(Request $request, $id){
+
+  $this->validate($request,[
+    'old_password' => 'required|string|min:6',
+   'password' => 'required|string|min:6',
+
+  ]);
+$user=User::findOrFail($id);
+$almacenada=$user->password;
+$recibida=$request->old_password;
+
+if (Hash::check($recibida, $almacenada)) {
+  $nueva_password=$request->password;
+  $user->password=bcrypt($nueva_password);
+  $user->save();
+  return redirect()->action('UserController@show',['id' => $user->id])->with('msj','la contraseña ha sido modificada con éxito');
+}else{
+  return redirect()->action('UserController@show',['id' => $user->id])->with('msj2','La contraseña anterior está incorrecta, intentelo nuevamente');
+}
+
+
+
+}
+
 }

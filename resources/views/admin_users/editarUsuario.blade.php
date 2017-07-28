@@ -46,19 +46,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                          <label for="id_rol" class="col-md-4 control-label">Rol de Usuario</label>
-                          <div class="col-md-6">
-                             <select class="form-control" name="id_rol" id="id_rol" onchange="ocul()">
-                               @foreach($rolUser as $id_rol)
-                                        <option  value='{{ $id_rol->id_rol}}'> {{ $id_rol->nombre_rol }} </option>
-                                @endforeach
-                                @foreach($rolDiferente as $id_rol)
-                                        <option  value='{{ $id_rol->id_rol}}'> {{ $id_rol->nombre_rol  }} </option>
-                                @endforeach
-                              </select>
-                          </div>
-                        </div>
+
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Contraseña</label>
@@ -82,10 +70,10 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Registrarse
+                                  <button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-floppy-disk"></span>Guardar Cambios </button>
                                 </button>
                             </div>
+                            
                         </div>
                     </form>
                 </div>

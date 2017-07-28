@@ -11,8 +11,8 @@ class rolDefaultSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('roles')->insert(['nombre_rol'=>'Administrador']);
-      DB::table('roles')->insert(['nombre_rol'=>'Radiologo']);
-      DB::table('roles')->insert(['nombre_rol'=>'Secretaria']);
+      DB::table('roles')->insert(['name'=>'Administrador']);
+      DB::table('roles')->insert(['name'=>'Secretaria']);
+      DB::table('roles')->insert(['name'=>'Radiologo']);
     }
 }

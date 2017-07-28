@@ -140,7 +140,8 @@
 						<div class="form-group">
 							<label for="sexo" class="col-md-4 control-label">Sexo</label>
 							<div class="col-md-6">
-								 <select class="form-control" name="sexo" id="sexo" onchange="ocul()">
+								 <select  required class="form-control" name="sexo" id="sexo" onchange="ocul()">
+								 <option value="" disabled selected>Elija un Sexo</option>
 								 @foreach($sexos as $sexo)
                                             <option  value='{{ $sexo->idSexo }}'> {{ $sexo->nombre_sexo }} </option>
                                         @endforeach
@@ -150,7 +151,8 @@
 						<div class="form-group">
 							<label for="procedencia" class="col-md-4 control-label">Procedencia</label>
 							<div class="col-md-6">
-								 <select class="form-control" name="procedencia" id="procedencia" onchange="ocul()">
+								 <select required class="form-control" name="procedencia" id="procedencia" onchange="ocul()">
+								 <option value="" disabled selected>Elija una Procedencia</option>
                                             @foreach($procedencias as $procedencia)
                                             <option  value='{{ $procedencia->idProcedencia }}'> {{ $procedencia->nombre_procedencia }} </option>
                                         @endforeach
@@ -160,8 +162,8 @@
 
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-success">
-									Registrar
+								<button type="submit" class="btn btn-success btn-sm">
+									Ingresar Nuevo Paciente
 								</button>
 							</div>
 						</div>

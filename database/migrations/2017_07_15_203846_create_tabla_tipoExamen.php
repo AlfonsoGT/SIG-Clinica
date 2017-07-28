@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRolesTable extends Migration
+class CreateTablaTipoExamen extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-      Schema::create('roles', function (Blueprint $table) {
-          $table->increments('id_rol');
-          $table->string('nombre_rol'); //nombres de los roles
-      });
+        Schema::create('tipoExamen', function (Blueprint $table) {
+            $table->increments('idTipoExamen');
+            $table->string('nombreTipoExamen');
+        });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -25,6 +26,6 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-          Schema::dropIfExists('roles');
+        Schema::dropIfExists('tipoExamen');
     }
 }

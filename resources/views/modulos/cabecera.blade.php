@@ -15,94 +15,17 @@
                             <ul class="mbr-navbar__items mbr-navbar__items--right float-left mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-decorator mbr-buttons--active mbr-buttons--only-links">
                                 @if (Auth::guest())
                                 <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}">INICIAR SESIÓN</a></li>
-
-
-                                @elseif((Auth::user()->nivel_1==1) and (Auth::user()->nivel_2==0) and (Auth::user()->nivel_3==0))
-                                <div class="mbr-navbar__item btn-group">
-                                <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> Gestión de Pacientes<span class="caret"></span></button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_pacientes.index') }}">VER EXPEDIENTES</a></li>
-                                <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_pacientes.create') }}">INGRESAR EXPEDIENTES</a></li>
-                                    </ul>
-                                </div>
-                                <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">SALIR</a></li>
-                                <li class="mbr-navbar__item"><a href="{{ route('admin_users.show',Auth::user()->id) }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> {{ Auth::user()->name }} </a></li>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-
-
-
-                                @elseif((Auth::user()->nivel_1==0) and (Auth::user()->nivel_2==1) and (Auth::user()->nivel_3==0)))
-
-                                      @elseif((Auth::user()->nivel_1==0) and (Auth::user()->nivel_2==0) and (Auth::user()->nivel_3==1))
-                                      <div class="mbr-navbar__item btn-group">
-                              <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> Gestión de Usuarios<span class="caret"></span></button>
-                                  <ul class="dropdown-menu" role="menu">
-                                      <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_users.index') }}">VER USUARIOS</a></li>
-                                      <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_users.create') }}">INGRESAR USUARIOS</a></li>
-                                  </ul>
-                              </div>
-
-                              <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">SALIR</a></li>
-                              <li class="mbr-navbar__item"><a href="{{ route('admin_users.show',Auth::user()->id) }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> {{ Auth::user()->name }} </a></li>
-                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                  {{ csrf_field() }}
-                              </form>
-
-
-
-
-                                        @elseif((Auth::user()->nivel_1==1) and (Auth::user()->nivel_2==1) and (Auth::user()->nivel_3==0))
-                                        <div class="mbr-navbar__item btn-group">
-                                        <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> Gestión de Pacientes<span class="caret"></span></button>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_pacientes.index') }}">VER EXPEDIENTES</a></li>
-                                        <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_pacientes.create') }}">INGRESAR EXPEDIENTES</a></li>
-                                            </ul>
-                                        </div>
-                                        <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">SALIR</a></li>
-                                        <li class="mbr-navbar__item"><a href="{{ route('admin_users.show',Auth::user()->id) }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> {{ Auth::user()->name }} </a></li>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-
-
-
-                                        @elseif((Auth::user()->nivel_1==1) and (Auth::user()->nivel_2==0) and (Auth::user()->nivel_3==1))
-                                        <div class="mbr-navbar__item btn-group">
-                                        <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> Gestión de Pacientes<span class="caret"></span></button>
-                                        <ul class="dropdown-menu" role="menu">
-                                          <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_pacientes.index') }}">VER EXPEDIENTES</a></li>
-                                              <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_pacientes.create') }}">INGRESAR EXPEDIENTES</a></li>
-                                                    </ul>
-
-                                      </div>
-                                      <div class="mbr-navbar__item btn-group">
-                                      <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> Gestión de Usuarios<span class="caret"></span></button>
-                                      <ul class="dropdown-menu" role="menu">
-                                        <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_users.index') }}">VER USUARIOS</a></li>
-                                          <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_users.create') }}">INGRESAR USUARIOS</a></li>
-                                            </ul>
-                                            </div>
-
-
-                            <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">SALIR</a></li>
-                                        <li class="mbr-navbar__item"><a href="{{ route('admin_users.show',Auth::user()->id) }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> {{ Auth::user()->name }} </a></li>
-                                          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                              {{ csrf_field() }}
-                                            </form>
-                          @elseif((Auth::user()->nivel_1==0) and (Auth::user()->nivel_2==1) and (Auth::user()->nivel_3==1))
-
-                        @elseif((Auth::user()->nivel_1==1) and (Auth::user()->nivel_2==1) and (Auth::user()->nivel_3==1))
+                      @else
                               <div class="mbr-navbar__item btn-group">
                               <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> Gestión de Pacientes<span class="caret"></span></button>
                               <ul class="dropdown-menu" role="menu">
                                 <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_pacientes.index') }}">VER EXPEDIENTES</a></li>
                                     <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_pacientes.create') }}">INGRESAR EXPEDIENTES</a></li>
                                           </ul>
+                                            </div>
+                    
 
-                            </div>
+
                             <div class="mbr-navbar__item btn-group">
                             <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> Gestión de Usuarios<span class="caret"></span></button>
                             <ul class="dropdown-menu" role="menu">

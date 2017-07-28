@@ -4,10 +4,14 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Caffeinated\Shinobi\Traits\ShinobiTrait;
+
+
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use ShinobiTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'password','username','id_rol','nivel_1','nivel_2','nivel_3',
+        'name', 'password','username',
     ];
 
     /**

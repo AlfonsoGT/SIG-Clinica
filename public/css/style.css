@@ -1265,12 +1265,38 @@ html {
 
 /*cambio*/
 .mbr-buttons__btn{background-color: #3097D1;
-border-color: #3097D1;}
+border-color: #3097D1;} 
 .mbr-buttons__btn:hover{background-color: #3097D1;
 border-color: #3097D1;}
 .mbr-buttons__btn:focus{background-color: #3097D1;
 border-color: #3097D1;}
 
+/*Cambios en botones*/
+#buscar{
+  background-color: #0F75D5;
+  border-radius: 9px 9px 9px 9px;
+  -moz-border-radius: 9px 9px 9px 9px;
+  -webkit-border-radius: 9px 9px 9px 9px;
+  border: 0px solid #000000;
+}
+#asignar{
+   background-color: #45B39D;
+}
+.btn-sm{
+  border-radius: 9px 9px 9px 9px;
+  -moz-border-radius: 9px 9px 9px 9px;
+  -webkit-border-radius: 9px 9px 9px 9px;
+  border: 0px solid #000000;
+}
+.form-control{
+  border-radius: 9px 9px 9px 9px;
+  -moz-border-radius: 9px 9px 9px 9px;
+  -webkit-border-radius: 9px 9px 9px 9px;
+  border: 0px solid #000000;
+}
+#busquedaAvanzada{
+  margin:30px;
+}
 
 
 .mbr-buttons--freeze.mbr-buttons--activated .mbr-buttons__link {
@@ -1626,3 +1652,4 @@ border-color: #3097D1;}
 	text-align: center;
 	padding: 0;
 }
+
