@@ -9,6 +9,9 @@
    @if(session()->has('msj'))
   <div class="alert alert-success" role="alert">{{session('msj')}}</div>
 	@endif
+	@if(session()->has('msj2'))
+ <div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
+ @endif
 	<div class="container">
 		<div id="loginbox" style="margin-top:30px">
 			<div class="panel panel-primary" >
@@ -123,9 +126,9 @@
 
                        <div class="form-group">
                                 <div class="col-lg-offset-4 col-lg-2">
-                                     
+
                                 </div>
-                                
+
                             </div>
 
 	</div>

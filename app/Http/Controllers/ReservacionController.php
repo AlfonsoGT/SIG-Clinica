@@ -33,7 +33,7 @@ class ReservacionController extends Controller
                 ->groupBy('citas.idTipoExamen')
                 ->get();
         $tipos =[];
-        
+
          foreach($citas as $cita){
             $aux = DB::table('citas')
             ->join('tipoExamen', 'citas.idTipoExamen', '=', 'tipoExamen.idTipoExamen')
@@ -42,12 +42,12 @@ class ReservacionController extends Controller
             ->get();
             array_push($tipos, $aux);
         }
-        
+
         $indices = [];
         for($i=0; $i<sizeof($citas);$i++){
             array_push($indices, $i);
         }
-      
+
         $regionAnatomica = DB ::table('regionAnatomica')
         ->select('idRegionAnatomica', 'nombreRegionAnatomica')->get();
 
@@ -69,7 +69,7 @@ class ReservacionController extends Controller
         //dd($cantidad);
         return view($this->path.'/asignacionCita')->with('citas',$citas)->with('tipos',$tipos)->with('indices',$indices)
             ->with('regionAnatomica',$regionAnatomica)->with('paciente',$paciente)->with('cantidad',$cantidad);
-        
+
     }
     /**
      * Store a newly created resource in storage.
@@ -85,6 +85,16 @@ class ReservacionController extends Controller
             'usgIndicacion' => 'nullable|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
         ]);
        try{
+
+         $revision= DB::table('reservacion')
+         ->where('numeroRecibo',$request->numeroRecibo)
+         ->where('fechaPago',$request->fechaPago)
+         ->where('idCita',$request->tipos)
+         ->where('idRegionAnatomica',$request->region)
+         ->where('idPaciente',$request->idPaciente)
+         ->count();
+
+         if($revision==0){
         $reservacion = new Reservacion();
         $reservacion->numeroRecibo= $request->numeroRecibo;
         $reservacion->fechaPago = $request->fechaPago;
@@ -96,10 +106,15 @@ class ReservacionController extends Controller
         $reservacion->idPaciente = $request->idPaciente;
         $reservacion->save();
         return redirect()->action('PacienteController@show',['idPaciente' => $request->idPaciente])->with('msj','Reservacion Registrada');
+      }else{
+        return redirect()
+        ->action('PacienteController@show',['idPaciente' => $request->idPaciente])
+->with('msj2','Reservacion no registrada, es posible que el paciente ya se encuentra asignado a la cita, con el mismo tipo de examen y misma región anatómica');}
+
        }catch(Exception $e){
         return "Fatal error - ".$e->getMessage();
       }
-        
+
     }
 
     /**
@@ -165,7 +180,7 @@ class ReservacionController extends Controller
                 ->where('citas.idTipoExamen','<>',$tipo->idTipoExamen)
                 ->groupBy('citas.idTipoExamen')
                 ->get();
-                
+
         }
         //para llenar la tabla y los atributos dependiente de la consulta para tipos
         $tiposExamen =[];
@@ -189,7 +204,7 @@ class ReservacionController extends Controller
         for($i=0; $i<sizeof($citasMaximasDiferente);$i++){
             array_push($indices2, $i);
         }
-        //Llenar el combobox con el asignado 
+        //Llenar el combobox con el asignado
         $regionAnatomicaReservacion = DB::table('regionAnatomica')->where('idRegionAnatomica',$reservacion->idRegionAnatomica)
         ->select('idRegionAnatomica','nombreRegionAnatomica','idTipoExamen')->get();
         //dd($regionAnatomicaReservacion);
@@ -205,7 +220,7 @@ class ReservacionController extends Controller
         $paciente = DB::table('pacientes')
         ->select('primerNombre','segundoNombre','primerApellido','segundoApellido','idPaciente')
         ->where('idPaciente','=',$idPaciente)->get();
-        
+
         //Para presentar en la vista la cantidad de pacientes
         $preliminar = DB::table('citas')->count();
         $cantidad = [];
@@ -217,7 +232,7 @@ class ReservacionController extends Controller
             ->get();
             array_push($cantidad, $aux);
         }
-        
+
         return view($this->path.'/editarAsignacionCita')->with('reservacion',$reservacion)
             ->with('tipos',$tipos)->with('indices',$indices)->with('regionAnatomicaReservacion',$regionAnatomicaReservacion)
             ->with('regionAnatomicaReservacionDiferente',$regionAnatomicaReservacionDiferente)->with('paciente',$paciente)
@@ -268,7 +283,7 @@ class ReservacionController extends Controller
         $reservacion = Reservacion::findOrFail($idReservacion);
         $reservacion->delete();
         return redirect()->action('PacienteController@show',['idPaciente' => $idPaciente]);
-   
+
     }
     public function tomarIdPaciente($idPaciente)
     {
@@ -284,7 +299,7 @@ class ReservacionController extends Controller
     }
     public function getRegion($idCita)
     {
-        
+
         $busqueda = DB::table('citas')
         ->join('tipoExamen','tipoExamen.idTipoExamen','=','citas.idTipoExamen')
         ->where('citas.idCita','=',$idCita)

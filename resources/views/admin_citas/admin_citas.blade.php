@@ -4,11 +4,14 @@
 @if(session()->has('msj'))
     <div class="alert alert-success" role="alert">{{session('msj')}}</div>
 @endif
+@if(session()->has('msj2'))
+    <div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
+@endif
     <section>
         <div class="container" id="panelAdminRoles">
             <div class="row">
                 <div class="panel panel-default">
-                
+
                     <div class="panel-heading">Administración de Citas</div>
                     <div class="panel-body">
                         <h1 style="display: inline;">Gestionar Citas</h1>
@@ -46,9 +49,9 @@
                                                        intval($cero);
                                                     else
                                                         print_r($dato['conteo']);
-                                                    
+
                                                 }
-                                            } 
+                                            }
                                         }
 
                                         ?>
