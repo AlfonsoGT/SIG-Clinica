@@ -33,3 +33,18 @@ function onSelectTiposUpdate(){
    });
 }
 });
+
+function validarFecha(){
+  var fechaPago = document.getElementById('fechaPago').value;
+  var f = new Date();
+  var año= f.getFullYear() ;
+  var mes = f.getMonth()+1; 
+  if(mes<10) mes="0"+mes;
+  var ndia = f.getDate();
+  var fecha = año+ "-" + mes + "-" + ndia;
+  if(fechaPago>fecha){
+    //tpl = '<div class="alert alert-warning">'+fechaPago+'</div>';
+    //$('#fechaPago').html(tpl);
+    document.getElementById("fechaPago").value = "";
+  }
+}

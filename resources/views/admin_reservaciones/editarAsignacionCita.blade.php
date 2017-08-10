@@ -122,7 +122,7 @@
                         <div class="form-group {{ $errors->has('fechaPago') ? ' has-error' : '' }}">
                             <label for="fechaPago" class="col-md-4 control-label">Fecha Pago</label>
                             <div class="col-md-6">
-                                <input id="fechaPago" type="date" class="form-control" name="fechaPago" value="{{ $reservacion->fechaPago }}" required autofocus>
+                                <input id="fechaPago" type="date" class="form-control" name="fechaPago" value="{{ $reservacion->fechaPago }}" required autofocus onblur="validarFecha();">
                                 @if ($errors->has('fechaPago'))
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('fechaPago') }}</strong>

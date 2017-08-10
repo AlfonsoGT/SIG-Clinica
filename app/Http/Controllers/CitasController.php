@@ -191,8 +191,14 @@ if($validar==0){
   */
   public function destroy($id)
   {
-    //
-  }
+    try{
+      $cita = Cita::findOrFail($id);
+      $cita->delete();
+      return redirect($this->path);
 
+        }catch(Exception $e){
+            return "No se pudo eliminar la cita Especificado";
+        }
+  }
 
 }

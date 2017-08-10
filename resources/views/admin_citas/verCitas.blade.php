@@ -13,7 +13,7 @@
 
 				<div style="padding-top:30px" class="panel-body" >
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
-
+	
 <!--tabla 1-->
 <div class="table-responsive">
 	 <table class="table table-striped table-hover table-bordered">
@@ -42,7 +42,8 @@
 		@endforeach
 		</tbody>
 	</table>
-	
+
+
 	<div class="panel-heading"><strong>Pacientes Registrados</strong></div>
 		<table class="table table-striped table-hover table-bordered">
 		 <thead>

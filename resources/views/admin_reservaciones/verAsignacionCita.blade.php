@@ -13,6 +13,7 @@
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
 
 <!--tabla 1-->
+
 <div class="table-responsive">
 	 <table class="table table-striped table-hover table-bordered">
 		@foreach($reservaciones as $reservacion)

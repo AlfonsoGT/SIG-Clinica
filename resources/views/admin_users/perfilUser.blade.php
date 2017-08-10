@@ -76,7 +76,7 @@
 							<form method="GET" action="/asignarRol/{{$user->id}}">
 								<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 							<div class="form-group">
-								<label for="rol_asignado" class="col-md-4 control-label">Permiso a asignar</label>
+								<label for="rol_asignado" class="col-md-4 control-label">Rol a asignar</label>
 								<div class="col-md-6">
 									<select class="form-control" name="rol_asignado" id="rol_asignado" onchange="ocul()">
 										@foreach($roles as $rol)

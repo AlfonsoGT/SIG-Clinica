@@ -1,21 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-@if(session()->has('msj'))
-    <div class="alert alert-success" role="alert">{{session('msj')}}</div>
-@endif
-@if(session()->has('msj2'))
-    <div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
-@endif
+
     <section>
         <div class="container" id="panelAdminRoles">
             <div class="row">
                 <div class="panel panel-default">
 
                     <div class="panel-heading">Administración de Citas</div>
+                    
                     <div class="panel-body">
+                    @if(session()->has('msj'))
+                     <div class="alert alert-success" role="alert">{{session('msj')}}</div>
+                    @endif
+                    @if(session()->has('msj2'))
+                    <div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
+                    @endif
                         <h1 style="display: inline;">Gestionar Citas</h1>
-                        <a href="{{ route('admin_citas.create')}}" class="btn btn-primary btn-sm">Ingresar Nueva Cita</a>
+                        <a href="{{ route('admin_citas.create')}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-paperclip"></span>Ingresar Nueva Cita</a>
                         <br><br>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover table-bordered">
@@ -58,8 +60,13 @@
                                         </td>
                                         <td>
                                         @if( $cita->habilitado == 1)
-                                            <a href="{{ route('admin_citas.edit',$cita->idCita) }}" class="btn btn-info btn-sm" id= 'BotonEditar' name="BotonEditar">Editar</a>
-                                             <a href="{{ route('admin_citas.show',$cita->idCita) }}" class="btn btn-success btn-sm">Ver</a>
+                                            <a href="{{ route('admin_citas.edit',$cita->idCita) }}" class="btn btn-info btn-sm" id= 'BotonEditar' name="BotonEditar"><span class="glyphicon glyphicon-pencil"></span>Editar</a>
+                                             <a href="{{ route('admin_citas.show',$cita->idCita) }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open"></span>Ver</a>
+                                             <form method="POST" action="{{ route('admin_citas.destroy', $cita->idCita) }} " style='display: inline;'>
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('está seguro que desea eliminar?')">
+                                                <span class="glyphicon glyphicon-trash"></span>Borrar</button></form>
                                         @else
                                          <a href="{{ route('admin_citas.show',$cita->idCita) }}" class="btn btn-success btn-sm">Ver</a>
                                         @endif

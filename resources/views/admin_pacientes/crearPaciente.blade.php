@@ -36,7 +36,17 @@
 
 					<form class="form-horizontal" role="form" method="POST" action="{{ url( '/admin_pacientes' ) }}">
 						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
-
+						<div class="form-group {{ $errors->has('fechaNacimiento') ? ' has-error' : '' }}">
+							<label for="fechaNacimiento" class="col-md-4 control-label">Fecha nacimiento</label>
+							<div class="col-md-6">
+								<input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" value="{{ old('fechaNacimiento') }}" onblur="calcularEdad();" required autofocus>
+								@if ($errors->has('fechaNacimiento'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('fechaNacimiento') }}</strong>
+                                                </span>
+                                 @endif
+							</div>
+						</div>
 						<div class="form-group {{ $errors->has('duiPaciente') ? ' has-error' : '' }}">
 							<label for="duiPaciente" class="col-md-4 control-label">DUI Paciente</label>
 							<div class="col-md-6">
@@ -44,6 +54,28 @@
 								@if ($errors->has('duiPaciente'))
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('duiPaciente') }}</strong>
+                                                </span>
+                                 @endif
+							</div>
+						</div>
+						<div class="form-group {{ $errors->has('duiEncargado') ? ' has-error' : '' }}">
+							<label for="duiEncargado" class="col-md-4 control-label">DUI de Encargado</label>
+							<div class="col-md-6">
+								<input id="duiEncargado" type="text" class="form-control" name="duiEncargado" value="{{ old('duiEncargado') }}" autocomplete="off">
+								@if ($errors->has('duiEncargado'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('duiEncargado') }}</strong>
+                                                </span>
+                                 @endif
+							</div>
+						</div>
+						<div class="form-group {{ $errors->has('nombreEncargado') ? ' has-error' : '' }}">
+							<label for="nombreEncargado" class="col-md-4 control-label">Nombre de Encargado</label>
+							<div class="col-md-6">
+								<input id="nombreEncargado" type="text" class="form-control" name="nombreEncargado" value="{{ old('nombreEncargado') }}" autocomplete="off">
+								@if ($errors->has('nombreEncargado'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('nombreEncargado') }}</strong>
                                                 </span>
                                  @endif
 							</div>
@@ -92,17 +124,7 @@
                                  @endif
 							</div>
 						</div>
-						<div class="form-group {{ $errors->has('fechaNacimiento') ? ' has-error' : '' }}">
-							<label for="fechaNacimiento" class="col-md-4 control-label">Fecha nacimiento</label>
-							<div class="col-md-6">
-								<input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" value="{{ old('fechaNacimiento') }}" onblur="calcularEdad();" required autofocus>
-								@if ($errors->has('fechaNacimiento'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('fechaNacimiento') }}</strong>
-                                                </span>
-                                 @endif
-							</div>
-						</div>
+						
 						<div class="form-group {{ $errors->has('numeroCelular') ? ' has-error' : '' }}">
 							<label for="numeroCelular" class="col-md-4 control-label">Numero Telefonico</label>
 							<div class="col-md-6">
@@ -115,28 +137,7 @@
 							</div>
 						</div>
 
-						<div class="form-group {{ $errors->has('duiEncargado') ? ' has-error' : '' }}">
-							<label for="duiEncargado" class="col-md-4 control-label">DUI de Encargado</label>
-							<div class="col-md-6">
-								<input id="duiEncargado" type="text" class="form-control" name="duiEncargado" value="{{ old('duiEncargado') }}" autocomplete="off">
-								@if ($errors->has('duiEncargado'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('duiEncargado') }}</strong>
-                                                </span>
-                                 @endif
-							</div>
-						</div>
-						<div class="form-group {{ $errors->has('nombreEncargado') ? ' has-error' : '' }}">
-							<label for="nombreEncargado" class="col-md-4 control-label">Nombre de Encargado</label>
-							<div class="col-md-6">
-								<input id="nombreEncargado" type="text" class="form-control" name="nombreEncargado" value="{{ old('nombreEncargado') }}" autocomplete="off">
-								@if ($errors->has('nombreEncargado'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('nombreEncargado') }}</strong>
-                                                </span>
-                                 @endif
-							</div>
-						</div>
+						
 						<div class="form-group">
 							<label for="sexo" class="col-md-4 control-label">Sexo</label>
 							<div class="col-md-6">

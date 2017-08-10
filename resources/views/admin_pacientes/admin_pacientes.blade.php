@@ -2,18 +2,15 @@
 
 @section('content')
 <section>
-	<div class="alert alert-info">
-		<strong>Lista de Pacientes</strong>
-	</div>
-	@if(session()->has('msj'))
-	<div class="alert alert-success" role="alert">{{session('msj')}}</div>
-	@endif
 	<div class="container" id="panelAdminPacientes">
 		<div class="row">
 			<div class="panel panel-default">
 				<div class="panel-heading">Administración de Pacientes</div>
 
 				<div class="panel-body">
+				@if(session()->has('msj'))
+				<div class="alert alert-success" role="alert">{{session('msj')}}</div>
+				@endif
 					<h2 style="display: inline;">Gestionar Pacientes</h2>
 					<a href="{{ route('admin_pacientes.create')}}" class="btn btn-primary btn-sm">
                         <span class="glyphicon glyphicon-paperclip"></span>Ingresar Nuevo Paciente</a>

@@ -2,24 +2,19 @@
 @extends('layouts.app')
 
 @section('content')
+
 <section>
-	<div class="alert alert-info" role="alert">
-		<strong>Perfil del Paciente</strong>
-   </div>
-   @if(session()->has('msj'))
-  <div class="alert alert-success" role="alert">{{session('msj')}}</div>
-	@endif
-	@if(session()->has('msj2'))
- <div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
- @endif
+   
 	<div class="container">
 		<div id="loginbox" style="margin-top:30px">
 			<div class="panel panel-primary" >
 				<div class="panel-heading">
 					<div class="panel-title">Información del paciente</div>
 				</div>
-
 				<div style="padding-top:30px" class="panel-body" >
+				@if(session()->has('msj3'))
+				<div class="alert alert-success" role="alert">{{session('msj3')}}</div>
+				@endif
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
 
 <!--tabla 1-->
@@ -83,6 +78,12 @@
 <span class="glyphicon glyphicon-list-alt"></span>Regresar a Expedientes</a>
 <!--tabla 3-->
 <div class="panel-heading"><strong>Examenes Almacenados del paciente</strong></div>
+        @if(session()->has('msj'))
+ 		 <div class="alert alert-success" role="alert">{{session('msj')}}</div>
+		@endif
+		@if(session()->has('msj2'))
+ 		<div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
+ @endif
 		<table class="table table-striped table-hover table-bordered">
 		 <thead>
 			 <tr>

@@ -204,14 +204,14 @@ class PacienteController extends Controller
         $paciente->idProcedencia = $request->procedencia;
 
         if($paciente->save()){
-        return redirect($this->path)->with('msj','Paciente modificado');
+        return redirect()->action('PacienteController@show',['idPaciente' => $id])->with('msj3','Paciente modificado');
         }else{
           return back()->with();
         }
 
 
 
-        return redirect($this->path);
+       // return redirect($this->path);
         }catch(Exception $e){
             //return "Fatal error - ".$e->getMessage();
             return back()->with('msj2','Paciente no modificado, es posible que el DUI PACIENTE ya se encuentra registrado');
