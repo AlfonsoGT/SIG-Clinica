@@ -52,7 +52,8 @@ class PacienteController extends Controller
     {
         $sexos = DB::table('sexo')->select('idSexo', 'nombre_sexo')->get();
         $procedencias = DB::table('procedencia')->select('idProcedencia', 'nombre_procedencia')->get();
-        return view($this->path.'/crearPaciente')->with('sexos',$sexos)->with('procedencias',$procedencias);
+        $departamentos=DB::table('departamentos')->select('idDepartamento','nombre_departamento')->get();
+        return view($this->path.'/crearPaciente')->with('sexos',$sexos)->with('procedencias',$procedencias)->with('departamentos',$departamentos);
 
     }
     public function home()
@@ -92,6 +93,7 @@ class PacienteController extends Controller
         $paciente->nombreEncargado = $request->nombreEncargado;
         $paciente->idSexo = $request->sexo;
         $paciente->idProcedencia = $request->procedencia;
+        $paciente->idDepartamento= $request->departamento;
 
         //guardado y envío de mensaje de confirmacion
         if($paciente->save()){
@@ -118,7 +120,9 @@ class PacienteController extends Controller
       $pacientes = DB::table('pacientes')
           ->join('sexo', 'pacientes.idSexo', '=', 'sexo.idSexo')
           ->join('procedencia', 'pacientes.idProcedencia', '=', 'procedencia.idProcedencia')
-          ->select('pacientes.*', 'sexo.nombre_sexo', 'procedencia.nombre_procedencia')->where('pacientes.idPaciente',
+          ->join('departamentos','pacientes.idDepartamento','=','departamentos.idDepartamento')
+          ->select('pacientes.*', 'sexo.nombre_sexo', 'procedencia.nombre_procedencia','departamentos.nombre_departamento')
+          ->where('pacientes.idPaciente',
               $paciente->idPaciente)
           ->get();
     $reservaciones= DB::table('citas')->select('citas.fechaCita','citas.horaCita','tipoExamen.nombreTipoExamen',
@@ -144,15 +148,26 @@ class PacienteController extends Controller
     {
         try{
              $paciente = Paciente::findOrFail($idPaciente);
+
              $sexoPaciente= DB::table('sexo')->where('idSexo',$paciente->idSexo)->select('idSexo','nombre_sexo')->get();
              $sexoDiferente =DB::table('sexo')->where('idSexo','<>',$paciente->idSexo)->select('idSexo','nombre_sexo')->get();
+
              $procedenciaPaciente =DB::table('procedencia')->where('idProcedencia',$paciente->idProcedencia)
                  ->select('nombre_procedencia','idProcedencia')->get();
              $procedenciaDiferente =DB::table('procedencia')->where('idProcedencia','<>',$paciente->idProcedencia)
                  ->select('idProcedencia','nombre_procedencia')->get();
-            return view($this->path.'/editarPaciente')->with("paciente",$paciente)->with('sexoPaciente',$sexoPaciente)
-                ->with('sexoDiferente',$sexoDiferente)->with('procedenciaPaciente',$procedenciaPaciente)
-                ->with('procedenciaDiferente',$procedenciaDiferente);
+
+            $departamentoPaciente=DB::table('departamentos')->where('idDepartamento',$paciente->idDepartamento)
+            ->select('idDepartamento','nombre_departamento')->get();
+            $departamentoDiferente =DB::table('departamentos')->where('idDepartamento','<>',$paciente->idDepartamento)
+                ->select('idDepartamento','nombre_departamento')->get();
+
+
+            return view($this->path.'/editarPaciente')
+            ->with("paciente",$paciente)
+            ->with('sexoPaciente',$sexoPaciente)->with('sexoDiferente',$sexoDiferente)
+            ->with('procedenciaPaciente',$procedenciaPaciente)->with('procedenciaDiferente',$procedenciaDiferente)
+            ->with('departamentoPaciente',$departamentoPaciente)->with('departamentoDiferente',$departamentoDiferente);
         }catch(Exception $e){
             return "Error al intentar modificar al Paciente".$e->getMessage();
         }
@@ -202,6 +217,7 @@ class PacienteController extends Controller
         $paciente->nombreEncargado = $request->nombreEncargado;
         $paciente->idSexo = $request->sexo;
         $paciente->idProcedencia = $request->procedencia;
+        $paciente->idDepartamento= $request->departamento;
 
         if($paciente->save()){
         return redirect()->action('PacienteController@show',['idPaciente' => $id])->with('msj3','Paciente modificado');

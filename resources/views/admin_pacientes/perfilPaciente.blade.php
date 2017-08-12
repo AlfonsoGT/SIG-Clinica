@@ -4,7 +4,7 @@
 @section('content')
 
 <section>
-   
+
 	<div class="container">
 		<div id="loginbox" style="margin-top:30px">
 			<div class="panel panel-primary" >
@@ -43,6 +43,7 @@
 		@endforeach
 		</tbody>
 	</table>
+</div>
 
 <!--tabla 2-->
 	<div class="table-responsive">
@@ -54,6 +55,7 @@
 					<th class="text-center">Nombre Encargado</th>
 					<th class="text-center">Sexo</th>
 					<th class="text-center">Procedencia</th>
+          <th class="text-center">Originario de</th>
 
 				</tr>
 			</thead>
@@ -65,11 +67,12 @@
 							<td class="text-center"> {{ $paciente->nombreEncargado}} </td>
 							<td class="text-center"> {{ $paciente->nombre_sexo }} </td>
 							<td class="text-center"> {{ $paciente->nombre_procedencia }} </td>
-
+              <td class="text-center"> {{ $paciente->nombre_departamento}} </td>
 						</tr>
 			@endforeach
 			</tbody>
 		</table>
+    </div>
 <a href="{{ route('admin_pacientes.edit',$paciente->idPaciente) }}" class="btn btn-info btn-sm">
 	<span class="glyphicon glyphicon-pencil"></span>Editar información</a>
 <a href="{{ route('tomarIdPaciente',$paciente->idPaciente) }}" class="btn btn-info btn-sm" id="asignar">
@@ -84,6 +87,8 @@
 		@if(session()->has('msj2'))
  		<div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
  @endif
+                    @if(count($reservaciones)>0)
+                    <div class="table-responsive">
 		<table class="table table-striped table-hover table-bordered">
 		 <thead>
 			 <tr>
@@ -115,8 +120,10 @@
 						<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('está seguro que desea eliminar?')">
 						<span class="glyphicon glyphicon-trash"></span>Borrar</button></form>
 						@else
-						 <a href="{{ route('admin_reservaciones.show',$reservacion->idReservacion) }}" class="btn btn-success btn-sm">
+								 <a class="btn btn-info btn-sm" id="inhabilitado" ><span class="glyphicon glyphicon-pencil"></span>Editar</a>
+								 <a href="{{ route('admin_reservaciones.show',$reservacion->idReservacion) }}" class="btn btn-success btn-sm">
 						<span class="glyphicon glyphicon-eye-open"></span>Ver</a>
+								 <a class="btn btn-danger btn-sm" id="inhabilitado"><span class="glyphicon glyphicon-trash"></span>Borrar</a>
 						@endif
 						</td>
 					 </tr>
@@ -132,8 +139,24 @@
 
                             </div>
 
+
 	</div>
-	</div>
+                </div>
+                @else
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="alert alert-warning">
+                                        <strong>No hay Examenes Registrados</strong>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    @endif
+
 </section>
 
 @endsection

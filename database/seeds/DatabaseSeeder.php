@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
     $this->call(rolDefaultSeeder::class);
     $this->call(userAdministradorDefault::class);
     $this->call(permisoSeeder::class);
+    $this->call(departamentoSeeder::class);
 
 
     // Seeders para pruebas con información (no descomentar)

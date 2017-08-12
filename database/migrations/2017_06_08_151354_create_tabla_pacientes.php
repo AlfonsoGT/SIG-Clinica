@@ -28,6 +28,8 @@ class CreateTablaPacientes extends Migration
           $table->foreign('idSexo')->references('idSexo')->on('sexo');
           $table->integer('idProcedencia')->unsigned();
           $table->foreign('idProcedencia')->references('idProcedencia')->on('procedencia');
+          $table->integer('idDepartamento')->unsigned();
+          $table->foreign('idDepartamento')->references('idDepartamento')->on('departamentos');
 
 
       });
