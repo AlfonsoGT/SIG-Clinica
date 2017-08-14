@@ -10,6 +10,9 @@
 				</div>
 
 				<div style="padding-top:30px" class="panel-body" >
+				@if(session()->has('msj'))
+                     <div class="alert alert-success" role="alert">{{session('msj')}}</div>
+                    @endif
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
 
 <!--tabla 1-->
@@ -47,6 +50,11 @@
 		@endforeach
 		</tbody>
 	</table>
+	<div class="form-group">
+	 @foreach($reservaciones as $pac)
+     <a href="{{ route('admin_pacientes.show',$pac->idPaciente) }}" class="btn btn-warning btn-sm">
+     <span class="glyphicon glyphicon-list-alt"></span>Regresar a Perfil de Paciente</a>
+     @endforeach
 </section>
 
 @endsection

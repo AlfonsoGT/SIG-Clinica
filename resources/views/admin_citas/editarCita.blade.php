@@ -53,6 +53,8 @@
                         <button type="submit" class="btn btn-success btn-sm">
                             Guardar Cambios
                         </button>
+                         <a href="{{ url('/admin_citas') }}" class="btn btn-warning btn-sm">
+                        <span class="glyphicon glyphicon-list-alt"></span>Regresar a Lista de Citas</a>
                     </div>
                 </div>
             </form>

@@ -47,9 +47,10 @@
 								@endforeach
 							</tbody>
 						</table>
-
+					</div>
 
 						<!--tabla 2-->
+						@if(count($rolesAsignados)>0)
 						<div class="table-responsive">
 							<table class="table table-striped table-hover table-bordered">
 								<thead>
@@ -73,12 +74,30 @@
 									@endforeach
 								</tbody>
 							</table>
+						</div>
+
+						@else
+        					<div class="row">
+            					<div class="col-lg-12">
+                					<div class="panel panel-default">
+                    					<div class="panel-body">
+                        					<div class="alert alert-warning">
+                            					<strong>No existen roles asignados a este usuario.</strong>
+                        					</div>
+
+                    					</div>
+               					 </div>
+            					</div>
+        					</div>
+    					@endif
+    					@if(count($roles)>0)
 							<form method="GET" action="/asignarRol/{{$user->id}}">
 								<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 							<div class="form-group">
 								<label for="rol_asignado" class="col-md-4 control-label">Rol a asignar</label>
 								<div class="col-md-6">
 									<select class="form-control" name="rol_asignado" id="rol_asignado" onchange="ocul()">
+										<option value="" disabled selected>Elija un Rol</option>
 										@foreach($roles as $rol)
 										<option  value='{{ $rol->id }}'> {{ $rol->name }} </option>
 										@endforeach
@@ -88,6 +107,14 @@
 						</div>
 						<div class="form-group">
 							<button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-floppy-disk"></span>Asignar Rol</button></td>
+						</div>
+						@endif
+
+						<div class="form-group">
+							 <a href="{{ url('/admin_users') }}" class="btn btn-warning btn-sm">
+                        <span class="glyphicon glyphicon-list-alt"></span>Regresar a lista de Usuarios</a>
+                        <a href="{{route ('homeAdministrador')}}" class="btn btn-warning btn-sm" id="inicioPanel">
+							<span class="glyphicon glyphicon-home"></span>Regresar al inicio</a>
 						</div>
 					</section>
 					@endsection

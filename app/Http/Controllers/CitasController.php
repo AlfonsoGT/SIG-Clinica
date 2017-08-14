@@ -107,7 +107,7 @@ if($validar==0){
   * @param  int  $id
   * @return \Illuminate\Http\Response
   */
-  public function show($id)
+  public function show($id,Request $request)
   {
     $cita = Cita::findOrFail($id);
     $citas = DB::table('citas')
@@ -122,7 +122,9 @@ if($validar==0){
     ->get();
 
 
-    $reservaciones = DB::table('reservacion')
+    $reservaciones = Reservacion::BusquedaReservacion($request->busqueda)
+      ->orderBy('idReservacion', 'desc')
+      //DB::table('reservacion')
     ->select('pacientes.primerNombre','pacientes.segundoNombre','pacientes.primerApellido','pacientes.segundoApellido',
     'pacientes.idPaciente','regionAnatomica.nombreRegionAnatomica','regionAnatomica.idRegionAnatomica','sexo.nombre_sexo')
     ->join('pacientes','pacientes.idPaciente','=','reservacion.idPaciente')
@@ -172,7 +174,7 @@ if($validar==0){
       $cita->horaCita = $request->horaCita;
       $cita->idTipoExamen = $request->tipoExamen;
       if($cita->save()){
-        return redirect($this->path)->with('msj','Cita modificada');
+        return redirect()->action('CitasController@show',['idCita' => $id])->with('msj','Cita modificada');
       }else{
         return back()->with();
       }

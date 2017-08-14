@@ -60,15 +60,17 @@
                                         </td>
                                         <td>
                                         @if( $cita->habilitado == 1)
-                                            <a href="{{ route('admin_citas.edit',$cita->idCita) }}" class="btn btn-info btn-sm" id= 'BotonEditar' name="BotonEditar"><span class="glyphicon glyphicon-pencil"></span>Editar</a>
-                                             <a href="{{ route('admin_citas.show',$cita->idCita) }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open"></span>Ver</a>
+                                            <a href="{{ route('admin_citas.edit',$cita->idCita) }}" class="btn btn-info btn-sm" ><span class="glyphicon glyphicon-pencil"></span>Editar Cita</a>
+                                             <a href="{{ route('admin_citas.show',$cita->idCita) }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open"></span>Ver Cita</a>
                                              <form method="POST" action="{{ route('admin_citas.destroy', $cita->idCita) }} " style='display: inline;'>
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('está seguro que desea eliminar?')">
-                                                <span class="glyphicon glyphicon-trash"></span>Borrar</button></form>
+                                            <!--<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('está seguro que desea eliminar?')">
+                                                <span class="glyphicon glyphicon-trash"></span>Borrar</button></form>-->
                                         @else
-                                         <a href="{{ route('admin_citas.show',$cita->idCita) }}" class="btn btn-success btn-sm">Ver</a>
+                                                <a class="btn btn-info btn-sm" id="inhabilitado" ><span class="glyphicon glyphicon-pencil"></span>Editar Cita</a>
+                                                <a href="{{ route('admin_citas.show',$cita->idCita) }}" class="btn btn-success btn-sm">Ver Cita</a>
+                                                <!--<a class="btn btn-danger btn-sm" id="inhabilitado"><span class="glyphicon glyphicon-trash"></span>Borrar</a>-->
                                         @endif
                                         </td>
                                     </tr>

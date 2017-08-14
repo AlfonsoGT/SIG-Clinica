@@ -161,6 +161,11 @@
                         <button type="submit" class="btn btn-success btn-sm">
                             Guardar Reservación
                         </button>
+                         @foreach($paciente as $pac)
+                         <a href="{{ route('admin_pacientes.show',$pac->idPaciente) }}" class="btn btn-warning btn-sm">
+                        <span class="glyphicon glyphicon-list-alt"></span>Regresar a Perfil de Paciente</a>
+                        @endforeach
+                        
                     </div>
                 </div>
             </form>

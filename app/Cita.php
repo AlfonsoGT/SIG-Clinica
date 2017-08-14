@@ -11,4 +11,7 @@ class Cita extends Model
     ];
     public $timestamps = false;
     protected $primaryKey = 'idCita';
+
+
 }
+

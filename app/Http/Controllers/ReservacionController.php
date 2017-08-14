@@ -30,6 +30,7 @@ class ReservacionController extends Controller
         DB::table('citas')
                 ->join('tipoExamen', 'citas.idTipoExamen', '=', 'tipoExamen.idTipoExamen')
                 ->select('citas.idTipoExamen',DB::raw('max(citas.idCita) as max'))
+                ->where('citas.habilitado','=',1)
                 ->groupBy('citas.idTipoExamen')
                 ->get();
         $tipos =[];
@@ -87,8 +88,8 @@ class ReservacionController extends Controller
        try{
 
          $revision= DB::table('reservacion')
-         ->where('numeroRecibo',$request->numeroRecibo)
-         ->where('fechaPago',$request->fechaPago)
+         //->where('numeroRecibo',$request->numeroRecibo)
+         //->where('fechaPago',$request->fechaPago)
          ->where('idCita',$request->tipos)
          ->where('idRegionAnatomica',$request->region)
          ->where('idPaciente',$request->idPaciente)
@@ -153,6 +154,7 @@ class ReservacionController extends Controller
         $citas =DB::table('citas')
                 ->join('tipoExamen', 'citas.idTipoExamen', '=', 'tipoExamen.idTipoExamen')
                 ->select('citas.idTipoExamen',DB::raw('max(citas.idCita) as max'))
+                ->where('citas.habilitado','=',1)
                 ->groupBy('citas.idTipoExamen')
                 ->get();
         //Para llenar la tabla con las ultimas citas creadas
@@ -178,6 +180,7 @@ class ReservacionController extends Controller
                 ->join('tipoExamen', 'citas.idTipoExamen', '=', 'tipoExamen.idTipoExamen')
                 ->select('citas.idTipoExamen',DB::raw('max(citas.idCita) as max'))
                 ->where('citas.idTipoExamen','<>',$tipo->idTipoExamen)
+                ->where('citas.habilitado','=',1)
                 ->groupBy('citas.idTipoExamen')
                 ->get();
 
@@ -266,7 +269,7 @@ class ReservacionController extends Controller
         $reservacion->idPaciente = $request->idPaciente;
 
         $reservacion->save();
-        return redirect()->action('PacienteController@show',['idPaciente' => $request->idPaciente])->with('msj','Reservacion Modificada');
+        return redirect()->action('ReservacionController@show',['idReservacion' => $idReservacion])->with('msj','Reservacion Modificada');
        }catch(Exception $e){
         return "Fatal error - ".$e->getMessage();
       }
@@ -282,7 +285,7 @@ class ReservacionController extends Controller
     {
         $reservacion = Reservacion::findOrFail($idReservacion);
         $reservacion->delete();
-        return redirect()->action('PacienteController@show',['idPaciente' => $idPaciente]);
+        return redirect()->action('PacienteController@show',['idPaciente' => $idPaciente])->with('msj2','Reservacion Eliminada con éxito');;
 
     }
     public function tomarIdPaciente($idPaciente)

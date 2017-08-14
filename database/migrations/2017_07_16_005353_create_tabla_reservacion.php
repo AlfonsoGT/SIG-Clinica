@@ -15,7 +15,7 @@ class CreateTablaReservacion extends Migration
     {
         Schema::create('reservacion', function (Blueprint $table) {
             $table->increments('idReservacion');
-            $table->integer('numeroRecibo');
+            $table->string('numeroRecibo');
             $table->date('fechaPago');
             $table->string('referencia')->nullable();
             $table->string('usgIndicacion')->nullable();

@@ -149,10 +149,11 @@
                                 @if($reservacion->preparacion == 1){
                                   <option  value='1'> SI </option>
                                   <option  value='0'> NO </option>
-                                  }@endif{
+                                  }@else{
                                   <option  value='0'>NO</option>
                                   <option  value='1'>SI</option>
                                   }
+                                  @endif
                                 </select>
                                  
                             </div>
@@ -172,8 +173,13 @@
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-success btn-sm">
-                            Guardar Cambios de Reservación
+                            Guardar Cambios
                         </button>
+                        @foreach($paciente as $pac)
+                         <a href="{{ route('admin_pacientes.show',$pac->idPaciente) }}" class="btn btn-warning btn-sm">
+                        <span class="glyphicon glyphicon-list-alt"></span>Regresar a Perfil de Paciente</a>
+                        @endforeach
+                        
                     </div>
                 </div>
             </form>

@@ -17,39 +17,57 @@
                 <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}">INICIAR SESIÓN</a></li>
                 @else
                 <div class="mbr-navbar__item btn-group">
+                <li class="mbr-navbar__item">
                   <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> Gestión de Pacientes<span class="caret"></span></button>
-                  <ul class="dropdown-menu" role="menu">
-                    <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_pacientes.index') }}">VER EXPEDIENTES</a></li>
-                    <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_pacientes.create') }}">INGRESAR EXPEDIENTES</a></li>
+                  <ul class="dropdown-menu" role="menu" id="menup">
+                    <li ><a class="mbr-buttons__link btn text-white" href="{{ route('admin_pacientes.index') }}">VER EXPEDIENTES</a></li>
+                    <li ><a class="mbr-buttons__link btn text-white" href="{{ route('admin_pacientes.create') }}">INGRESAR EXPEDIENTES</a></li>
                   </ul>
+                  </li>
                 </div>
+                
 
 
                 <div class="mbr-navbar__item btn-group">
+                <li class="mbr-navbar__item">
                   <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> Gestión de Citas<span class="caret"></span></button>
-                  <ul class="dropdown-menu" role="menu">
+                  <ul class="dropdown-menu" role="menu" id="menup">
                     <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_citas.index') }}">VER TODAS LAS CITAS</a></li>
                     <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_citas.create') }}">CREAR NUEVA CITA</a></li>
                   </ul>
+                  </li>
                 </div>
 
 
 
                 <div class="mbr-navbar__item btn-group">
+                <li class="mbr-navbar__item">
                   <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> Gestión de Usuarios<span class="caret"></span></button>
-                  <ul class="dropdown-menu" role="menu">
+                  <ul class="dropdown-menu" role="menu"  id="menup">
                     <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_users.index') }}">VER USUARIOS</a></li>
                     <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_users.create') }}">CREAR USUARIOS</a></li>
                     <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_roles.index') }}">GESTION DE ROLES</a></li>
                   </ul>
+                  </li>
                 </div>
 
 
-                <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">SALIR</a></li>
-                <li class="mbr-navbar__item"><a href="{{ route('admin_users.show',Auth::user()->id) }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> {{ Auth::user()->name }} </a></li>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+
+                <div class="mbr-navbar__item btn-group">
+                <li class="mbr-navbar__item">
+                  <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> {{ Auth::user()->username }}<span class="caret"></span></button>
+                  <ul class="dropdown-menu" role="menu" id="menup">
+                  <li class="mbr-navbar__item"><a href="{{ route('admin_users.show',Auth::user()->id) }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> VER MI PERFIL</a></li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   {{ csrf_field() }}
-                </form>
+                    </form>
+                    <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">SALIR</a></li>
+                  </ul>
+                  </li>
+                </div>
+
+
+                
 
                 @endif
 

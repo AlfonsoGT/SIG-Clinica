@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-
+@if(session()->has('msj2'))
+<div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
+@endif
 <div class="container">
     <div id="loginbox" style="margin-top:30px">
         <div class="panel panel-primary" >

@@ -24,7 +24,7 @@
                     <div class="form-group {{ $errors->has('fechaCita') ? ' has-error' : '' }}">
                         <label for="fechaCita" class="col-md-4 control-label">Fecha Cita</label>
                         <div class="col-md-6">
-                            <input id="fechaCita" type="date" class="form-control" name="fechaCita" value="{{ old('fechaCita') }}"" required autofocus>
+                            <input id="fechaCita" type="date" class="form-control" name="fechaCita" value="{{ old('fechaCita') }}"  required autofocus onblur="validarFecha();" >
                             @if ($errors->has('fechaCita'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('fechaCita') }}</strong>
@@ -50,6 +50,8 @@
                         <button type="submit" class="btn btn-success btn-sm">
                             Guardar Cita
                         </button>
+                         <a href="{{ url('/admin_citas') }}" class="btn btn-warning btn-sm">
+                        <span class="glyphicon glyphicon-list-alt"></span>Regresar a Lista de Citas</a>
                     </div>
                 </div>
             </form>
