@@ -94,6 +94,7 @@ class PacienteController extends Controller
         $paciente->idSexo = $request->sexo;
         $paciente->idProcedencia = $request->procedencia;
         $paciente->idDepartamento= $request->departamento;
+        $paciente->activo=true;
 
         //guardado y envío de mensaje de confirmacion
         if($paciente->save()){
@@ -172,18 +173,33 @@ class PacienteController extends Controller
             return "Error al intentar modificar al Paciente".$e->getMessage();
         }
     }
-// funcion para generar perfil de paciente
- /**   public function profile($id)
+
+   public function inactivar($id)
     {
       $paciente = Paciente::findOrFail($id);
-      $pacientes = DB::table('pacientes')
-          ->join('sexo', 'pacientes.idSexo', '=', 'sexo.idSexo')
-          ->join('procedencia', 'pacientes.idProcedencia', '=', 'procedencia.idProcedencia')
-          ->select('pacientes.*', 'sexo.nombre_sexo', 'procedencia.nombre_procedencia')->where('pacientes.id',$paciente->id)
-          ->paginate(1);
-    return view($this->path.'/perfilPaciente')->with('pacientes',$pacientes);
+      if($paciente->activo==false){
+        return redirect()->action('PacienteController@show',['idPaciente' => $id])->with('msj3','EL PERFIL DEL PACIENTE YA SE ENCUENTRA INHABILITADO');
+      }else{
+        $paciente->activo=False;
+      $paciente->save();
+      return redirect()->action('PacienteController@show',['idPaciente' => $id])->with('msj3','PERFIL DE PACIENTE INHABILITADO');
     }
-    */
+    }
+
+    public function activar($id)
+     {
+       $paciente = Paciente::findOrFail($id);
+       if($paciente->activo==true){
+         return redirect()->action('PacienteController@show',['idPaciente' => $id])->with('msj3','EL PERFIL DEL PACIENTE YA SE ENCUENTRA INHABILITADO');
+
+       }else{$paciente->activo=true;
+       $paciente->save();
+       return redirect()->action('PacienteController@show',['idPaciente' => $id])->with('msj3','PERFIL DE PACIENTE HABILITADO');
+     }
+
+
+     }
+
     /**
      * Update the specified resource in storage.
      *

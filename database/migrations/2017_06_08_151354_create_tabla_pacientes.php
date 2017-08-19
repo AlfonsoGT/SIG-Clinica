@@ -30,6 +30,8 @@ class CreateTablaPacientes extends Migration
           $table->foreign('idProcedencia')->references('idProcedencia')->on('procedencia');
           $table->integer('idDepartamento')->unsigned();
           $table->foreign('idDepartamento')->references('idDepartamento')->on('departamentos');
+          $table->boolean('activo')->default(true);
+          $table->timestamps();
 
 
       });

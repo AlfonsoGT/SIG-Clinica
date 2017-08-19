@@ -17,10 +17,15 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/homeAdministrador', 'UserController@home')->name('homeAdministrador');
-/*Route::get('/perfilPaciente/{id}', 'PacienteController@profile')->name('perfilPaciente');*/
+/*activación y desactivación de perfiles de pacientes*/
+Route::get('/inactivar/{id}', 'PacienteController@inactivar')->name('inactivar');
+Route::get('/activar/{id}', 'PacienteController@activar')->name('activar');
+
+/* asignar y revocar permisos a roles*/
 Route::get('/asignarPermiso/{id}', 'RolController@asignarPermiso')->name('asignarPermiso');
 Route::get('/revocarPermiso/{id},{idpermiso}', 'RolController@revocarPermiso')->name('revocarPermiso');
 
+/* asignar y revocar roles a usuarios*/
 Route::get('/asignarRol/{id}', 'UserController@asignarRol')->name('asignarRol');
 Route::get('/revocarRol/{id},{idpermiso}', 'UserController@revocarRol')->name('revocarRol');
 

@@ -16,7 +16,7 @@ class Paciente extends Model
         'duiPaciente', 'primerNombre', 'segundoNombre',
         'primerApellido', 'segundoApellido', 'fechaNacimiento',
         'numeroCelular', 'duiEncargado', 'nombreEncargado',
-        'idSexo', 'idProcedencia','idDepartamento',
+        'idSexo', 'idProcedencia','idDepartamento','activo',
     ];
 
     public $timestamps = false;
