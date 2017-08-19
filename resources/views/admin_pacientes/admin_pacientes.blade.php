@@ -55,7 +55,7 @@
 											<td>
 											<a href="{{ route('admin_pacientes.edit',$paciente->idPaciente) }}" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-pencil"></span>Editar</a>
-											<a href="{{ route('admin_pacientes.show',$paciente->idPaciente) }}" class="btn btn-success btn-sm">
+											<a href="{{ route('admin_pacientes.show',$paciente->idPaciente) }}" target="_blank" class="btn btn-success btn-sm">
 												<span class="glyphicon glyphicon-eye-open"></span>Ver</a>
 											<!--<a href="{{ route('tomarIdPaciente',$paciente->idPaciente) }}" class="btn btn-info btn-sm">
 	                                        <span class="glyphicon glyphicon-wrench"></span>Asignar Cita</a>-->
