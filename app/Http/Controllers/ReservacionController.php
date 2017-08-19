@@ -6,6 +6,7 @@ use App\Paciente;
 use App\Reservacion;
 use App\RegionAnatomica;
 use Illuminate\Http\Request;
+use App\Http\Requests\ReservacionRequest;
 
 class ReservacionController extends Controller
 {
@@ -78,7 +79,7 @@ class ReservacionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReservacionRequest $request)
     {
         $this->validate($request,[
             'numeroRecibo' => 'required|max:7|min:7|regex:/^\d{7}$/',
@@ -249,7 +250,7 @@ class ReservacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$idReservacion)
+    public function update(ReservacionRequest $request,$idReservacion)
     {
        $this->validate($request,[
             'numeroRecibo' => 'required|max:7|min:7|regex:/^\d{7}$/',

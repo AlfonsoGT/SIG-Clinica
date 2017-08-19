@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Cita;
 use App\Reservacion;
+use App\Http\Requests\CitaRequest;
 
 class CitasController extends Controller
 {
@@ -59,7 +60,7 @@ class CitasController extends Controller
   * @param  \Illuminate\Http\Request  $request
   * @return \Illuminate\Http\Response
   */
-  public function store(Request $request)
+  public function store(CitaRequest $request)
   {
     try{
       //valida si hay una cita activa para la fecha asignada y tipo de examen específico
@@ -166,7 +167,7 @@ if($validar==0){
   * @param  int  $id
   * @return \Illuminate\Http\Response
   */
-  public function update(Request $request, $id)
+  public function update(CitaRequest $request, $id)
   {
     try{
       $cita = Cita::findOrFail($id);
