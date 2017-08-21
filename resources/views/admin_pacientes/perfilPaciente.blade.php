@@ -39,7 +39,11 @@
 									<td class="text-center">{{ $paciente->duiPaciente }}</td>
 									<td class="text-center"> {{ $paciente->primerNombre }} {{ $paciente->segundoNombre }} </td>
 									<td class="text-center"> {{ $paciente->primerApellido }} {{ $paciente->segundoApellido}}</td>
-									<td class="text-center"> {{ $paciente->fechaNacimiento }} </td>
+									<td class="text-center"> 
+									<?php  
+                                    $newDate = date("d-m-Y", strtotime($paciente->fechaNacimiento));
+                                    print_r($newDate ); ?>
+									  </td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -79,11 +83,11 @@
 						<span class="glyphicon glyphicon-pencil"></span>Editar información</a>
 						<a href="{{ route('tomarIdPaciente',$paciente->idPaciente) }}" class="btn btn-info btn-sm" id="asignar">
 							<span class="glyphicon glyphicon-wrench"></span>Asignar Cita</a>
-							<a href="{{ route('inactivar',$paciente->idPaciente) }}" class="btn btn-info btn-sm" id="asignar">
-									<span class="glyphicon glyphicon-wrench"></span>inhabilitar perfil </a>
+							<a href="{{ route('inactivar',$paciente->idPaciente) }}" class="btn btn-info btn-sm" id="pac_inhabilitado">
+									<span class="glyphicon glyphicon-remove"></span>inhabilitar perfil </a>
 									@else
-									<a href="{{ route('activar',$paciente->idPaciente) }}" class="btn btn-info btn-sm" id="asignar">
-										<span class="glyphicon glyphicon-wrench"></span>habilitar perfil </a>
+									<a href="{{ route('activar',$paciente->idPaciente) }}" class="btn btn-info btn-sm" id="pac_habilitado">
+										<span class="glyphicon glyphicon-link"></span>habilitar perfil </a>
 										@endif
 										<a href="{{ url('/admin_pacientes') }}" class="btn btn-warning btn-sm">
 											<span class="glyphicon glyphicon-list-alt"></span>Regresar a Expedientes</a>

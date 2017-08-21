@@ -48,7 +48,7 @@
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-success btn-sm">
-                            Guardar Cita
+                             <span class="glyphicon glyphicon-floppy-disk"></span>Guardar Cita
                         </button>
                          <a href="{{ url('/admin_citas') }}" class="btn btn-warning btn-sm">
                         <span class="glyphicon glyphicon-list-alt"></span>Regresar a Lista de Citas</a>

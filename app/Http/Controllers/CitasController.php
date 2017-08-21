@@ -17,9 +17,9 @@ class CitasController extends Controller
 
   */
   private $path = '/admin_citas';
-  public function index()
+  public function index(Request $request)
   {
-    $citas = DB::table('citas')
+    $citas = Cita::busqueda($request->busqueda)
     ->orderBy('idCita', 'desc')
     ->select('citas.idCita','citas.fechaCita','citas.horaCita','citas.idTipoExamen','tipoExamen.nombreTipoExamen','citas.habilitado')
     ->join('tipoExamen','citas.idTipoExamen','=','tipoExamen.idTipoExamen')

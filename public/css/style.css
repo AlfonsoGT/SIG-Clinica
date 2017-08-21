@@ -1641,6 +1641,12 @@ html {
 #inhabilitado{
   background-color: #747474;
 }
+#pac_inhabilitado{
+  background-color: #DF0101;
+}
+#pac_habilitado{
+  background-color: #04B404;
+}
 #inicioPanel{
    background-color: #0000FF;
 }

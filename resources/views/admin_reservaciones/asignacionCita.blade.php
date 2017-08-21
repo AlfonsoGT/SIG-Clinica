@@ -159,7 +159,7 @@
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-success btn-sm">
-                            Guardar Reservación
+                           <span class="glyphicon glyphicon-floppy-disk"></span> Guardar Reservación
                         </button>
                          @foreach($paciente as $pac)
                          <a href="{{ route('admin_pacientes.show',$pac->idPaciente) }}" class="btn btn-warning btn-sm">

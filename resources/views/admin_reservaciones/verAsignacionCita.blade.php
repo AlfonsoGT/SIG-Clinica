@@ -35,7 +35,11 @@
 		<TR><th class="text-center">Referencia</TH>
 		<td class="text-center">{{ $reservacion->referencia }}</TD>
 		<TR><th class="text-center">Fecha de Pago</TH>
-		<td class="text-center">{{ $reservacion->fechaPago }}</TD>
+		<td class="text-center">
+		<?php  
+        $newDate = date("d-m-Y", strtotime($reservacion->fechaPago ));
+        print_r($newDate ); ?>
+        </TD>
 		<TR><th class="text-center">Preparación</TH>
 		<td class="text-center">
 		@if(  $reservacion->preparacion == 1  )

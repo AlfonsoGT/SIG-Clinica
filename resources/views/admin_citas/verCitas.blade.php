@@ -39,7 +39,11 @@
 					 <td class="text-center">{{ $cita->idCita}}</td>
                      <td class="text-center">{{ $cita->nombreTipoExamen}}</td>
                      <td class="text-center"> {{ $cita->horaCita }} </td>
-                      <td class="text-center"> {{ $cita->fechaCita }} </td>
+                      <td class="text-center">
+                      	<?php  
+                        $newDate = date("d-m-Y", strtotime($cita->fechaCita));
+                        print_r($newDate ); ?>
+                      </td>
                        <td class="text-center"> {{ $can->conteo }} </td>
 					</tr>
 

@@ -12,6 +12,12 @@ class Cita extends Model
     public $timestamps = false;
     protected $primaryKey = 'idCita';
 
-
+     public function scopeBusqueda($query, $busqueda)
+    {
+        $busqueda2 = preg_replace('/( ){2,}/u',' ',$busqueda);
+        if(trim($busqueda2) != ""){
+            return $query->where('fechaCita', 'LIKE', '%'.$busqueda2.'%');
+        }
+    }
 }
 

@@ -181,7 +181,7 @@
 							<div class="form-group">
 								<div class="col-md-6 col-md-offset-4">
 									<button type="submit" class="btn btn-success btn-sm">
-										Ingresar Nuevo Paciente
+										<span class="glyphicon glyphicon-floppy-disk"></span>Ingresar Nuevo Paciente
 									</button>
 									 <a href="{{ url('/admin_pacientes') }}" class="btn btn-warning btn-sm">
                         			<span class="glyphicon glyphicon-list-alt"></span>Regresar a Expedientes</a>

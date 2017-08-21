@@ -19,6 +19,21 @@
                         <h1 style="display: inline;">Gestionar Citas</h1>
                         <a href="{{ route('admin_citas.create')}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-paperclip"></span>Ingresar Nueva Cita</a>
                         <br><br>
+                        <!--BUSCADOR DE PACIENTES-->
+                    <br>
+                    <div class="row" id="busquedaAvanzada">
+                        {!! Form::open(['route' => 'admin_citas.index', 'method' =>'GET', 'class'=>'form-group']) !!}
+                        <div class="input-group input-group-sm">
+                            {!! Form::text('busqueda',null,['class'=>'form-control','placeholder'=>'Buscar cita con Formato aaaa-mm-dd','autocomplete'=>'off']) !!}
+                            <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default btn-sm" id="buscar"><span class="glyphicon glyphicon-search"></span>Buscar Cita</button>
+                    </span>
+                        </div>
+
+                        {!! Form::close() !!}
+                    </div>
+                    <!--BUSCADOR DE PACIENTES-->
+                    @if(count($citas)>0)
                         <div class="table-responsive">
                             <table class="table table-striped table-hover table-bordered">
                                 <thead>
@@ -38,7 +53,9 @@
                                         <td class="text-center">{{ $cita->idCita}}</td>
                                         <td class="text-center">{{ $cita->nombreTipoExamen}}</td>
                                         <td class="text-center"> {{ $cita->horaCita }} </td>
-                                        <td class="text-center"> {{ $cita->fechaCita }} </td>
+                                        <td class="text-center"> <?php  
+                                        $newDate = date("d-m-Y", strtotime($cita->fechaCita));
+                                        print_r($newDate ); ?></td>
                                         <td class="text-center">
                                         <?php
                                         for($i=0; $i < $preliminar; $i++){
@@ -63,13 +80,13 @@
                                             <a href="{{ route('admin_citas.edit',$cita->idCita) }}" class="btn btn-info btn-sm" ><span class="glyphicon glyphicon-pencil"></span>Editar Cita</a>
                                              <a href="{{ route('admin_citas.show',$cita->idCita) }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open"></span>Ver Cita</a>
                                              <form method="POST" action="{{ route('admin_citas.destroy', $cita->idCita) }} " style='display: inline;'>
-                                            <input type="hidden" name="_method" value="DELETE">
+                                            <!--<input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <!--<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('está seguro que desea eliminar?')">
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('está seguro que desea eliminar?')">
                                                 <span class="glyphicon glyphicon-trash"></span>Borrar</button></form>-->
                                         @else
                                                 <a class="btn btn-info btn-sm" id="inhabilitado" ><span class="glyphicon glyphicon-pencil"></span>Editar Cita</a>
-                                                <a href="{{ route('admin_citas.show',$cita->idCita) }}" class="btn btn-success btn-sm">Ver Cita</a>
+                                                <a href="{{ route('admin_citas.show',$cita->idCita) }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open"></span>Ver Cita</a>
                                                 <!--<a class="btn btn-danger btn-sm" id="inhabilitado"><span class="glyphicon glyphicon-trash"></span>Borrar</a>-->
                                         @endif
                                         </td>
@@ -85,5 +102,19 @@
 
         </div>
         </div>
+        @else
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="alert alert-danger">
+                            <strong>No se encuentra  Cita en esa fecha</strong>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     </section>
 @endsection
