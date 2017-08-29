@@ -149,7 +149,7 @@
 									<select  required class="form-control" name="sexo" id="sexo" onchange="ocul()">
 										<option value="" disabled selected>Elija un Sexo</option>
 										@foreach($sexos as $sexo)
-										<option  value='{{ $sexo->idSexo }}'> {{ $sexo->nombre_sexo }} </option>
+										<option  value='{{ $sexo->idSexo }}'> {{ $sexo->nombreSexo }} </option>
 										@endforeach
 									</select>
 								</div>
@@ -160,7 +160,7 @@
 									<select required class="form-control" name="procedencia" id="procedencia" onchange="ocul()">
 										<option value="" disabled selected>Elija una Procedencia</option>
 										@foreach($procedencias as $procedencia)
-										<option  value='{{ $procedencia->idProcedencia }}'> {{ $procedencia->nombre_procedencia }} </option>
+										<option  value='{{ $procedencia->idProcedencia }}'> {{ $procedencia->nombreProcedencia }} </option>
 										@endforeach
 									</select>
 								</div>
@@ -172,7 +172,7 @@
 									<select required class="form-control" name="departamento" id="departamento" onchange="ocul()">
 										<option value="" disabled selected>Elija un Departamento</option>
 										@foreach($departamentos as $departamento)
-										<option  value='{{ $departamento->idDepartamento }}'> {{ $departamento->nombre_departamento }} </option>
+										<option  value='{{ $departamento->idDepartamento }}'> {{ $departamento->nombreDepartamento }} </option>
 										@endforeach
 									</select>
 								</div>

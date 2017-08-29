@@ -9,6 +9,8 @@
             <div class="panel-heading">
                 <div class="panel-title">Asignación de Examen a Paciente </div>
             </div>
+             @foreach($paciente as $pac)
+             @if($pac->activo==1)
             <div style="padding-top:30px" class="panel-body" >
                 <form class="form-horizontal" role="form" method="POST" action="{{ url( '/admin_reservaciones' ) }}">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
@@ -58,7 +60,7 @@
                             </tbody>
                         </table>
 
-                    </div> 
+                    </div>
                      <div class="form-group">
 
                             <label for="tipoExamen" class="col-md-4 control-label">Tipo de Examen</label>
@@ -80,7 +82,7 @@
                                         @endforeach
                                     </select>
                             </div>
-                </div>  
+                </div>
                  <div class="form-group">
                             <label for="regionAnatomica" class="col-md-4 control-label">Region Anatomica</label>
                             <div class="col-md-6">
@@ -97,7 +99,7 @@
                                 <input id="nombreCompleto" type="text" class="form-control" name="nombreCompleto" value="{{ $pac->primerNombre}} {{$pac->segundoNombre}} {{$pac->primerApellido}} {{$pac->segundoApellido}} " autocomplete="off" disabled="disabled">
                             @endforeach
                             </div>
-                        </div>    
+                        </div>
                      <div class="form-group {{ $errors->has('numeroRecibo') ? ' has-error' : '' }}">
                             <label for="numeroRecibo" class="col-md-4 control-label">Numero de Recibo</label>
                             <div class="col-md-6">
@@ -120,7 +122,7 @@
                                  @endif
                             </div>
                         </div>
-                        
+
                         <div class="form-group {{ $errors->has('referencia') ? ' has-error' : '' }}">
                             <label for="referencia" class="col-md-4 control-label">Referencia</label>
                             <div class="col-md-6">
@@ -132,7 +134,7 @@
                                  @endif
                             </div>
                         </div>
-                       
+
                     <div class="form-group {{ $errors->has('preparacion') ? ' has-error' : '' }}">
                             <label for="preparacion" class="col-md-4 control-label">Preparación</label>
                             <div class="col-md-6">
@@ -141,7 +143,7 @@
                                    <option  value='1'> SI</option>
                                    <option  value='0'> NO</option>
                                     </select>
-                                 
+
                             </div>
                     </div>
                   <div class="form-group {{ $errors->has('usgIndicacion') ? ' has-error' : '' }}">
@@ -155,7 +157,7 @@
                                  @endif
                             </div>
                     </div>
-               
+
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-success btn-sm">
@@ -165,11 +167,15 @@
                          <a href="{{ route('admin_pacientes.show',$pac->idPaciente) }}" class="btn btn-warning btn-sm">
                         <span class="glyphicon glyphicon-list-alt"></span>Regresar a Perfil de Paciente</a>
                         @endforeach
-                        
+
                     </div>
                 </div>
             </form>
         </div>
+        @else
+        <div class="alert alert-danger" role="alert"> EL PERFIL DEL PACIENTE NO ESTÁ HABILITADO, NO PUEDE ASIGNARLE NINGUNA CITA </div>
+        @endif
+        @endforeach
     </div>
 </div>
 </div>

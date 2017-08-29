@@ -40,7 +40,7 @@ class PacienteController extends Controller
             ->orderBy('idPaciente', 'desc')
             ->join('sexo', 'pacientes.idSexo', '=', 'sexo.idSexo')
             ->join('procedencia', 'pacientes.idProcedencia', '=', 'procedencia.idProcedencia')
-            ->select('pacientes.*', 'sexo.nombre_sexo', 'procedencia.nombre_procedencia')
+            ->select('pacientes.*', 'sexo.nombreSexo', 'procedencia.nombreProcedencia')
             ->paginate(10);
         return view($this->path.'/admin_pacientes')->with('pacientes',$pacientes);
     }
@@ -52,9 +52,9 @@ class PacienteController extends Controller
      */
     public function create()
     {
-        $sexos = DB::table('sexo')->select('idSexo', 'nombre_sexo')->get();
-        $procedencias = DB::table('procedencia')->select('idProcedencia', 'nombre_procedencia')->get();
-        $departamentos=DB::table('departamentos')->select('idDepartamento','nombre_departamento')->get();
+        $sexos = DB::table('sexo')->select('idSexo', 'nombreSexo')->get();
+        $procedencias = DB::table('procedencia')->select('idProcedencia', 'nombreProcedencia')->get();
+        $departamentos=DB::table('departamentos')->select('idDepartamento','nombreDepartamento')->get();
         return view($this->path.'/crearPaciente')->with('sexos',$sexos)->with('procedencias',$procedencias)->with('departamentos',$departamentos);
 
     }
@@ -124,7 +124,7 @@ class PacienteController extends Controller
           ->join('sexo', 'pacientes.idSexo', '=', 'sexo.idSexo')
           ->join('procedencia', 'pacientes.idProcedencia', '=', 'procedencia.idProcedencia')
           ->join('departamentos','pacientes.idDepartamento','=','departamentos.idDepartamento')
-          ->select('pacientes.*', 'sexo.nombre_sexo', 'procedencia.nombre_procedencia','departamentos.nombre_departamento')
+          ->select('pacientes.*', 'sexo.nombreSexo', 'procedencia.nombreProcedencia','departamentos.nombreDepartamento')
           ->where('pacientes.idPaciente',
               $paciente->idPaciente)
           ->get();
@@ -152,18 +152,18 @@ class PacienteController extends Controller
         try{
              $paciente = Paciente::findOrFail($idPaciente);
 
-             $sexoPaciente= DB::table('sexo')->where('idSexo',$paciente->idSexo)->select('idSexo','nombre_sexo')->get();
-             $sexoDiferente =DB::table('sexo')->where('idSexo','<>',$paciente->idSexo)->select('idSexo','nombre_sexo')->get();
+             $sexoPaciente= DB::table('sexo')->where('idSexo',$paciente->idSexo)->select('idSexo','nombreSexo')->get();
+             $sexoDiferente =DB::table('sexo')->where('idSexo','<>',$paciente->idSexo)->select('idSexo','nombreSexo')->get();
 
              $procedenciaPaciente =DB::table('procedencia')->where('idProcedencia',$paciente->idProcedencia)
-                 ->select('nombre_procedencia','idProcedencia')->get();
+                 ->select('nombreProcedencia','idProcedencia')->get();
              $procedenciaDiferente =DB::table('procedencia')->where('idProcedencia','<>',$paciente->idProcedencia)
-                 ->select('idProcedencia','nombre_procedencia')->get();
+                 ->select('idProcedencia','nombreProcedencia')->get();
 
             $departamentoPaciente=DB::table('departamentos')->where('idDepartamento',$paciente->idDepartamento)
-            ->select('idDepartamento','nombre_departamento')->get();
+            ->select('idDepartamento','nombreDepartamento')->get();
             $departamentoDiferente =DB::table('departamentos')->where('idDepartamento','<>',$paciente->idDepartamento)
-                ->select('idDepartamento','nombre_departamento')->get();
+                ->select('idDepartamento','nombreDepartamento')->get();
 
 
             return view($this->path.'/editarPaciente')

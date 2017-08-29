@@ -15,7 +15,7 @@ class CreateTablaProcedencia extends Migration
     {
       Schema::create('procedencia', function (Blueprint $table) {
         $table->increments('idProcedencia');
-          $table->string('nombre_procedencia'); //nombre de facultad o persona externa
+          $table->string('nombreProcedencia'); //nombre de facultad o persona externa
       });
     }
 

@@ -15,7 +15,7 @@ class CreateTablaSexo extends Migration
     {
       Schema::create('sexo', function (Blueprint $table) {
         $table->increments('idSexo');
-          $table->string('nombre_sexo'); //masculino o femenino
+          $table->string('nombreSexo'); //masculino o femenino
       });
     }
 

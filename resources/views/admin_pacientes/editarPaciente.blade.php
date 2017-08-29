@@ -147,10 +147,10 @@
 									<!--lista desplegable -->
 									<select class="form-control" name="sexo" id="sexo" onchange="ocul()">
 										@foreach($sexoPaciente as $sexo)
-										<option  value='{{ $sexo->idSexo}}'> {{ $sexo->nombre_sexo }} </option>
+										<option  value='{{ $sexo->idSexo}}'> {{ $sexo->nombreSexo }} </option>
 										@endforeach
 										@foreach($sexoDiferente as $sexo)
-										<option  value='{{ $sexo->idSexo}}'> {{ $sexo->nombre_sexo }} </option>
+										<option  value='{{ $sexo->idSexo}}'> {{ $sexo->nombreSexo }} </option>
 										@endforeach
 									</select>
 								</div>
@@ -161,10 +161,10 @@
 									<!--lista desplegable -->
 									<select class="form-control" name="procedencia" id="procedencia" onchange="ocul()">
 										@foreach($procedenciaPaciente as $procedencia)
-										<option  value='{{ $procedencia->idProcedencia}}'> {{ $procedencia->nombre_procedencia }} </option>
+										<option  value='{{ $procedencia->idProcedencia}}'> {{ $procedencia->nombreProcedencia }} </option>
 										@endforeach
 										@foreach($procedenciaDiferente as $procedencia)
-										<option  value='{{ $procedencia->idProcedencia}}'> {{ $procedencia->nombre_procedencia }} </option>
+										<option  value='{{ $procedencia->idProcedencia}}'> {{ $procedencia->nombreProcedencia }} </option>
 										@endforeach
 									</select>
 								</div>
@@ -176,15 +176,15 @@
 									<!--lista desplegable -->
 									<select class="form-control" name="departamento" id="departamento" onchange="ocul()">
 										@foreach($departamentoPaciente as $departamento)
-										<option  value='{{ $departamento->idDepartamento}}'> {{ $departamento->nombre_departamento }} </option>
+										<option  value='{{ $departamento->idDepartamento}}'> {{ $departamento->nombreDepartamento }} </option>
 										@endforeach
 										@foreach($departamentoDiferente as $departamento)
-										<option  value='{{ $departamento->idDepartamento}}'> {{ $departamento->nombre_departamento }} </option>
+										<option  value='{{ $departamento->idDepartamento}}'> {{ $departamento->nombreDepartamento }} </option>
 										@endforeach
 									</select>
 								</div>
 							</div>
-							
+
 							<div class="form-group">
 								<div class="col-lg-offset-4 col-lg-2">
 									<button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-floppy-disk"></span>Guardar Cambios</button>

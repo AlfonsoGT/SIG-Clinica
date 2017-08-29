@@ -54,7 +54,7 @@ class ReservacionController extends Controller
         ->select('idRegionAnatomica', 'nombreRegionAnatomica')->get();
 
         $paciente = DB::table('pacientes')
-        ->select('primerNombre','segundoNombre','primerApellido','segundoApellido','idPaciente')
+        ->select('primerNombre','segundoNombre','primerApellido','segundoApellido','idPaciente','activo')
         ->where('idPaciente','=',$idPaciente)->get();
         //dd($paciente);
         //Para presentar en la vista la cantidad de pacientes
@@ -222,7 +222,7 @@ class ReservacionController extends Controller
         }
         //Para llenar el campo del nombre del paciente
         $paciente = DB::table('pacientes')
-        ->select('primerNombre','segundoNombre','primerApellido','segundoApellido','idPaciente')
+        ->select('primerNombre','segundoNombre','primerApellido','segundoApellido','idPaciente','activo')
         ->where('idPaciente','=',$idPaciente)->get();
 
         //Para presentar en la vista la cantidad de pacientes
@@ -308,7 +308,7 @@ class ReservacionController extends Controller
         ->join('tipoExamen','tipoExamen.idTipoExamen','=','citas.idTipoExamen')
         ->where('citas.idCita','=',$idCita)
         ->select('tipoExamen.idTipoExamen')->get();
-        //dd($busqueda);
+
         foreach ($busqueda as $bus) {
             $regiones = RegionAnatomica::where('idTipoExamen',$bus->idTipoExamen)->get();
         }

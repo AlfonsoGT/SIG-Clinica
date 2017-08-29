@@ -39,8 +39,8 @@
 									<td class="text-center">{{ $paciente->duiPaciente }}</td>
 									<td class="text-center"> {{ $paciente->primerNombre }} {{ $paciente->segundoNombre }} </td>
 									<td class="text-center"> {{ $paciente->primerApellido }} {{ $paciente->segundoApellido}}</td>
-									<td class="text-center"> 
-									<?php  
+									<td class="text-center">
+									<?php
                                     $newDate = date("d-m-Y", strtotime($paciente->fechaNacimiento));
                                     print_r($newDate ); ?>
 									  </td>
@@ -70,9 +70,9 @@
 									<td class="text-center"> {{ $paciente->numeroCelular }} </td>
 									<td class="text-center"> {{ $paciente->duiEncargado}}</td>
 									<td class="text-center"> {{ $paciente->nombreEncargado}} </td>
-									<td class="text-center"> {{ $paciente->nombre_sexo }} </td>
-									<td class="text-center"> {{ $paciente->nombre_procedencia }} </td>
-									<td class="text-center"> {{ $paciente->nombre_departamento}} </td>
+									<td class="text-center"> {{ $paciente->nombreSexo }} </td>
+									<td class="text-center"> {{ $paciente->nombreProcedencia }} </td>
+									<td class="text-center"> {{ $paciente->nombreDepartamento}} </td>
 								</tr>
 								@endforeach
 							</tbody>

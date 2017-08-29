@@ -11,8 +11,8 @@ class sexoSeeder extends Seeder
      */
     public function run()
     {
-  DB::table('sexo')->insert(['nombre_sexo'=>'Masculino']);
-  DB::table('sexo')->insert(['nombre_sexo'=>'Femenino']);
+  DB::table('sexo')->insert(['nombreSexo'=>'Masculino']);
+  DB::table('sexo')->insert(['nombreSexo'=>'Femenino']);
 
     }
 }
