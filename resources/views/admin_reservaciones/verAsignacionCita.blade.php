@@ -32,10 +32,13 @@
 		<td class="text-center">{{ $reservacion->nombreRegionAnatomica }}</TD>
 		<TR><th class="text-center">Número de Recibo</TH>
 		<td class="text-center">{{ $reservacion->numeroRecibo }}</TD>
+		@if(  $reservacion->referencia == null)
+		@else
 		<TR><th class="text-center">Referencia</TH>
 		<td class="text-center">{{ $reservacion->referencia }}</TD>
 		<TR><th class="text-center">Detalle de Referencia</TH>
 		<td class="text-center">{{ $reservacion->detalleReferencia }}</TD>
+		@endif
 		<TR><th class="text-center">Fecha de Pago</TH>
 		<td class="text-center">
 		<?php  
@@ -50,8 +53,12 @@
 		NO
 		@endif
 		</TD>
+		@if(  $reservacion->usgIndicacion == null  )
+		
+		@else
 		<TR><th class="text-center">USG Indicación</TH>
 		<td class="text-center">{{ $reservacion->usgIndicacion }}</TD>
+		@endif
 		</thead>
 		@endforeach
 		</tbody>
