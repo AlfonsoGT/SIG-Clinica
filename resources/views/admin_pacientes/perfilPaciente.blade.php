@@ -4,7 +4,7 @@
 @section('content')
 
 <section>
-
+@can('control_pacientes')
 	<div class="container">
 		<div id="loginbox" style="margin-top:30px">
 			<div class="panel panel-primary" >
@@ -81,13 +81,24 @@
 					@if($paciente->activo==1)
 					<a href="{{ route('admin_pacientes.edit',$paciente->idPaciente) }}" class="btn btn-info btn-sm">
 						<span class="glyphicon glyphicon-pencil"></span>Editar información</a>
+
+						@can('control_citas')
 						<a href="{{ route('tomarIdPaciente',$paciente->idPaciente) }}" class="btn btn-info btn-sm" id="asignar">
 							<span class="glyphicon glyphicon-wrench"></span>Asignar Cita</a>
+							@endcan
+
+							@can('modificar_perfil_paciente')
 							<a href="{{ route('inactivar',$paciente->idPaciente) }}" class="btn btn-info btn-sm" id="pac_inhabilitado">
 									<span class="glyphicon glyphicon-remove"></span>inhabilitar perfil </a>
+									@endcan
+
 									@else
+
+									@can('modificar_perfil_paciente')
 									<a href="{{ route('activar',$paciente->idPaciente) }}" class="btn btn-info btn-sm" id="pac_habilitado">
 										<span class="glyphicon glyphicon-link"></span>habilitar perfil </a>
+										@endcan
+
 										@endif
 										<a href="{{ url('/admin_pacientes') }}" class="btn btn-warning btn-sm">
 											<span class="glyphicon glyphicon-list-alt"></span>Regresar a Expedientes</a>
@@ -123,15 +134,23 @@
 														<td class="text-center"> {{ $reservacion->nombreRegionAnatomica}} </td>
 														<td>
 															@if( $reservacion->habilitado == 1)
+															@can('control_citas')
 															<a href="/tomarIdPacienteUpdate/{{$paciente->idPaciente}},{{$reservacion->idReservacion}}" class="btn btn-info btn-sm">
 																<span class="glyphicon glyphicon-pencil"></span>Editar</a>
+																@endcan
+
+
 																<a href="{{ route('admin_reservaciones.show',$reservacion->idReservacion) }}" class="btn btn-success btn-sm">
 																	<span class="glyphicon glyphicon-eye-open"></span>Ver</a>
+
+																	@can('control_citas')
 																	<form method="GET" action="/tomarIdPacienteEliminar/{{$paciente->idPaciente}},{{$reservacion->idReservacion}} " style='display: inline;'>
 																		<input type="hidden" name="_method" value="DELETE">
 																		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 																		<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('está seguro que desea eliminar?')">
 																			<span class="glyphicon glyphicon-trash"></span>Borrar</button></form>
+																			@endcan
+
 																			@else
 																			<a class="btn btn-info btn-sm" id="inhabilitado" ><span class="glyphicon glyphicon-pencil"></span>Editar</a>
 																			<a href="{{ route('admin_reservaciones.show',$reservacion->idReservacion) }}" class="btn btn-success btn-sm">
@@ -169,6 +188,11 @@
 															</div>
 														</div>
 														@endif
+														@else
+														<div class="alert alert-danger">
+														<strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+														</div>
+														@endcan
 
 													</section>
 

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('content')
+
+@can('control_roles')
 @if(session()->has('msj2'))
 <div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
 @endif
@@ -51,6 +53,11 @@
     </div>
   </div>
 </div>
+@else
+<div class="alert alert-danger">
+<strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+</div>
+@endcan
 @endsection
 
 <a href="{{ url('/admin_roles') }}" class="btn btn-danger">Cancelar</a>

@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-
+@can('control_citas')
     <section>
         <div class="container" id="panelAdminRoles">
             <div class="row">
                 <div class="panel panel-default">
 
                     <div class="panel-heading">Administración de Citas</div>
-                    
+
                     <div class="panel-body">
                     @if(session()->has('msj'))
                      <div class="alert alert-success" role="alert">{{session('msj')}}</div>
@@ -53,7 +53,7 @@
                                         <td class="text-center">{{ $cita->idCita}}</td>
                                         <td class="text-center">{{ $cita->nombreTipoExamen}}</td>
                                         <td class="text-center"> {{ $cita->horaCita }} </td>
-                                        <td class="text-center"> <?php  
+                                        <td class="text-center"> <?php
                                         $newDate = date("d-m-Y", strtotime($cita->fechaCita));
                                         print_r($newDate ); ?></td>
                                         <td class="text-center">
@@ -116,5 +116,11 @@
             </div>
         </div>
     @endif
+
+    @else
+    <div class="alert alert-danger">
+    <strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+    </div>
+     @endcan
     </section>
 @endsection

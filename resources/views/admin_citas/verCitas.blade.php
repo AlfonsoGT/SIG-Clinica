@@ -3,7 +3,7 @@
 @section('content')
 
 <section>
-	
+	@can('control_citas')
 	<div class="container">
 		<div id="loginbox" style="margin-top:30px">
 			<div class="panel panel-primary" >
@@ -16,7 +16,7 @@
                 @endif
 				<div style="padding-top:30px" class="panel-body" >
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
-	
+
 <!--tabla 1-->
 
 <div class="table-responsive">
@@ -40,7 +40,7 @@
                      <td class="text-center">{{ $cita->nombreTipoExamen}}</td>
                      <td class="text-center"> {{ $cita->horaCita }} </td>
                       <td class="text-center">
-                      	<?php  
+                      	<?php
                         $newDate = date("d-m-Y", strtotime($cita->fechaCita));
                         print_r($newDate ); ?>
                       </td>
@@ -78,7 +78,7 @@
 				 <th class="text-center">Nombre Completo de Paciente</th>
 				 <th class="text-center">Sexo</th>
 				 <th class="text-center">Región Anatomica</th>
-				 
+
 			 </tr>
 		 </thead>
 		 <tbody>
@@ -87,7 +87,7 @@
 						 <td class="text-center">{{ $reservacion->primerNombre}} {{$reservacion->segundoNombre}} {{$reservacion->primerApellido}}  {{$reservacion->segundoApellido}}</td>
 						 <td class="text-center"> {{ $reservacion->nombre_sexo}}</td>
 						 <td class="text-center"> {{ $reservacion->nombreRegionAnatomica}}</td>
-						
+
 					 </tr>
 		@endforeach
 		 </tbody>
@@ -116,5 +116,10 @@
         <a href="{{ url('/admin_citas') }}" class="btn btn-warning btn-sm">
          <span class="glyphicon glyphicon-list-alt"></span>Regresar a Lista de Citas</a>
     @endif
+		@else
+		<div class="alert alert-danger">
+		<strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+		</div>
+		 @endcan
 </section>
 @endsection

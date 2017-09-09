@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+	@can('control_usuarios')
 <div class="container">
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-primary" >
@@ -73,12 +73,17 @@
                                   <button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-floppy-disk"></span>Guardar Cambios </button>
                                 </button>
                             </div>
-                            
+
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    @else
+    <div class="alert alert-danger">
+    <strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+    </div>
+    @endcan
 
 @endsection

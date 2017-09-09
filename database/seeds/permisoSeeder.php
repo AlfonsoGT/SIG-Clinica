@@ -11,11 +11,12 @@ class permisoSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('permissions')->insert(['name'=>'puede ver','slug'=>'puede_ver']);
-      DB::table('permissions')->insert(['name'=>'puede eliminar','slug'=>'puede_eliminar']);
-      DB::table('permissions')->insert(['name'=>'puede cargar','slug'=>'puede_cargar']);
-      DB::table('permissions')->insert(['name'=>'puede editar','slug'=>'puede_editar']);
-      DB::table('permissions')->insert(['name'=>'puede modificar usuarios','slug'=>'puede_modificar_usuarios']);
+      DB::table('permissions')->insert(['name'=>'control de gestión de pacientes','slug'=>'control_pacientes','description'=>'control']);
+      DB::table('permissions')->insert(['name'=>'control de gestión de citas','slug'=>'control_citas','description'=>'control']);
+      DB::table('permissions')->insert(['name'=>'control de gestión de usuarios','slug'=>'control_usuarios','description'=>'control']);
+      DB::table('permissions')->insert(['name'=>'control de gestión de roles','slug'=>'control_roles','description'=>'control']);
+      DB::table('permissions')->insert(['name'=>'permiso para agregar o quitar roles a un usuario','slug'=>'modificar_roles','description'=>'control']);
+      DB::table('permissions')->insert(['name'=>'permiso para habilitar o inhabilitar perfil de paciente','slug'=>'modificar_perfil_paciente','description'=>'control']);
 
 
     }

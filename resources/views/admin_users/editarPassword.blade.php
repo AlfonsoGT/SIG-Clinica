@@ -4,6 +4,8 @@
 
 <div class="container">
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+
+      @if(Auth::user()->id==$user->id)
         <div class="panel panel-primary" >
             <div class="panel-heading">
                 <div class="panel-title">Editar Contraseña</div>
@@ -64,6 +66,11 @@
                     </form>
                 </div>
             </div>
+            @else
+            <div class="alert alert-danger">
+            <strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+            </div>
+            @endif
         </div>
     </div>
 

@@ -3,6 +3,7 @@
 @section('content')
 
 <section>
+	@can('control_usuarios')
 	<div class="alert alert-info">
 		<strong>Lista Usuarios</strong>
 	</div>
@@ -86,6 +87,11 @@
 			</div>
 		</div>
 	@endif
+	@else
+	<div class="alert alert-danger">
+	<strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+	</div>
+	@endcan
 </section>
 </section>
 @endsection

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@can('control_citas')
 <script type="text/javascript" src="{{ asset('js/fechasCitas.js')}}"></script>
 <div class="container">
     <div id="loginbox" style="margin-top:30px">
@@ -36,7 +37,7 @@
                     <div class="form-group">
                         <label for="nombre_rol" class="col-md-4 control-label">Ingresar Hora</label>
                         <div class="col-md-6">
-                            <input id="horaCita" type="time" class="form-control" name="horaCita" value="{{ old('fechaCita') }}"" required autofocus>
+                            <input id="horaCita" type="time" class="form-control" name="horaCita" value="{{ old('fechaCita') }}" required autofocus>
                             @if ($errors->has('horaCita'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('horaCita') }}</strong>
@@ -44,7 +45,7 @@
                             @endif
                         </div>
                     </div>
-                    
+
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-success btn-sm">
@@ -59,4 +60,9 @@
     </div>
 </div>
 </div>
+@else
+<div class="alert alert-danger">
+<strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+</div>
+ @endcan
 @endsection

@@ -2,6 +2,7 @@
 
 @section('content')
 <section>
+	@can('control_roles')
 	@if(session()->has('msj'))
 	<div class="alert alert-success" role="alert">{{session('msj')}}</div>
 	@endif
@@ -103,6 +104,10 @@
 						</div>
 						</div>
 
-						<!--</div>-->
+						@else
+						<div class="alert alert-danger">
+						<strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+						</div>
+						@endcan
 					</section>
 					@endsection

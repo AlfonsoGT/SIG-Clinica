@@ -48,3 +48,7 @@ Route::resource('/admin_roles', 'RolController');
 /*modificacion de contraseña */
 Route::get('/editPassword/{id}', 'UserController@editPassword')->name('editPassword');
 Route::post('/actualizarPassword/{id}','UserController@actualizarPassword')->name('actualizarPassword');
+
+
+/*Adquisicion de Productos*/
+Route::resource('/admin_productos','ProductoController');

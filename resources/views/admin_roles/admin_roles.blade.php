@@ -2,6 +2,7 @@
 
 @section('content')
     <section>
+      @can('control_roles')
         <div class="alert alert-info">
             <strong>Lista de Roles</strong>
         </div>
@@ -53,5 +54,10 @@
 
         </div>
         </div>
+        @else
+      	<div class="alert alert-danger">
+      	<strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+      	</div>
+      	@endcan
     </section>
 @endsection

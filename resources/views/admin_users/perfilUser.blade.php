@@ -41,8 +41,10 @@
 									<a href="/editPassword/{{$user->id}}" class="btn btn-info btn-sm">
 										<span class="glyphicon glyphicon-pencil"></span>Editar mi contraseña</a>
 										@endif
+										@can('control_usuarios')
 										<a href="{{ route('admin_users.edit',$user->id) }}" class="btn btn-info btn-sm">
 											<span class="glyphicon glyphicon-pencil"></span>Editar información del usuario</a></td>
+											@endcan
 								</tr>
 								@endforeach
 							</tbody>
@@ -69,7 +71,9 @@
 
 										<td class="text-center">{{ $rolesA->name }}</td>
 										<td class="text-center">{{ $rolesA->description }}</td>
+										@can('modificar_roles')
 										<td><a href="/revocarRol/{{$user->id}},{{$rolesA->id}}" class="btn btn-danger btn-sm">borrar</a></td>
+										@endcan
 									</tr>
 									@endforeach
 								</tbody>
@@ -91,6 +95,7 @@
         					</div>
     					@endif
     					@if(count($roles)>0)
+							@can('modificar_roles')
 							<form method="GET" action="/asignarRol/{{$user->id}}">
 								<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 							<div class="form-group">
@@ -108,11 +113,15 @@
 						<div class="form-group">
 							<button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-floppy-disk"></span>Asignar Rol</button></td>
 						</div>
+						@endcan
 						@endif
 
+
 						<div class="form-group">
+							@can('control_usuarios')
 							 <a href="{{ url('/admin_users') }}" class="btn btn-warning btn-sm">
                         <span class="glyphicon glyphicon-list-alt"></span>Regresar a lista de Usuarios</a>
+												@endcan
                         <a href="{{route ('homeAdministrador')}}" class="btn btn-warning btn-sm" id="inicioPanel">
 							<span class="glyphicon glyphicon-home"></span>Regresar al inicio</a>
 						</div>

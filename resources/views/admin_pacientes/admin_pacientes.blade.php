@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
 <section>
+	@can('control_pacientes')
 	<div class="container" id="panelAdminPacientes">
 		<div class="row">
 			<div class="panel panel-default">
@@ -49,7 +51,11 @@
 
 											<td class="text-center">{{ $paciente->duiPaciente }}</a> </td>
 											<td class="text-center"> {{ $paciente->primerNombre }} {{ $paciente->segundoNombre }} {{ $paciente->primerApellido }} {{ $paciente->segundoApellido}}</td>
-											<td class="text-center"> {{ $paciente->fechaNacimiento }} </td>
+											<td class="text-center">
+											<?php
+		                                    $newDate = date("d-m-Y", strtotime($paciente->fechaNacimiento));
+		                                    print_r($newDate ); ?>
+											  </td>
 											<td class="text-center"> {{ $paciente->duiEncargado}} </td>
 											<td class="text-center"> {{ $paciente->nombreEncargado}} </td>
 											<td>
@@ -91,6 +97,11 @@
 			</div>
 		</div>
 	@endif
+	@else
+	<div class="alert alert-danger">
+	<strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+	</div>
+	@endcan
 </section>
 
 

@@ -12,7 +12,7 @@ class Reservacion extends Model
         'idRegionAnatomica', 'idCita','idPaciente','usgIndicacion'
         ,
     ];
-     protected $primaryKey = 'idReservacion';
+    protected $primaryKey = 'idReservacion';
     public $timestamps = false;
 
     public function scopeBusquedaReservacion($query, $busqueda)

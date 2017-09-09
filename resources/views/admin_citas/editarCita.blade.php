@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@can('control_citas')
 <script type="text/javascript" src="{{ asset('js/fechasCitas.js')}}"></script>
 <div class="container">
     <div id="loginbox" style="margin-top:30px">
@@ -47,7 +48,7 @@
                             @endif
                         </div>
                     </div>
-                    
+
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-success btn-sm">
@@ -62,4 +63,9 @@
     </div>
 </div>
 </div>
+@else
+<div class="alert alert-danger">
+<strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+</div>
+ @endcan
 @endsection

@@ -16,6 +16,7 @@
                 @if (Auth::guest())
                 <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}">INICIAR SESIÓN</a></li>
                 @else
+                  @can('control_pacientes')
                 <div class="mbr-navbar__item btn-group">
                 <li class="mbr-navbar__item">
                   <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> Gestión de Pacientes<span class="caret"></span></button>
@@ -25,9 +26,10 @@
                   </ul>
                   </li>
                 </div>
-                
+                @endcan
 
 
+                @can('control_citas')
                 <div class="mbr-navbar__item btn-group">
                 <li class="mbr-navbar__item">
                   <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> Gestión de Citas<span class="caret"></span></button>
@@ -37,20 +39,23 @@
                   </ul>
                   </li>
                 </div>
+                @endcan
 
 
-
+                @can('control_usuarios')
                 <div class="mbr-navbar__item btn-group">
                 <li class="mbr-navbar__item">
                   <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> Gestión de Usuarios<span class="caret"></span></button>
                   <ul class="dropdown-menu" role="menu"  id="menup">
                     <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_users.index') }}">VER USUARIOS</a></li>
                     <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_users.create') }}">CREAR USUARIOS</a></li>
+                    @can('control_roles')
                     <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_roles.index') }}">GESTION DE ROLES</a></li>
+                    @endcan
                   </ul>
                   </li>
                 </div>
-
+                @endcan
 
 
                 <div class="mbr-navbar__item btn-group">
@@ -67,7 +72,7 @@
                 </div>
 
 
-                
+
 
                 @endif
 
