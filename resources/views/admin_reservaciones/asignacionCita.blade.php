@@ -135,6 +135,18 @@
                                  @endif
                             </div>
                         </div>
+                        <div class="form-group {{ $errors->has('detalleReferencia') ? ' has-error' : '' }}">
+                            <label for="detalleReferencia" class="col-md-4 control-label">Detalle de Referencia</label>
+                            <div class="col-md-6">
+                                <input id="detalleReferencia" type="text" class="form-control" name="detalleReferencia" value="{{ old('detalleReferencia') }}" autocomplete="off">
+                                @if ($errors->has('detalleReferencia'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('detalleReferencia') }}</strong>
+                                                </span>
+                                 @endif
+                            </div>
+                        </div>
+
 
                     <div class="form-group {{ $errors->has('preparacion') ? ' has-error' : '' }}">
                             <label for="preparacion" class="col-md-4 control-label">Preparación</label>

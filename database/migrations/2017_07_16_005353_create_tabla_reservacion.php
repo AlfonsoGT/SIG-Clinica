@@ -18,6 +18,7 @@ class CreateTablaReservacion extends Migration
             $table->string('numeroRecibo');
             $table->date('fechaPago');
             $table->string('referencia')->nullable();
+            $table->string('detalleReferencia')->nullable();
             $table->string('usgIndicacion')->nullable();
             $table->boolean('preparacion')->nullable()->default(0);
             $table->integer('idCita')->unsigned();

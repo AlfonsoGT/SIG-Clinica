@@ -84,6 +84,7 @@ class ReservacionController extends Controller
         $this->validate($request,[
             'numeroRecibo' => 'required|max:7|min:7|regex:/^\d{7}$/',
             'referencia' => 'nullable|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'detalleReferencia' => 'nullable|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
             'usgIndicacion' => 'nullable|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
         ]);
        try{
@@ -101,6 +102,7 @@ class ReservacionController extends Controller
         $reservacion->numeroRecibo= $request->numeroRecibo;
         $reservacion->fechaPago = $request->fechaPago;
         $reservacion->referencia = $request->referencia;
+        $reservacion->detalleReferencia = $request->detalleReferencia;
         $reservacion->idRegionAnatomica= $request->region;
         $reservacion->usgIndicacion= $request->usgIndicacion;
         $reservacion->preparacion= $request->preparacion;
@@ -255,6 +257,7 @@ class ReservacionController extends Controller
        $this->validate($request,[
             'numeroRecibo' => 'required|max:7|min:7|regex:/^\d{7}$/',
             'referencia' => 'nullable|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'detalleReferencia' => 'nullable|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
             'usgIndicacion' => 'nullable|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
         ]);
 
@@ -263,6 +266,7 @@ class ReservacionController extends Controller
         $reservacion->numeroRecibo= $request->numeroRecibo;
         $reservacion->fechaPago = $request->fechaPago;
         $reservacion->referencia = $request->referencia;
+        $reservacion->detalleReferencia = $request->detalleReferencia;
         $reservacion->idRegionAnatomica= $request->regionAnatomica;
         $reservacion->usgIndicacion= $request->usgIndicacion;
         $reservacion->preparacion= $request->preparacion;

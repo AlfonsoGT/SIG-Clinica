@@ -34,6 +34,8 @@
 		<td class="text-center">{{ $reservacion->numeroRecibo }}</TD>
 		<TR><th class="text-center">Referencia</TH>
 		<td class="text-center">{{ $reservacion->referencia }}</TD>
+		<TR><th class="text-center">Detalle de Referencia</TH>
+		<td class="text-center">{{ $reservacion->detalleReferencia }}</TD>
 		<TR><th class="text-center">Fecha de Pago</TH>
 		<td class="text-center">
 		<?php  

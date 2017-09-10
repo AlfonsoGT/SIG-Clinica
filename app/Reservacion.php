@@ -9,8 +9,8 @@ class Reservacion extends Model
 	protected $table = 'reservacion';
     protected $fillable = [
         'numeroRecibo', 'fechaPago', 'referencia',
-        'idRegionAnatomica', 'idCita','idPaciente','usgIndicacion'
-        ,
+        'idRegionAnatomica', 'idCita','idPaciente','usgIndicacion',
+        'detalleReferencia',
     ];
     protected $primaryKey = 'idReservacion';
     public $timestamps = false;
