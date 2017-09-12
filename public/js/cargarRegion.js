@@ -5,7 +5,7 @@ function onSelectTipos(){
     var idCita = $(this).val();
    //alert(idCita);
    //AJAX
-   $.get('/api/region/'+idCita+'',function(data){
+   $.get('/region/'+idCita+'',function(data){
     //console.log(data);
     var html_select = '<option value="">Seleccione una Region Anatomica</option>';
     $("#region").empty();
