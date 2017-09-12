@@ -127,7 +127,7 @@ if($validar==0){
       ->orderBy('idReservacion', 'desc')
       //DB::table('reservacion')
     ->select('pacientes.primerNombre','pacientes.segundoNombre','pacientes.primerApellido','pacientes.segundoApellido',
-    'pacientes.idPaciente','regionAnatomica.nombreRegionAnatomica','regionAnatomica.idRegionAnatomica','sexo.nombre_sexo')
+    'pacientes.idPaciente','regionAnatomica.nombreRegionAnatomica','regionAnatomica.idRegionAnatomica','sexo.nombreSexo')
     ->join('pacientes','pacientes.idPaciente','=','reservacion.idPaciente')
     ->join('sexo','pacientes.idSexo','=','sexo.idSexo')
     ->join('regionAnatomica','regionAnatomica.idRegionAnatomica','=','reservacion.idRegionAnatomica')

@@ -115,6 +115,10 @@
         </div>
         <a href="{{ url('/admin_citas') }}" class="btn btn-warning btn-sm">
          <span class="glyphicon glyphicon-list-alt"></span>Regresar a Lista de Citas</a>
+
+          <a href="{{ url('/admin_citas') }}" class="btn btn-danger btn-sm">
+         <span class="glyphicon glyphicon-wrench"></span>Cerrar Cita</a>
+     
     @endif
 		@else
 		<div class="alert alert-danger">
