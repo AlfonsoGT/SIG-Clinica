@@ -85,7 +85,7 @@
 		 @foreach($reservaciones as $reservacion)
 					 <tr>
 						 <td class="text-center">{{ $reservacion->primerNombre}} {{$reservacion->segundoNombre}} {{$reservacion->primerApellido}}  {{$reservacion->segundoApellido}}</td>
-						 <td class="text-center"> {{ $reservacion->nombre_sexo}}</td>
+						 <td class="text-center"> {{ $reservacion->nombreSexo}}</td>
 						 <td class="text-center"> {{ $reservacion->nombreRegionAnatomica}}</td>
 
 					 </tr>

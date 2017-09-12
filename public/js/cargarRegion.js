@@ -9,12 +9,11 @@ function onSelectTipos(){
     //console.log(data);
     var html_select = '<option value="">Seleccione una Region Anatomica</option>';
     $("#region").empty();
+     $('#region option').remove();
     for( var i=0;i<data.length;++i)
     {
-        html_select += '<option value="'+data[i].idRegionAnatomica+'">'+data[i].nombreRegionAnatomica+'</option>';
+      $('#region').append('<option value="'+data[i].idRegionAnatomica+'">'+data[i].nombreRegionAnatomica+'</option>')
     }
-    console.log(html_select);
-    $('#region').html(html_select);
    });
 }
 
