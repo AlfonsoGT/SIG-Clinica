@@ -24,7 +24,7 @@ class ReservacionRequest extends FormRequest
     public function rules()
     {
         return [
-            "fechaPago"  =>    "required|after_or_equal:today",
+            "fechaPago"  =>    "required|before_or_equal:today",
         ];
     }
 
@@ -33,7 +33,7 @@ class ReservacionRequest extends FormRequest
         return [
             
             'fechaPago.required' => 'La fecha de pago es requerida',
-            'fechaPago.after_or_equal' => 'La fecha de pago es imposible. Esta fecha es del pasado',
+            'fechaPago.after_or_equal' => 'La fecha de pago es imposible. Esta fecha es del futuro',
         ];
     }
 }
