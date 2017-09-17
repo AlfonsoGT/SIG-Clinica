@@ -23,7 +23,7 @@
 						<table class="table table-striped table-hover table-bordered">
 							<thead>
 								<tr>
-
+									<th class="text-center">ID</th>
 									<th class="text-center">DUI Paciente</th>
 									<th class="text-center">Nombres</th>
 									<th class="text-center">Apellidos</th>
@@ -35,7 +35,7 @@
 							<tbody>
 								@foreach($pacientes as $paciente)
 								<tr>
-
+									<td class="text-center">{{ $paciente->idPaciente }}</a> </td>
 									<td class="text-center">{{ $paciente->duiPaciente }}</td>
 									<td class="text-center"> {{ $paciente->primerNombre }} {{ $paciente->segundoNombre }} </td>
 									<td class="text-center"> {{ $paciente->primerApellido }} {{ $paciente->segundoApellido}}</td>

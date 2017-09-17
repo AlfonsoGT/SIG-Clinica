@@ -3,7 +3,7 @@
 @section('content')
 <section>
 <div class="alert alert-info">
-<strong>Bienvenido al Sistema de la Clinica </strong>Indicaciones para Administrador
+<strong>Bienvenido al Sistema de la Clinica </strong>Indicaciones para {{ Auth::user()->name }}
 </div>
 
 <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="features1-12" style="background-color:	#F0F8FF ">
