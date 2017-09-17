@@ -119,7 +119,7 @@
          <a href="{{ route('inhabilitarCita',$cita->idCita) }}"class="btn btn-danger btn-sm">
          <span class="glyphicon glyphicon-wrench"></span>Cerrar Cita</a>
 				 @else
-				 <a href="{{ route('habilitarCita',$cita->idCita) }}"class="btn btn-danger btn-sm">
+				 <a href="{{ route('habilitarCita',$cita->idCita) }}" class="btn btn-info btn-sm"  id="pac_habilitado">
 				<span class="glyphicon glyphicon-wrench"></span>Abrir Cita</a>
 				@endif
 

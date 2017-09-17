@@ -35,28 +35,28 @@
                 </div>
                 <div class="mbr-section__container mbr-section__container--middle">
                     <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
-                        <h3 class="mbr-header__text_manejo">Permisos Asignados para {{ Auth::user()->name }} </h3>
+                        <h3 class="mbr-header__text_manejo">Permisos Asignados a {{ Auth::user()->name }} </h3>
                     </div>
                 </div>
                 <div class="mbr-section__container mbr-section__container--middle">
                     <div class="mbr-article mbr-article--wysiwyg">
                         @can('control_pacientes')
-                        <div class="mbr-buttons mbr-buttons--center"><a href="{{ url('/admin_pacientes') }}" class="btn btn-success btn-sm">
+                        <div class="mbr-buttons mbr-buttons--center"><a href="{{ url('/admin_pacientes') }}" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">
                         <span class="glyphicon glyphicon-list-alt"></span>Gestión de Expedientes</a></div>
                         <br>
                         @endcan
                         @can('control_citas')
-                        <div class="mbr-buttons mbr-buttons--center"><a href="{{ url('/admin_citas') }}" class="btn btn-success btn-sm">
+                        <div class="mbr-buttons mbr-buttons--center"><a href="{{ url('/admin_citas') }}" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">
                         <span class="glyphicon glyphicon-list-alt"></span>Gestión de Citas</a></div>
                         <br>
                         @endcan
                         @can('control_usuarios')
-                        <div class="mbr-buttons mbr-buttons--center"><a href="{{ url('/admin_users') }}" class="btn btn-success btn-sm">
+                        <div class="mbr-buttons mbr-buttons--center"><a href="{{ url('/admin_users') }}" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">
                         <span class="glyphicon glyphicon-list-alt"></span>Gestión de Usuarios</a></div>
                         <br>
                         @endcan
                         @can('control_roles')
-                        <div class="mbr-buttons mbr-buttons--center"><a href="{{ url('/admin_roles') }}" class="btn btn-success btn-sm">
+                        <div class="mbr-buttons mbr-buttons--center"><a href="{{ url('/admin_roles') }}" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">
                         <span class="glyphicon glyphicon-list-alt"></span>Gestión de Roles</a></div>
                         <br>
                         @endcan
