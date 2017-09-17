@@ -43,10 +43,12 @@
                                                 print_r($dato['horaCita']);
                                             }
                                             ?></td>
-                                            <td class="text-center">  <?php
+                                            <td class="text-center">
+                                            <?php
                                             $datos = json_decode($tipos[$indice],true);
                                             foreach ($datos as $dato) {
-                                                print_r($dato['fechaCita']);
+                                                $newDate = date("d-m-Y", strtotime($dato['fechaCita']));
+                                                print_r($newDate);
                                             }
                                             ?></td>
                                             </td>
@@ -78,6 +80,9 @@
                                             $datos = json_decode($tipos[$indice],true);
                                             foreach ($datos as $dato) {
                                                 print_r($dato['nombreTipoExamen']);
+                                                print_r('-------');
+                                                $newDate = date("d-m-Y", strtotime($dato['fechaCita']));
+                                                print_r($newDate);
                                             }
                                             ?> </option>
                                         @endforeach

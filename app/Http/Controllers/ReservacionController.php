@@ -176,7 +176,7 @@ class ReservacionController extends Controller
         $tipoSeleccionado = DB::table('reservacion')
         ->join('citas','citas.idCita','=','reservacion.idCita')
         ->join('tipoExamen','citas.idTipoExamen','=','tipoExamen.idTipoExamen')
-        ->select('reservacion.idCita','citas.idTipoExamen','tipoExamen.nombreTipoExamen')
+        ->select('reservacion.idCita','citas.idTipoExamen','tipoExamen.nombreTipoExamen','citas.fechaCita')
         ->where('reservacion.idReservacion',$reservacion->idReservacion)
         ->get();
         //Para seleccionar los tipos de Examenes no Asignados

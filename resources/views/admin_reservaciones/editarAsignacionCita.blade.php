@@ -50,7 +50,8 @@
                                             <td class="text-center">  <?php
                                             $datos = json_decode($tipos[$indice],true);
                                             foreach ($datos as $dato) {
-                                                print_r($dato['fechaCita']);
+                                                $newDate = date("d-m-Y", strtotime($dato['fechaCita']));
+                                                print_r($newDate);
                                             }
                                             ?></td>
                                             <td class="text-center">  <?php
@@ -71,7 +72,7 @@
                             <div class="col-md-6">
                                  <select required class="form-control" name="tipoExamen" id="tipoExamen">
                                   @foreach($tipoSeleccionado as $tipo)
-                                            <option  value='{{ $tipo->idCita}}' selected> {{ $tipo->nombreTipoExamen }} </option>
+                                            <option  value='{{ $tipo->idCita}}' selected> {{ $tipo->nombreTipoExamen }} ------- {{ $tipo->fechaCita }} </option>
                                     @endforeach
                                     @foreach($indices2 as $indice)
                                             <option  value='<?php
@@ -83,6 +84,9 @@
                                             $datos = json_decode($tiposExamen[$indice],true);
                                             foreach ($datos as $dato) {
                                                 print_r($dato['nombreTipoExamen']);
+                                                print_r('-------');
+                                                $newDate = date("d-m-Y", strtotime($dato['fechaCita']));
+                                                print_r($newDate);
                                             }
                                             ?> </option>
                                         @endforeach
