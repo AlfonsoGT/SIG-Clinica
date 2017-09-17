@@ -37,10 +37,12 @@ class PacienteController extends Controller
     {
 
         $pacientes = Paciente::busqueda($request->busqueda)
-            ->orderBy('idPaciente', 'desc')
+            //->orderBy('idPaciente', 'desc')
+            ->latest('pacientes.updated_at')
             ->join('sexo', 'pacientes.idSexo', '=', 'sexo.idSexo')
             ->join('procedencia', 'pacientes.idProcedencia', '=', 'procedencia.idProcedencia')
             ->select('pacientes.*', 'sexo.nombreSexo', 'procedencia.nombreProcedencia')
+
             ->paginate(10);
         return view($this->path.'/admin_pacientes')->with('pacientes',$pacientes);
     }
@@ -236,6 +238,7 @@ class PacienteController extends Controller
         $paciente->idSexo = $request->sexo;
         $paciente->idProcedencia = $request->procedencia;
         $paciente->idDepartamento= $request->departamento;
+        $paciente->updated_at=date('Y-m-d G:i:s');
 
         if($paciente->save()){
         return redirect()->action('PacienteController@show',['idPaciente' => $id])->with('msj3','Paciente modificado');

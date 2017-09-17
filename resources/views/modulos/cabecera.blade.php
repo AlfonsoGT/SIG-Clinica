@@ -62,6 +62,7 @@
                 <li class="mbr-navbar__item">
                   <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> {{ Auth::user()->username }}<span class="caret"></span></button>
                   <ul class="dropdown-menu" role="menu" id="menup">
+                    <li class="mbr-navbar__item"><a href="{{route ('homeAdministrador')}}" class="mbr-buttons__link btn text-white"  aria-expanded="false">INICIO</a></li>
                   <li class="mbr-navbar__item"><a href="{{ route('admin_users.show',Auth::user()->id) }}" class="mbr-buttons__link btn text-white"  aria-expanded="false"> VER MI PERFIL</a></li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   {{ csrf_field() }}

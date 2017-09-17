@@ -110,6 +110,11 @@ class ReservacionController extends Controller
         $reservacion->preparacion= $request->preparacion;
         $reservacion->idCita= $request->tipos;
         $reservacion->idPaciente = $request->idPaciente;
+        //actualiza la fecha de actualización del perfil de paciente para que aparezca entre los primeros de la lista
+        $paciente=Paciente::findOrFail($request->idPaciente);
+        $paciente->updated_at=date('Y-m-d G:i:s');
+        $paciente->save();
+        /*--*/
         $reservacion->save();
         return redirect()->action('PacienteController@show',['idPaciente' => $request->idPaciente])->with('msj','Reservacion Registrada');
       }else{
@@ -276,6 +281,12 @@ class ReservacionController extends Controller
         $reservacion->preparacion= $request->preparacion;
         $reservacion->idCita= $request->tipoExamen;
         $reservacion->idPaciente = $request->idPaciente;
+
+        //actualiza la fecha de actualización del perfil de paciente para que aparezca entre los primeros de la lista
+        $paciente=Paciente::findOrFail($request->idPaciente);
+        $paciente->updated_at=date('Y-m-d G:i:s');
+        $paciente->save();
+        /*--*/
 
         $reservacion->save();
         return redirect()->action('ReservacionController@show',['idReservacion' => $idReservacion])->with('msj','Reservacion Modificada');
