@@ -294,9 +294,24 @@ class ReservacionController extends Controller
     {
         $reservacion = Reservacion::findOrFail($idReservacion);
         $reservacion->delete();
-        return redirect()->action('PacienteController@show',['idPaciente' => $idPaciente])->with('msj2','Reservacion Eliminada con éxito');;
+        return redirect()->action('PacienteController@show',['idPaciente' => $idPaciente])->with('msj2','Reservacion Eliminada con éxito');
 
     }
+
+    public function vista_borrar($idPaciente,$idReservacion){
+         //recuperar de la base el elemento que queremos borrar en base al ID que recibimos en la URL con el unico fin de mostrar el detalle
+
+         $reservacion = Reservacion::find($idReservacion);
+         $detalleReservacion = DB::table('reservacion')
+        ->join('citas','citas.idCita','=','reservacion.idCita')
+        ->join('tipoExamen','citas.idTipoExamen','=','tipoExamen.idTipoExamen')
+        ->select('citas.*','tipoExamen.*')
+        ->where('reservacion.idReservacion',$reservacion->idReservacion)
+        ->get();
+         $paciente = Paciente::find($idPaciente);
+        return view($this->path.'/vista_borrar')->with('reservacion', $reservacion)->with('detalleReservacion',$detalleReservacion)->with('paciente',$paciente);
+    }
+
     public function tomarIdPaciente($idPaciente)
     {
         return $this->create($idPaciente);

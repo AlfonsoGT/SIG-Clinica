@@ -38,12 +38,14 @@ Route::resource('/admin_reservaciones','ReservacionController');
 Route::get('/tomarIdPaciente/{id}','ReservacionController@tomaridPaciente')->name('tomarIdPaciente');
 Route::get('/tomarIdPacienteUpdate/{idPaciente},{idReservacion}','ReservacionController@tomaridPacienteUpdate')->name('tomarIdPacienteUpdate');
 Route::get('/tomarIdPacienteEliminar/{idPaciente},{idReservacion}','ReservacionController@tomarIdPacienteEliminar')->name('tomarIdPacienteEliminar');
+Route::get('vista_borrar/{idPaciente},{idReservacion}', 'ReservacionController@vista_borrar'); //mostrar la pantalla de confirmacion
 Route::get('/region/{idCita}','ReservacionController@getRegion');
 
 /*Gestion de Citas*/
 Route::resource('/admin_citas', 'CitasController');
 
 Route::resource('/admin_users','UserController');
+Route::get('vista_borrarUsuarios/{id}', 'UserController@vista_borrarUsuarios'); //mostrar la pantalla de confirmacion
 Route::resource('/admin_roles', 'RolController');
 
 /*modificacion de contraseña */

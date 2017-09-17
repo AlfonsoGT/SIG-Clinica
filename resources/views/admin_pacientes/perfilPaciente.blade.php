@@ -144,10 +144,8 @@
 																	<span class="glyphicon glyphicon-eye-open"></span>Ver</a>
 
 																	@can('control_citas')
-																	<form method="GET" action="/tomarIdPacienteEliminar/{{$paciente->idPaciente}},{{$reservacion->idReservacion}} " style='display: inline;'>
-																		<input type="hidden" name="_method" value="DELETE">
-																		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-																		<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('está seguro que desea eliminar?')">
+																	<form method="GET" action="/vista_borrar/{{$paciente->idPaciente}},{{$reservacion->idReservacion}} " style='display: inline;'>
+																		<button type="submit" class="btn btn-danger btn-sm">
 																			<span class="glyphicon glyphicon-trash"></span>Borrar</button></form>
 																			@endcan
 

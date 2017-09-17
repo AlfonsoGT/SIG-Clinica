@@ -240,4 +240,11 @@ if (Hash::check($recibida, $almacenada)) {
 
 }
 
+public function vista_borrarUsuarios($id){
+         //recuperar de la base el elemento que queremos borrar en base al ID que recibimos en la URL con el unico fin de mostrar el detalle
+
+         $usuario = User::find($id);
+        return view($this->path.'/vista_borrarUsuarios')->with('usuario', $usuario);
+    }
+
 }

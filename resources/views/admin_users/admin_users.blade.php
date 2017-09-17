@@ -53,14 +53,12 @@
 											<td class="text-center"> {{ $user->username }} </td>
 											<td>
 											<a href="{{ route('admin_users.edit',$user->id) }}" class="btn btn-info btn-sm">
-												<span class="glyphicon glyphicon-pencil"></span>Editar</a>
-											<form method="POST" action="{{ route('admin_users.destroy', $user->id) }} " style='display: inline;'>
-												<a href="{{ route('admin_users.show',$user->id) }}" class="btn btn-success btn-sm">
-													<span class="glyphicon glyphicon-eye-open"></span>Ver</a>
-											<input type="hidden" name="_method" value="DELETE">
-											<input type="hidden" name="_token" value="{{ csrf_token() }}">
-											<button type="submit" class="btn btn-danger btn-sm"onclick="return confirm('está seguro que desea eliminar?')">
-												<span class="glyphicon glyphicon-trash"></span>Borrar</button></form>
+											<span class="glyphicon glyphicon-pencil"></span>Editar</a>
+											<a href="{{ route('admin_users.show',$user->id) }}" class="btn btn-success btn-sm">
+											<span class="glyphicon glyphicon-eye-open"></span>Ver</a>
+											<form method="GET" action="/vista_borrarUsuarios/{{$user->id}} " style='display: inline;'>
+											<button type="submit" class="btn btn-danger btn-sm">
+											<span class="glyphicon glyphicon-trash"></span>Borrar</button></form>
 											</td>
 										</tr>
 							@endforeach
