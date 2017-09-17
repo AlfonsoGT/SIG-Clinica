@@ -115,10 +115,14 @@
         </div>
         <a href="{{ url('/admin_citas') }}" class="btn btn-warning btn-sm">
          <span class="glyphicon glyphicon-list-alt"></span>Regresar a Lista de Citas</a>
-
-          <a href="{{ url('/admin_citas') }}" class="btn btn-danger btn-sm">
+				 @if($cita->habilitado==1)
+         <a href="{{ route('inhabilitarCita',$cita->idCita) }}"class="btn btn-danger btn-sm">
          <span class="glyphicon glyphicon-wrench"></span>Cerrar Cita</a>
-     
+				 @else
+				 <a href="{{ route('habilitarCita',$cita->idCita) }}"class="btn btn-danger btn-sm">
+				<span class="glyphicon glyphicon-wrench"></span>Abrir Cita</a>
+				@endif
+
     @endif
 		@else
 		<div class="alert alert-danger">

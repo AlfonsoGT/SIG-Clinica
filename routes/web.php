@@ -40,6 +40,8 @@ Route::get('/tomarIdPacienteUpdate/{idPaciente},{idReservacion}','ReservacionCon
 Route::get('/tomarIdPacienteEliminar/{idPaciente},{idReservacion}','ReservacionController@tomarIdPacienteEliminar')->name('tomarIdPacienteEliminar');
 Route::get('vista_borrar/{idPaciente},{idReservacion}', 'ReservacionController@vista_borrar'); //mostrar la pantalla de confirmacion
 Route::get('/region/{idCita}','ReservacionController@getRegion');
+Route::get('/habilitarCita/{id}','CitasController@habilitarCita')->name('habilitarCita');
+Route::get('/inhabilitarCita/{id}','CitasController@inhabilitarCita')->name('inhabilitarCita');
 
 /*Gestion de Citas*/
 Route::resource('/admin_citas', 'CitasController');

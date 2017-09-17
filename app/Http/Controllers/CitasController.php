@@ -26,7 +26,7 @@ class CitasController extends Controller
     ->paginate(10);
 
     $preliminar = DB::table('citas')->count();
-    //dd($preliminar);
+
 
     $cantidad = [];
     for ($i=1; $i<=$preliminar;$i++) {
@@ -37,7 +37,7 @@ class CitasController extends Controller
       ->get();
       array_push($cantidad, $aux);
     }
-    //dd($cantidad);
+
 
     return view($this->path.'/admin_citas')->with('citas',$citas)->with('cantidad',$cantidad)
     ->with('preliminar',$preliminar);
@@ -112,7 +112,7 @@ if($validar==0){
   {
     $cita = Cita::findOrFail($id);
     $citas = DB::table('citas')
-    ->select('citas.idCita','citas.fechaCita','citas.horaCita','tipoExamen.nombreTipoExamen')
+    ->select('citas.idCita','citas.fechaCita','citas.horaCita','tipoExamen.nombreTipoExamen','citas.habilitado')
     ->join('tipoExamen','citas.idTipoExamen','=','tipoExamen.idTipoExamen')
     ->where('citas.idCita','=',$cita->idCita)
     ->get();
@@ -125,7 +125,6 @@ if($validar==0){
 
     $reservaciones = Reservacion::BusquedaReservacion($request->busqueda)
       ->orderBy('idReservacion', 'desc')
-      //DB::table('reservacion')
     ->select('pacientes.primerNombre','pacientes.segundoNombre','pacientes.primerApellido','pacientes.segundoApellido',
     'pacientes.idPaciente','regionAnatomica.nombreRegionAnatomica','regionAnatomica.idRegionAnatomica','sexo.nombreSexo')
     ->join('pacientes','pacientes.idPaciente','=','reservacion.idPaciente')
@@ -203,5 +202,18 @@ if($validar==0){
             return "No se pudo eliminar la cita Especificado";
         }
   }
+
+public function habilitarCita($id){
+$cita= Cita::findOrFail($id);
+$cita->habilitado=true;
+$cita->save();
+return redirect()->action('CitasController@show',['id' => $id])->with('msj','Cita Habilitada');
+}
+public function inhabilitarCita($id){
+  $cita= Cita::findOrFail($id);
+  $cita->habilitado=false;
+  $cita->save();
+  return redirect()->action('CitasController@show',['id' => $id])->with('msj','Cita Inhabilitada');
+}
 
 }
