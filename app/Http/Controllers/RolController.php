@@ -185,9 +185,18 @@ public function destroy($id)
   try{
     $rol = Role::findOrFail($id);
     $rol->delete();
-    return redirect($this->path);
+    return redirect($this->path)->with('msj2','Rol eliminado Exitosamente');
   }catch(Exception $e){
     return "No se pudo eliminar el Rol Especificado";
   }
 }
+
+
+public function vista_borrarRoles($id){
+         //recuperar de la base el elemento que queremos borrar en base al ID que recibimos en la URL con el unico fin de mostrar el detalle
+
+         $rol = Role::find($id);
+        return view($this->path.'/vista_borrarRoles')->with('rol', $rol);
+    }
+
 }

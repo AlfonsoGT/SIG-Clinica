@@ -178,7 +178,7 @@ class UserController extends Controller
         try{
             $user = User::findOrFail($id);
             $user->delete();
-            return redirect($this->path);
+            return redirect($this->path)->with('msj2','Usuario Eliminado Exitosamente');
         }catch(Exception $e){
             return "No se pudo eliminar el Usuario Especificado";
         }

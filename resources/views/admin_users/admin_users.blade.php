@@ -7,15 +7,20 @@
 	<div class="alert alert-info">
 		<strong>Lista Usuarios</strong>
 	</div>
-	@if(session()->has('msj'))
-	<div class="alert alert-success" role="alert">{{session('msj')}}</div>
-	@endif
+	
 
 	<div class="container" id="panelAdminUsers">
 		<div class="row">
 			<div class="panel panel-default">
 				<div class="panel-heading">Administración de Usuarios</div>
 				<div class="panel-body">
+					@if(session()->has('msj'))
+					<div class="alert alert-success" role="alert">{{session('msj')}}</div>
+					@endif
+					@if(session()->has('msj2'))
+					<div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
+					@endif
+
 					<h1 style="display: inline;">Gestionar Usuarios</h1>
 					<a href="{{ route('admin_users.create')}}" class="btn btn-primary btn-sm">
 						<span class="glyphicon glyphicon-paperclip"></span>Ingresar Nuevo Usuario</a>

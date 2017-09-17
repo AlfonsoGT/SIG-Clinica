@@ -47,6 +47,7 @@ Route::resource('/admin_citas', 'CitasController');
 Route::resource('/admin_users','UserController');
 Route::get('vista_borrarUsuarios/{id}', 'UserController@vista_borrarUsuarios'); //mostrar la pantalla de confirmacion
 Route::resource('/admin_roles', 'RolController');
+Route::get('vista_borrarRoles/{id}', 'RolController@vista_borrarRoles'); //mostrar la pantalla de confirmacion
 
 /*modificacion de contraseña */
 Route::get('/editPassword/{id}', 'UserController@editPassword')->name('editPassword');
