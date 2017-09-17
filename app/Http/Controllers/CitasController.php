@@ -207,13 +207,13 @@ public function habilitarCita($id){
 $cita= Cita::findOrFail($id);
 $cita->habilitado=true;
 $cita->save();
-return redirect()->action('CitasController@show',['id' => $id]);
+return redirect()->action('CitasController@show',['id' => $id])->with('msj','Cita Habilitada');
 }
 public function inhabilitarCita($id){
   $cita= Cita::findOrFail($id);
   $cita->habilitado=false;
   $cita->save();
-  return redirect()->action('CitasController@show',['id' => $id]);
+  return redirect()->action('CitasController@show',['id' => $id])->with('msj','Cita Inhabilitada');
 }
 
 }
