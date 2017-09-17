@@ -17,16 +17,16 @@
                 </div>
                 <div class="mbr-section__container mbr-section__container--middle">
                     <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
-                        <h3 class="mbr-header__text_manejo">Para Crear un Usuario</h3>
+                        <h3 class="mbr-header__text_manejo">Los Permisos</h3>
                     </div>
                 </div>
                 <div class="mbr-section__container mbr-section__container--middle">
                     <div class="mbr-article mbr-article--wysiwyg">
-                        <p>Debe solicitar todos los datos del Usuario para proceder a la creación de las credenciales&nbsp;<br>Debe llenar el formulario que se le presenta despues de presionar el botón</p>
+                        <p>{{ Auth::user()->name }} le damos la bienvenida al sistema para la Clinica de Radiologia&nbsp;<br>Puede Editar su Información Personal en el siguiente Boton</p>
                     </div>
                 </div>
                 <div class="mbr-section__container mbr-section__container--last" style="padding-bottom: 93px;">
-                    <div class="mbr-buttons mbr-buttons--center"><a href="{{ route('admin_users.create')}}"" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">Crear Usuario</a></div>
+                    <div class="mbr-buttons mbr-buttons--center"><a href="{{ route('admin_users.show',Auth::user()->id) }}"" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">Mi Perfil</a></div>
                 </div>
             </div>
             <div class="mbr-section__col col-xs-12 col-md-3 col-sm-6">
@@ -35,16 +35,32 @@
                 </div>
                 <div class="mbr-section__container mbr-section__container--middle">
                     <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
-                        <h3 class="mbr-header__text_manejo">Para Ver lista de Usuarios</h3>
+                        <h3 class="mbr-header__text_manejo">Permisos Asignados para {{ Auth::user()->name }} </h3>
                     </div>
                 </div>
                 <div class="mbr-section__container mbr-section__container--middle">
                     <div class="mbr-article mbr-article--wysiwyg">
-                        <p>Para realizar una actualización de un Usuario o eliminación debe seleccionarlo en el expediente &nbsp;</p>
+                        @can('control_pacientes')
+                        <div class="mbr-buttons mbr-buttons--center"><a href="{{ url('/admin_pacientes') }}" class="btn btn-success btn-sm">
+                        <span class="glyphicon glyphicon-list-alt"></span>Gestión de Expedientes</a></div>
+                        <br>
+                        @endcan
+                        @can('control_citas')
+                        <div class="mbr-buttons mbr-buttons--center"><a href="{{ url('/admin_citas') }}" class="btn btn-success btn-sm">
+                        <span class="glyphicon glyphicon-list-alt"></span>Gestión de Citas</a></div>
+                        <br>
+                        @endcan
+                        @can('control_usuarios')
+                        <div class="mbr-buttons mbr-buttons--center"><a href="{{ url('/admin_users') }}" class="btn btn-success btn-sm">
+                        <span class="glyphicon glyphicon-list-alt"></span>Gestión de Usuarios</a></div>
+                        <br>
+                        @endcan
+                        @can('control_roles')
+                        <div class="mbr-buttons mbr-buttons--center"><a href="{{ url('/admin_roles') }}" class="btn btn-success btn-sm">
+                        <span class="glyphicon glyphicon-list-alt"></span>Gestión de Roles</a></div>
+                        <br>
+                        @endcan
                     </div>
-                </div>
-                <div class="mbr-section__container mbr-section__container--last" style="padding-bottom: 93px;">
-                    <div class="mbr-buttons mbr-buttons--center"><a href="{{ route('admin_users.index')}}" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">Ver Usuarios</a></div>
                 </div>
             </div>
             <div class="clearfix visible-sm-block"></div>
@@ -54,7 +70,7 @@
                 </div>
                 <div class="mbr-section__container mbr-section__container--middle">
                     <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
-                        <h3 class="mbr-header__text_manejo">Estamos trabajando para Usted</h3>
+                        <h3 class="mbr-header__text_manejo">Objetivo del Sistema</h3>
                     </div>
                 </div>
                 <div class="mbr-section__container mbr-section__container--middle">
@@ -70,12 +86,12 @@
                 </div>
                 <div class="mbr-section__container mbr-section__container--middle">
                     <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
-                        <h3 class="mbr-header__text_manejo">Seguimos arreglando este Modulo</h3>
+                        <h3 class="mbr-header__text_manejo">Clinica Radiologia </h3>
                     </div>
                 </div>
                 <div class="mbr-section__container mbr-section__container--middle">
                     <div class="mbr-article mbr-article--wysiwyg">
-                        <p>Bienvenido a su portal para Recepción&nbsp;</p>
+                        <p>Bienvenido a su portal&nbsp;</p>
                     </div>
                 </div>
             </div>
