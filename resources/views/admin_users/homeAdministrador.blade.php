@@ -7,8 +7,8 @@
 </div>
 
 <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="features1-12" style="background-color:	#F0F8FF ">
-    
-    
+
+
     <div class="mbr-section__container container mbr-section__container--std-top-padding" style="padding-top: 93px;">
         <div class="mbr-section__row row">
             <div class="mbr-section__col col-xs-12 col-md-3 col-sm-6">
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="mbr-section__container mbr-section__container--last" style="padding-bottom: 93px;">
-                    <div class="mbr-buttons mbr-buttons--center"><a href="{{ route('admin_users.show',Auth::user()->id) }}"" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">Mi Perfil</a></div>
+                    <div class="mbr-buttons mbr-buttons--center"><a href="{{ route('admin_users.show',Auth::user()->id) }}" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">Mi Perfil</a></div>
                 </div>
             </div>
             <div class="mbr-section__col col-xs-12 col-md-3 col-sm-6">
@@ -79,7 +79,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="mbr-section__col col-xs-12 col-md-3 col-sm-6">
                 <div class="mbr-section__container mbr-section__container--center mbr-section__container--middle">
                     <figure class="mbr-figure"><img src="{{ asset('img/ues.png')}}" class="mbr-figure__img"></figure>
