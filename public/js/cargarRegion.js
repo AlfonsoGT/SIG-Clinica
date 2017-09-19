@@ -23,8 +23,6 @@ function onSelectExamen(){
 
   });
 }
-
-  
 $('#examen').on('change',onSelectExamenCitas);
 function onSelectExamenCitas(){
   var idTipoExamen = $(this).val();

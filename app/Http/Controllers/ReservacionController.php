@@ -176,9 +176,8 @@ class ReservacionController extends Controller
         $citasMaximasDiferente =DB::table('citas')
                 ->join('tipoExamen', 'citas.idTipoExamen', '=', 'tipoExamen.idTipoExamen')
                 ->select('citas.*')
-                ->where('citas.idTipoExamen','<>',$tipo->idTipoExamen)
+                ->where('citas.idTipoExamen','=',$tipo->idTipoExamen)
                 ->where('citas.habilitado','=',1)
-                
                 ->get();
 
         }
