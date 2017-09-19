@@ -37,7 +37,7 @@ class CitasController extends Controller
       ->get();
       array_push($cantidad, $aux);
     }
-
+    
 
     return view($this->path.'/admin_citas')->with('citas',$citas)->with('cantidad',$cantidad)
     ->with('preliminar',$preliminar);

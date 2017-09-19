@@ -32,34 +32,33 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-                            @foreach($indices as $indice)
+                                @foreach($citas as $cita)
                                         <tr>
-                                            <td class="text-center">  <?php
-                                            $datos = json_decode($tipos[$indice],true);
+                                            <td class="text-center">{{ $cita->nombreTipoExamen}}</td>
+                                            <td class="text-center"> {{ $cita->horaCita }}</td>
+                                            <td class="text-center">
+                                            <?php
+                                            $newDate = date("d-m-Y", strtotime($cita->fechaCita));
+                                            print_r($newDate ); ?>
+                                            </td>
+                                            <td class="text-center">  
+                                            <?php
+                                            for($i=0; $i <  $preliminar; $i++){
+                                            $datos=[];
+                                            $cero=0;
+                                            $datos = json_decode($cantidad[$i],true);
                                             foreach ($datos as $dato) {
-                                                print_r($dato['nombreTipoExamen']);
+                                                if($dato['idCita']== $cita->idCita){
+                                                    if($dato['conteo'] == 0)
+                                                       intval($cero);
+                                                    else
+                                                        print_r($dato['conteo']);
+                                                }
                                             }
-                                            ?></td>
-                                            <td class="text-center">  <?php
-                                            $datos = json_decode($tipos[$indice],true);
-                                            foreach ($datos as $dato) {
-                                                print_r($dato['horaCita']);
-                                            }
-                                            ?></td>
-                                            <td class="text-center">  <?php
-                                            $datos = json_decode($tipos[$indice],true);
-                                            foreach ($datos as $dato) {
-                                                $newDate = date("d-m-Y", strtotime($dato['fechaCita']));
-                                                print_r($newDate);
-                                            }
-                                            ?></td>
-                                            <td class="text-center">  <?php
-                                            $datos = json_decode($cantidad[$indice],true);
-                                            foreach ($datos as $dato) {
-                                                print_r($dato['conteo']);
-                                            }
-                                            ?></td>
+                                        }
+
+                                        ?>
+                                            </td>
                                         </tr>
                             @endforeach
                             </tbody>
