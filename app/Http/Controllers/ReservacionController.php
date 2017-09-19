@@ -52,8 +52,8 @@ class ReservacionController extends Controller
         ->where('idPaciente','=',$idPaciente)->get();
         //dd($paciente);
         //Para presentar en la vista la cantidad de pacientes
-       /** $preliminar = DB::table('citas')->where('citas.habilitado','=',1)->count();
-
+       $preliminar = DB::table('citas')->where('citas.habilitado','=',1)->count();
+        /**
          $cantidad = [];
         for ($i=1; $i<=$preliminar;$i++) {
         $aux = DB::table('reservacion')
@@ -66,7 +66,7 @@ class ReservacionController extends Controller
         
         //dd($cantidad);*/
         return view($this->path.'/asignacionCita')->with('citas',$citas)
-            ->with('regionAnatomica',$regionAnatomica)->with('paciente',$paciente)->with('examen',$examen);
+            ->with('regionAnatomica',$regionAnatomica)->with('paciente',$paciente)->with('examen',$examen)->with('preliminar',$preliminar);
 
     }
     /**
@@ -333,7 +333,7 @@ class ReservacionController extends Controller
         $regiones = DB::table('regionAnatomica')
         ->join('tipoExamen','tipoExamen.idTipoExamen','=','regionAnatomica.idTipoExamen')
         ->where('regionAnatomica.idTipoExamen','=',$idTipoExamen)
-        ->select('RegionAnatomica.*')->get();
+        ->select('regionAnatomica.*')->get();
         return $regiones;
     }
 
@@ -360,5 +360,18 @@ class ReservacionController extends Controller
         }*/
         return $citas;
     }
-
+    public function getCantidadPaciente($idTipoExamen)
+    {
+        $cantidad = [];
+        for ($i=1; $i<=$preliminar;$i++) {
+            $aux = DB::table('reservacion')
+          ->where([['reservacion.idCita','=',$i]])
+          ->where([['reservacion.idCita','=',$idTipoExamen]])
+          ->select('reservacion.idCita',DB::raw('count(reservacion.idPaciente) as conteo'))
+          ->groupBy('reservacion.idCita')
+          ->get();
+          array_push($cantidad, $aux);
+      }
+          return $cantidad;
+    }
 }
