@@ -1,5 +1,31 @@
 $(document).ready(function(){ 
- $("#tipos").on('change',onSelectTipos)
+  
+$('#examen').on('change',onSelectExamen);
+function onSelectExamen(){
+  var idTipoExamen = $(this).val();
+ // alert(idTipoExamen);
+  
+  $.get('/consulta/'+idTipoExamen+'',function(data){
+    var d = '<thead>'+'<tr>'+
+        '<th class="text-center">Tipo de Examen</th>'+
+        '<th class="text-center">Hora de Cita</th>'+
+        '<th class="text-center">Fecha de Cita</th>'+
+        '</tr>'+'</thead>'+ '<tbody>';
+     $("#tabla").empty();
+    for( var i=0;i<data.length;++i)
+    {
+      d += '<tr>'+'<td class="text-center">'+data[i].nombreTipoExamen+'</td>'+
+        '<td class="text-center">'+data[i].horaCita+'</td>'+
+        '<td class="text-center">'+data[i].fechaCita+'</td>'+'</tr>'
+    }
+    d += '</tbody>';
+    $('#tabla').append(d);
+
+  });
+}
+
+
+ $("#tipos").on('change',onSelectTipos);
    
 function onSelectTipos(){
     var idCita = $(this).val();
@@ -12,42 +38,11 @@ function onSelectTipos(){
      $('#region option').remove();
     for( var i=0;i<data.length;++i)
     {
-      $('#region').append('<option value="'+data[i].idRegionAnatomica+'">'+data[i].nombreRegionAnatomica+'</option>')
+      $('#region').append('<option value="'+data[i].idRegionAnatomica+'">'+data[i].nombreRegionAnatomica+'</option>');
     }
    });
 }
 
-$("#tipoExamen").on('change',onSelectTiposUpdate)
-   
-function onSelectTiposUpdate(){
-    var idCita = $(this).val();
-   //alert(idCita);
-   //AJAX
-   $.get('/region/'+idCita+'',function(data){
-    //console.log(data);
-    $("#regionAnatomica").empty();
-    var html_select = '<option value="">Seleccione una Region Anatomica</option>';
-    for( var i=0;i<data.length;++i)
-    {
-        html_select += '<option value="'+data[i].idRegionAnatomica+'">'+data[i].nombreRegionAnatomica+'</option>';
-      }
-    console.log(html_select);
-    $('#regionAnatomica').html(html_select);
-   });
-}
-});
 
-function validarFecha(){
-  var fechaPago = document.getElementById('fechaPago').value;
-  var f = new Date();
-  var año= f.getFullYear() ;
-  var mes = f.getMonth()+1; 
-  if(mes<10) mes="0"+mes;
-  var ndia = f.getDate();
-  var fecha = año+ "-" + mes + "-" + ndia;
-  if(fechaPago>fecha){
-    //tpl = '<div class="alert alert-warning">'+fechaPago+'</div>';
-    //$('#fechaPago').html(tpl);
-    document.getElementById("fechaPago").value = "";
-  }
-}
+  
+});

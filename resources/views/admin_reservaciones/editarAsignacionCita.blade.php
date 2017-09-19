@@ -19,57 +19,32 @@
                         <input type="hidden" name="_method" value="PUT">
                          <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
 
-                <label>Citas Disponibles</label>
-                <div class="table-responsive">
-                         <table class="table table-striped table-hover table-bordered">
-                            <thead>
-                                <tr>
-
-                                    <th class="text-center">Tipo Examen</th>
-                                    <th class="text-center">Hora de Cita</th>
-                                    <th class="text-center">Fecha de Cita</th>
-                                    <th class="text-center">Pacientes Asignados</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($citas as $cita)
-                                        <tr>
-                                            <td class="text-center">{{ $cita->nombreTipoExamen}}</td>
-                                            <td class="text-center"> {{ $cita->horaCita }}</td>
-                                            <td class="text-center">
-                                            <?php
-                                            $newDate = date("d-m-Y", strtotime($cita->fechaCita));
-                                            print_r($newDate ); ?>
-                                            </td>
-                                            <td class="text-center">  
-                                            <?php
-                                            for($i=0; $i <  $preliminar; $i++){
-                                            $datos=[];
-                                            $cero=0;
-                                            $datos = json_decode($cantidad[$i],true);
-                                            foreach ($datos as $dato) {
-                                                if($dato['idCita']== $cita->idCita){
-                                                    if($dato['conteo'] == 0)
-                                                       intval($cero);
-                                                    else
-                                                        print_r($dato['conteo']);
-                                                }
-                                            }
-                                        }
-
-                                        ?>
-                                            </td>
-                                        </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                        {!! $citas->render() !!}
-                    </div>
-                     <div class="form-group">
+                <div class="form-group">
 
                             <label for="tipoExamen" class="col-md-4 control-label">Tipo de Examen</label>
                             <div class="col-md-6">
-                                 <select required class="form-control" name="tipoExamen" id="tipoExamen">
+                                 <select required class="form-control" name="examen" id="examen">
+                                  @foreach($tipoSeleccionado as $tipo)
+                                            <option  value='{{ $tipo->idTipoExamen}}' selected> {{ $tipo->nombreTipoExamen }} </option>
+                                    @endforeach
+                                           @foreach($examen as $exa)
+                                            <option  value='{{ $exa->idTipoExamen}}'>{{ $exa->nombreTipoExamen}} </option>
+                                        @endforeach
+                                    </select>
+                            </div>
+                </div>
+                <label>Citas Disponibles</label>
+                <div class="table-responsive">
+                         <table class="table table-striped table-hover table-bordered" id="tabla">
+                            
+                        </table>
+                        
+                    </div>
+                     <div class="form-group">
+
+                            <label for="tipoExamen" class="col-md-4 control-label">Seleccionar Cita disponible</label>
+                            <div class="col-md-6">
+                                 <select required class="form-control" name="tipos" id="tipos">
                                   @foreach($tipoSeleccionado as $tipo)
                                             <option  value='{{ $tipo->idCita}}' selected> {{ $tipo->nombreTipoExamen }} ------- {{ $tipo->fechaCita }} </option>
                                     @endforeach
@@ -95,7 +70,7 @@
                 <div class="form-group">
                             <label for="regionAnatomica" class="col-md-4 control-label">Region Anatomica</label>
                             <div class="col-md-6">
-                                 <select class="form-control" name="regionAnatomica" id="regionAnatomica" onchange="ocul()">
+                                 <select class="form-control" name="region" id="region" onchange="ocul()">
                                  @foreach($regionAnatomicaReservacion as $regionseleccionada)
                                             <option  value='{{ $regionseleccionada->idRegionAnatomica}}'> {{ $regionseleccionada->nombreRegionAnatomica }} </option>
                                     @endforeach
@@ -128,7 +103,7 @@
                         <div class="form-group {{ $errors->has('fechaPago') ? ' has-error' : '' }}">
                             <label for="fechaPago" class="col-md-4 control-label">Fecha Pago</label>
                             <div class="col-md-6">
-                                <input id="fechaPago" type="date" class="form-control" name="fechaPago" value="{{ $reservacion->fechaPago }}" required autofocus onblur="validarFecha();">
+                                <input id="fechaPago" type="date" class="form-control" name="fechaPago" value="{{ $reservacion->fechaPago }}" required autofocus>
                                 @if ($errors->has('fechaPago'))
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('fechaPago') }}</strong>
