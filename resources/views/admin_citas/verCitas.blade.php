@@ -94,8 +94,6 @@
 		</table>
 		 {!! $reservaciones->render() !!}
 </div>
-                    <a href="{{ url('/admin_citas') }}" class="btn btn-warning btn-sm">
-                        <span class="glyphicon glyphicon-list-alt"></span>Regresar a Citas</a>
 	</div>
 	</div>
 	</div>
@@ -113,17 +111,17 @@
                 </div>
             </div>
         </div>
-        <a href="{{ url('/admin_citas') }}" class="btn btn-warning btn-sm">
-         <span class="glyphicon glyphicon-list-alt"></span>Regresar a Lista de Citas</a>
-				 @if($cita->habilitado==1)
-         <a href="{{ route('inhabilitarCita',$cita->idCita) }}"class="btn btn-danger btn-sm">
-         <span class="glyphicon glyphicon-wrench"></span>Cerrar Cita</a>
-				 @else
-				 <a href="{{ route('habilitarCita',$cita->idCita) }}" class="btn btn-info btn-sm"  id="pac_habilitado">
-				<span class="glyphicon glyphicon-wrench"></span>Abrir Cita</a>
-				@endif
-
     @endif
+		<a href="{{ url('/admin_citas') }}" class="btn btn-warning btn-sm">
+		 <span class="glyphicon glyphicon-list-alt"></span>Regresar a Lista de Citas</a>
+		 @if($cita->habilitado==1)
+		 <a href="{{ route('inhabilitarCita',$cita->idCita) }}"class="btn btn-danger btn-sm">
+		 <span class="glyphicon glyphicon-wrench"></span>Cerrar Cita</a>
+		 @else
+		 <a href="{{ route('habilitarCita',$cita->idCita) }}" class="btn btn-info btn-sm"  id="pac_habilitado">
+		<span class="glyphicon glyphicon-wrench"></span>Abrir Cita</a>
+		@endif
+
 		@else
 		<div class="alert alert-danger">
 		<strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>

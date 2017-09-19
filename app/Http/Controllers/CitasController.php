@@ -70,18 +70,24 @@ class CitasController extends Controller
       ->count();
 
 if($validar==0){
-  //revisa si hay citas antiguas activas para ser desactivadas debido a que se crea una nueva cita
+  //revisa si hay más de 5 citas antiguas activas para ser desactivadas debido a que se crea una nueva cita
+  $contadorCitasActivas=DB::table('citas')
+  ->where('idTipoExamen',$request->tipoExamen)
+  ->where('habilitado','=',true)
+  ->count();
+//encuentra el id de la cita más antigua que se encuentra activa
+  if($contadorCitasActivas==5){
   $idcitaAnterior= DB::table('citas')
         ->where('citas.idTipoExamen',$request->tipoExamen)
         ->where('citas.habilitado','=',true)
-        ->max('citas.idCita');
+        ->min('citas.idCita');
 
         if($idcitaAnterior!=null){
           $citaAnterior=Cita::findOrFail($idcitaAnterior);
           $citaAnterior->habilitado=false;
           $citaAnterior->save();
         }
-
+}
         $cita = new Cita();
         $cita->fechaCita = $request->fechaCita;
         $cita->horaCita = $request->horaCita;
