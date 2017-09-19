@@ -32,8 +32,8 @@ class ReservacionController extends Controller
                 ->join('tipoExamen', 'citas.idTipoExamen', '=', 'tipoExamen.idTipoExamen')
                 ->select('citas.*','tipoExamen.*')
                 ->where('citas.habilitado','=',1)
-                ->orderBy('tipoExamen.idTipoExamen')
-                ->paginate(5);
+                ->orderBy('tipoExamen.idTipoExamen', 'desc')
+                ->paginate(4);
        
 
         $indices = [];
@@ -158,8 +158,8 @@ class ReservacionController extends Controller
                 ->join('tipoExamen', 'citas.idTipoExamen', '=', 'tipoExamen.idTipoExamen')
                 ->select('citas.*','tipoExamen.*')
                 ->where('citas.habilitado','=',1)
-                ->orderBy('tipoExamen.idTipoExamen')
-                ->paginate(5);
+                ->orderBy('tipoExamen.idTipoExamen', 'desc')
+                ->paginate(4);
 
         //Para seleccionar el tipo de Examen de la maxima cita asignada
         $tipoSeleccionado = DB::table('reservacion')

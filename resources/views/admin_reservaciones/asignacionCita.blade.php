@@ -60,6 +60,7 @@
                             @endforeach
                             </tbody>
                         </table>
+                        {!! $citas->render() !!}
 
                     </div>
                      <div class="form-group">
