@@ -39,9 +39,7 @@
                             <div class="col-md-6">
                                  <select required class="form-control" name="tipos" id="tipos">
                                   <option value="" disabled selected>Seleccione una cita</option>
-                                           @foreach($citas as $cita)
-                                            <option  value='{{ $cita->idCita}}'>{{ $cita->nombreTipoExamen}}-----{{ $cita->fechaCita}} </option>
-                                        @endforeach
+                                        
                                     </select>
                             </div>
                 </div>
