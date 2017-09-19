@@ -49,7 +49,7 @@ function onSelectTipos(){
    //AJAX
    $.get('/region/'+idTipoExamen+'',function(data){
     //console.log(data);
-    var html_select = '<option value="">Seleccione una Region Anatomica</option>';
+    
     $("#region").empty();
      $('#region option').remove();
     for( var i=0;i<data.length;++i)

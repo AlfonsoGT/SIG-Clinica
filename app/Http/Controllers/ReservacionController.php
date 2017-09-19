@@ -186,7 +186,7 @@ class ReservacionController extends Controller
          foreach($citasMaximasDiferente as $cita){
             $aux = DB::table('citas')
             ->join('tipoExamen', 'citas.idTipoExamen', '=', 'tipoExamen.idTipoExamen')
-            ->where([['citas.idCita', $cita->idCita]])
+            ->where([['citas.idCita','=',$cita->idCita]])
             ->select('tipoExamen.nombreTipoExamen','citas.idTipoExamen','citas.fechaCita','citas.horaCita','citas.idCita')
             ->get();
             array_push($tiposExamen, $aux);
@@ -268,10 +268,10 @@ class ReservacionController extends Controller
         $reservacion->fechaPago = $request->fechaPago;
         $reservacion->referencia = $request->referencia;
         $reservacion->detalleReferencia = $request->detalleReferencia;
-        $reservacion->idRegionAnatomica= $request->regionAnatomica;
+        $reservacion->idRegionAnatomica= $request->region;
         $reservacion->usgIndicacion= $request->usgIndicacion;
         $reservacion->preparacion= $request->preparacion;
-        $reservacion->idCita= $request->tipoExamen;
+        $reservacion->idCita= $request->tipos;
         $reservacion->idPaciente = $request->idPaciente;
 
         //actualiza la fecha de actualización del perfil de paciente para que aparezca entre los primeros de la lista

@@ -30,7 +30,9 @@
                 <label>Citas Disponibles</label>
                 <div class="table-responsive"   >
                          <table class="table table-striped table-hover table-bordered" id="tabla">
-                           
+                           <div class="alert alert-info" role="alert">
+                                    <strong>Seleccione un Tipo de Examen para ver las Citas Disponibles</strong>
+                            </div>
                         </table>
                     </div>
                      <div class="form-group">
