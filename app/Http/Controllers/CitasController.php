@@ -76,7 +76,7 @@ if($validar==0){
   ->where('habilitado','=',true)
   ->count();
 //encuentra el id de la cita más antigua que se encuentra activa
-  if($contadorCitasActivas==5){
+  if($contadorCitasActivas>=5){
   $idcitaAnterior= DB::table('citas')
         ->where('citas.idTipoExamen',$request->tipoExamen)
         ->where('citas.habilitado','=',true)
