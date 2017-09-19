@@ -39,8 +39,9 @@ Route::get('/tomarIdPaciente/{id}','ReservacionController@tomaridPaciente')->nam
 Route::get('/tomarIdPacienteUpdate/{idPaciente},{idReservacion}','ReservacionController@tomaridPacienteUpdate')->name('tomarIdPacienteUpdate');
 Route::get('/tomarIdPacienteEliminar/{idPaciente},{idReservacion}','ReservacionController@tomarIdPacienteEliminar')->name('tomarIdPacienteEliminar');
 Route::get('vista_borrar/{idPaciente},{idReservacion}', 'ReservacionController@vista_borrar'); //mostrar la pantalla de confirmacion
-Route::get('/region/{idCita}','ReservacionController@getRegion');
+Route::get('/region/{idTipoExamen}','ReservacionController@getRegion');
 Route::get('/consulta/{idTipoExamen}','ReservacionController@getConsulta');
+Route::get('/citasDisponibles/{idTipoExamen}','ReservacionController@getCitasDisponibles');
 Route::get('/habilitarCita/{id}','CitasController@habilitarCita')->name('habilitarCita');
 Route::get('/inhabilitarCita/{id}','CitasController@inhabilitarCita')->name('inhabilitarCita');
 

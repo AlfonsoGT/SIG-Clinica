@@ -328,17 +328,13 @@ class ReservacionController extends Controller
     {
         return $this->destroy($idPaciente,$idReservacion);
     }
-    public function getRegion($idCita)
+    public function getRegion($idTipoExamen)
     {
 
-        $busqueda = DB::table('citas')
-        ->join('tipoExamen','tipoExamen.idTipoExamen','=','citas.idTipoExamen')
-        ->where('citas.idCita','=',$idCita)
-        ->select('tipoExamen.idTipoExamen')->get();
-
-        foreach ($busqueda as $bus) {
-            $regiones = RegionAnatomica::where('idTipoExamen',$bus->idTipoExamen)->get();
-        }
+        $regiones = DB::table('regionAnatomica')
+        ->join('tipoExamen','tipoExamen.idTipoExamen','=','regionAnatomica.idTipoExamen')
+        ->where('regionAnatomica.idTipoExamen','=',$idTipoExamen)
+        ->select('RegionAnatomica.*')->get();
         return $regiones;
     }
 
@@ -351,7 +347,7 @@ class ReservacionController extends Controller
                 ->where('citas.habilitado','=',1)
                 ->where('citas.idTipoExamen','=',$idTipoExamen)
                 ->get();
-        $preliminar = DB::table('citas')->where('citas.habilitado','=',1)->count();
+       /** $preliminar = DB::table('citas')->where('citas.habilitado','=',1)->count();
 
         $cantidad = [];
         for ($i=1; $i<=$preliminar;$i++) {
@@ -362,7 +358,8 @@ class ReservacionController extends Controller
           ->groupBy('reservacion.idCita')
           ->get();
           array_push($cantidad, $aux);
-        }
+        }*/
         return $citas;
     }
+
 }

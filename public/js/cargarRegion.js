@@ -24,14 +24,32 @@ function onSelectExamen(){
   });
 }
 
+  
+$('#examen').on('change',onSelectExamenCitas);
+function onSelectExamenCitas(){
+  var idTipoExamen = $(this).val();
+ // alert(idTipoExamen);
+  
+  $.get('/consulta/'+idTipoExamen+'',function(data){
+     $("#tipos").empty();
+     $('#tipos option').remove();
+    for( var i=0;i<data.length;++i)
+    {
+       $('#tipos').append('<option value="'+data[i].idCita+'">'+data[i].nombreTipoExamen+'-----'+data[i].fechaCita+
+        '</option>');
+    }
 
- $("#tipos").on('change',onSelectTipos);
+  });
+}
+
+
+$("#examen").on('change',onSelectTipos);
    
 function onSelectTipos(){
-    var idCita = $(this).val();
+    var idTipoExamen= $(this).val();
    //alert(idCita);
    //AJAX
-   $.get('/region/'+idCita+'',function(data){
+   $.get('/region/'+idTipoExamen+'',function(data){
     //console.log(data);
     var html_select = '<option value="">Seleccione una Region Anatomica</option>';
     $("#region").empty();
