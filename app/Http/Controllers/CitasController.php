@@ -23,7 +23,7 @@ class CitasController extends Controller
     ->orderBy('idCita', 'desc')
     ->select('citas.idCita','citas.fechaCita','citas.horaCita','citas.idTipoExamen','tipoExamen.nombreTipoExamen','citas.habilitado')
     ->join('tipoExamen','citas.idTipoExamen','=','tipoExamen.idTipoExamen')
-    ->paginate(10);
+    ->paginate(7);
 
     $preliminar = DB::table('citas')->count();
 
