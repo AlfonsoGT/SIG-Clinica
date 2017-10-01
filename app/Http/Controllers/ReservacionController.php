@@ -83,7 +83,8 @@ class ReservacionController extends Controller
             'detalleReferencia' => 'nullable|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
             'usgIndicacion' => 'nullable|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
             'preparacion' => 'required|in:1,0',
-            'usgIndicacion' => 'required_if:preparacion,1'
+            'usgIndicacion' => 'required_if:preparacion,1',
+            'precio' => 'required|regex:/^[0-9]{1,2}(\.[0-9]{1,2})?$/',
         ]);
        try{
 
@@ -104,6 +105,7 @@ class ReservacionController extends Controller
         $reservacion->idRegionAnatomica= $request->region;
         $reservacion->usgIndicacion= $request->usgIndicacion;
         $reservacion->preparacion= $request->preparacion;
+        $reservacion->precio= $request->precio;
         $reservacion->idCita= $request->tipos;
         $reservacion->idPaciente = $request->idPaciente;
         //actualiza la fecha de actualización del perfil de paciente para que aparezca entre los primeros de la lista
@@ -186,7 +188,8 @@ class ReservacionController extends Controller
          foreach($citasMaximasDiferente as $cita){
             $aux = DB::table('citas')
             ->join('tipoExamen', 'citas.idTipoExamen', '=', 'tipoExamen.idTipoExamen')
-            ->where([['citas.idCita','=',$cita->idCita]])
+            ->where([['citas.idCita','<>',$cita->idCita]])
+            ->where([['citas.idCita','=',$cita->idTipoExamen]])
             ->select('tipoExamen.nombreTipoExamen','citas.idTipoExamen','citas.fechaCita','citas.horaCita','citas.idCita')
             ->get();
             array_push($tiposExamen, $aux);
@@ -259,7 +262,8 @@ class ReservacionController extends Controller
             'detalleReferencia' => 'nullable|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
             'usgIndicacion' => 'nullable|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
             'preparacion' => 'required|in:1,0',
-            'usgIndicacion' => 'required_if:preparacion,1'
+            'usgIndicacion' => 'required_if:preparacion,1',
+            'precio' => 'required|regex:/^[0-9]{1,2}(\.[0-9]{1,2})?$/',
         ]);
 
        try{
@@ -271,6 +275,7 @@ class ReservacionController extends Controller
         $reservacion->idRegionAnatomica= $request->region;
         $reservacion->usgIndicacion= $request->usgIndicacion;
         $reservacion->preparacion= $request->preparacion;
+        $reservacion->precio= $request->precio;
         $reservacion->idCita= $request->tipos;
         $reservacion->idPaciente = $request->idPaciente;
 

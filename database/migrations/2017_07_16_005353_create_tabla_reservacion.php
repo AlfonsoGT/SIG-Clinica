@@ -20,6 +20,7 @@ class CreateTablaReservacion extends Migration
             $table->string('referencia')->nullable();
             $table->string('detalleReferencia')->nullable();
             $table->string('usgIndicacion')->nullable();
+            $table->float('precio', 4, 2);
             $table->boolean('preparacion')->nullable()->default(0);
             $table->integer('idCita')->unsigned();
             $table->foreign('idCita')->references('idCita')->on('citas');

@@ -73,6 +73,19 @@
                                  @endif
                             </div>
                         </div>
+
+                        <div class="form-group {{ $errors->has('precio') ? ' has-error' : '' }}">
+                            <label for="precio" class="col-md-4 control-label">Precio</label>
+                            <div class="col-md-6">
+                                <input id="precio" type="text" class="form-control" name="precio" value="{{ old('precio') }}" autocomplete="off">
+                                @if ($errors->has('precio'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('precio') }}</strong>
+                                                </span>
+                                 @endif
+                            </div>
+                        </div>
+
                         <div class="form-group {{ $errors->has('fechaPago') ? ' has-error' : '' }}">
                             <label for="fechaPago" class="col-md-4 control-label">Fecha Pago</label>
                             <div class="col-md-6">
