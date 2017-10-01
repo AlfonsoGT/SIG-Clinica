@@ -34,6 +34,8 @@
 		<td class="text-center">{{ $reservacion->nombreRegionAnatomica }}</TD>
 		<TR><th class="text-center">Número de Recibo</TH>
 		<td class="text-center">{{ $reservacion->numeroRecibo }}</TD>
+		<TR><th class="text-center">Precio del Recibo</TH>
+		<td class="text-center">{{ $reservacion->precio }}</TD>
 		@if(  $reservacion->referencia == null)
 		@else
 		<TR><th class="text-center">Referencia</TH>
