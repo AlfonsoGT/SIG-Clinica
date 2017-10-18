@@ -26,7 +26,6 @@ class UserController extends Controller
     {
       $users =  User::busqueda($request->busqueda)
           ->orderBy('id', 'desc')
-          //->join('roles', 'users.id_rol', '=', 'roles.id_rol')
           ->select('users.id','users.name', 'users.username')
           ->paginate(7);
           return view($this->path.'/admin_users')->with('users',$users);
@@ -69,7 +68,10 @@ class UserController extends Controller
       $user->username=$request->username;
       $user->password= bcrypt($request->password);
 
+
       if($user->save()){
+        $user->assignRole($request->rol_asignado);
+        $user->save();
       return redirect($this->path)->with('msj','Usuario Registrado');
       }else{
         return back()->with('msj2','Usuario no registrado, es posible que el username ya se encuentre registrado');
@@ -220,7 +222,7 @@ public function actualizarPassword(Request $request, $id){
 
   $this->validate($request,[
     'old_password' => 'required|string|min:6',
-   'password' => 'required|string|min:6',
+   'password' => 'confirmed|required|string|min:6',
 
   ]);
 $user=User::findOrFail($id);

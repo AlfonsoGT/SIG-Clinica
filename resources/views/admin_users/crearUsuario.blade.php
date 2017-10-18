@@ -49,17 +49,7 @@
                             </div>
                         </div>
 
-<!--                      <div class="form-group">
-                          <label for="id_rol" class="col-md-4 control-label">Rol de Usuario</label>
-                          <div class="col-md-6">
-                             <select class="form-control" name="id_rol" id="id_rol" onchange="ocul()">
-                                                        @foreach($roles as $rol)
-                                                        <option  value='{{ $rol->id }}'> {{ $rol->name }} </option>
-                                                    @endforeach
-                                                </select>
-                          </div>
-                        </div>
--->
+
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Contraseña</label>
 
@@ -80,6 +70,20 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
+
+
+												<div class="form-group">
+													<label for="rol_asignado" class="col-md-4 control-label">Rol a asignar</label>
+													<div class="col-md-6">
+														<select class="form-control" name="rol_asignado" id="rol_asignado" onchange="ocul()">
+															<option value="" disabled selected>Elija un Rol</option>
+															@foreach($roles as $rol)
+															<option  value='{{ $rol->id }}'> {{ $rol->name }} </option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+												
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                <button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-floppy-disk"></span>Guardar Usuario</button>

@@ -60,3 +60,7 @@ Route::post('/actualizarPassword/{id}','UserController@actualizarPassword')->nam
 
 /*Adquisicion de Productos*/
 Route::resource('/admin_productos','ProductoController');
+
+/* Gestión de examen */
+Route::resource('/admin_examenes','ExamenController');
+Route::get('/crearcita/{id}', 'ExamenController@create')->name('crearcita');

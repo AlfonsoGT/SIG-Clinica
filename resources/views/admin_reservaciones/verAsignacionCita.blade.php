@@ -34,8 +34,8 @@
 		<td class="text-center">{{ $reservacion->nombreRegionAnatomica }}</TD>
 		<TR><th class="text-center">Número de Recibo</TH>
 		<td class="text-center">{{ $reservacion->numeroRecibo }}</TD>
-		<TR><th class="text-center">Precio del Recibo</TH>
-		<td class="text-center">{{ $reservacion->precio }}</TD>
+	  <TR><th class="text-center">Precio del Recibo</TH>
+    <td class="text-center">{{ $reservacion->precio }}</TD>
 		@if(  $reservacion->referencia == null)
 		@else
 		<TR><th class="text-center">Referencia</TH>
@@ -45,7 +45,7 @@
 		@endif
 		<TR><th class="text-center">Fecha de Pago</TH>
 		<td class="text-center">
-		<?php  
+		<?php
         $newDate = date("d-m-Y", strtotime($reservacion->fechaPago ));
         print_r($newDate ); ?>
         </TD>
@@ -58,7 +58,7 @@
 		@endif
 		</TD>
 		@if(  $reservacion->usgIndicacion == null  )
-		
+
 		@else
 		<TR><th class="text-center">USG Indicación</TH>
 		<td class="text-center">{{ $reservacion->usgIndicacion }}</TD>

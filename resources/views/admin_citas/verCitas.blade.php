@@ -78,6 +78,8 @@
 				 <th class="text-center">Nombre Completo de Paciente</th>
 				 <th class="text-center">Sexo</th>
 				 <th class="text-center">Región Anatomica</th>
+				 <th class="text-center">Acciones</th>
+
 
 			 </tr>
 		 </thead>
@@ -87,6 +89,9 @@
 						 <td class="text-center">{{ $reservacion->primerNombre}} {{$reservacion->segundoNombre}} {{$reservacion->primerApellido}}  {{$reservacion->segundoApellido}}</td>
 						 <td class="text-center"> {{ $reservacion->nombreSexo}}</td>
 						 <td class="text-center"> {{ $reservacion->nombreRegionAnatomica}}</td>
+						 <td>
+						 <a href="/crearcita/{{$reservacion->idReservacion}}" class="btn btn-info btn-sm">
+							 <span class="glyphicon glyphicon-pencil"></span>Realizar Examen</a></td>
 
 					 </tr>
 		@endforeach

@@ -37,7 +37,7 @@ class CitasController extends Controller
       ->get();
       array_push($cantidad, $aux);
     }
-    
+
 
     return view($this->path.'/admin_citas')->with('citas',$citas)->with('cantidad',$cantidad)
     ->with('preliminar',$preliminar);
@@ -131,7 +131,7 @@ if($validar==0){
 
     $reservaciones = Reservacion::BusquedaReservacion($request->busqueda)
       ->orderBy('idReservacion', 'desc')
-    ->select('pacientes.primerNombre','pacientes.segundoNombre','pacientes.primerApellido','pacientes.segundoApellido',
+    ->select('reservacion.idReservacion','pacientes.primerNombre','pacientes.segundoNombre','pacientes.primerApellido','pacientes.segundoApellido',
     'pacientes.idPaciente','regionAnatomica.nombreRegionAnatomica','regionAnatomica.idRegionAnatomica','sexo.nombreSexo')
     ->join('pacientes','pacientes.idPaciente','=','reservacion.idPaciente')
     ->join('sexo','pacientes.idSexo','=','sexo.idSexo')

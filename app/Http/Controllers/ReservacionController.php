@@ -39,10 +39,7 @@ class ReservacionController extends Controller
        ->select('tipoExamen.*')
        ->get();
 
-        /**$indices = [];
-        for($i=0; $i<sizeof($citas);$i++){
-            array_push($indices, $i);
-        }*/
+
 
         $regionAnatomica = DB ::table('regionAnatomica')
         ->select('idRegionAnatomica', 'nombreRegionAnatomica')->get();
@@ -50,21 +47,10 @@ class ReservacionController extends Controller
         $paciente = DB::table('pacientes')
         ->select('primerNombre','segundoNombre','primerApellido','segundoApellido','idPaciente','activo')
         ->where('idPaciente','=',$idPaciente)->get();
-        //dd($paciente);
+
         //Para presentar en la vista la cantidad de pacientes
        $preliminar = DB::table('citas')->where('citas.habilitado','=',1)->count();
-        /**
-         $cantidad = [];
-        for ($i=1; $i<=$preliminar;$i++) {
-        $aux = DB::table('reservacion')
-          ->where([['reservacion.idCita','=',$i]])
-          ->select('reservacion.idCita',DB::raw('count(reservacion.idPaciente) as conteo'))
-          ->groupBy('reservacion.idCita')
-          ->get();
-          array_push($cantidad, $aux);
-        }
-        
-        //dd($cantidad);*/
+
         return view($this->path.'/asignacionCita')->with('citas',$citas)
             ->with('regionAnatomica',$regionAnatomica)->with('paciente',$paciente)->with('examen',$examen)->with('preliminar',$preliminar);
 
@@ -89,8 +75,6 @@ class ReservacionController extends Controller
        try{
 
          $revision= DB::table('reservacion')
-         //->where('numeroRecibo',$request->numeroRecibo)
-         //->where('fechaPago',$request->fechaPago)
          ->where('idCita',$request->tipos)
          ->where('idRegionAnatomica',$request->region)
          ->where('idPaciente',$request->idPaciente)
@@ -156,7 +140,7 @@ class ReservacionController extends Controller
     public function edit($idPaciente,$idReservacion)
     {
         $reservacion = Reservacion::findOrFail($idReservacion);
-        //dd($reservacion);
+
         //Para detectar cuales son las ultimas citas creadas
         $citas =
         DB::table('citas')
@@ -194,7 +178,7 @@ class ReservacionController extends Controller
             ->get();
             array_push($tiposExamen, $aux);
         }
-       //dd($tiposExamen);
+
 
         //Para llenar la tabla
         $indices = [];
@@ -224,18 +208,7 @@ class ReservacionController extends Controller
         ->select('primerNombre','segundoNombre','primerApellido','segundoApellido','idPaciente','activo')
         ->where('idPaciente','=',$idPaciente)->get();
 
-        //Para presentar en la vista la cantidad de pacientes
-        /**$preliminar = DB::table('citas')->where('citas.habilitado','=',1)->count();
 
-        $cantidad = [];
-        for ($i=1; $i<=$preliminar;$i++) {
-            $aux = DB::table('reservacion')
-          ->where([['reservacion.idCita','=',$i]])
-          ->select('reservacion.idCita',DB::raw('count(reservacion.idPaciente) as conteo'))
-          ->groupBy('reservacion.idCita')
-          ->get();
-          array_push($cantidad, $aux);
-        }*/
         $examen = DB::table('tipoExamen')
        ->select('tipoExamen.*')
        ->where('tipoExamen.idTipoExamen','<>',$tipo->idTipoExamen)
@@ -351,18 +324,7 @@ class ReservacionController extends Controller
                 ->where('citas.habilitado','=',1)
                 ->where('citas.idTipoExamen','=',$idTipoExamen)
                 ->get();
-       /** $preliminar = DB::table('citas')->where('citas.habilitado','=',1)->count();
 
-        $cantidad = [];
-        for ($i=1; $i<=$preliminar;$i++) {
-            $aux = DB::table('reservacion')
-          ->where([['reservacion.idCita','=',$i]])
-          ->where([['reservacion.idCita','=',$idTipoExamen]])
-          ->select('reservacion.idCita',DB::raw('count(reservacion.idPaciente) as conteo'))
-          ->groupBy('reservacion.idCita')
-          ->get();
-          array_push($cantidad, $aux);
-        }*/
         return $citas;
     }
     public function getCantidadPaciente($idTipoExamen)
