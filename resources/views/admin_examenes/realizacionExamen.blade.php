@@ -70,6 +70,8 @@
 </div>
 
 @endforeach
+
+@if($reservacion->realizado==0)
 <div class="container">
   <div id="loginbox" style="margin-top:30px">
     <div class="panel panel-primary" >
@@ -156,6 +158,10 @@
     </div>
   </div>
 </div>
-
+@else
+<div class="alert alert-danger">
+<strong>ESTE EXAMEN YA FUE REALIZADO Y REGISTRADO</strong>
+</div>
+@endif
 
 @endsection

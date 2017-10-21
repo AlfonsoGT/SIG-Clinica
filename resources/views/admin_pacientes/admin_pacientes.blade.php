@@ -63,13 +63,7 @@
 												<span class="glyphicon glyphicon-pencil"></span>Editar</a>
 											<a href="{{ route('admin_pacientes.show',$paciente->idPaciente) }}" target="_blank" class="btn btn-success btn-sm">
 												<span class="glyphicon glyphicon-eye-open"></span>Ver</a>
-											<!--<a href="{{ route('tomarIdPaciente',$paciente->idPaciente) }}" class="btn btn-info btn-sm">
-	                                        <span class="glyphicon glyphicon-wrench"></span>Asignar Cita</a>
-											<form method="POST" action="{{ route('admin_pacientes.destroy', $paciente->idPaciente) }} " style='display: inline;'>
-											<input type="hidden" name="_method" value="DELETE">
-											<input type="hidden" name="_token" value="{{ csrf_token() }}">
-											<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('está seguro que desea eliminar?')">
-												<span class="glyphicon glyphicon-trash"></span>Borrar</button></form>-->
+
 											</td>
 										</tr>
 							@endforeach

@@ -50,10 +50,35 @@ class ExamenController extends Controller
     public function store(Request $request)
     {
       $this->validate($request,[
-          'cantidadUsadas' => 'required|min:1|max:3|regex:/^\d*$/'
+          'cantidadUsadas' => 'required|min:1|max:3|regex:/^\d*$/',
+          'cantidadRepetidas' => 'required|min:1|max:3|regex:/^\d*$/',
       ]);
-      dd($request->cantidadUsadas);
+
+      try{
       $examen= new Examen();
+      $examen->idusuario=$request->idUser;
+      $examen->idReservacion=$request->idReservacion;
+      $examen->fechaRealizacion=date('Y-m-d');
+      if($examen->save()){
+
+        DB::table('examen_placa')->insert(['idExamen'=>$examen->idExamen,'idPlaca' =>$request->nombrePlaca,
+        'numeroUsadas' => $request->cantidadUsadas,'numeroRepetidas' =>$request->cantidadRepetidas,]);
+        $reservacion= Reservacion::findOrFail($examen->idReservacion);
+        $reservacion->realizado=true;
+        $reservacion->save();
+
+      return back()->with('msj','Registro de Examen Realizado con Éxito');
+      }else{
+        return back()->with();
+      }
+
+
+
+
+    }catch(Exception $e){
+        //return "Fatal error - ".$e->getMessage();
+        return back()->with('msj2','Paciente no registrado, es posible que el DUI PACIENTE ya se encuentra registrado');
+    }
 
 
     }

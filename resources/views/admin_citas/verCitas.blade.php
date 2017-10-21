@@ -4,6 +4,9 @@
 
 <section>
 	@can('control_citas')
+	@if(session()->has('msj'))
+	<div class="alert alert-success" role="alert">{{session('msj')}}</div>
+	@endif
 	<div class="container">
 		<div id="loginbox" style="margin-top:30px">
 			<div class="panel panel-primary" >
@@ -89,10 +92,8 @@
 						 <td class="text-center">{{ $reservacion->primerNombre}} {{$reservacion->segundoNombre}} {{$reservacion->primerApellido}}  {{$reservacion->segundoApellido}}</td>
 						 <td class="text-center"> {{ $reservacion->nombreSexo}}</td>
 						 <td class="text-center"> {{ $reservacion->nombreRegionAnatomica}}</td>
-						 <td>
-						 <a href="/crearcita/{{$reservacion->idReservacion}}" class="btn btn-info btn-sm">
+							 <td><a href="/crearcita/{{$reservacion->idReservacion}}" class="btn btn-info btn-sm">
 							 <span class="glyphicon glyphicon-pencil"></span>Realizar Examen</a></td>
-
 					 </tr>
 		@endforeach
 		 </tbody>

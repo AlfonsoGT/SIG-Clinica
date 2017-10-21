@@ -28,6 +28,8 @@ class CreateTablaReservacion extends Migration
             $table->foreign('idRegionAnatomica')->references('idRegionAnatomica')->on('regionAnatomica');
             $table->integer('idPaciente')->unsigned();
             $table->foreign('idPaciente')->references('idPaciente')->on('pacientes');
+            $table->boolean('realizado')->default(false);
+
 
         });
     }

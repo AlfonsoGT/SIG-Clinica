@@ -19,6 +19,8 @@ class CreateTablaExamenPlaca extends Migration
           $table->foreign('idExamen')->references('idExamen')->on('examen');
           $table->integer('idPlaca')->unsigned();
           $table->foreign('idPlaca')->references('idPlaca')->on('placa');
+          $table->integer('numeroUsadas')->nullable();
+          $table->integer('numeroRepetidas')->nullable();
           });
     }
 
