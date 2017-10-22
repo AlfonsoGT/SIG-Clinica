@@ -1,6 +1,6 @@
 
 function ponerFecha(){
-    var tipoExamen = document.getElementById('tipoExamen').value;
+    var tipoExamen = document.getElementById('examen').value;
    // alert(tipoExamen);
     if(tipoExamen == 1 || tipoExamen == 2){   
         var f = new Date();
@@ -10,11 +10,21 @@ function ponerFecha(){
         if(dia<10) dia = "0"+ dia;
         if(mes<10) mes="0"+mes;
         var fecha = año+ "-" + mes + "-" + dia;
+        var hora = new Date();
+        var hora1 = f.getHours();
+        var minutos = f.getMinutes();
+
+        if (minutos<=9)
+        minutos="0"+minutos;
+       
+        var horaAsignada = hora1 + ":"+ minutos;
       //alert(fecha);
         document.getElementById("fechaCita").value = fecha;
+        document.getElementById("horaCita").value = horaAsignada;
         //$('#fechaCita').prop("readOnly", true);
      }else{
         document.getElementById("fechaCita").value = "";
+        document.getElementById("horaCita").value = "";
        // $('#fechaCita').prop("readOnly", false);
         
 }

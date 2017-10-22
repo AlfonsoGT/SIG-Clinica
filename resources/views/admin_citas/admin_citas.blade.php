@@ -17,8 +17,6 @@
                     <div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
                     @endif
                         <h1 style="display: inline;">Gestionar Citas</h1>
-                        <a href="{{ route('admin_citas.create')}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-paperclip"></span>Ingresar Nueva Cita</a>
-                        <br><br>
                         <!--BUSCADOR DE PACIENTES-->
                     <br>
                     <div class="row" id="busquedaAvanzada">
@@ -39,7 +37,7 @@
                                 <thead>
                                 <tr>
 
-                                    <th class="text-center">ID</th>
+                                    
                                     <th class="text-center">Tipo de Examen</th>
                                     <th class="text-center">Hora de Cita</th>
                                     <th class="text-center">Fecha de Cita</th>
@@ -50,7 +48,7 @@
                                 <tbody>
                                 @foreach($citas as $cita)
                                     <tr>
-                                        <td class="text-center">{{ $cita->idCita}}</td>
+                                        
                                         <td class="text-center">{{ $cita->nombreTipoExamen}}</td>
                                         <td class="text-center"> {{ $cita->horaCita }} </td>
                                         <td class="text-center"> <?php
@@ -77,7 +75,7 @@
                                         </td>
                                         <td>
                                         @if( $cita->habilitado == 1)
-                                            <a href="{{ route('admin_citas.edit',$cita->idCita) }}" class="btn btn-info btn-sm" ><span class="glyphicon glyphicon-pencil"></span>Editar Cita</a>
+                                            
                                              <a href="{{ route('admin_citas.show',$cita->idCita) }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open"></span>Ver Cita</a>
                                              <form method="POST" action="{{ route('admin_citas.destroy', $cita->idCita) }} " style='display: inline;'>
                                             <!--<input type="hidden" name="_method" value="DELETE">
@@ -85,7 +83,7 @@
                                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('está seguro que desea eliminar?')">
                                                 <span class="glyphicon glyphicon-trash"></span>Borrar</button></form>-->
                                         @else
-                                                <a class="btn btn-info btn-sm" id="inhabilitado" ><span class="glyphicon glyphicon-pencil"></span>Editar Cita</a>
+                                                
                                                 <a href="{{ route('admin_citas.show',$cita->idCita) }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open"></span>Ver Cita</a>
                                                 <!--<a class="btn btn-danger btn-sm" id="inhabilitado"><span class="glyphicon glyphicon-trash"></span>Borrar</a>-->
                                         @endif

@@ -2,7 +2,7 @@
 @section('content')
 @can('control_citas')
 <script type="text/javascript" src="{{ asset('js/jquery-2.1.0.min.js')}}"></script>
-
+<script type="text/javascript" src="{{ asset('js/fechasCitas.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/cargarRegion.js')}}"></script>
 <div class="container">
     <div id="loginbox" style="margin-top:30px">
@@ -15,36 +15,41 @@
             <div style="padding-top:30px" class="panel-body" >
                 <form class="form-horizontal" role="form" method="POST" action="{{ url( '/admin_reservaciones' ) }}">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
+                     
                     <div class="form-group">
-
                             <label for="tipoExamen" class="col-md-4 control-label">Tipo de Examen</label>
                             <div class="col-md-6">
-                                 <select required class="form-control" name="examen" id="examen">
-                                  <option value="" disabled selected>Seleccione un tipo de Examen</option>
-                                           @foreach($examen as $exa)
-                                            <option  value='{{ $exa->idTipoExamen}}'>{{ $exa->nombreTipoExamen}} </option>
+                                 <select required class="form-control" name="examen" id="examen" onchange="ponerFecha();">
+                                 <option value="" disabled selected>Elije un tipo de Examen</option>
+                                            @foreach($tipoExamenes as $tipoExamen)
+                                            <option  value='{{ $tipoExamen->idTipoExamen }}'> {{ $tipoExamen->nombreTipoExamen }} </option>
                                         @endforeach
                                     </select>
                             </div>
-                </div>
-                <label>Citas Disponibles</label>
-                <div class="table-responsive"   >
-                         <table class="table table-striped table-hover table-bordered" id="tabla">
-                           <div class="alert alert-info" role="alert">
-                                    <strong>Seleccione un Tipo de Examen para ver las Citas Disponibles</strong>
-                            </div>
-                        </table>
                     </div>
-                     <div class="form-group">
+                    <div class="form-group {{ $errors->has('fechaCita') ? ' has-error' : '' }}">
+                        <label for="fechaCita" class="col-md-4 control-label">Fecha Cita</label>
+                        <div class="col-md-6">
+                            <input id="fechaCita" type="date" class="form-control" name="fechaCita" value="{{ old('fechaCita') }}"  required autofocus onblur="validarFecha();" >
+                            @if ($errors->has('fechaCita'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('fechaCita') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
 
-                            <label for="tipoExamen" class="col-md-4 control-label">Seleccionar Cita Disponible</label>
-                            <div class="col-md-6">
-                                 <select required class="form-control" name="tipos" id="tipos">
-                                  <option value="" disabled selected>Seleccione una cita</option>
-                                        
-                                    </select>
-                            </div>
-                </div>
+                    <div class="form-group">
+                        <label for="nombre_rol" class="col-md-4 control-label">Ingresar Hora</label>
+                        <div class="col-md-6">
+                            <input id="horaCita" type="time" class="form-control" name="horaCita" value="{{ old('fechaCita') }}" required autofocus>
+                            @if ($errors->has('horaCita'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('horaCita') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
                  <div class="form-group">
                             <label for="regionAnatomica" class="col-md-4 control-label">Region Anatomica</label>
                             <div class="col-md-6">

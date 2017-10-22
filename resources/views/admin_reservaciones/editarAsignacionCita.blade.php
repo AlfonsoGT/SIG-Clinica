@@ -33,42 +33,33 @@
                                     </select>
                             </div>
                 </div>
-                <label>Citas Disponibles</label>
-                <div class="table-responsive">
-                         <table class="table table-striped table-hover table-bordered" id="tabla">
-                            <div class="alert alert-info" role="alert">
-                                    <strong>Seleccione un Tipo de Examen para ver las Citas Disponibles</strong>
-                            </div>
-                        </table>
-                        
+                <div class="form-group {{ $errors->has('fechaCita') ? ' has-error' : '' }}">
+                        <label for="fechaCita" class="col-md-4 control-label">Fecha Cita</label>
+                        <div class="col-md-6">
+                             @foreach($tipoSeleccionado as $tipo)
+                            <input id="fechaCita" type="date" class="form-control" name="fechaCita" value="{{ $tipo->fechaCita }}"  required autofocus onblur="validarFecha();" >
+                             @endforeach
+                            @if ($errors->has('fechaCita'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('fechaCita') }}</strong>
+                            </span>
+                            @endif
+                        </div>
                     </div>
-                     <div class="form-group">
 
-                            <label for="tipoExamen" class="col-md-4 control-label">Seleccionar Cita disponible</label>
-                            <div class="col-md-6">
-                                 <select required class="form-control" name="tipos" id="tipos">
-                                  @foreach($tipoSeleccionado as $tipo)
-                                            <option  value='{{ $tipo->idCita}}' selected> {{ $tipo->nombreTipoExamen }} ------- {{ $tipo->fechaCita }} </option>
-                                    @endforeach
-                                    @foreach($indices2 as $indice)
-                                            <option  value='<?php
-                                            $datos = json_decode($tiposExamen[$indice],true);
-                                            foreach ($datos as $dato) {
-                                                print_r($dato['idCita']);
-                                            }
-                                            ?> '> <?php
-                                            $datos = json_decode($tiposExamen[$indice],true);
-                                            foreach ($datos as $dato) {
-                                                print_r($dato['nombreTipoExamen']);
-                                                print_r('-------');
-                                                $newDate = date("d-m-Y", strtotime($dato['fechaCita']));
-                                                print_r($newDate);
-                                            }
-                                            ?> </option>
-                                        @endforeach
-                                    </select>
-                            </div>
-                </div>
+                    <div class="form-group">
+                        <label for="nombre_rol" class="col-md-4 control-label">Ingresar Hora</label>
+                        <div class="col-md-6">
+                            @foreach($tipoSeleccionado as $tipo)
+                            <input id="horaCita" type="time" class="form-control" name="horaCita" value="{{ $tipo->horaCita }}" required autofocus>
+                             @endforeach
+                            @if ($errors->has('horaCita'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('horaCita') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
                 <div class="form-group">
                             <label for="regionAnatomica" class="col-md-4 control-label">Region Anatomica</label>
                             <div class="col-md-6">

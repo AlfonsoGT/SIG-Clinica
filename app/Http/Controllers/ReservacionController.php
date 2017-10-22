@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Paciente;
+use App\Cita;
 use App\Reservacion;
 use App\RegionAnatomica;
 use Illuminate\Http\Request;
@@ -39,7 +40,10 @@ class ReservacionController extends Controller
        ->select('tipoExamen.*')
        ->get();
 
-
+        /**$indices = [];
+        for($i=0; $i<sizeof($citas);$i++){
+            array_push($indices, $i);
+        }*/
 
         $regionAnatomica = DB ::table('regionAnatomica')
         ->select('idRegionAnatomica', 'nombreRegionAnatomica')->get();
@@ -47,12 +51,13 @@ class ReservacionController extends Controller
         $paciente = DB::table('pacientes')
         ->select('primerNombre','segundoNombre','primerApellido','segundoApellido','idPaciente','activo')
         ->where('idPaciente','=',$idPaciente)->get();
-
+        //dd($paciente);
         //Para presentar en la vista la cantidad de pacientes
        $preliminar = DB::table('citas')->where('citas.habilitado','=',1)->count();
+       $tipoExamenes = DB::table('tipoExamen')->select('idTipoExamen', 'nombreTipoExamen')->get();
 
         return view($this->path.'/asignacionCita')->with('citas',$citas)
-            ->with('regionAnatomica',$regionAnatomica)->with('paciente',$paciente)->with('examen',$examen)->with('preliminar',$preliminar);
+            ->with('regionAnatomica',$regionAnatomica)->with('paciente',$paciente)->with('examen',$examen)->with('preliminar',$preliminar)->with('tipoExamenes',$tipoExamenes);
 
     }
     /**
@@ -61,54 +66,77 @@ class ReservacionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ReservacionRequest $request)
-    {
-        $this->validate($request,[
-            'numeroRecibo' => 'required|max:7|min:7|regex:/^\d{7}$/',
-            'referencia' => 'nullable|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
-            'detalleReferencia' => 'nullable|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
-            'usgIndicacion' => 'nullable|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
-            'preparacion' => 'required|in:1,0',
-            'usgIndicacion' => 'required_if:preparacion,1',
-            'precio' => 'required|regex:/^[0-9]{1,2}(\.[0-9]{1,2})?$/',
-        ]);
-       try{
-
-         $revision= DB::table('reservacion')
-         ->where('idCita',$request->tipos)
-         ->where('idRegionAnatomica',$request->region)
-         ->where('idPaciente',$request->idPaciente)
+     public function store(ReservacionRequest $request)
+     {
+         $this->validate($request,[
+             'numeroRecibo' => 'required|max:7|min:7|regex:/^\d{7}$/',
+             'referencia' => 'nullable|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+             'detalleReferencia' => 'nullable|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+             'usgIndicacion' => 'nullable|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+             'preparacion' => 'required|in:1,0',
+             'usgIndicacion' => 'required_if:preparacion,1',
+             'precio' => 'required|regex:/^[0-9]{1,2}(\.[0-9]{1,2})?$/',
+         ]);
+         try{
+         //revisa si existen citas existentes del mismo tipo y la misma fecha y que estén habilitadas
+         $revision=DB::table('citas')
+         ->where('idTipoExamen',$request->examen)
+         ->where('fechaCita',$request->fechaCita)
+         ->where('habilitado',true)
          ->count();
 
          if($revision==0){
-        $reservacion = new Reservacion();
-        $reservacion->numeroRecibo= $request->numeroRecibo;
-        $reservacion->fechaPago = $request->fechaPago;
-        $reservacion->referencia = $request->referencia;
-        $reservacion->detalleReferencia = $request->detalleReferencia;
-        $reservacion->idRegionAnatomica= $request->region;
-        $reservacion->usgIndicacion= $request->usgIndicacion;
-        $reservacion->preparacion= $request->preparacion;
-        $reservacion->precio= $request->precio;
-        $reservacion->idCita= $request->tipos;
-        $reservacion->idPaciente = $request->idPaciente;
-        //actualiza la fecha de actualización del perfil de paciente para que aparezca entre los primeros de la lista
-        $paciente=Paciente::findOrFail($request->idPaciente);
-        $paciente->updated_at=date('Y-m-d G:i:s');
-        $paciente->save();
-        /*--*/
-        $reservacion->save();
-        return redirect()->action('PacienteController@show',['idPaciente' => $request->idPaciente])->with('msj','Reservacion Registrada');
-      }else{
-        return redirect()
-        ->action('PacienteController@show',['idPaciente' => $request->idPaciente])
-->with('msj2','Reservacion no registrada, es posible que el paciente ya se encuentra asignado a la cita, con el mismo tipo de examen y misma región anatómica');}
+           $verificar=0;
+           $cita=new Cita();
+           $cita->fechaCita=$request->fechaCita;
+           $cita->idTipoExamen=$request->examen;
+           $cita->horaCita=$request->horaCita;
+           $cita->habilitado=true;
+           $cita->save();
+         }else{
+           $idCitaExistente=DB::table('citas')
+           ->where('fechaCita',$request->fechaCita)
+           ->where('idTipoExamen',$request->examen)
+           ->where('habilitado',true)->max('idCita');
+           $cita=Cita::findOrFail($idCitaExistente);
 
-       }catch(Exception $e){
-        return "Fatal error - ".$e->getMessage();
-      }
+           //verifica si el paciente no está registrado a la misma cita
+           $verificar=DB::table('reservacion')
+           ->where('idCita',$cita->idCita)
+           ->where('idRegionAnatomica',$request->region)
+           ->where('idPaciente',$request->idPaciente)
+           ->count();
+         }
 
-    }
+
+           if($verificar==0){
+          $reservacion = new Reservacion();
+          $reservacion->numeroRecibo= $request->numeroRecibo;
+          $reservacion->fechaPago = $request->fechaPago;
+          $reservacion->referencia = $request->referencia;
+          $reservacion->detalleReferencia = $request->detalleReferencia;
+          $reservacion->idRegionAnatomica= $request->region;
+          $reservacion->usgIndicacion= $request->usgIndicacion;
+          $reservacion->preparacion= $request->preparacion;
+          $reservacion->precio= $request->precio;
+          $reservacion->idCita= $cita->idCita;
+          $reservacion->idPaciente = $request->idPaciente;
+          //actualiza la fecha de actualización del perfil de paciente para que aparezca entre los primeros de la lista
+          $paciente=Paciente::findOrFail($request->idPaciente);
+          $paciente->updated_at=date('Y-m-d G:i:s');
+          $paciente->save();
+          /*--*/
+          $reservacion->save();
+          return redirect()->action('PacienteController@show',['idPaciente' => $request->idPaciente])->with('msj','Reservacion Registrada');
+         }else{
+          return redirect()
+          ->action('PacienteController@show',['idPaciente' => $request->idPaciente])
+         ->with('msj2','Reservacion no registrada, es posible que el paciente ya se encuentra asignado a la cita, con el mismo tipo de examen y misma región anatómica');}
+
+         }catch(Exception $e){
+          return "Fatal error - ".$e->getMessage();
+         }
+     }
 
     /**
      * Display the specified resource.
@@ -140,7 +168,7 @@ class ReservacionController extends Controller
     public function edit($idPaciente,$idReservacion)
     {
         $reservacion = Reservacion::findOrFail($idReservacion);
-
+        //dd($reservacion);
         //Para detectar cuales son las ultimas citas creadas
         $citas =
         DB::table('citas')
@@ -154,7 +182,7 @@ class ReservacionController extends Controller
         $tipoSeleccionado = DB::table('reservacion')
         ->join('citas','citas.idCita','=','reservacion.idCita')
         ->join('tipoExamen','citas.idTipoExamen','=','tipoExamen.idTipoExamen')
-        ->select('reservacion.idCita','citas.idTipoExamen','tipoExamen.nombreTipoExamen','citas.fechaCita')
+        ->select('reservacion.idCita','citas.idTipoExamen','tipoExamen.nombreTipoExamen','citas.fechaCita','citas.horaCita')
         ->where('reservacion.idReservacion',$reservacion->idReservacion)
         ->get();
         //Para seleccionar los tipos de Examenes no Asignados
@@ -178,7 +206,7 @@ class ReservacionController extends Controller
             ->get();
             array_push($tiposExamen, $aux);
         }
-
+       //dd($tiposExamen);
 
         //Para llenar la tabla
         $indices = [];
@@ -238,31 +266,66 @@ class ReservacionController extends Controller
             'usgIndicacion' => 'required_if:preparacion,1',
             'precio' => 'required|regex:/^[0-9]{1,2}(\.[0-9]{1,2})?$/',
         ]);
-
        try{
-         $reservacion = Reservacion::findOrFail($idReservacion);
-        $reservacion->numeroRecibo= $request->numeroRecibo;
-        $reservacion->fechaPago = $request->fechaPago;
-        $reservacion->referencia = $request->referencia;
-        $reservacion->detalleReferencia = $request->detalleReferencia;
-        $reservacion->idRegionAnatomica= $request->region;
-        $reservacion->usgIndicacion= $request->usgIndicacion;
-        $reservacion->preparacion= $request->preparacion;
-        $reservacion->precio= $request->precio;
-        $reservacion->idCita= $request->tipos;
-        $reservacion->idPaciente = $request->idPaciente;
+         //revisa si existen citas existentes del mismo tipo y la misma fecha y que estén habilitadas
+         $revision=DB::table('citas')
+         ->where('idTipoExamen',$request->examen)
+         ->where('fechaCita',$request->fechaCita)
+         ->where('habilitado',true)
+         ->count();
 
-        //actualiza la fecha de actualización del perfil de paciente para que aparezca entre los primeros de la lista
-        $paciente=Paciente::findOrFail($request->idPaciente);
-        $paciente->updated_at=date('Y-m-d G:i:s');
-        $paciente->save();
-        /*--*/
+         if($revision==0){
+           $verificar=0;
+           $cita=new Cita();
+           $cita->fechaCita=$request->fechaCita;
+           $cita->idTipoExamen=$request->examen;
+           $cita->horaCita=$request->horaCita;
+           $cita->habilitado=true;
+           $cita->save();
+         }else{
+           $idCitaExistente=DB::table('citas')
+           ->where('fechaCita',$request->fechaCita)
+           ->where('idTipoExamen',$request->examen)
+           ->where('habilitado',true)->max('idCita');
+           $cita=Cita::findOrFail($idCitaExistente);
 
-        $reservacion->save();
-        return redirect()->action('ReservacionController@show',['idReservacion' => $idReservacion])->with('msj','Reservacion Modificada');
-       }catch(Exception $e){
-        return "Fatal error - ".$e->getMessage();
-      }
+           //verifica si el paciente no está registrado a la misma cita
+           $verificar=DB::table('reservacion')
+           ->where('idCita',$cita->idCita)
+           ->where('idRegionAnatomica',$request->region)
+           ->where('idPaciente',$request->idPaciente)
+           ->count();
+         }
+
+
+           if($verificar==0){
+          $reservacion = Reservacion::findOrFail($idReservacion);
+          $reservacion->numeroRecibo= $request->numeroRecibo;
+          $reservacion->fechaPago = $request->fechaPago;
+          $reservacion->referencia = $request->referencia;
+          $reservacion->detalleReferencia = $request->detalleReferencia;
+          $reservacion->idRegionAnatomica= $request->region;
+          $reservacion->usgIndicacion= $request->usgIndicacion;
+          $reservacion->preparacion= $request->preparacion;
+          $reservacion->precio= $request->precio;
+          $reservacion->idCita= $cita->idCita;
+          $reservacion->idPaciente = $request->idPaciente;
+          //actualiza la fecha de actualización del perfil de paciente para que aparezca entre los primeros de la lista
+          $paciente=Paciente::findOrFail($request->idPaciente);
+          $paciente->updated_at=date('Y-m-d G:i:s');
+          $paciente->save();
+          /*--*/
+          $reservacion->save();
+          return redirect()->action('PacienteController@show',['idPaciente' => $request->idPaciente])->with('msj','Reservacion Registrada');
+         }else{
+          return redirect()
+          ->action('PacienteController@show',['idPaciente' => $request->idPaciente])
+         ->with('msj2','Reservacion no registrada, es posible que el paciente ya se encuentra asignado a la cita, con el mismo tipo de examen y misma región anatómica');}
+
+         }catch(Exception $e){
+          return "Fatal error - ".$e->getMessage();
+         }
+      
     }
 
     /**

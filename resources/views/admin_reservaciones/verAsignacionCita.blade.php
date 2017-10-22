@@ -20,8 +20,7 @@
 <div class="table-responsive">
 	 <table class="table table-striped table-hover table-bordered">
 		@foreach($reservaciones as $reservacion)
-		<TR><th class="text-center">ID Paciente</TH>
-		<td class="text-center">{{ $reservacion->idPaciente }}</TD>
+		
 		<TR><th class="text-center">Nombre Completo del Paciente</TH>
 		<td class="text-center">{{ $reservacion->primerNombre}} {{$reservacion->segundoNombre}} {{$reservacion->primerApellido}} {{$reservacion->segundoApellido}}</TD>
 		<TR><th class="text-center">Fecha de Cita</TH>
