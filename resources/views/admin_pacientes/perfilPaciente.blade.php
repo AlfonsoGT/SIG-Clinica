@@ -100,8 +100,7 @@
 										@endcan
 
 										@endif
-										<a href="{{ url('/admin_pacientes') }}" class="btn btn-warning btn-sm">
-											<span class="glyphicon glyphicon-list-alt"></span>Regresar a Expedientes</a>
+									<input name="button" type="button" class="btn btn-warning btn-sm" onclick="window.close();" value="Salir de este Expediente" />
 
 										<!--tabla 3-->
 										<div class="panel-heading"><strong>Examenes Almacenados del paciente</strong></div>
