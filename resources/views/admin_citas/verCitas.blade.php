@@ -93,7 +93,11 @@
 						 <td class="text-center"> {{ $reservacion->nombreSexo}}</td>
 						 <td class="text-center"> {{ $reservacion->nombreRegionAnatomica}}</td>
 							 <td><a href="/crearcita/{{$reservacion->idReservacion}}" class="btn btn-info btn-sm">
-							 <span class="glyphicon glyphicon-pencil"></span>Realizar Examen</a></td>
+							 <span class="glyphicon glyphicon-pencil"></span>Realizar Examen</a>
+						<a href="{{ route('admin_pacientes.show',$reservacion->idPaciente) }}" target="_blank" class="btn btn-success btn-sm">
+							<span class="glyphicon glyphicon-eye-open"></span>Ver Expediente</a>
+
+						</td>
 					 </tr>
 		@endforeach
 		 </tbody>
