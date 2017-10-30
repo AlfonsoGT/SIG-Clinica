@@ -18,8 +18,7 @@ class CreateTablaCita extends Migration
             $table->date('fechaCita');
             $table->time('horaCita');
             $table->integer('idTipoExamen')->unsigned();
-            $table->foreign('idTipoExamen')->references('idTipoExamen')->on('tipoExamen')->onDelete('cascade');
-            $table->boolean('habilitado')->default(true);
+            $table->foreign('idTipoExamen')->references('idTipoExamen')->on('tipoExamen');
         });
     }
 

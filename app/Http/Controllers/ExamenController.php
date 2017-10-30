@@ -62,12 +62,12 @@ class ExamenController extends Controller
       if($examen->save()){
 
         DB::table('examen_placa')->insert(['idExamen'=>$examen->idExamen,'idPlaca' =>$request->nombrePlaca,
-        'numeroUsadas' => $request->cantidadUsadas,'numeroRepetidas' =>$request->cantidadRepetidas,]);
+        'numeroUsadas' => $request->cantidadUsadas,'numeroRepetidas' =>$request->cantidadRepetidas,'motivoDeRepetidas' =>$request->motivorepeticion,]);
         $reservacion= Reservacion::findOrFail($examen->idReservacion);
         $reservacion->realizado=true;
+        $id=$reservacion->idCita;
         $reservacion->save();
-
-      return back()->with('msj','Registro de Examen Realizado con Éxito');
+        return redirect()->action('CitasController@show',['idCita' => $id])->with('msj','Examen Registrado Exitosamente');
       }else{
         return back()->with();
       }

@@ -25,6 +25,7 @@ class ReservacionRequest extends FormRequest
     {
         return [
             "fechaPago"  =>    "required|before_or_equal:today",
+            "fechaCita"  =>    "required|after_or_equal:today",
         ];
     }
 
@@ -34,6 +35,8 @@ class ReservacionRequest extends FormRequest
             
             'fechaPago.required' => 'La fecha de pago es requerida',
             'fechaPago.after_or_equal' => 'La fecha de pago es imposible. Esta fecha es del futuro',
+            'fechaCita.required' => 'La fecha de la cita es requerida',
+            'fechaCita.after_or_equal' => 'La fecha de la cita es imposible. Esta fecha es del pasado',
         ];
     }
 }

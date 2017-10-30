@@ -132,7 +132,7 @@ class PacienteController extends Controller
           ->get();
     $reservaciones= DB::table('citas')->select('citas.fechaCita','citas.horaCita','tipoExamen.nombreTipoExamen',
         'reservacion.numeroRecibo','reservacion.fechaPago','reservacion.referencia','regionAnatomica.nombreRegionAnatomica',
-        'reservacion.idPaciente','reservacion.idReservacion','reservacion.idPaciente','citas.habilitado')
+        'reservacion.idPaciente','reservacion.idReservacion','reservacion.idPaciente','reservacion.realizado')
         ->orderBy('idReservacion', 'desc')
         ->join('tipoExamen','tipoExamen.idTipoExamen','=','citas.idTipoExamen')
         ->join('reservacion','citas.idCita','=','reservacion.idCita')

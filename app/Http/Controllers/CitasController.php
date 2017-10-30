@@ -21,7 +21,7 @@ class CitasController extends Controller
   {
     $citas = Cita::busqueda($request->busqueda)
     ->orderBy('idCita', 'desc')
-    ->select('citas.idCita','citas.fechaCita','citas.horaCita','citas.idTipoExamen','tipoExamen.nombreTipoExamen','citas.habilitado')
+    ->select('citas.idCita','citas.fechaCita','citas.horaCita','citas.idTipoExamen','tipoExamen.nombreTipoExamen')
     ->join('tipoExamen','citas.idTipoExamen','=','tipoExamen.idTipoExamen')
     ->paginate(7);
 
@@ -50,8 +50,7 @@ class CitasController extends Controller
   */
   public function create()
   {
-    $tipoExamenes = DB::table('tipoExamen')->select('idTipoExamen', 'nombreTipoExamen')->get();
-    return view($this->path.'/crearCita')->with('tipoExamenes',$tipoExamenes);
+
   }
 
   /**
@@ -62,48 +61,7 @@ class CitasController extends Controller
   */
   public function store(CitaRequest $request)
   {
-    try{
-      //valida si hay una cita activa para la fecha asignada y tipo de examen específico
-      $validar=DB::table('citas')->where('fechaCita',$request->fechaCita)
-      ->where('idTipoExamen',$request->tipoExamen)
-      ->where('habilitado','=',true)
-      ->count();
 
-if($validar==0){
-  //revisa si hay más de 5 citas antiguas activas para ser desactivadas debido a que se crea una nueva cita
-  $contadorCitasActivas=DB::table('citas')
-  ->where('idTipoExamen',$request->tipoExamen)
-  ->where('habilitado','=',true)
-  ->count();
-//encuentra el id de la cita más antigua que se encuentra activa
-  if($contadorCitasActivas>=5){
-  $idcitaAnterior= DB::table('citas')
-        ->where('citas.idTipoExamen',$request->tipoExamen)
-        ->where('citas.habilitado','=',true)
-        ->min('citas.idCita');
-
-        if($idcitaAnterior!=null){
-          $citaAnterior=Cita::findOrFail($idcitaAnterior);
-          $citaAnterior->habilitado=false;
-          $citaAnterior->save();
-        }
-}
-        $cita = new Cita();
-        $cita->fechaCita = $request->fechaCita;
-        $cita->horaCita = $request->horaCita;
-        $cita->idTipoExamen= $request->tipoExamen;
-        $cita->save();
-        return redirect($this->path)->with('msj','Cita Registrada');
-
-}else{
-  return redirect($this->path)->with('msj2','Cita NO registrada, es posible que ya exista una cita para el mismo tipo de examen en la misma fecha');
-}
-
-
-
-    }catch(Exception $e){
-      return "Fatal error - ".$e->getMessage();
-    }
   }
 
 
@@ -118,7 +76,7 @@ if($validar==0){
   {
     $cita = Cita::findOrFail($id);
     $citas = DB::table('citas')
-    ->select('citas.idCita','citas.fechaCita','citas.horaCita','tipoExamen.nombreTipoExamen','citas.habilitado')
+    ->select('citas.idCita','citas.fechaCita','citas.horaCita','tipoExamen.nombreTipoExamen')
     ->join('tipoExamen','citas.idTipoExamen','=','tipoExamen.idTipoExamen')
     ->where('citas.idCita','=',$cita->idCita)
     ->get();
@@ -131,7 +89,7 @@ if($validar==0){
 
     $reservaciones = Reservacion::BusquedaReservacion($request->busqueda)
       ->orderBy('idReservacion', 'desc')
-    ->select('reservacion.idReservacion','pacientes.primerNombre','pacientes.segundoNombre','pacientes.primerApellido','pacientes.segundoApellido',
+    ->select('reservacion.realizado','reservacion.idReservacion','pacientes.primerNombre','pacientes.segundoNombre','pacientes.primerApellido','pacientes.segundoApellido',
     'pacientes.idPaciente','regionAnatomica.nombreRegionAnatomica','regionAnatomica.idRegionAnatomica','sexo.nombreSexo')
     ->join('pacientes','pacientes.idPaciente','=','reservacion.idPaciente')
     ->join('sexo','pacientes.idSexo','=','sexo.idSexo')
@@ -151,17 +109,7 @@ if($validar==0){
   */
   public function edit($id)
   {
-    try{
-      $cita = Cita::findOrFail($id);
-      $tipoExamenes= DB::table('tipoExamen')->where('idTipoExamen',$cita->idTipoExamen)
-      ->select('idTipoExamen','nombreTipoExamen')->get();
-      $tipoExamenesDiferente =DB::table('tipoExamen')->where('idTipoExamen','<>',$cita->idTipoExamen)
-      ->select('idTipoExamen','nombreTipoExamen')->get();
-      return view($this->path.'/editarCita')->with('cita',$cita)->with('tipoExamenes',$tipoExamenes)
-      ->with('tipoExamenesDiferente',$tipoExamenesDiferente);
-    }catch(Exception $e){
-      return "Error al intentar modificar la cita".$e->getMessage();
-    }
+
 
   }
 
@@ -174,20 +122,7 @@ if($validar==0){
   */
   public function update(CitaRequest $request, $id)
   {
-    try{
-      $cita = Cita::findOrFail($id);
-      $cita->fechaCita = $request->fechaCita;
-      $cita->horaCita = $request->horaCita;
-      $cita->idTipoExamen = $request->tipoExamen;
-      if($cita->save()){
-        return redirect()->action('CitasController@show',['idCita' => $id])->with('msj','Cita modificada');
-      }else{
-        return back()->with();
-      }
 
-    }catch(Exception $e){
-
-    }
 
   }
 
@@ -199,27 +134,7 @@ if($validar==0){
   */
   public function destroy($id)
   {
-    try{
-      $cita = Cita::findOrFail($id);
-      $cita->delete();
-      return redirect($this->path);
 
-        }catch(Exception $e){
-            return "No se pudo eliminar la cita Especificado";
-        }
   }
-
-public function habilitarCita($id){
-$cita= Cita::findOrFail($id);
-$cita->habilitado=true;
-$cita->save();
-return redirect()->action('CitasController@show',['id' => $id])->with('msj','Cita Habilitada');
-}
-public function inhabilitarCita($id){
-  $cita= Cita::findOrFail($id);
-  $cita->habilitado=false;
-  $cita->save();
-  return redirect()->action('CitasController@show',['id' => $id])->with('msj','Cita Inhabilitada');
-}
 
 }

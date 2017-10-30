@@ -4,9 +4,6 @@
 
 <section>
 	@can('control_citas')
-	@if(session()->has('msj'))
-	<div class="alert alert-success" role="alert">{{session('msj')}}</div>
-	@endif
 	<div class="container">
 		<div id="loginbox" style="margin-top:30px">
 			<div class="panel panel-primary" >
@@ -81,7 +78,9 @@
 				 <th class="text-center">Nombre Completo de Paciente</th>
 				 <th class="text-center">Sexo</th>
 				 <th class="text-center">Región Anatomica</th>
+				 <th class="text-center">Realizada</th>
 				 <th class="text-center">Acciones</th>
+
 
 
 			 </tr>
@@ -92,12 +91,21 @@
 						 <td class="text-center">{{ $reservacion->primerNombre}} {{$reservacion->segundoNombre}} {{$reservacion->primerApellido}}  {{$reservacion->segundoApellido}}</td>
 						 <td class="text-center"> {{ $reservacion->nombreSexo}}</td>
 						 <td class="text-center"> {{ $reservacion->nombreRegionAnatomica}}</td>
-							 <td><a href="/crearcita/{{$reservacion->idReservacion}}" class="btn btn-info btn-sm">
+						 @if($reservacion->realizado==0)
+						 <td class="text-center">NO</td>
+						 @else
+						 <td class="text-center">SI</td>
+						 @endif
+						 <td>
+							 @if($reservacion->realizado==0)
+						 <a href="/crearcita/{{$reservacion->idReservacion}}" class="btn btn-info btn-sm">
 							 <span class="glyphicon glyphicon-pencil"></span>Realizar Examen</a>
+							 @endif
 						<a href="{{ route('admin_pacientes.show',$reservacion->idPaciente) }}" target="_blank" class="btn btn-success btn-sm">
 							<span class="glyphicon glyphicon-eye-open"></span>Ver Expediente</a>
-
 						</td>
+
+
 					 </tr>
 		@endforeach
 		 </tbody>
@@ -124,13 +132,7 @@
     @endif
 		<a href="{{ url('/admin_citas') }}" class="btn btn-warning btn-sm">
 		 <span class="glyphicon glyphicon-list-alt"></span>Regresar a Lista de Citas</a>
-		 @if($cita->habilitado==1)
-		 <a href="{{ route('inhabilitarCita',$cita->idCita) }}"class="btn btn-danger btn-sm">
-		 <span class="glyphicon glyphicon-wrench"></span>Cerrar Cita</a>
-		 @else
-		 <a href="{{ route('habilitarCita',$cita->idCita) }}" class="btn btn-info btn-sm"  id="pac_habilitado">
-		<span class="glyphicon glyphicon-wrench"></span>Abrir Cita</a>
-		@endif
+
 
 		@else
 		<div class="alert alert-danger">

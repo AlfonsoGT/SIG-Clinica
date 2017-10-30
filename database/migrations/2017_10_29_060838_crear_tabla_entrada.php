@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTablaPlaca extends Migration
+class CrearTablaEntrada extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateTablaPlaca extends Migration
      */
     public function up()
     {
-      Schema::create('placa', function (Blueprint $table) {
-          $table->increments('idPlaca');
-          $table->string('tipoPlaca');
-          
-          });
+        Schema::create('entrada', function (Blueprint $table) {
+            $table->increments('idEntrada');
+            $table->integer('año');
+            $table->integer('id')->unsigned();
+            $table->foreign('id')->references('id')->on('users');
+        });
     }
 
     /**
@@ -27,6 +28,6 @@ class CreateTablaPlaca extends Migration
      */
     public function down()
     {
-        Schema::drop('placa');
+        Schema::dropIfExists('entrada');
     }
 }

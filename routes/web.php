@@ -58,9 +58,11 @@ Route::get('/editPassword/{id}', 'UserController@editPassword')->name('editPassw
 Route::post('/actualizarPassword/{id}','UserController@actualizarPassword')->name('actualizarPassword');
 
 
-/*Adquisicion de Productos*/
-Route::resource('/admin_productos','ProductoController');
+/*Salidas de Material*/
+Route::resource('/admin_salidas','SalidasController');
+Route::post('/ingresarMaterial/{idSalida}','SalidasController@IngresarMaterial')->name('ingresarMaterial');
 
 /* Gestión de examen */
 Route::resource('/admin_examenes','ExamenController');
+
 Route::get('/crearcita/{id}', 'ExamenController@create')->name('crearcita');

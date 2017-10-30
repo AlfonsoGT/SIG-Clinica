@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
     $this->call(tipoExamenSeeder::class);
     $this->call(regionAnatomicaSeeder::class);
     //$this->call(citaSeeder::class);
-    $this->call(tipoProductoSeeder::class);
+    $this->call(tipoMaterial::class);
+    $this->call(tipoUnidad::class);
     }
 }

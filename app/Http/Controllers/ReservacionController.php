@@ -28,22 +28,10 @@ class ReservacionController extends Controller
      */
     public function create($idPaciente)
     {
-        $citas =
-        DB::table('citas')
-                ->join('tipoExamen', 'citas.idTipoExamen', '=', 'tipoExamen.idTipoExamen')
-                ->select('citas.*','tipoExamen.*')
-                ->where('citas.habilitado','=',1)
-                ->orderBy('tipoExamen.idTipoExamen', 'desc')
-                ->get();
-
+        
        $examen = DB::table('tipoExamen')
        ->select('tipoExamen.*')
        ->get();
-
-        /**$indices = [];
-        for($i=0; $i<sizeof($citas);$i++){
-            array_push($indices, $i);
-        }*/
 
         $regionAnatomica = DB ::table('regionAnatomica')
         ->select('idRegionAnatomica', 'nombreRegionAnatomica')->get();
@@ -51,13 +39,10 @@ class ReservacionController extends Controller
         $paciente = DB::table('pacientes')
         ->select('primerNombre','segundoNombre','primerApellido','segundoApellido','idPaciente','activo')
         ->where('idPaciente','=',$idPaciente)->get();
-        //dd($paciente);
-        //Para presentar en la vista la cantidad de pacientes
-       $preliminar = DB::table('citas')->where('citas.habilitado','=',1)->count();
        $tipoExamenes = DB::table('tipoExamen')->select('idTipoExamen', 'nombreTipoExamen')->get();
 
-        return view($this->path.'/asignacionCita')->with('citas',$citas)
-            ->with('regionAnatomica',$regionAnatomica)->with('paciente',$paciente)->with('examen',$examen)->with('preliminar',$preliminar)->with('tipoExamenes',$tipoExamenes);
+        return view($this->path.'/asignacionCita')
+            ->with('regionAnatomica',$regionAnatomica)->with('paciente',$paciente)->with('examen',$examen)->with('tipoExamenes',$tipoExamenes);
 
     }
     /**
@@ -82,7 +67,6 @@ class ReservacionController extends Controller
          $revision=DB::table('citas')
          ->where('idTipoExamen',$request->examen)
          ->where('fechaCita',$request->fechaCita)
-         ->where('habilitado',true)
          ->count();
 
          if($revision==0){
@@ -91,13 +75,12 @@ class ReservacionController extends Controller
            $cita->fechaCita=$request->fechaCita;
            $cita->idTipoExamen=$request->examen;
            $cita->horaCita=$request->horaCita;
-           $cita->habilitado=true;
            $cita->save();
          }else{
            $idCitaExistente=DB::table('citas')
            ->where('fechaCita',$request->fechaCita)
            ->where('idTipoExamen',$request->examen)
-           ->where('habilitado',true)->max('idCita');
+           ->max('idCita');
            $cita=Cita::findOrFail($idCitaExistente);
 
            //verifica si el paciente no está registrado a la misma cita
@@ -168,16 +151,7 @@ class ReservacionController extends Controller
     public function edit($idPaciente,$idReservacion)
     {
         $reservacion = Reservacion::findOrFail($idReservacion);
-        //dd($reservacion);
-        //Para detectar cuales son las ultimas citas creadas
-        $citas =
-        DB::table('citas')
-                ->join('tipoExamen', 'citas.idTipoExamen', '=', 'tipoExamen.idTipoExamen')
-                ->select('citas.*','tipoExamen.*')
-                ->where('citas.habilitado','=',1)
-                ->orderBy('tipoExamen.idTipoExamen', 'desc')
-                ->get();
-
+ 
         //Para seleccionar el tipo de Examen de la maxima cita asignada
         $tipoSeleccionado = DB::table('reservacion')
         ->join('citas','citas.idCita','=','reservacion.idCita')
@@ -191,7 +165,6 @@ class ReservacionController extends Controller
                 ->join('tipoExamen', 'citas.idTipoExamen', '=', 'tipoExamen.idTipoExamen')
                 ->select('citas.*')
                 ->where('citas.idTipoExamen','=',$tipo->idTipoExamen)
-                ->where('citas.habilitado','=',1)
                 ->get();
 
         }
@@ -206,24 +179,11 @@ class ReservacionController extends Controller
             ->get();
             array_push($tiposExamen, $aux);
         }
-       //dd($tiposExamen);
+       
 
-        //Para llenar la tabla
-        $indices = [];
-        for($i=0; $i<sizeof($citas);$i++){
-            array_push($indices, $i);
-        }
-
-        //Para llenar el combobox
-        $indices2 = [];
-        for($i=0; $i<sizeof($citasMaximasDiferente);$i++){
-            array_push($indices2, $i);
-        }
-        //Llenar el combobox con el asignado
         $regionAnatomicaReservacion = DB::table('regionAnatomica')->where('idRegionAnatomica',$reservacion->idRegionAnatomica)
         ->select('idRegionAnatomica','nombreRegionAnatomica','idTipoExamen')->get();
-        //dd($regionAnatomicaReservacion);
-        //llenar con el distinto el combobox
+
         foreach ($regionAnatomicaReservacion as $region) {
         $regionAnatomicaReservacionDiferente= DB::table('regionAnatomica')
         ->where('idRegionAnatomica','<>',$reservacion->idRegionAnatomica)
@@ -231,7 +191,7 @@ class ReservacionController extends Controller
         ->select('idRegionAnatomica','nombreRegionAnatomica','idTipoExamen')
         ->get();
         }
-        //Para llenar el campo del nombre del paciente
+
         $paciente = DB::table('pacientes')
         ->select('primerNombre','segundoNombre','primerApellido','segundoApellido','idPaciente','activo')
         ->where('idPaciente','=',$idPaciente)->get();
@@ -243,9 +203,9 @@ class ReservacionController extends Controller
        ->get();
 
         return view($this->path.'/editarAsignacionCita')->with('reservacion',$reservacion)
-            ->with('citas',$citas)->with('indices',$indices)->with('regionAnatomicaReservacion',$regionAnatomicaReservacion)
+            ->with('regionAnatomicaReservacion',$regionAnatomicaReservacion)
             ->with('regionAnatomicaReservacionDiferente',$regionAnatomicaReservacionDiferente)->with('paciente',$paciente)
-            ->with('tipoSeleccionado',$tipoSeleccionado)->with('tiposExamen',$tiposExamen)->with('indices2',$indices2)->with('examen',$examen);
+            ->with('tipoSeleccionado',$tipoSeleccionado)->with('tiposExamen',$tiposExamen)->with('examen',$examen);
     }
 
     /**
@@ -271,7 +231,6 @@ class ReservacionController extends Controller
          $revision=DB::table('citas')
          ->where('idTipoExamen',$request->examen)
          ->where('fechaCita',$request->fechaCita)
-         ->where('habilitado',true)
          ->count();
 
          if($revision==0){
@@ -280,13 +239,12 @@ class ReservacionController extends Controller
            $cita->fechaCita=$request->fechaCita;
            $cita->idTipoExamen=$request->examen;
            $cita->horaCita=$request->horaCita;
-           $cita->habilitado=true;
            $cita->save();
          }else{
            $idCitaExistente=DB::table('citas')
            ->where('fechaCita',$request->fechaCita)
            ->where('idTipoExamen',$request->examen)
-           ->where('habilitado',true)->max('idCita');
+           ->max('idCita');
            $cita=Cita::findOrFail($idCitaExistente);
 
            //verifica si el paciente no está registrado a la misma cita
@@ -316,7 +274,7 @@ class ReservacionController extends Controller
           $paciente->save();
           /*--*/
           $reservacion->save();
-          return redirect()->action('PacienteController@show',['idPaciente' => $request->idPaciente])->with('msj','Reservacion Registrada');
+          return redirect()->action('PacienteController@show',['idPaciente' => $request->idPaciente])->with('msj','Reservacion Modificada con Exito');
          }else{
           return redirect()
           ->action('PacienteController@show',['idPaciente' => $request->idPaciente])
@@ -384,24 +342,10 @@ class ReservacionController extends Controller
         DB::table('citas')
                 ->join('tipoExamen', 'citas.idTipoExamen', '=', 'tipoExamen.idTipoExamen')
                 ->select('citas.*','tipoExamen.*')
-                ->where('citas.habilitado','=',1)
                 ->where('citas.idTipoExamen','=',$idTipoExamen)
                 ->get();
 
         return $citas;
     }
-    public function getCantidadPaciente($idTipoExamen)
-    {
-        $cantidad = [];
-        for ($i=1; $i<=$preliminar;$i++) {
-            $aux = DB::table('reservacion')
-          ->where([['reservacion.idCita','=',$i]])
-          ->where([['reservacion.idCita','=',$idTipoExamen]])
-          ->select('reservacion.idCita',DB::raw('count(reservacion.idPaciente) as conteo'))
-          ->groupBy('reservacion.idCita')
-          ->get();
-          array_push($cantidad, $aux);
-      }
-          return $cantidad;
-    }
+  
 }
