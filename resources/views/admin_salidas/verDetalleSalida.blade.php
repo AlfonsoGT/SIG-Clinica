@@ -33,14 +33,115 @@
                         </tbody>
                     </table>
                 </div>
-
-
-                
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                
+                                <th class="text-center">Cantidad de Placas de 6 1/2</th>
+                                <th class="text-center">Cantidad de Placas de 8 x 10</th>
+                                <th class="text-center">Cantidad de Placas de 10 x 12</th>
+                                <th class="text-center">Cantidad de Placas de 11 x 14</th>
+                                <th class="text-center">Cantidad de Placas de 14 x 14</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr>
+                                
+                                <td class="text-center">  
+                                @foreach($sumaTotal as $suma)
+                                @if($suma->idTipoUnidad == 1)
+                                {{ $suma->cantidadUnidad }}
+                                  
+                                 @endif 
+                                @endforeach
+                                </td>
+                                <td class="text-center">
+                                @foreach($sumaTotal as $suma)
+                                @if($suma->idTipoUnidad == 2)
+                                {{ $suma->cantidadUnidad }}
+                                   
+                                 @endif 
+                                @endforeach
+                                </td>
+                                <td class="text-center">
+                                    @foreach($sumaTotal as $suma)
+                                @if($suma->idTipoUnidad == 3)
+                                {{ $suma->cantidadUnidad }}
+                                   
+                                 @endif 
+                                @endforeach
+                                </td>
+                                <td class="text-center">
+                                @foreach($sumaTotal as $suma)
+                                @if($suma->idTipoUnidad == 4)
+                                {{ $suma->cantidadUnidad }}
+                                
+                                 @endif 
+                                @endforeach
+                                </td>
+                                <td class="text-center">
+                                @foreach($sumaTotal as $suma)
+                                @if($suma->idTipoUnidad == 5)
+                                {{ $suma->cantidadUnidad }}
+                                  
+                                 @endif 
+                                @endforeach
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                
+                                <th class="text-center">Cantidad de Set para Revelador</th>
+                                <th class="text-center">Cantidad de Set para Fijador</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr>
+                                
+                                <td class="text-center">
+                                @foreach($sumaTotal as $suma)
+                                @if($suma->idTipoUnidad == 6)
+                                {{ $suma->cantidadUnidad }}
+                                  
+                                 @endif 
+                                @endforeach
+                                </td>
+                                <td class="text-center">
+                                @foreach($sumaTotal as $suma)
+                                @if($suma->idTipoUnidad == 7)
+                                {{ $suma->cantidadUnidad }}
+                                  
+                                 @endif 
+                                @endforeach
+                                </td>
+                                
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+               <a href="{{ route('admin_material.create')}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-paperclip"></span>Ingresar Material</a>
+                        
+                         <a href="{{ url('/admin_salidas') }}" class="btn btn-warning btn-sm">
+                        <span class="glyphicon glyphicon-list-alt"></span>Regresar a Registros</a>
+                    <br><br>
                 <!--tabla 2-->
                  @if(session()->has('msj'))
                         <div class="alert alert-success" role="alert">{{session('msj')}}</div>
                         @endif
-                       <h2 style="display: inline;">Materiales</h2>
+                @if(session()->has('msj2'))
+                                    <div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
+                                    @endif
+                       
                         <div class="table-responsive">
                             <table class="table table-striped table-hover table-bordered">
                                 <thead>
@@ -64,77 +165,23 @@
                                         <td class="text-center">{{ $detalle->cantidadMaterial }}</td>
                                         <td class="text-center">{{ $detalle->nombreTipoUnidad }}</td>
                                        
-                                        <td><a href="" class="btn btn-danger btn-sm">borrar</a></td>
+                                        <td>
+                                            
+                                            <form method="GET" action="/vista_borrarMaterial/{{$detalle->idMaterial}}, {{$detalle->idSalida}}" style='display: inline;'>
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                            <span class="glyphicon glyphicon-trash"></span>Borrar</button></form>
+                                         
+                                        </td>
                                         
                                     </tr>
                                   @endforeach
                                 </tbody>
-                                {!! $detalleSalidas->render() !!}
+                                
                             </table>
+                            {!! $detalleSalidas->render() !!}
                         </div>
-                        @foreach($salidas as $salida)
-                        <form class="form-horizontal" role="form" method="POST" action="/ingresarMaterial/{{$salida->idSalida }}">
-                        @endforeach
-                        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
-
-
-                        <div class="form-group{{ $errors->has('cantidadMaterial') ? ' has-error' : '' }}">
-                            <label for="cantidadMaterial" class="col-md-4 control-label">Cantidad de Material</label>
-
-                            <div class="col-md-6">
-                                <input id="cantidadMaterial" type="text" class="form-control" name="cantidadMaterial" value="{{ old('cantidadMaterial') }}" autocomplete="off" required autofocus>
-
-                                @if ($errors->has('cantidadMaterial'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('cantidadMaterial') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group {{ $errors->has('fecha') ? ' has-error' : '' }}">
-                                <label for="fecha" class="col-md-4 control-label">Fecha de Uso</label>
-                                <div class="col-md-6">
-                                    <input id="fecha" type="date" class="form-control" name="fecha" value="{{ old('fecha') }}" " required autofocus>
-                                    @if ($errors->has('fecha'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('fecha') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="tipoMaterial" class="col-md-4 control-label">Tipo Material</label>
-                                <div class="col-md-6">
-                                    <select required class="form-control" name="tipoMaterial" id="tipoMaterial" onchange="ocul()">
-                                        <option value="" disabled selected>Seleccione un Tipo de Material</option>
-                                        @foreach($tipoMaterial as $tipo)
-                                        <option  value='{{$tipo->idTipoMaterial}}'> {{$tipo->nombreTipoMaterial}}</option>
-                                      @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                             <div class="form-group">
-                                <label for="tipoUnidad" class="col-md-4 control-label">Tipo Unidad</label>
-                                <div class="col-md-6">
-                                    <select required class="form-control" name="tipoUnidad" id="tipoUnidad" onchange="ocul()">
-                                        <option value="" disabled selected>Seleccione un Tipo de Unidad</option>
-                                        @foreach($tipoUnidad as $tipo)
-                                        <option  value='{{$tipo->idTipoUnidad}}'> {{$tipo->nombreTipoUnidad}}</option>
-                                      @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-success btn-sm">
-                                        <span class="glyphicon glyphicon-floppy-disk"></span>Ingresar Nuevo Material
-                                    </button>
-                                     <a href="{{ url('/admin_salidas') }}" class="btn btn-warning btn-sm">
-                                    <span class="glyphicon glyphicon-list-alt"></span>Regresar a ver Registros</a>
-                                    
-                                </div>
-                            </div>
-                    </form>
+                        
+                        
                         </div>
                     </div>
                 </div>

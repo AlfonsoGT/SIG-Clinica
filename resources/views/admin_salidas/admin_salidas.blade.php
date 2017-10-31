@@ -15,7 +15,7 @@
 
                         <h2 style="display: inline;">Gestionar Materiales</h2>
                         
-                        <a href="{{ route('admin_salidas.create')}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-paperclip"></span>Aperturar Inventario</a>
+                        <a href="{{ route('admin_material.create')}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-paperclip"></span>Ingresar Material</a>
                         <br><br>
                    
                         <div class="table-responsive">
@@ -27,8 +27,8 @@
                                     <th class="text-center">Mes</th>
                                     <th class="text-center">Encargado</th>
                                     <th class="text-center">Cantidad de Placas</th>
-                                    <th class="text-center">Cantidad de Set para Fijador</th>
-                                    <th class="text-center">Cantidad de Set para Revelador</th>
+                                    <th class="text-center">Cantidad de Fijador</th>
+                                    <th class="text-center">Cantidad de Revelador</th>
                                    <th class="text-center">Acciones</th>
                                 </tr>
                                 </thead>
@@ -37,14 +37,64 @@
                                     <tr>
                                         
                                         <td class="text-center"> 
-                                            <?php
-                                         $newDate = date("m-Y", strtotime($salida->fecha ));
-                                        print_r($newDate ); ?>
+                                           {{$salida->fecha }}
                                             </td>
-                                        <td class="text-center">  {{ $salida->id}}</td>
-                                         <td class="text-center">  </td>
-                                          <td class="text-center">  </td>
-                                          <td class="text-center">  </td>
+                                        <td class="text-center">  {{ $salida->username}}</td>
+                                         <td class="text-center">  
+                                        <?php
+                                        for($i=0; $i < $salidasConteo; $i++){
+                                            $datos=[];
+                                            $cero=0;
+                                            $datos = json_decode($sumaTotal[$i],true);
+                                            foreach ($datos as $dato) {
+                                                if($dato['idSalida']== $salida->idSalida and $dato['idTipoMaterial']== 1){
+                                                    if($dato['cantidadUnidad'] == 0)
+                                                       intval($cero);
+                                                    else
+                                                        print_r($dato['cantidadUnidad']);
+
+                                                }
+                                            }
+                                        }
+                                        ?>
+                                         </td>
+                                          <td class="text-center">
+                                          <?php
+                                        for($i=0; $i < $salidasConteo; $i++){
+                                            $datos=[];
+                                            $cero=0;
+                                            $datos = json_decode($sumaTotal[$i],true);
+                                            foreach ($datos as $dato) {
+                                                if($dato['idSalida']== $salida->idSalida and $dato['idTipoMaterial']== 2){
+                                                    if($dato['cantidadUnidad'] == 0)
+                                                       intval($cero);
+                                                    else
+                                                        print_r($dato['cantidadUnidad']);
+
+                                                }
+                                            }
+                                        }
+                                        ?>  
+                                          </td>
+                                          <td class="text-center"> 
+                                            <?php
+                                        for($i=0; $i < $salidasConteo; $i++){
+                                            $datos=[];
+                                            $cero=0;
+                                            $datos = json_decode($sumaTotal[$i],true);
+                                            foreach ($datos as $dato) {
+                                                if($dato['idSalida']== $salida->idSalida and $dato['idTipoMaterial']== 3){
+                                                    if($dato['cantidadUnidad'] == 0)
+                                                       intval($cero);
+                                                    else
+                                                        print_r($dato['cantidadUnidad']);
+
+                                                }
+                                            }
+                                        }
+                                        ?>
+
+                                          </td>
                                         <td>
                                         <a href="{{ route('admin_salidas.show',$salida->idSalida) }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open"></span>Ver Detalle </a>
                                        

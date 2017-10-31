@@ -60,7 +60,11 @@ Route::post('/actualizarPassword/{id}','UserController@actualizarPassword')->nam
 
 /*Salidas de Material*/
 Route::resource('/admin_salidas','SalidasController');
-Route::post('/ingresarMaterial/{idSalida}','SalidasController@IngresarMaterial')->name('ingresarMaterial');
+Route::resource('/admin_material','MaterialController');
+Route::get('/tomarIdMaterialEliminar/{idMaterial},{idSalida}','MaterialController@tomarIdMaterialEliminar')->name('tomarIdMaterialEliminar');
+Route::get('vista_borrarMaterial/{idMaterial},{idSalida}', 'MaterialController@vista_borrarMaterial'); //mostrar la pantalla de confirmacion
+Route::get('/unidades/{idTipoMaterial}','MaterialController@getTipoUnidad');
+
 
 /* Gestión de examen */
 Route::resource('/admin_examenes','ExamenController');

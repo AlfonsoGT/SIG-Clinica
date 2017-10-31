@@ -19,8 +19,26 @@ class SalidasController extends Controller
      private $path = '/admin_salidas';
     public function index()
     {
-        $salidas = DB::table('salida')->paginate(10);
-        return view($this->path.'/admin_salidas')->with('salidas',$salidas);
+        $salidas = DB::table('salida')
+        ->join('users','users.id','=','salida.id')
+        ->select('users.*','salida.*')
+        ->paginate(10);
+        $sumaTotal=[];
+        foreach ($salidas as $sal) {
+            $aux = DB::table('material')
+            ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
+            ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+            ->join('salida','salida.idSalida','=','material.idSalida')
+            ->where([['salida.idSalida','=',$sal->idSalida]])
+            ->select(DB::raw('SUM(material.cantidadMaterial) as cantidadUnidad,tipoUnidad.idTipoMaterial,material.idSalida'))
+            ->groupBy('tipoUnidad.idTipoMaterial')
+            ->groupBy('material.idSalida')
+            ->get();
+            array_push($sumaTotal, $aux);
+        }
+        $salidasConteo = DB::table('salida')->count();
+       //dd($sumaTotal);
+        return view($this->path.'/admin_salidas')->with('salidas',$salidas)->with('sumaTotal',$sumaTotal)->with('salidasConteo',$salidasConteo);
     }
 
     /**
@@ -74,31 +92,21 @@ class SalidasController extends Controller
           ->where('salida.idSalida',
               $salida->idSalida)
           ->paginate(5);
-         
 
-        $tipoMaterial =DB::table('tipoMaterial')->select('idTipoMaterial', 'nombreTipoMaterial')->get();
-        $tipoUnidad =DB::table('tipoUnidad')->select('idTipoUnidad', 'nombreTipoUnidad')->get();
+            $sumaTotal = DB::table('material')
+            ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
+            ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+            ->join('salida','salida.idSalida','=','material.idSalida')
+            ->where('salida.idSalida','=',$salida->idSalida)
+            ->select(DB::raw('SUM(material.cantidadMaterial) as cantidadUnidad,tipoUnidad.idTipoUnidad'))
+            ->groupBy('tipoUnidad.idTipoUnidad')
+            ->get();
+        //dd($sumaTotal);
+            $unidadConteo= DB::table('tipoUnidad')->count();
 
-        return view($this->path.'/verDetalleSalida')->with('salidas',$salidas)->with('tipoMaterial',$tipoMaterial)->with('tipoUnidad',$tipoUnidad)->with('detalleSalidas',$detalleSalidas);
+        return view($this->path.'/verDetalleSalida')->with('salidas',$salidas)->with('detalleSalidas',$detalleSalidas)->with('sumaTotal',$sumaTotal)->with('unidadConteo',$unidadConteo);
 
     }
-    public function IngresarMaterial(Request $request, $idSalida)
-    {
-       
-        try{
-            $material = new Material();
-            $material->cantidadMaterial= $request->cantidadMaterial;
-            $material->fecha = $request->fecha;
-            $material->idTipoUnidad=$request->tipoUnidad;
-            $material->idSalida = $idSalida;
-            
-            $material->save();
-            return redirect()->action('SalidasController@show',['idSalida' => $idSalida])->with('msj','Material Guardado exitosamente');
-        }catch(Exception $e){
-        } 
-    }
-
-
     /**
      * Show the form for editing the specified resource.
      *
