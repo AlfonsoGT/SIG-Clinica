@@ -6,10 +6,10 @@
     <div id="loginbox" style="margin-top:30px">
         <div class="panel panel-primary" >
             <div class="panel-heading">
-                <div class="panel-title">Ingresar Nuevo Uso de Material</div>
+                <div class="panel-title">Ingresar Material</div>
             </div>
             <div style="padding-top:30px" class="panel-body" >
-                <form class="form-horizontal" role="form" method="POST" action="{{ url( '/admin_material' ) }}">
+                <form class="form-horizontal" role="form" method="POST" action="{{ url( '/admin_entradas' ) }}">
                         
                         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
                          <div class="form-group">
@@ -22,7 +22,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('cantidadMaterial') ? ' has-error' : '' }}">
-                            <label for="cantidadMaterial" class="col-md-4 control-label">Cantidad de Material</label>
+                            <label for="cantidadMaterial" class="col-md-4 control-label">Cantidad en Cajas de Material</label>
 
                             <div class="col-md-6">
                                 <input id="cantidadMaterial" type="text" class="form-control" name="cantidadMaterial" value="{{ old('cantidadMaterial') }}" autocomplete="off" required autofocus>
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                         <div class="form-group {{ $errors->has('fecha') ? ' has-error' : '' }}">
-                                <label for="fecha" class="col-md-4 control-label">Fecha de Uso</label>
+                                <label for="fecha" class="col-md-4 control-label">Fecha de Compra de Material</label>
                                 <div class="col-md-6">
                                     <input id="fecha" type="date" class="form-control" name="fecha" value="{{ old('fecha') }}" " required autofocus>
                                     @if ($errors->has('fecha'))
@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                              <div class="form-group">
-                                <label for="tipoUnidad" class="col-md-4 control-label">Tipo Unidad</label>
+                                <label for="tipoUnidad" class="col-md-4 control-label">Unidades</label>
                                 <div class="col-md-6">
                                     <select required class="form-control" name="tipoUnidad" id="tipoUnidad" onchange="ocul()">
                                         <option value="" disabled selected>Seleccione un Tipo de Unidad</option>
@@ -65,14 +65,39 @@
                                     </select>
                                 </div>
                             </div>
+                             <div class="form-group{{ $errors->has('cantidadUnidadMaterial') ? ' has-error' : '' }}">
+                            <label for="cantidadUnidadMaterial" class="col-md-4 control-label">Cantidad de Unidades de Material por Caja </label>
+
+                            <div class="col-md-6">
+                                <input id="cantidadUnidadMaterial" type="text" class="form-control" name="cantidadUnidadMaterial" value="{{ old('cantidadUnidadMaterial') }}" autocomplete="off" required autofocus>
+
+                                @if ($errors->has('cantidadUnidadMaterial'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('cantidadUnidadMaterial') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('proveedor') ? ' has-error' : '' }}">
+                            <label for="proveedor" class="col-md-4 control-label">Proveedor </label>
+
+                            <div class="col-md-6">
+                                <input id="proveedor" type="text" class="form-control" name="proveedor" value="{{ old('proveedor') }}" autocomplete="off" required autofocus>
+
+                                @if ($errors->has('proveedor'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('proveedor') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-success btn-sm">
-                                        <span class="glyphicon glyphicon-floppy-disk"></span>Ingresar Uso de Material
+                                        <span class="glyphicon glyphicon-floppy-disk"></span>Ingresar Material
                                     </button>
-                                     <a href="{{ url('/admin_salidas') }}" class="btn btn-warning btn-sm">
-                                    <span class="glyphicon glyphicon-list-alt"></span>Regresar a ver Registros</a>
-                                    
+                                     <a href="{{ url('/admin_entradas') }}" class="btn btn-warning btn-sm">
+                                    <span class="glyphicon glyphicon-list-alt"></span>Regresar a ver Registros </a>
                                 </div>
                             </div>
                     </form>

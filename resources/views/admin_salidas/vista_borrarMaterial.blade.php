@@ -14,7 +14,7 @@
            @endforeach
       		 <div class="form-group">
         <button  type="submit" class="btn btn-danger btn-sm "><span class="glyphicon glyphicon-trash"></span>Eliminar registro de Material</button>
-        <a href="{{ route('admin_material.show',$material->idMaterial) }}" class="btn btn-warning btn-sm">
+        <a href="{{ route('admin_salidas.show',$material->idSalida) }}" class="btn btn-warning btn-sm">
      <span class="glyphicon glyphicon-list-alt"></span></span>Cancelar</a>
     </div>
     </form>

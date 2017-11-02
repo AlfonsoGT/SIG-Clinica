@@ -9,7 +9,8 @@ class Material extends Model
     protected $table = 'material';
     protected $fillable = [
         'cantidadMaterial', 'fecha', 'precio',
-        'proveedor', 'idEntrada','idSalida','idTipoUnidad',
+        'proveedor', 'idEntrada','idSalida','idTipoUnidad','cantidadUnidadMaterial',
+        'proveedor',
     ];
     protected $primaryKey = 'idMaterial';
     public $timestamps = false;

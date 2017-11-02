@@ -17,6 +17,7 @@ class CrearTablaMaterial extends Migration
             $table->increments('idMaterial');
             $table->integer('cantidadMaterial');
             $table->date('fecha');
+            $table->integer('cantidadUnidadMaterial')->nullable();
             $table->double('precio')->nullable();
             $table->string('proveedor')->nullable();
             $table->integer('idEntrada')->unsigned()->nullable();

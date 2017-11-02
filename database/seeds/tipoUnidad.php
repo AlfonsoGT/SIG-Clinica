@@ -18,5 +18,6 @@ class tipoUnidad extends Seeder
          DB::table('tipoUnidad')->insert(['nombreTipoUnidad'=>'14 x 14','idTipoMaterial'=>'1']);
          DB::table('tipoUnidad')->insert(['nombreTipoUnidad'=>'Set','idTipoMaterial'=>'2']);
          DB::table('tipoUnidad')->insert(['nombreTipoUnidad'=>'Set','idTipoMaterial'=>'3']);
+         DB::table('tipoUnidad')->insert(['nombreTipoUnidad'=>'14 x 17','idTipoMaterial'=>'1']);
     }
 }
