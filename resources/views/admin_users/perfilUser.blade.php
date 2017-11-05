@@ -38,7 +38,7 @@
 									<td class="text-center">{{ $user->name }}</td>
 									<td class="text-center"> {{ $user->username }} </td>
 									<td>@if(Auth::user()->id==$user->id)
-									<a href="/editPassword/{{$user->id}}" class="btn btn-info btn-sm">
+									<a href="{{ route('editPassword',$user->id) }} " class="btn btn-info btn-sm">
 										<span class="glyphicon glyphicon-pencil"></span>Editar mi contraseña</a>
 										@endif
 										@can('control_usuarios')
@@ -72,7 +72,8 @@
 										<td class="text-center">{{ $rolesA->name }}</td>
 										<td class="text-center">{{ $rolesA->description }}</td>
 										@can('modificar_roles')
-										<td><a href="/revocarRol/{{$user->id}},{{$rolesA->id}}" class="btn btn-danger btn-sm">borrar</a></td>
+										<td><a href="{{ route('revocarRol',[$user->id,$rolesA->id]) }}
+											" class="btn btn-danger btn-sm">borrar</a></td>
 										@endcan
 									</tr>
 									@endforeach
@@ -96,7 +97,7 @@
     					@endif
     					@if(count($roles)>0)
 							@can('modificar_roles')
-							<form method="GET" action="/asignarRol/{{$user->id}}">
+							<form method="GET" action="{{ route('asignarRol',$user->id) }}">
 								<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 							<div class="form-group">
 								<label for="rol_asignado" class="col-md-4 control-label">Rol a asignar</label>

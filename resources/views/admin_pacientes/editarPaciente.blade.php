@@ -35,14 +35,14 @@
 
 						<!--Mensaje de error -->
 						<div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-						<form class="form-horizontal" role="form" method="POST" action="/admin_pacientes/{{$paciente->idPaciente}}">
+						<form class="form-horizontal" role="form" method="POST" action="{{ route('admin_pacientes.update',$paciente->idPaciente) }}">
 							<input type="hidden" name="_method" value="PUT">
 							<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
 
 							<div class="form-group {{ $errors->has('primerNombre') ? ' has-error' : '' }}">
 								<label for="primerNombre" class="col-md-4 control-label">Primer Nombre</label>
 								<div class="col-md-6">
-									<input id="primerNombre" type="text" class="form-control" name="primerNombre" value="{{ $paciente->primerNombre }}" >
+									<input id="primerNombre" type="text" class="form-control" name="primerNombre" value="{{ $paciente->primerNombre }}" autocomplete="off" required>
 									@if ($errors->has('primerNombre'))
 									<span class="help-block">
 										<strong>{{ $errors->first('primerNombre') }}</strong>
@@ -53,7 +53,7 @@
 							<div class="form-group {{ $errors->has('segundoNombre') ? ' has-error' : '' }}">
 								<label for="segundoNombre" class="col-md-4 control-label">Segundo Nombre</label>
 								<div class="col-md-6">
-									<input id="segundoNombre" type="text" class="form-control" name="segundoNombre" value="{{ $paciente->segundoNombre }}">
+									<input id="segundoNombre" type="text" class="form-control" name="segundoNombre" value="{{ $paciente->segundoNombre }}" autocomplete="off" required>
 									@if ($errors->has('segundoNombre'))
 									<span class="help-block">
 										<strong>{{ $errors->first('segundoNombre') }}</strong>
@@ -64,7 +64,7 @@
 							<div class="form-group  {{ $errors->has('primerApellido') ? ' has-error' : '' }}">
 								<label for="primerApellido" class="col-md-4 control-label">Primer Apellido</label>
 								<div class="col-md-6">
-									<input id="primerApellido" type="text" class="form-control" name= "primerApellido" value="{{ $paciente->primerApellido }} ">
+									<input id="primerApellido" type="text" class="form-control" name= "primerApellido" value="{{ $paciente->primerApellido }} " autocomplete="off" required>
 									@if ($errors->has('primerApellido'))
 									<span class="help-block">
 										<strong>{{ $errors->first('primerApellido') }}</strong>
@@ -75,7 +75,7 @@
 							<div class="form-group {{ $errors->has('segundoApellido') ? ' has-error' : '' }}">
 								<label for="segundoApellido" class="col-md-4 control-label">Segundo Apellido</label>
 								<div class="col-md-6">
-									<input id="segundoApellido" type="text" class="form-control" name="segundoApellido" value="{{ $paciente->segundoApellido}}">
+									<input id="segundoApellido" type="text" class="form-control" name="segundoApellido" value="{{ $paciente->segundoApellido}}" autocomplete="off" required>
 									@if ($errors->has('segundoApellido'))
 									<span class="help-block">
 										<strong>{{ $errors->first('segundoApellido') }}</strong>
@@ -87,7 +87,7 @@
 							<div class="form-group {{ $errors->has('fechaNacimiento') ? ' has-error' : '' }}">
 								<label for="fechaNacimiento" class="col-md-4 control-label">Fecha nacimiento</label>
 								<div class="col-md-6">
-									<input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" value="{{ $paciente->fechaNacimiento }}">
+									<input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" value="{{ $paciente->fechaNacimiento }}" required>
 									@if ($errors->has('fechaNacimiento'))
 									<span class="help-block">
 										<strong>{{ $errors->first('fechaNacimiento') }}</strong>
@@ -120,7 +120,7 @@
 							<div class="form-group {{ $errors->has('nombreEncargado') ? ' has-error' : '' }}">
 								<label for="nombreEncargado" class="col-md-4 control-label">Nombre de Encargado</label>
 								<div class="col-md-6">
-									<input id="nombreEncargado" type="text" class="form-control" name="nombreEncargado" value="{{ $paciente->nombreEncargado }}">
+									<input id="nombreEncargado" type="text" class="form-control" name="nombreEncargado" value="{{ $paciente->nombreEncargado }}" autocomplete="off" required>
 									@if ($errors->has('nombreEncargado'))
 									<span class="help-block">
 										<strong>{{ $errors->first('nombreEncargado') }}</strong>
@@ -160,7 +160,7 @@
 								<label for="procedencia" class="col-md-4 control-label">Procedencia</label>
 								<div class="col-md-6">
 									<!--lista desplegable -->
-									<select class="form-control" name="procedencia" id="procedencia" onchange="ocul()">
+									<select required class="form-control" name="procedencia" id="procedencia" onchange="ocul()">
 										@foreach($procedenciaPaciente as $procedencia)
 										<option  value='{{ $procedencia->idProcedencia}}'> {{ $procedencia->nombreProcedencia }} </option>
 										@endforeach
@@ -175,7 +175,7 @@
 								<label for="departamento" class="col-md-4 control-label">Departamento</label>
 								<div class="col-md-6">
 									<!--lista desplegable -->
-									<select class="form-control" name="departamento" id="departamento" onchange="ocul()">
+									<select required class="form-control" name="departamento" id="departamento" onchange="ocul()">
 										@foreach($departamentoPaciente as $departamento)
 										<option  value='{{ $departamento->idDepartamento}}'> {{ $departamento->nombreDepartamento }} </option>
 										@endforeach

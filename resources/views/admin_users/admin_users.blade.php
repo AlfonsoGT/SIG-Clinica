@@ -61,7 +61,8 @@
 											<span class="glyphicon glyphicon-pencil"></span>Editar</a>
 											<a href="{{ route('admin_users.show',$user->id) }}" class="btn btn-success btn-sm">
 											<span class="glyphicon glyphicon-eye-open"></span>Ver</a>
-											<form method="GET" action="/vista_borrarUsuarios/{{$user->id}} " style='display: inline;'>
+											<form method="GET" action="{{ route('vista_borrarUsuarios',$user->id) }}
+											 " style='display: inline;'>
 											<button type="submit" class="btn btn-danger btn-sm">
 											<span class="glyphicon glyphicon-trash"></span>Borrar</button></form>
 											</td>

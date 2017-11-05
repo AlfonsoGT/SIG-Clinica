@@ -18,7 +18,7 @@
                 <!--Mensaje de error -->
                 <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-                    <form class="form-horizontal" role="form" method="POST" action="/admin_users">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url( '/admin_users' ) }}">
                         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
 
 

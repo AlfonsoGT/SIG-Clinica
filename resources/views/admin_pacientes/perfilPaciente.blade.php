@@ -127,7 +127,9 @@
 												@foreach($reservaciones as $reservacion)
 												<tr>
 
-													<td class="text-center"> {{ $reservacion->fechaCita }} </td>
+													<td class="text-center"> <?php
+             											$newDate = date("d-m-Y", strtotime($reservacion->fechaCita ));
+             											print_r($newDate ); ?></td>
 													<td class="text-center"> {{ $reservacion->horaCita }} </td>
 													<td class="text-center"> {{ $reservacion->nombreTipoExamen }}</td>
 													<td class="text-center"> {{ $reservacion->nombreRegionAnatomica}} </td>
@@ -135,7 +137,7 @@
 
 														@can('control_citas')
 														@if($reservacion->realizado==0)
-														<a href="/tomarIdPacienteUpdate/{{$paciente->idPaciente}},{{$reservacion->idReservacion}}" class="btn btn-info btn-sm">
+														<a href="{{ route('tomarIdPacienteUpdate',[$paciente->idPaciente, $reservacion->idReservacion] ) }}" class="btn btn-info btn-sm">
 															<span class="glyphicon glyphicon-pencil"></span>Editar</a>
 															@endif
 															@endcan
@@ -146,9 +148,8 @@
 
 																@can('control_citas')
 																@if($reservacion->realizado==0)
-																<form method="GET" action="/vista_borrar/{{$paciente->idPaciente}},{{$reservacion->idReservacion}} " style='display: inline;'>
-																	<button type="submit" class="btn btn-danger btn-sm">
-																		<span class="glyphicon glyphicon-trash"></span>Borrar</button></form>
+																<a href="{{ route('vista_borrar',[$reservacion->idPaciente, $reservacion->idReservacion]) }} "  class="btn btn-danger btn-sm">
+																		<span class="glyphicon glyphicon-trash"></span>Borrar</a>
 																		@endif
 																		@endcan
 

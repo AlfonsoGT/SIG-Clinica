@@ -24,7 +24,11 @@
 		<TR><th class="text-center">Nombre Completo del Paciente</TH>
 		<td class="text-center">{{ $reservacion->primerNombre}} {{$reservacion->segundoNombre}} {{$reservacion->primerApellido}} {{$reservacion->segundoApellido}}</TD>
 		<TR><th class="text-center">Fecha de Cita</TH>
-		<td class="text-center">{{ $reservacion->fechaCita }}</TD>
+		<td class="text-center">
+			<?php
+             $newDate = date("d-m-Y", strtotime($reservacion->fechaCita ));
+             print_r($newDate ); ?> 
+			</TD>
 		<TR><th class="text-center">Hora de Cita</TH>
 		<td class="text-center">{{ $reservacion->horaCita }}</TD>
 		<TR><th class="text-center">Tipo de Examen</TH>

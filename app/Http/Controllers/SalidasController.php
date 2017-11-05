@@ -37,7 +37,7 @@ class SalidasController extends Controller
             array_push($sumaTotal, $aux);
         }
         $salidasConteo = DB::table('salida')->count();
-       //dd($sumaTotal);
+
         return view($this->path.'/admin_salidas')->with('salidas',$salidas)->with('sumaTotal',$sumaTotal)->with('salidasConteo',$salidasConteo);
     }
 
@@ -51,7 +51,7 @@ class SalidasController extends Controller
         $tipoMaterial =DB::table('tipoMaterial')->select('idTipoMaterial', 'nombreTipoMaterial')->get();
         $tipoUnidad =DB::table('tipoUnidad')->select('idTipoUnidad', 'nombreTipoUnidad')->get();
         return view($this->path.'/crearMaterial')->with('tipoMaterial',$tipoMaterial)->with('tipoUnidad',$tipoUnidad);
-    
+
     }
 
     /**
@@ -64,6 +64,7 @@ class SalidasController extends Controller
     {
        try{
             $newDate = date("m-Y", strtotime($request->fecha));
+            $añoSalida = date("Y", strtotime($request->fecha));
             $revision=DB::table('salida')
             ->where('fecha',$newDate)
             ->count();
@@ -72,9 +73,11 @@ class SalidasController extends Controller
                 $verificar=0;
                 $salida = new Salida();
                 $salida->fecha = $newDate;
+                $salida->añoSalida = $añoSalida;
                 $salida->id = $request->idUser;
+
                 $salida->save();
-                
+
             }else{
                 $idSalidaExistente=DB::table('salida')
                 ->where('fecha',$newDate)
@@ -129,18 +132,30 @@ class SalidasController extends Controller
               $salida->idSalida)
           ->paginate(5);
 
-            $sumaTotal = DB::table('material')
+            $sumaTotalSalidas = DB::table('material')
             ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
             ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
             ->join('salida','salida.idSalida','=','material.idSalida')
-            ->where('salida.idSalida','=',$salida->idSalida)
+            ->where('salida.añoSalida','=',$salida->añoSalida)
             ->select(DB::raw('SUM(material.cantidadMaterial) as cantidadUnidad,tipoUnidad.idTipoUnidad'))
             ->groupBy('tipoUnidad.idTipoUnidad')
             ->get();
         //dd($sumaTotal);
-            $unidadConteo= DB::table('tipoUnidad')->count();
+            $TipoUnidadTodo = DB::table('tipoMaterial')
+            ->join('tipoUnidad','tipoUnidad.idTipoMaterial','=','tipoMaterial.idTipoMaterial')
+            ->select('tipoUnidad.*','tipoMaterial.*')
+            ->get();
+            $sumaTotal = DB::table('material')
+            ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
+            ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+            ->join('entrada','entrada.idEntrada','=','material.idEntrada')
+            ->where('entrada.año','=',$salida->añoSalida)
+            ->select(DB::raw('SUM(material.cantidadMaterial) as cantidadUnidad,SUM(material.cantidadUnidadMaterial) as cantidadSuma,tipoUnidad.idTipoUnidad'))
+            ->groupBy('tipoUnidad.idTipoUnidad')
+            ->get();
+            //dd($sumaTotal);
 
-        return view($this->path.'/verDetalleSalida')->with('salidas',$salidas)->with('detalleSalidas',$detalleSalidas)->with('sumaTotal',$sumaTotal)->with('unidadConteo',$unidadConteo);
+        return view($this->path.'/verDetalleSalida')->with('salidas',$salidas)->with('detalleSalidas',$detalleSalidas)->with('sumaTotalSalidas',$sumaTotalSalidas)->with('sumaTotal',$sumaTotal)->with('TipoUnidadTodo',$TipoUnidadTodo);
 
     }
     /**
@@ -172,11 +187,11 @@ class SalidasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($idMaterial,$idSalida)
+    public function destroy($idMaterial)
     {
         $material = Material::findOrFail($idMaterial);
         $material->delete();
-       return redirect()->action('SalidasController@show',['idSalida' => $idSalida])->with('msj2','Material Eliminado exitosamente');
+       return redirect()->action('SalidasController@show',['idSalida' => $material->idSalida])->with('msj2','Material Eliminado exitosamente');
     }
     public function vista_borrarMaterial($idMaterial,$idSalida){
          //recuperar de la base el elemento que queremos borrar en base al ID que recibimos en la URL con el unico fin de mostrar el detalle

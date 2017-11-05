@@ -29,5 +29,7 @@
        'idProcedencia'=>$faker->randomElement(['1','2','3','4','5','6','7','8','9','10','11','12','13']),
        'idDepartamento'=>$faker->randomElement(['1','2','3','4','5','6','7','8','9','10','11','12','13','14']),
        'activo'=>true,
+       'created_at'=>date('Y-m-d G:i:s'),
+       'updated_at'=>date('Y-m-d G:i:s'),
     ];
 });

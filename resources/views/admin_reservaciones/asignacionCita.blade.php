@@ -4,6 +4,8 @@
 <script type="text/javascript" src="{{ asset('js/jquery-2.1.0.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/fechasCitas.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/cargarRegion.js')}}"></script>
+
+
 <div class="container">
     <div id="loginbox" style="margin-top:30px">
         <div class="panel panel-primary" >

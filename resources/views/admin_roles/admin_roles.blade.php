@@ -40,7 +40,7 @@
                                         <td class="text-center"> {{ $rol->description }} </td>
                                         <td>
                                             <a href="{{ route('admin_roles.show',$rol->id) }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open"></span>Ver</a>
-                                            <form method="GET" action="/vista_borrarRoles/{{$rol->id}} " style='display: inline;'>
+                                            <form method="GET" action="{{ route('vista_borrarRoles',$rol->id) }}" style='display: inline;'>
                                             <button type="submit" class="btn btn-danger btn-sm">
                                             <span class="glyphicon glyphicon-trash"></span>Borrar</button></form>
                                         </td>

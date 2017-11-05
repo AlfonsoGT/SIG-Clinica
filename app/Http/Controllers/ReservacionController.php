@@ -92,7 +92,7 @@ class ReservacionController extends Controller
          }
 
 
-           if($verificar==0){
+          if($verificar==0){
           $reservacion = new Reservacion();
           $reservacion->numeroRecibo= $request->numeroRecibo;
           $reservacion->fechaPago = $request->fechaPago;

@@ -44,8 +44,6 @@ function poner() {
 
 						  $('#duiEncargado').removeAttr("required");
 							  $('#nombreEncargado').removeAttr("required");
-								$('#duiEncargado').val('');
-								$('#nombreEncargado').val('');
 								$('#duiEncargado').prop("readOnly", true);
 								$('#nombreEncargado').prop("readOnly", true);
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Http\FormRequest;
 use App\Entrada;
 use App\TipoUnidad;
 use App\Material;
@@ -61,12 +62,19 @@ class EntradaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'proveedor' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'cantidadMaterial' => 'required|integer',
+            'cantidadUnidadMaterial' => 'required|integer',
+            
+        ]);
         try{
             $newDate = date("Y", strtotime($request->fecha));
             $revision=DB::table('entrada')
             ->where('año',$newDate)
             ->count();
            // dd($revision);
+            //https://laravel.com/docs/5.5/validation
             if($revision==0){
                 $verificar=0;
                 $entrada = new Entrada();
@@ -128,16 +136,32 @@ class EntradaController extends Controller
           ->where('entrada.idEntrada',$entrada->idEntrada)
           ->paginate(5);
           //dd($detalleEntradas);
+          
+         $sumaTotalSalidas = DB::table('material')
+            ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
+            ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+            ->join('salida','salida.idSalida','=','material.idSalida')
+            ->where('salida.añoSalida','=',$entrada->año)
+            ->select(DB::raw('SUM(material.cantidadMaterial) as cantidadUnidad,tipoUnidad.idTipoUnidad'))
+            ->groupBy('tipoUnidad.idTipoUnidad')
+            ->get();
+          //dd($sumaTotalSalidas);
+        $TipoUnidadTodo = DB::table('tipoMaterial')
+        ->join('tipoUnidad','tipoUnidad.idTipoMaterial','=','tipoMaterial.idTipoMaterial')
+        ->select('tipoUnidad.*','tipoMaterial.*')
+        ->get();
+        //dd($TipoUnidadTodo);
+
           $sumaTotal = DB::table('material')
             ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
             ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
             ->join('entrada','entrada.idEntrada','=','material.idEntrada')
             ->where('entrada.idEntrada','=',$entrada->idEntrada)
-            ->select(DB::raw('SUM(material.cantidadMaterial) as cantidadUnidad,SUM(material.cantidadUnidadMaterial) as cantidadUn,tipoUnidad.idTipoUnidad'))
+            ->select(DB::raw('SUM(material.cantidadMaterial) as cantidadUnidad,SUM(material.cantidadUnidadMaterial) as cantidadSuma,tipoUnidad.idTipoUnidad'))
             ->groupBy('tipoUnidad.idTipoUnidad')
             ->get();
         //dd($sumaTotal);
-        return view($this->path.'/verDetalleEntrada')->with('entradas',$entradas)->with('detalleEntradas',$detalleEntradas)->with('sumaTotal',$sumaTotal);
+        return view($this->path.'/verDetalleEntrada')->with('entradas',$entradas)->with('detalleEntradas',$detalleEntradas)->with('sumaTotal',$sumaTotal)->with('sumaTotalSalidas',$sumaTotalSalidas)->with('TipoUnidadTodo',$TipoUnidadTodo);
     }
 
     /**
@@ -169,11 +193,11 @@ class EntradaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     public function destroy($idMaterial,$idEntrada)
+     public function destroy($idMaterial)
     {
         $material = Material::findOrFail($idMaterial);
         $material->delete();
-       return redirect()->action('EntradaController@show',['idEntrada' => $idEntrada])->with('msj2','Material Eliminado exitosamente');
+       return redirect()->action('EntradaController@show',['idEntrada' => $material->idEntrada])->with('msj2','Material Eliminado exitosamente');
     }
     public function borrarMaterialEntrada($idMaterial,$idEntrada){
          //recuperar de la base el elemento que queremos borrar en base al ID que recibimos en la URL con el unico fin de mostrar el detalle

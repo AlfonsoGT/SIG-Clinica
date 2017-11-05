@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <script type="text/javascript" src="{{ asset('js/jquery-2.1.0.min.js')}}"></script>
-<script type="text/javascript" src="{{ asset('js/cargarRegion.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/validarFechaExamen.js')}}"></script>
 
 
 <div class="container">
@@ -93,22 +93,10 @@
             </div>
           </div>
 
-          <div class="form-group {{ $errors->has('fechaCita') ? ' has-error' : '' }}">
-            <label for="fechaRealizacion" class="col-md-4 control-label">Fecha de Realización </label>
-            <div class="col-md-6">
-              <input id="fechaRealizacion" type="date" class="form-control" name="fechaRealizacion" value="{{ old('fechaRealizacion') }}"  required autofocus onblur="validarFecha();" >
-              @if ($errors->has('fechaRealizacion'))
-              <span class="help-block">
-                <strong>{{ $errors->first('fechaRealizacion') }}</strong>
-              </span>
-              @endif
-            </div>
-          </div>
-
           <div class="form-group">
             <label for="nombrePlaca" class="col-md-4 control-label">Tipo de placa a usar</label>
             <div class="col-md-6">
-              <select required class="form-control" name="nombrePlaca" id="nombrePlaca" onchange="ocul()">
+              <select required class="form-control" name="nombrePlaca" id="nombrePlaca" onchange="ponerFecha();">
                 <option value="" disabled selected>Elija un tipo de Placa</option>
                 @foreach($tipoPlaca as $placa)
                 <option  value='{{$placa->idPlaca}}'>{{$placa->tipoPlaca}}</option>
@@ -132,7 +120,7 @@
           <div class="form-group {{ $errors->has('cantidadUsadas') ? ' has-error' : '' }}">
             <label for="cantidadRepetidas" class="col-md-4 control-label">Cantidad Repetidas</label>
             <div class="col-md-6">
-              <input id="cantidadRepetidas" type="text" class="form-control" name= "cantidadRepetidas" value="{{ old('cantidadRepetidas') }}" autocomplete="off" required autofocus>
+              <input id="cantidadRepetidas" type="text" class="form-control" name= "cantidadRepetidas" value="{{ old('cantidadRepetidas') }}" autocomplete="off" >
               @if ($errors->has('cantidadRepRepetidas'))
               <span class="help-block">
                 <strong>{{ $errors->first('cantidadRepetidas') }}</strong>
@@ -154,7 +142,17 @@
                   </div>
           </div>
 
-
+          <div class="form-group {{ $errors->has('fechaCita') ? ' has-error' : '' }}">
+            <label for="fechaRealizacion" class="col-md-4 control-label">Fecha de Realización </label>
+            <div class="col-md-6">
+              <input id="fechaRealizacion" type="date" class="form-control" name="fechaRealizacion" value="{{ old('fechaRealizacion') }}"  required autofocus onblur="validarFecha();" >
+              @if ($errors->has('fechaRealizacion'))
+              <span class="help-block">
+                <strong>{{ $errors->first('fechaRealizacion') }}</strong>
+              </span>
+              @endif
+            </div>
+          </div>
 
           <div class="form-group">
             <div class="col-md-6 col-md-offset-4">

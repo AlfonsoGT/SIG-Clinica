@@ -56,7 +56,7 @@
 									<tr>
 										<td class="text-center">{{ $permisoA->name }}</td>
 										<td class="text-center">{{ $permisoA->description }}</td>
-										<td><a href="/revocarPermiso/{{$rol->id}},{{$permisoA->id}}" class="btn btn-danger btn-sm">borrar</a></td>
+										<td><a href="{{ route('revocarPermiso',[$rol->id,$permisoA->id]) }}" class="btn btn-danger btn-sm">borrar</a></td>
 									</tr>
 									@endforeach
 								</tbody>
@@ -78,7 +78,7 @@
         					</div>
     					@endif
     					@if(count($permisos)>0)
-						<form method="GET" action="/asignarPermiso/{{$rol->id}}">
+						<form method="GET" action="{{ route('asignarPermiso',$rol->id) }}">
 							<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 							<div class="form-group">
 								<label for="permiso_asignado" class="col-md-4 control-label">Permiso a asignar</label>

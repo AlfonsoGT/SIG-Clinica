@@ -7,8 +7,9 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<div class="table-responsive">
-			<form class="form" method="get" action="/tomarIdMaterialEliminar/{{$material->idMaterial}},{{$material->idSalida}}">
-     				{{ csrf_field() }}    
+			 <form class="form" method="post" action="{{ route('admin_salidas.destroy', $material->idMaterial) }} ">
+     <input type="hidden" name="_method" value="DELETE">
+            {{ csrf_field() }} 
      	@foreach($detalleMaterial as $material)    
            <h1>Desea eliminar el tipo de Material de :{{ $material->nombreTipoMaterial}} con fecha: {{$material->fecha}} , tipo de Unidad: {{$material->nombreTipoUnidad}} y cantidad : {{$material->cantidadMaterial}}</h1>
            @endforeach

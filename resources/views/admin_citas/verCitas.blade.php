@@ -98,7 +98,7 @@
 						 @endif
 						 <td>
 							 @if($reservacion->realizado==0)
-						 <a href="/crearcita/{{$reservacion->idReservacion}}" class="btn btn-info btn-sm">
+						 <a href="{{ route('crearcita',$reservacion->idReservacion) }}" class="btn btn-info btn-sm">
 							 <span class="glyphicon glyphicon-pencil"></span>Realizar Examen</a>
 							 @endif
 						<a href="{{ route('admin_pacientes.show',$reservacion->idPaciente) }}" target="_blank" class="btn btn-success btn-sm">

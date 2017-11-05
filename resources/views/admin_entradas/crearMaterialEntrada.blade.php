@@ -21,34 +21,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('cantidadMaterial') ? ' has-error' : '' }}">
-                            <label for="cantidadMaterial" class="col-md-4 control-label">Cantidad en Cajas de Material</label>
-
-                            <div class="col-md-6">
-                                <input id="cantidadMaterial" type="text" class="form-control" name="cantidadMaterial" value="{{ old('cantidadMaterial') }}" autocomplete="off" required autofocus>
-
-                                @if ($errors->has('cantidadMaterial'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('cantidadMaterial') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group {{ $errors->has('fecha') ? ' has-error' : '' }}">
-                                <label for="fecha" class="col-md-4 control-label">Fecha de Compra de Material</label>
-                                <div class="col-md-6">
-                                    <input id="fecha" type="date" class="form-control" name="fecha" value="{{ old('fecha') }}" " required autofocus>
-                                    @if ($errors->has('fecha'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('fecha') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
+                        
                             <div class="form-group">
                                 <label for="tipoMaterial" class="col-md-4 control-label">Tipo Material</label>
                                 <div class="col-md-6">
-                                    <select required class="form-control" name="tipoMaterial" id="tipoMaterial">
+                                    <select required class="form-control" name="tipoMaterial" id="tipoMaterial"onchange="ponerFecha();">
                                         <option value="" disabled selected>Seleccione un Tipo de Material</option>
                                         @foreach($tipoMaterial as $tipo)
                                         <option  value='{{$tipo->idTipoMaterial}}'> {{$tipo->nombreTipoMaterial}}</option>
@@ -65,6 +42,19 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group{{ $errors->has('cantidadMaterial') ? ' has-error' : '' }}">
+                            <label for="cantidadMaterial" class="col-md-4 control-label">Cantidad en Cajas de Material</label>
+
+                            <div class="col-md-6">
+                                <input id="cantidadMaterial" type="text" class="form-control" name="cantidadMaterial" value="{{ old('cantidadMaterial') }}" autocomplete="off" required autofocus >
+
+                                @if ($errors->has('cantidadMaterial'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('cantidadMaterial') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                              <div class="form-group{{ $errors->has('cantidadUnidadMaterial') ? ' has-error' : '' }}">
                             <label for="cantidadUnidadMaterial" class="col-md-4 control-label">Cantidad de Unidades de Material por Caja </label>
 
@@ -91,6 +81,17 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group {{ $errors->has('fecha') ? ' has-error' : '' }}">
+                                <label for="fecha" class="col-md-4 control-label">Fecha de Compra de Material</label>
+                                <div class="col-md-6">
+                                    <input id="fecha" type="date" class="form-control" name="fecha" value="{{ old('fecha') }}" " required autofocus onblur="validarFecha();">
+                                    @if ($errors->has('fecha'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('fecha') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-success btn-sm">

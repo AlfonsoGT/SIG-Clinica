@@ -16,6 +16,7 @@ class CrearTablaSalida extends Migration
         Schema::create('salida', function (Blueprint $table) {
             $table->increments('idSalida');
             $table->string('fecha');
+            $table->integer('añoSalida');
             $table->integer('id')->unsigned();
             $table->foreign('id')->references('id')->on('users');
         });

@@ -15,7 +15,8 @@
             <div style="padding-top:30px" class="panel-body" >
                 <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-                <form class="form-horizontal" role="form" method="POST" action="/admin_roles/{{$rol->id}}">
+                <form class="form-horizontal" role="form" method="POST" action="
+                {{ route('admin_roles.update',$rol->id) }}">
                   <input type="hidden" name="_method" value="PUT">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
                     <div class="form-group {{ $errors->has('nombre_rol') ? ' has-error' : '' }}">

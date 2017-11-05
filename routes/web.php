@@ -38,7 +38,7 @@ Route::resource('/admin_reservaciones','ReservacionController');
 Route::get('/tomarIdPaciente/{id}','ReservacionController@tomaridPaciente')->name('tomarIdPaciente');
 Route::get('/tomarIdPacienteUpdate/{idPaciente},{idReservacion}','ReservacionController@tomaridPacienteUpdate')->name('tomarIdPacienteUpdate');
 Route::get('/tomarIdPacienteEliminar/{idPaciente},{idReservacion}','ReservacionController@tomarIdPacienteEliminar')->name('tomarIdPacienteEliminar');
-Route::get('vista_borrar/{idPaciente},{idReservacion}', 'ReservacionController@vista_borrar'); //mostrar la pantalla de confirmacion
+Route::get('/vista_borrar/{idPaciente},{idReservacion}', 'ReservacionController@vista_borrar')->name('vista_borrar'); //mostrar la pantalla de confirmacion
 Route::get('/region/{idTipoExamen}','ReservacionController@getRegion');
 Route::get('/consulta/{idTipoExamen}','ReservacionController@getConsulta');
 Route::get('/citasDisponibles/{idTipoExamen}','ReservacionController@getCitasDisponibles');
@@ -49,9 +49,9 @@ Route::get('/inhabilitarCita/{id}','CitasController@inhabilitarCita')->name('inh
 Route::resource('/admin_citas', 'CitasController');
 
 Route::resource('/admin_users','UserController');
-Route::get('vista_borrarUsuarios/{id}', 'UserController@vista_borrarUsuarios'); //mostrar la pantalla de confirmacion
+Route::get('vista_borrarUsuarios/{id}', 'UserController@vista_borrarUsuarios')->name('vista_borrarUsuarios'); //mostrar la pantalla de confirmacion
 Route::resource('/admin_roles', 'RolController');
-Route::get('vista_borrarRoles/{id}', 'RolController@vista_borrarRoles'); //mostrar la pantalla de confirmacion
+Route::get('vista_borrarRoles/{id}', 'RolController@vista_borrarRoles')->name('vista_borrarRoles'); //mostrar la pantalla de confirmacion
 
 /*modificacion de contraseña */
 Route::get('/editPassword/{id}', 'UserController@editPassword')->name('editPassword');
@@ -61,17 +61,31 @@ Route::post('/actualizarPassword/{id}','UserController@actualizarPassword')->nam
 /*Salidas de Material*/
 Route::resource('/admin_salidas','SalidasController');
 Route::get('/tomarIdMaterialEliminar/{idMaterial},{idSalida}','SalidasController@tomarIdMaterialEliminar')->name('tomarIdMaterialEliminar');
-Route::get('vista_borrarMaterial/{idMaterial},{idSalida}', 'SalidasController@vista_borrarMaterial'); //mostrar la pantalla de confirmacion
+Route::get('vista_borrarMaterial/{idMaterial},{idSalida}', 'SalidasController@vista_borrarMaterial')->name('vista_borrarMaterial'); //mostrar la pantalla de confirmacion
 Route::get('/unidades/{idTipoMaterial}','SalidasController@getTipoUnidad');
 
 
 /*Entradas de Material*/
 Route::resource('/admin_entradas','EntradaController');
 Route::get('/tomarIdMaterialEliminarEntrada/{idMaterial},{idEntrada}','EntradaController@tomarIdMaterialEliminarEntrada')->name('tomarIdMaterialEliminarEntrada');
-Route::get('/borrarMaterialEntrada/{idMaterial},{idEntrada}', 'EntradaController@borrarMaterialEntrada'); //mostrar la pantalla de confirmacion
+Route::get('/borrarMaterialEntrada/{idMaterial},{idEntrada}', 'EntradaController@borrarMaterialEntrada')->name('borrarMaterialEntrada'); //mostrar la pantalla de confirmacion
 
 
 /* Gestión de examen */
 Route::resource('/admin_examenes','ExamenController');
 
 Route::get('/crearcita/{id}', 'ExamenController@create')->name('crearcita');
+
+/*graficas*/
+Route::resource('/admin_graficos','GraficaController');
+
+//graficas individuales
+Route::get('/graficaRegionAnatomica', 'GraficaController@graficaRegionAnatomica')->name('graficaRegionAnatomica');
+Route::get('/graficoEdades', 'GraficaController@graficoEdades')->name('graficoEdades');
+Route::get('/graficaPacientesDepartamento','GraficaController@graficaPacientesDepartamento')->name('graficaPacientesDepartamento');
+Route::get('/graficaPacientesPorSexo','GraficaController@graficaPacientesPorSexo')->name('graficaPacientesPorSexo');
+Route::get('/graficaExamenesRealizadosRegionAnatomica','GraficaController@graficaExamenesRealizadosRegionAnatomica')->name('graficaExamenesRealizadosRegionAnatomica');
+
+//graficas de intervalos
+Route::get('/graficaExamenesTotalEntre', 'GraficaController@graficaExamenesTotalEntre')->name('graficaExamenesTotalEntre');
+Route::get('/graficaExamenesRealizadosRegionAnatomicaDiario', 'GraficaController@graficaExamenesRealizadosRegionAnatomicaDiario')->name('graficaExamenesRealizadosRegionAnatomicaDiario');

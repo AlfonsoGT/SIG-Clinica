@@ -37,7 +37,6 @@ class PacienteController extends Controller
     {
 
         $pacientes = Paciente::busqueda($request->busqueda)
-            //->orderBy('idPaciente', 'desc')
             ->latest('pacientes.updated_at')
             ->join('sexo', 'pacientes.idSexo', '=', 'sexo.idSexo')
             ->join('procedencia', 'pacientes.idProcedencia', '=', 'procedencia.idProcedencia')
@@ -98,6 +97,8 @@ class PacienteController extends Controller
         $paciente->idSexo = $request->sexo;
         $paciente->idProcedencia = $request->procedencia;
         $paciente->idDepartamento= $request->departamento;
+        $paciente->created_at=date('Y-m-d G:i:s');
+        $paciente->updated_at=date('Y-m-d G:i:s');
         $paciente->activo=true;
 
         //guardado y envío de mensaje de confirmacion

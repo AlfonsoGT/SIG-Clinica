@@ -33,113 +33,73 @@
                         </tbody>
                     </table>
                 </div>
+                <h2 style="display: inline;">Detalle de Materiales </h2>
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                
-                                <th class="text-center">Cantidad de Placas de 6 1/2</th>
-                                <th class="text-center">Cantidad de Placas de 8 x 10</th>
-                                <th class="text-center">Cantidad de Placas de 10 x 12</th>
-                                <th class="text-center">Cantidad de Placas de 11 x 14</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                            <tr>
-                                
-                                <td class="text-center">  
-                                @foreach($sumaTotal as $suma)
-                                @if($suma->idTipoUnidad == 1)
-                                {{ $suma->cantidadUnidad }}
+                            <table class="table table-striped table-hover table-bordered">
+                                <thead>
+                                    <tr>
+
+                                        <th class="text-center">Material</th>
+                                        <th class="text-center">Tipo</th>
+                                        <th class="text-center">Unidades Compradas</th>
+                                        <th class="text-center">Unidades Utilizadas</th>
+                                        <th class="text-center">Unidades Disponibles</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                     @foreach($TipoUnidadTodo as $detalle)
+                                    <tr>
+                                        <td class="text-center">{{$detalle->nombreTipoMaterial}}</td>
+                                        <td class="text-center">{{$detalle->nombreTipoUnidad}}</td>
+                                        <td class="text-center">@foreach($sumaTotal as $suma)
+                                                @if($suma->idTipoUnidad == $detalle->idTipoUnidad)
+                                                <?php
+                                                $cantidadCajas =  $suma->cantidadUnidad;
+                                                $cantidadUnidad = $suma->cantidadSuma;
+                                                $cantidadTotal = $cantidadCajas*$cantidadUnidad;
+                                                 print_r( $cantidadTotal );
+                                                ?>
                                   
-                                 @endif 
-                                @endforeach
-                                </td>
-                                <td class="text-center">
-                                @foreach($sumaTotal as $suma)
-                                @if($suma->idTipoUnidad == 2)
-                                {{ $suma->cantidadUnidad }}
-                                   
-                                 @endif 
-                                @endforeach
-                                </td>
-                                <td class="text-center">
-                                    @foreach($sumaTotal as $suma)
-                                @if($suma->idTipoUnidad == 3)
-                                {{ $suma->cantidadUnidad }}
-                                   
-                                 @endif 
-                                @endforeach
-                                </td>
-                                <td class="text-center">
-                                @foreach($sumaTotal as $suma)
-                                @if($suma->idTipoUnidad == 4)
-                                {{ $suma->cantidadUnidad }}
-                                
-                                 @endif 
-                                @endforeach
-                                </td>
-                               
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                
-                                <th class="text-center">Cantidad de Set para Revelador</th>
-                                <th class="text-center">Cantidad de Set para Fijador</th>
-                                <th class="text-center">Cantidad de Placas de 14 x 14</th>
-                                <th class="text-center">Cantidad de Placas de 14 x 17</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                            <tr>
-                                
-                                <td class="text-center">
-                                @foreach($sumaTotal as $suma)
-                                @if($suma->idTipoUnidad == 6)
-                                {{ $suma->cantidadUnidad }}
+                                                 @endif 
+                                                @endforeach</td>
+                                        <td class="text-center">
+                                             @foreach($sumaTotalSalidas as $suma)
+                                                @if($suma->idTipoUnidad == $detalle->idTipoUnidad)
+                                                <?php
+                                                $cantidadCajas =  $suma->cantidadUnidad;
+                                               
+                                                 print_r( $cantidadCajas);
+                                                ?>
                                   
-                                 @endif 
-                                @endforeach
-                                </td>
-                                <td class="text-center">
-                                @foreach($sumaTotal as $suma)
-                                @if($suma->idTipoUnidad == 7)
-                                {{ $suma->cantidadUnidad }}
-                                  
-                                 @endif 
-                                @endforeach
-                                </td>
-                                 <td class="text-center">
-                                @foreach($sumaTotal as $suma)
-                                @if($suma->idTipoUnidad == 5)
-                                {{ $suma->cantidadUnidad }}
-                                  
-                                 @endif 
-                                @endforeach
-                                </td>
-                                 <td class="text-center">
-                                @foreach($sumaTotal as $suma)
-                                @if($suma->idTipoUnidad == 8)
-                                {{ $suma->cantidadUnidad }}
-                                  
-                                 @endif 
-                                @endforeach
-                                </td>
+                                                 @endif 
+                                                @endforeach
+                                        </td>
+                                        <td class="text-center">
+                                             @foreach($sumaTotal as $suma)  
+                                                @foreach($sumaTotalSalidas as $suma2)
+                                                @if($suma->idTipoUnidad == $detalle->idTipoUnidad && $suma2->idTipoUnidad == $detalle->idTipoUnidad)
+                                                <?php
+                                                $cantidadCajas =  $suma->cantidadUnidad;
+                                                $cantidadUnidad = $suma->cantidadSuma;
+                                                $cantidad = $suma2->cantidadUnidad;
+                                                $cantidadTotal = $cantidadCajas*$cantidadUnidad;
+                                                $cantidadRestante = $cantidadTotal-$cantidad;
+                                                 print_r( $cantidadRestante);
+                                                ?>
+                
+                                              @endif 
+                                                @endforeach
+                                             @endforeach
+                                        </td>
+                                       
+                                       </tr>
+                                 @endforeach
+                                </tbody>
                                 
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-                </div>
+                            </table>
+                        </div>
                <a href="{{ route('admin_salidas.create')}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-paperclip"></span>Ingresar Uso de Material</a>
                         
                          <a href="{{ url('/admin_salidas') }}" class="btn btn-warning btn-sm">
@@ -172,13 +132,15 @@
                                     <tr>
 
                                         <td class="text-center">{{ $detalle->nombreTipoMaterial }}</td>
-                                        <td class="text-center">{{ $detalle->fecha }}</td>
+                                        <td class="text-center">  <?php
+                                            $newDate = date("d-m-Y", strtotime($detalle->fecha));
+                                            print_r($newDate ); ?></td>
                                         <td class="text-center">{{ $detalle->cantidadMaterial }}</td>
                                         <td class="text-center">{{ $detalle->nombreTipoUnidad }}</td>
                                        
                                         <td>
                                             
-                                            <form method="GET" action="/vista_borrarMaterial/{{$detalle->idMaterial}}, {{$detalle->idSalida}}" style='display: inline;'>
+                                            <form method="GET" action="{{ route('vista_borrarMaterial',[$detalle->idMaterial,$detalle->idSalida]) }}" style='display: inline;'>
                                             <button type="submit" class="btn btn-danger btn-sm">
                                             <span class="glyphicon glyphicon-trash"></span>Borrar</button></form>
                                          
