@@ -51,18 +51,39 @@
 
                   <div class="panel-heading">Datos Estadisticos</div>
 
+                  <div class="table-responsive">
+                  	 <table class="table table-striped table-hover table-bordered">
+                       <thead>
+       									<tr>
+       										<th class="text-center">{{$ejex}}</th>
+       										<th class="text-center">{{$number}}</th>
+
+
+
+       									</tr>
+       								</thead>
+                      <tbody>
+                  		@foreach($resultados as $resultado)
+
+                  		<TR><th class="text-center">{{$resultado->titulo}}</TH>
+                  		<td class="text-center">{{$resultado->conteo}}</TD>
+                        @endforeach
+                      </tbody>
+                  	</table>
+                  </div>
+
 
           <!--BUSCADOR DE PACIENTES-->
                     <br><br>
                     <div class="panel-body">
-                      <h1 style="display: inline;">Datos Estadisticos</h1>
+                      <h1 style="display: inline;">Gráfico de Barras</h1>
                         <div align="center" id="chart_div">
 
                         </div>
                     </div>
 
                     <div class="panel-body">
-                      <h1 style="display: inline;">Datos Estadisticos</h1>
+                      <h1 style="display: inline;">Gráfico de Pastel</h1>
                         <div align="center" id="chart_div2">
 
                         </div>

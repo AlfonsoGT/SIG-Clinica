@@ -31,8 +31,9 @@ class GraficaController extends Controller
         ->select('regionanatomica.nombreRegionAnatomica as titulo',DB::raw('count(reservacion.idReservacion) as conteo'))
         ->where('citas.fechaCita',date('Y-m-d'))
         ->groupBy('regionanatomica.nombreRegionAnatomica')->get();
+        $ejex='Region Anatómica';
 
-        return view($this->path.'/graficasIndividual')->with('resultados',$resultados)->with('titulo',$titulo)->with('number',$number);
+        return view($this->path.'/graficasIndividual')->with('resultados',$resultados)->with('titulo',$titulo)->with('number',$number)->with('ejex',$ejex);
       }
 
 
@@ -59,13 +60,14 @@ class GraficaController extends Controller
       {
         $titulo='Gráfico de pacientes registrados por Departamento';
         $number='Cantidad de pacientes';
+        $ejex='Departamento';
 
         $resultados = Paciente::join('departamentos','pacientes.idDepartamento','=','departamentos.idDepartamento')
         ->select('departamentos.nombreDepartamento as titulo',DB::raw('count(pacientes.idDepartamento) as conteo'))
         ->groupBy('departamentos.nombreDepartamento')->get();
 
 
-        return view($this->path.'/graficasIndividual')->with('resultados',$resultados)->with('titulo',$titulo)->with('number',$number);
+        return view($this->path.'/graficasIndividual')->with('resultados',$resultados)->with('titulo',$titulo)->with('number',$number)->with('ejex',$ejex);
       }
 
 
@@ -77,21 +79,23 @@ class GraficaController extends Controller
 
         $titulo='Gráfico de pacientes registrados por Sexo';
         $number='Cantidad de pacientes';
+        $ejex='Sexo';
 
         $resultados = Paciente::join('sexo','pacientes.idSexo','=','sexo.idSexo')
         ->select('nombreSexo as titulo',DB::raw('count(pacientes.idPaciente) as conteo'))
         ->groupBy('sexo.nombreSexo')->get();
 
 
-        return view($this->path.'/graficasIndividual')->with('resultados',$resultados)->with('titulo',$titulo)->with('number',$number);
+        return view($this->path.'/graficasIndividual')->with('resultados',$resultados)->with('titulo',$titulo)->with('number',$number)->with('ejex',$ejex);
 
       }
 
 
       public function graficaExamenesRealizadosRegionAnatomica()
       {
-        $titulo='Gráfico de exámenes realizados por región anatómica en el año';
+        $titulo='Gráfico de exámenes realizados por región anatómica en el año actual';
         $number='Cantidad de exámenes';
+        $ejex='Region Anatómica';
 
         $resultados = Reservacion::join('regionanatomica','reservacion.idRegionAnatomica','=','regionanatomica.idRegionAnatomica')
         ->select('regionanatomica.nombreRegionAnatomica as titulo',DB::raw('count(reservacion.idReservacion) as conteo'))
@@ -99,7 +103,7 @@ class GraficaController extends Controller
         ->groupBy('regionanatomica.nombreRegionAnatomica')
         ->get();
 
-        return view($this->path.'/graficasIndividual')->with('resultados',$resultados)->with('titulo',$titulo)->with('number',$number);
+        return view($this->path.'/graficasIndividual')->with('resultados',$resultados)->with('titulo',$titulo)->with('number',$number)->with('ejex',$ejex);
       }
 
 
@@ -127,18 +131,17 @@ class GraficaController extends Controller
 
         $titulo='Gráfico de total de examenes realizados entre los años';
           $number='Cantidad de examenes realizados';
+          $ejex='Año';
 
-        $resultados = Reservacion::join('citas','reservacion.idCita','=','citas.idCita')
-        ->select(DB::raw('year(citas.fechaCita) as titulo,count(reservacion.idReservacion) as conteo'))
-        ->where('realizado',1)
-        ->whereBetween(DB::raw('year(citas.fechaCita)'), [$anio1,$anio2])
-        ->groupBy(DB::raw('year(citas.fechaCita)'))
-        ->get();
+        $resultados=DB::table('examen')->select(DB::raw('year(examen.fechaRealizacion) as titulo,count(examen.idExamen) as conteo'))
+        ->whereBetween(DB::raw('year(examen.fechaRealizacion)'), [$anio1,$anio2])
+        ->groupBy(DB::raw('year(examen.fechaRealizacion)'))->get();
 
       return view($this->path.'/graficaTotalExamenesEntre')->with('resultados',$resultados)->with('titulo',$titulo)
       ->with('number',$number)
       ->with('anio1',$anio1)
-      ->with('anio2',$anio2);
+      ->with('anio2',$anio2)
+      ->with('ejex',$ejex);
       }
 
 
@@ -147,7 +150,8 @@ class GraficaController extends Controller
       public function graficaExamenesRealizadosRegionAnatomicaDiario(Request $request)
       {
         $titulo='Gráfico de examenes realizados por región anatómica del dia';
-        $number='Cantidad de examenes en la fecha:';
+        $number='Cantidad de examenes realizados en la fecha indicada';
+        $ejex='Region Anatómica';
 
         $fecha=$request->fecha;
         if($fecha==null){
@@ -164,7 +168,7 @@ class GraficaController extends Controller
         ->get();
 
         return view($this->path.'/graficaExamenesDiarios')->with('resultados',$resultados)->with('titulo',$titulo)->with('number',$number)
-        ->with('newFecha',$newFecha);
+        ->with('newFecha',$newFecha)->with('ejex',$ejex);
       }
 
 

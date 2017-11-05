@@ -132,7 +132,7 @@
           <div class="form-group {{ $errors->has('motivorepeticion') ? ' has-error' : '' }}">
                   <label for="motivorepeticion" class="col-md-4 control-label">Repetición</label>
                   <div class="col-md-6">
-                      <select required class="form-control" name="motivorepeticion" id="motivorepeticion" onchange="ocul()">
+                      <select class="form-control" name="motivorepeticion" id="motivorepeticion" onchange="ocul()">
                         <option value="" disabled selected>Motivo de Repetición</option>
                          <option  value='Técnica'>Técnica</option>
                          <option  value='Procesador'>Procesador</option>

@@ -59,7 +59,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="text-center">Gráfica de examenes diarios hechos por región</td>
+                    <td class="text-center">Gráfica de examenes realizados diarios por región anatómica</td>
                     <td>
                         <a href="{{ url('/graficaExamenesRealizadosRegionAnatomicaDiario') }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open"></span>Generar Gráfico</a>
                     </td>
