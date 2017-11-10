@@ -20,20 +20,33 @@ class GraficaController extends Controller
       return view($this->path.'/admin_graficos');
     }
 
-    public function graficaRegionAnatomica()
+    public function graficaRegionAnatomica(Request $request)
       {
-        $titulo='Gráfico de reservaciones hechas en el día';
+        $anio=$request->fecha;
+        if($anio==null){
+          $anio=date("Y-m-d");
+        }
+          $nanio = date("d-m-Y", strtotime($anio));
+
+      $titulo='Gráfico de reservaciones hechas en el día';
           $number='Cantidad de reservaciones';
         $resultados = Paciente::join('reservacion','pacientes.idPaciente','=','reservacion.idPaciente')
         ->join('citas','citas.idCita','=','reservacion.idCita')
         ->join('tipoExamen','tipoExamen.idTipoExamen','=','citas.idTipoExamen')
         ->join('regionanatomica','regionanatomica.idRegionAnatomica','=','reservacion.idRegionAnatomica')
         ->select('regionanatomica.nombreRegionAnatomica as titulo',DB::raw('count(reservacion.idReservacion) as conteo'))
-        ->where('citas.fechaCita',date('Y-m-d'))
+        ->where('citas.fechaCita',$anio)
         ->groupBy('regionanatomica.nombreRegionAnatomica')->get();
         $ejex='Region Anatómica';
 
-        return view($this->path.'/graficasIndividual')->with('resultados',$resultados)->with('titulo',$titulo)->with('number',$number)->with('ejex',$ejex);
+
+          return view($this->path.'/graficasRegionDiaria')
+        ->with('resultados',$resultados)->with('titulo',$titulo)
+        ->with('number',$number)->with('ejex',$ejex)->with('nanio',$nanio);
+
+
+
+
       }
 
 
@@ -91,21 +104,30 @@ class GraficaController extends Controller
       }
 
 
-      public function graficaExamenesRealizadosRegionAnatomica()
+
+      public function graficaExamenesRealizadosRegionAnatomica(Request $request)
       {
-        $titulo='Gráfico de exámenes realizados por región anatómica en el año actual';
+        $titulo='Gráfico de exámenes realizados por región anatómica en el año';
         $number='Cantidad de exámenes';
         $ejex='Region Anatómica';
 
+        $anio=$request->A1;
+        if($anio==null){
+        $anio=date('Y');
+        }
+
+
         $resultados = Reservacion::join('regionanatomica','reservacion.idRegionAnatomica','=','regionanatomica.idRegionAnatomica')
+        ->join('examen','examen.idReservacion','=','reservacion.idReservacion')
         ->select('regionanatomica.nombreRegionAnatomica as titulo',DB::raw('count(reservacion.idReservacion) as conteo'))
         ->where('realizado',1)
+        ->where(DB::raw('year(examen.fechaRealizacion)'),$anio)
         ->groupBy('regionanatomica.nombreRegionAnatomica')
         ->get();
 
-        return view($this->path.'/graficasIndividual')->with('resultados',$resultados)->with('titulo',$titulo)->with('number',$number)->with('ejex',$ejex);
+        return view($this->path.'/graficasExamenesPorRegionAnio')->with('resultados',$resultados)->with('titulo',$titulo)->with('number',$number)->with('ejex',$ejex)
+        ->with('anio',$anio);
       }
-
 
       public function graficaExamenesTotalEntre(Request $request)
       {

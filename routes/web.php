@@ -89,3 +89,4 @@ Route::get('/graficaExamenesRealizadosRegionAnatomica','GraficaController@grafic
 //graficas de intervalos
 Route::get('/graficaExamenesTotalEntre', 'GraficaController@graficaExamenesTotalEntre')->name('graficaExamenesTotalEntre');
 Route::get('/graficaExamenesRealizadosRegionAnatomicaDiario', 'GraficaController@graficaExamenesRealizadosRegionAnatomicaDiario')->name('graficaExamenesRealizadosRegionAnatomicaDiario');
+Route::get('/graficaExamenesRealizadosRegionAnatomica', 'GraficaController@graficaExamenesRealizadosRegionAnatomica')->name('graficaExamenesRealizadosRegionAnatomica');

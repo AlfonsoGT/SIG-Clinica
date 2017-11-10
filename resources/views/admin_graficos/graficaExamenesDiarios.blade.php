@@ -58,7 +58,7 @@
                 <tr>
 
                   <td>Generar Gráficos de la fecha:
-                    <input id="fechaNacimiento" type="date" name="fecha"  value="<?php echo date('Y-m-d'); ?>" required autofocus>
+                    <input id="fecha" type="date" name="fecha"  value="" required autofocus>
                   </span>
 
                   <button type="submit" class="btn btn-info btn-sm">

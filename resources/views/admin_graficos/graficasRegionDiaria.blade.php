@@ -19,7 +19,7 @@
 
         // Create the data table.
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Departamentos');
+        data.addColumn('string', '');
         data.addColumn('number', '{{$number}}');
         data.addRows([
           @foreach($resultados as $resultado)
@@ -29,7 +29,7 @@
         ]);
 
         // Set chart options
-        var options = {'title':'{{$titulo}}: {{$anio1}} y {{$anio2}}',
+        var options = {'title':'{{$titulo}}: {{$nanio}}',
                        'width':1133,
                        'height':470};
 
@@ -43,7 +43,7 @@
   </head>
 
   <body>
-    <!--Div that will hold the chart-->
+    <!--Div that will hold the pie chart-->
     <section>
        <div class="container" id="panelAdminRoles">
             <div class="row">
@@ -51,47 +51,48 @@
 
                   <div class="panel-heading">Datos Estadisticos</div>
                   <div class="table-responsive">
-          <form class="form-horizontal" role="form" method="GET" action="{{ url('/graficaExamenesTotalEntre') }}">
-            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
-          <table class="table table-striped table-hover table-bordered">
+                    <form class="form-horizontal" role="form" method="GET" action="{{ url('/graficaRegionAnatomica') }}">
+                      <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
+                      <table class="table table-striped table-hover table-bordered">
 
-    <tr>
+                        <tr>
 
-  <td>Generar Gráficos entre los Años:
-     <input id="A1" type="text"  size="20" name="A1"  onfocus= value="" required autocomplete="off" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
-    Y <input id="A2" type="text" size="20" name="A2"  onfocus= value="" required autocomplete="off" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
-          <button type="submit" class="btn btn-info btn-sm">
-            <span class="glyphicon glyphicon-floppy-disk"></span>Generar Gráfico
-          </button>
-        </td>
+                          <td>Generar Gráficos de la fecha:
+                            <input id="fecha" type="date" name="fecha"  value="" required autofocus>
+                          </span>
 
-    </tr>
+                          <button type="submit" class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-floppy-disk"></span>Generar Gráfico
+                          </button>
+                        </td>
 
-</table>
-</form>
-          </div>
-          <div>
-          <div class="table-responsive">
-             <table class="table table-striped table-hover table-bordered">
-               <thead>
-                <tr>
-                  <th class="text-center">{{$ejex}}</th>
-                  <th class="text-center">{{$number}}</th>
+                      </tr>
+                      @if(session()->has('msj'))
+                      <div class="alert alert-success" role="alert">{{session('msj')}}</div>
+                      @endif
+                    </table>
+                  </form>
+                  <div class="table-responsive">
+                  	 <table class="table table-striped table-hover table-bordered">
+                       <thead>
+       									<tr>
+       										<th class="text-center">{{$ejex}}</th>
+       										<th class="text-center">{{$number}}</th>
 
+       									</tr>
+       								</thead>
+                      <tbody>
 
+                  		@foreach($resultados as $resultado)
 
-                </tr>
-              </thead>
-              <tbody>
-              @foreach($resultados as $resultado)
+                  		<TR><th class="text-center">{{$resultado->titulo}}</TH>
+                  		<td class="text-center">{{$resultado->conteo}}</TD>
+                        @endforeach
+                      </tbody>
+                  	</table>
+                  </div>
+                </div>
 
-              <TR><th class="text-center">{{$resultado->titulo}}</TH>
-              <td class="text-center">{{$resultado->conteo}}</TD>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
           <!--BUSCADOR DE PACIENTES-->
                     <br><br>
                     <div class="panel-body">
@@ -100,12 +101,14 @@
 
                         </div>
                     </div>
+
                     <div class="panel-body">
                       <h1 style="display: inline;">Gráfico de Pastel</h1>
                         <div align="center" id="chart_div2">
 
                         </div>
                     </div>
+
                   </div>
                 </div>
             </div>

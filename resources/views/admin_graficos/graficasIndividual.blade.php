@@ -71,7 +71,7 @@
                       </tbody>
                   	</table>
                   </div>
-                  </div>
+                </div>
 
           <!--BUSCADOR DE PACIENTES-->
                     <br><br>
