@@ -62,6 +62,10 @@ class SalidasController extends Controller
      */
     public function store(Request $request)
     {
+         $this->validate($request,[
+            'proveedor' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'cantidadMaterial' => 'required|integer',
+        ]);
        try{
             $newDate = date("m-Y", strtotime($request->fecha));
             $añoSalida = date("Y", strtotime($request->fecha));
