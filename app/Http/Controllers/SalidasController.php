@@ -63,16 +63,62 @@ class SalidasController extends Controller
     public function store(Request $request)
     {
          $this->validate($request,[
-            'proveedor' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            
             'cantidadMaterial' => 'required|integer',
         ]);
        try{
+
             $newDate = date("m-Y", strtotime($request->fecha));
             $añoSalida = date("Y", strtotime($request->fecha));
             $revision=DB::table('salida')
             ->where('fecha',$newDate)
             ->count();
-            //dd($revision);
+            //-------------------------------------------------
+        $sumaTotalEntradas = DB::table('material')
+            ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
+            ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+            ->join('entrada','entrada.idEntrada','=','material.idEntrada')
+            ->where('tipoUnidad.idTipoMaterial','=',$request->tipoMaterial)
+            ->where('material.idTipoUnidad','=',$request->tipoUnidad)
+            ->select(DB::raw('SUM(material.cantidadMaterial) as cantidadUnidad,SUM(material.cantidadUnidadMaterial) as cantidadSuma,tipoUnidad.idTipoUnidad'))
+            ->groupBy('tipoUnidad.idTipoUnidad')
+            ->get();
+            /** $cajasEntrada =DB::table('entrada')
+            ->join('material','material.idEntrada','=','material.idEntrada')
+            ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
+            ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+            ->select('material.cantidadMaterial','material.cantidadUnidadMaterial')
+            ->where('tipoUnidad.idTipoMaterial','=',$request->tipoMaterial)
+            ->where('material.idTipoUnidad','=',$request->tipoUnidad)
+            ->get();**/
+        $sumaTotalSalidas = DB::table('material')
+            ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
+            ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+            ->join('salida','salida.idSalida','=','material.idSalida')
+            ->where('salida.añoSalida','=', $añoSalida)
+            ->select(DB::raw('SUM(material.cantidadMaterial) as cantidadUnidad,tipoUnidad.idTipoUnidad'))
+            ->groupBy('tipoUnidad.idTipoUnidad')
+            ->get();
+
+            foreach ($sumaTotalEntradas as $caja) {
+                $cantidadEntrada = $caja->cantidadUnidad*$caja->cantidadSuma;
+            } 
+            foreach ($sumaTotalSalidas as $caja) {
+                $cantidadSalida = $caja->cantidadUnidad;
+            } 
+            if(isset($cantidadEntrada)){
+                $prueba = $cantidadSalida - $request->cantidadMaterial;
+            }elseif(isset($cantidadSalida)){
+                 $prueba =  $request->cantidadMaterial*-1;
+            }else{
+                $prueba = $cantidadEntrada - $cantidadSalida - $request->cantidadMaterial;
+            }
+            //dd($cantidadSalida);
+           
+            //dd($prueba);
+            //---------------------------------------------------
+            if($prueba>0){
+                 //dd($revision);
             if($revision==0){
                 $verificar=0;
                 $salida = new Salida();
@@ -105,7 +151,16 @@ class SalidasController extends Controller
          }else{
           return redirect()
           ->action('SalidasController@show',['idSalida' => $salida->idSalida])
-         ->with('msj2','Registro de Material ya hecho posiblemente en la misma Fecha');}
+         ->with('msj2','Registro de Material ya hecho posiblemente en la misma Fecha');
+            }
+
+            }else{
+            return redirect($this->path)
+            ->with('msj2','El registro de Material se pasa del limite de materiales disponibles o No hay materiales Disponibles');
+            }
+
+            
+           
 
          }catch(Exception $e){
           return "Fatal error - ".$e->getMessage();

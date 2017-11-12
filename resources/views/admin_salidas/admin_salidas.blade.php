@@ -9,8 +9,8 @@
                 
                     <div class="panel-heading">Administración de Inventario de Materiales</div>
                     <div class="panel-body">
-                        @if(session()->has('msj'))
-                        <div class="alert alert-success" role="alert">{{session('msj')}}</div>
+                        @if(session()->has('msj2'))
+                        <div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
                         @endif
 
                         <h2 style="display: inline;">Gestionar Materiales</h2>
@@ -27,8 +27,8 @@
                                     <th class="text-center">Mes</th>
                                     <th class="text-center">Encargado</th>
                                     <th class="text-center">Cantidad de Placas</th>
-                                    <th class="text-center">Cantidad de Fijador</th>
                                     <th class="text-center">Cantidad de Revelador</th>
+                                    <th class="text-center">Cantidad de Fijador</th>
                                    <th class="text-center">Acciones</th>
                                 </tr>
                                 </thead>
