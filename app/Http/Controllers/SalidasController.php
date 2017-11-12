@@ -80,17 +80,19 @@ class SalidasController extends Controller
             ->join('entrada','entrada.idEntrada','=','material.idEntrada')
             ->where('tipoUnidad.idTipoMaterial','=',$request->tipoMaterial)
             ->where('material.idTipoUnidad','=',$request->tipoUnidad)
+            ->where('entrada.año','=', $añoSalida)
             ->select(DB::raw('SUM(material.cantidadMaterial) as cantidadUnidad,SUM(material.cantidadUnidadMaterial) as cantidadSuma,tipoUnidad.idTipoUnidad'))
             ->groupBy('tipoUnidad.idTipoUnidad')
             ->get();
-            /** $cajasEntrada =DB::table('entrada')
+            $conteo =DB::table('entrada')
             ->join('material','material.idEntrada','=','material.idEntrada')
             ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
             ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
             ->select('material.cantidadMaterial','material.cantidadUnidadMaterial')
             ->where('tipoUnidad.idTipoMaterial','=',$request->tipoMaterial)
             ->where('material.idTipoUnidad','=',$request->tipoUnidad)
-            ->get();**/
+            ->where('entrada.año','=', $añoSalida)
+            ->count();
         $sumaTotalSalidas = DB::table('material')
             ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
             ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
@@ -106,12 +108,10 @@ class SalidasController extends Controller
             foreach ($sumaTotalSalidas as $caja) {
                 $cantidadSalida = $caja->cantidadUnidad;
             } 
-            if(isset($cantidadEntrada)){
-                $prueba = $cantidadSalida - $request->cantidadMaterial;
-            }elseif(isset($cantidadSalida)){
-                 $prueba =  $request->cantidadMaterial*-1;
+            if($conteo>0){
+              $prueba = $cantidadEntrada - $cantidadSalida - $request->cantidadMaterial;
             }else{
-                $prueba = $cantidadEntrada - $cantidadSalida - $request->cantidadMaterial;
+               $prueba =  $request->cantidadMaterial*-1;
             }
             //dd($cantidadSalida);
            
