@@ -2,6 +2,7 @@
 @section('content')
 <script type="text/javascript" src="{{ asset('js/jquery-2.1.0.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/validarFechaExamen.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/validarRepetidas.js')}}"></script>
 
 
 <div class="container">
@@ -120,7 +121,7 @@
           <div class="form-group {{ $errors->has('cantidadUsadas') ? ' has-error' : '' }}">
             <label for="cantidadRepetidas" class="col-md-4 control-label">Cantidad Repetidas</label>
             <div class="col-md-6">
-              <input id="cantidadRepetidas" type="text" class="form-control" name= "cantidadRepetidas" value="{{ old('cantidadRepetidas') }}" autocomplete="off" >
+              <input id="cantidadRepetidas" type="text" class="form-control" name= "cantidadRepetidas" value="{{ old('cantidadRepetidas') }}" autocomplete="off" required onchange="validarRepetidas();">
               @if ($errors->has('cantidadRepRepetidas'))
               <span class="help-block">
                 <strong>{{ $errors->first('cantidadRepetidas') }}</strong>
@@ -132,7 +133,7 @@
           <div class="form-group {{ $errors->has('motivorepeticion') ? ' has-error' : '' }}">
                   <label for="motivorepeticion" class="col-md-4 control-label">Repetición</label>
                   <div class="col-md-6">
-                      <select class="form-control" name="motivorepeticion" id="motivorepeticion" onchange="ocul()">
+                      <select required class="form-control" name="motivorepeticion" id="motivorepeticion" onchange="ocul()">
                         <option value="" disabled selected>Motivo de Repetición</option>
                          <option  value='Técnica'>Técnica</option>
                          <option  value='Procesador'>Procesador</option>
