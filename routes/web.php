@@ -90,3 +90,6 @@ Route::get('/graficaExamenesRealizadosRegionAnatomica','GraficaController@grafic
 Route::get('/graficaExamenesTotalEntre', 'GraficaController@graficaExamenesTotalEntre')->name('graficaExamenesTotalEntre');
 Route::get('/graficaExamenesRealizadosRegionAnatomicaDiario', 'GraficaController@graficaExamenesRealizadosRegionAnatomicaDiario')->name('graficaExamenesRealizadosRegionAnatomicaDiario');
 Route::get('/graficaExamenesRealizadosRegionAnatomica', 'GraficaController@graficaExamenesRealizadosRegionAnatomica')->name('graficaExamenesRealizadosRegionAnatomica');
+
+//gestion de lecturas
+Route::resource('/admin_lecturas','LecturaController');
