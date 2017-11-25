@@ -17,16 +17,7 @@
                 <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}">INICIAR SESIÓN</a></li>
                 @else
 
-                <div class="mbr-navbar__item btn-group">
-                <li class="mbr-navbar__item">
-                  <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> Inventario <span class="caret"></span></button>
-                  <ul class="dropdown-menu" role="menu" id="menup">
-
-                    <li ><a class="mbr-buttons__link btn text-white" href="{{ route('admin_salidas.index') }}">REGISTRO DE MATERIAL UTILIZADO</a></li>
-                    <li ><a class="mbr-buttons__link btn text-white" href="{{ route('admin_entradas.index') }}">ADQUISICIÓN DE MATERIAL </a></li>
-                  </ul>
-                  </li>
-                </div>
+               
 
                   @can('control_pacientes')
                 <div class="mbr-navbar__item btn-group">
@@ -63,7 +54,9 @@
                     @can('control_roles')
                     <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_roles.index') }}">GESTION DE ROLES</a></li>
                     @endcan
-                    <li ><a class="mbr-buttons__link btn text-white" href="{{ route('admin_graficos.index') }}">VER SECCIÓN DE GRÁFICOS</a></li>
+                    <li  class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_salidas.index') }}">REGISTRO DE MATERIAL UTILIZADO</a></li>
+                    <li  class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_entradas.index') }}">ADQUISICIÓN DE MATERIAL </a></li>
+                    <li  class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_graficos.index') }}">VER SECCIÓN DE GRÁFICOS</a></li>
                   </ul>
                   </li>
                 </div>
