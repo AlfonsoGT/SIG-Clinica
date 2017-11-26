@@ -14,7 +14,7 @@
 				<div class="alert alert-success" role="alert">{{session('msj')}}</div>
 				@endif
 					<h2 style="display: inline;">Gestionar Lecturas</h2>
-					<a href="{{ route('admin_pacientes.create')}}" class="btn btn-primary btn-sm">
+					<a href="{{ route('admin_lecturas.create')}}" class="btn btn-primary btn-sm">
                         <span class="glyphicon glyphicon-paperclip"></span>Ingresar Nueva Lectura</a>
 		
 					<br>
@@ -42,6 +42,10 @@
 											<td>
 											<a href="{{ route('admin_lecturas.edit',$paciente->idPaciente) }}" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-pencil"></span>Editar</a>
+											<a href="{{action('LecturaController@seePDF', $paciente->idPaciente)}}" class="btn btn-info btn-sm">
+												<span class="glyphicon glyphicon-eye-open"></span>Ver PDF</a>	
+											<a href="{{action('LecturaController@downloadPDF', $paciente->idPaciente)}}" class="btn btn-info btn-sm">
+												<span class="glyphicon glyphicon-download-alt"></span>Descargar PDF</a>	
 											</td>
 
 											</td>
@@ -63,7 +67,7 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
                         <div class="alert alert-danger">
-                            <strong>No se encuentra el Paciente .</strong>
+                            <strong>No se encuentran Lecturas del Paciente .</strong>
                         </div>
 
 					</div>

@@ -63,7 +63,7 @@
 												<span class="glyphicon glyphicon-pencil"></span>Editar</a>
 											<a href="{{ route('admin_pacientes.show',$paciente->idPaciente) }}" target="_blank" class="btn btn-success btn-sm">
 												<span class="glyphicon glyphicon-eye-open"></span>Ver</a>
-											<a href="{{ route('admin_lecturas.show',$paciente->idPaciente) }}" target="_blank" class="btn btn-success btn-sm">
+											<a href="{{ route('admin_lecturas.show',$paciente->idPaciente) }}" target="_blank" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-list-alt"></span>Lecturas</a>	
 
 											</td>

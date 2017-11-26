@@ -57,6 +57,7 @@
                             <div class="col-md-6">
                                  <select required class="form-control" name="region" id="region">
                                   <option value="" disabled selected>Seleccione una Region Anatomica</option>
+                                              
                                     </select>
                             </div>
                         </div>
