@@ -16,9 +16,6 @@
 					<h2 style="display: inline;">Gestionar Lecturas</h2>
 					<a href="{{ route('admin_lecturas.create')}}" class="btn btn-primary btn-sm">
                         <span class="glyphicon glyphicon-paperclip"></span>Ingresar Nueva Lectura</a>
-		
-					<br>
-					
                     <br><br>
 					@if(count($pacientes)>0)
 					<div class="table-responsive">
@@ -26,9 +23,10 @@
 							<thead>
 								<tr>
 									
-									<th class="text-center">DUI Paciente</th>
-									<th class="text-center">Nombre de Paciente</th>
 									<th class="text-center">Tipo de Examen</th>
+									<th class="text-center">Region Anatomica</th>
+									<th class="text-center">Patologia</th>
+									<th class="text-center">Descripcion</th>
 									<th class="text-center">Acciones</th>
 								</tr>
 							</thead>
@@ -36,9 +34,10 @@
 							@foreach($pacientes as $paciente)
 										<tr>
 											
-											<td class="text-center">{{ $paciente->duiPaciente }}</a> </td>
-											<td class="text-center"> {{ $paciente->primerNombre }} {{ $paciente->segundoNombre }} {{ $paciente->primerApellido }} {{ $paciente->segundoApellido}}</td>
-											<td class="text-center"> {{ $paciente->nombreTipoExamen}} </td>
+											<td class="text-center">{{ $paciente->nombreTipoExamen }}</a> </td>
+											<td class="text-center"> {{ $paciente->nombreRegionAnatomica }}</td>
+											<td class="text-center"> {{ $paciente->patologia}} </td>
+											<td class="text-center"> {{ $paciente->descripcion}} </td>
 											<td>
 											<a href="{{ route('admin_lecturas.edit',$paciente->idPaciente) }}" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-pencil"></span>Editar</a>

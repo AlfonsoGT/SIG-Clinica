@@ -97,3 +97,4 @@ Route::resource('/admin_lecturas','LecturaController');
 Route::get('/downloadPDF/{idPaciente}','LecturaController@downloadPDF');
 //ver pdf
 Route::get('/seePDF/{idPaciente}','LecturaController@seePDF');
+

@@ -38,9 +38,9 @@
 
 
 							<div class="form-group">
-								<label for="tipoExamen" class="col-md-4 control-label">Tipo de Examen</label>
+								<label for="idTipoExamen" class="col-md-4 control-label">Tipo de Examen</label>
 								<div class="col-md-6">
-									<select required class="form-control" name="tipoExamen" id="tipoExamen" onchange="ocul()">
+									<select required class="form-control" name="idTipoExamen" id="idTipoExamen" onchange="ocul()">
 										<option value="" disabled selected>Elija una opción
 										@foreach($tExamenes as $tExamen)
 										<option  value='{{ $tExamen->idTipoExamen }}'> {{ $tExamen->nombreTipoExamen }} </option>
@@ -53,9 +53,9 @@
 								<label for="patologia" class="col-md-4 control-label">Patologia</label>
 								<div class="col-md-2">
 								<fieldset class="form-control">
-									<input type="radio" id="si" name="patologia" value="v">
+									<input type="radio" id="si" name="patologia" value="Si">
 									<label for="si">Si</label>
-									<input type="radio" id="no" name="patologia" value="f">
+									<input type="radio" id="no" name="patologia" value="No">
 									<label for="no">No</label>
 								</fieldset>
 								</div>
@@ -75,7 +75,7 @@
 									<button type="submit" class="btn btn-success btn-sm">
 										<span class="glyphicon glyphicon-floppy-disk"></span>Guardar Lectura
 									</button>
-									 <a href="{{ url('/admin_pacientes') }}" class="btn btn-warning btn-sm">
+									 <a href="{{ url('/admin_lecturas') }}" class="btn btn-warning btn-sm">
                         			<span class="glyphicon glyphicon-list-alt"></span>Regresar</a>
 								</div>
 							</div>

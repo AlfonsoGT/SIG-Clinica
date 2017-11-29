@@ -86,11 +86,11 @@
         </tr>
         <tr>  
           <th align="left"><h3>Patologia:</h3></th>
-          <td align="right"></td>
+          <td align="right">{{$paciente->patologia}} </td>
         </tr>
         <tr>  
           <th align="left"><h3>Descripción:</h3></th>
-          <td align="right"></td>
+          <td align="right">{{$paciente->descripcion}} </td>
         </tr>
       </table>
     </p>

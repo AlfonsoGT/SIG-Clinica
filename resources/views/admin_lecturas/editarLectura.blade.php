@@ -39,6 +39,7 @@
 
 							
 
+
                             
 
                             <div class="form-group">
@@ -61,39 +62,29 @@
 								</div>
 							</div>
 
+
+
                             <div class="form-group">
 								<label for="patologia" class="col-md-4 control-label">Patologia</label>
 								<div class="col-md-2">
 								<fieldset class="form-control">
-									<input type="radio" id="si" name="patologia" value="v">
+									<input type="radio" id="si" name="patologia" value="Si"{{ $pacientes->patologia == 'Si' ? 'checked' : '' }} >
 									<label for="si">Si</label>
-									<input type="radio" id="no" name="patologia" value="f">
+									<input type="radio" id="no" name="patologia" value="No"$pacientes->patologia == 'No' ? 'checked' : '' }>
 									<label for="no">No</label>
 								</fieldset>
 								</div>
 							</div>
 							
-							<div class="form-group">
+							
+                           <div class="form-group">
 								<label for="descripcion" class="col-md-4 control-label">Descripción</label>
 								<div class="col-md-6">
-									<textarea id="descripcion"  class ="form-control" name="descripcion" rows="5" cols="50"></textarea>
+									<textarea id="descripcion"  class ="form-control" name="descripcion" rows="5" cols="50" value= "{{ $pacientes->descripcion }}"></textarea>
 								</div>
 								
 							</div>
 
-
-                            <div class="form-group{{ $errors->has('idSexo') ? ' has-error' : '' }}">
-						<label for="idSexo">Sexo del Paciente</label>
-						<select name="idSexo" class="form-control" >
-						    <option value="" selected="selected">Seleccione una opción...</option>@foreach($sexos as $sexo)
-                                <option value="{{ $sexo->idSexo }}" 
-                                    @if ($sexo->idSexo == $paciente->idSexo)
-                                            selected 
-                                    @endif   
-                                >{{ $sexo->nombreSexo }}</option>   
-							@endforeach
-						</select>
-					</div>
 
 
 							
@@ -103,7 +94,7 @@
 									<button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-floppy-disk"></span>Guardar Cambios</button>
 								</div>
 								<div class="col-lg-4">
-									<a href="{{ url('/admin_pacientes') }}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span>Cancelar</a>
+									<a href="{{ url('/admin_lecturas') }}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span>Cancelar</a>
 								</div>
 							</div>
 						</form>
