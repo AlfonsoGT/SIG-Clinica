@@ -68,8 +68,7 @@
     </table>
   </footer>
   <div id="content">
-    @foreach($pacientes as $paciente)
-    <!--@if(count($pacientes)< 2)-->
+    @foreach($lecturas as $paciente)
       <p>
      <table class="table table-bordered">
         <tr>
@@ -94,7 +93,6 @@
         </tr>
       </table>
     </p>
-    <!--@endif-->
     @endforeach
    </div>
 </body>

@@ -94,7 +94,7 @@ Route::get('/graficaExamenesRealizadosRegionAnatomica', 'GraficaController@grafi
 //gestion de lecturas
 Route::resource('/admin_lecturas','LecturaController');
 //descargar pdf
-Route::get('/downloadPDF/{idPaciente}','LecturaController@downloadPDF');
+Route::get('/downloadPDF/{idPaciente},{idLecturaExamen}','LecturaController@downloadPDF');
 //ver pdf
-Route::get('/seePDF/{idPaciente}','LecturaController@seePDF');
+Route::get('/seePDF/{idPaciente},{idLecturaExamen}','LecturaController@seePDF');
 

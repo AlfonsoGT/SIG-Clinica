@@ -41,9 +41,9 @@
 											<td>
 											<a href="{{ route('admin_lecturas.edit',$paciente->idPaciente) }}" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-pencil"></span>Editar</a>
-											<a href="{{action('LecturaController@seePDF', $paciente->idPaciente)}}" class="btn btn-info btn-sm">
+											<a href="{{action('LecturaController@seePDF', [$paciente->idPaciente, $paciente->idLecturaExamen] )}}" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-eye-open"></span>Ver PDF</a>	
-											<a href="{{action('LecturaController@downloadPDF', $paciente->idPaciente)}}" class="btn btn-info btn-sm">
+											<a href="{{action('LecturaController@downloadPDF', [$paciente->idPaciente,$paciente->idLecturaExamen ])}}" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-download-alt"></span>Descargar PDF</a>	
 											</td>
 

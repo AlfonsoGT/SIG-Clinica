@@ -124,36 +124,41 @@ class LecturaController extends Controller
     {
         //
     }
-    public function downloadPDF($idPaciente){
+    public function downloadPDF($idPaciente,$idLecturaExamen){
 
       $paciente = Paciente::find($idPaciente);
-       $pacientes = DB::table('pacientes')
+      $lectura = LecturaExamen::find($idLecturaExamen);
+      $lecturas = DB::table('pacientes')
       ->join('reservacion', 'reservacion.idPaciente', '=', 'pacientes.idPaciente')
       ->join('citas','citas.idCita', '=', 'reservacion.idCita')
       ->join('tipoExamen','tipoExamen.idTipoExamen','=','citas.idTipoExamen')
       ->join('lecturaExamen','lecturaExamen.idTipoExamen','=','tipoExamen.idTipoExamen')
       ->join('sexo', 'pacientes.idSexo', '=', 'sexo.idSexo')
-        ->select('pacientes.idPaciente', 'pacientes.duiPaciente','pacientes.primerNombre','pacientes.segundoNombre', 'pacientes.primerApellido', 'pacientes.segundoApellido', 'sexo.nombreSexo', 'tipoExamen.nombreTipoExamen' ,'lecturaExamen.patologia', 'lecturaExamen.descripcion')
+        ->select('pacientes.idPaciente', 'pacientes.duiPaciente','pacientes.primerNombre','pacientes.segundoNombre', 'pacientes.primerApellido', 'pacientes.segundoApellido', 'sexo.nombreSexo', 'tipoExamen.nombreTipoExamen','lecturaExamen.patologia', 'lecturaExamen.descripcion', 'lecturaExamen.idLecturaExamen')
         ->where('pacientes.idPaciente',$paciente->idPaciente)
+        ->where('lecturaExamen.idLecturaExamen',$lectura->idLecturaExamen)
+
         ->get();
-      $pdf = PDF::loadView($this->path.'/pdf', compact('pacientes'));
+      $pdf = PDF::loadView($this->path.'/pdf', compact('lecturas'));
       return $pdf->download('lectura.pdf');
 
     }
 
-    public function seePDF($idPaciente){
+    public function seePDF($idPaciente,$idLecturaExamen){
 
       $paciente = Paciente::find($idPaciente);
-      $pacientes = DB::table('pacientes')
+      $lectura = LecturaExamen::find($idLecturaExamen);
+      $lecturas = DB::table('pacientes')
       ->join('reservacion', 'reservacion.idPaciente', '=', 'pacientes.idPaciente')
       ->join('citas','citas.idCita', '=', 'reservacion.idCita')
       ->join('tipoExamen','tipoExamen.idTipoExamen','=','citas.idTipoExamen')
       ->join('lecturaExamen','lecturaExamen.idTipoExamen','=','tipoExamen.idTipoExamen')
       ->join('sexo', 'pacientes.idSexo', '=', 'sexo.idSexo')
-        ->select('pacientes.idPaciente', 'pacientes.duiPaciente','pacientes.primerNombre','pacientes.segundoNombre', 'pacientes.primerApellido', 'pacientes.segundoApellido', 'sexo.nombreSexo', 'tipoExamen.nombreTipoExamen','lecturaExamen.patologia', 'lecturaExamen.descripcion')
+        ->select('pacientes.idPaciente', 'pacientes.duiPaciente','pacientes.primerNombre','pacientes.segundoNombre', 'pacientes.primerApellido', 'pacientes.segundoApellido', 'sexo.nombreSexo', 'tipoExamen.nombreTipoExamen','lecturaExamen.patologia', 'lecturaExamen.descripcion', 'lecturaExamen.idLecturaExamen')
         ->where('pacientes.idPaciente',$paciente->idPaciente)
+        ->where('lecturaExamen.idLecturaExamen',$lectura->idLecturaExamen)
         ->get();
-      $pdf = PDF::loadView($this->path.'/pdf', compact('pacientes'));
+      $pdf = PDF::loadView($this->path.'/pdf', compact('lecturas'));
       return $pdf->stream('lectura.pdf');
      
 
