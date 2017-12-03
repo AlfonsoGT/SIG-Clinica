@@ -16,7 +16,7 @@ class CrearTablaLectura extends Migration
         Schema::create('lectura', function (Blueprint $table) {
             $table->increments('idLecturaExamen');
             $table->string('patologia');
-            $table->string('descripcion');
+            $table->string('descripcion',10000);
             $table->integer('idExamen')->unsigned();
             $table->foreign('idExamen')->references('idExamen')->on('examen');
         });
