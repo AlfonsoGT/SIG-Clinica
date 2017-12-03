@@ -17,14 +17,14 @@
 				<div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
 				@endif
 					<h2 style="display: inline;">Gestionar Lecturas</h2>
-					
+
                     <br><br>
 					@if(count($examenesNoLectura)>0)
 					<div class="table-responsive">
 						 <table class="table table-striped table-hover table-bordered">
 							<thead>
 								<tr>
-									
+
 									<th class="text-center">Nombre de Paciente</th>
 									<th class="text-center">Tipo de Examen</th>
 									<th class="text-center">Region Anatomica</th>
@@ -35,7 +35,7 @@
 							<tbody>
 							@foreach($examenesNoLectura as $examen)
 										<tr>
-											
+
 											<td class="text-center">{{ $examen->primerNombre }} {{ $examen->segundoNombre }} {{ $examen->primerApellido }} {{ $examen->segundoApellido }}</a> </td>
 											<td class="text-center"> {{ $examen->nombreTipoExamen }}</td>
 											<td class="text-center"> {{ $examen->nombreRegionAnatomica}} </td>
@@ -49,7 +49,7 @@
 												<span class="glyphicon glyphicon-download-alt"></span>Ver PDF</a>
                         						@endif
 
-												
+
 											</td>
 
 											</td>
@@ -71,7 +71,7 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
                         <div class="alert alert-danger">
-                            <strong>No se encuentran Lecturas del Paciente .</strong>
+                            <strong>No hay examenes pendientes de registro de lectura</strong>
                         </div>
 
 					</div>
