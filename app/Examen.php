@@ -15,4 +15,9 @@ protected $table = 'examen';
   protected $primaryKey = 'idExamen';
   public $timestamps = false;
 
+  public function scopeBusqueda($query, $busqueda)
+    {
+     return $query->where('tipoExamen.idTipoExamen', 'LIKE', '%'.$busqueda.'%');
+	}
+
 }

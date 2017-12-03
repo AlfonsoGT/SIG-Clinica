@@ -22,16 +22,18 @@ class LecturaController extends Controller
 
      private $path = '/admin_lecturas';
 
-    public function index()
+    public function index(Request $request)
     {
-        $examenesNoLectura = DB::table('examen')
+        $examenesNoLectura = Examen::busqueda($request->busqueda)
         ->join('reservacion','reservacion.idReservacion','=','examen.idReservacion')
         ->join('pacientes','pacientes.idPaciente','=','reservacion.idPaciente')
         ->join('regionAnatomica','regionAnatomica.idRegionAnatomica','=','reservacion.idRegionAnatomica')
         ->join('tipoExamen','tipoExamen.idTipoExamen','=','regionAnatomica.idTipoExamen')
-
         ->select('examen.*','pacientes.*','reservacion.*','regionAnatomica.*','tipoExamen.*')->paginate(10);
-        return view($this->path.'/lecturas')->with('examenesNoLectura',$examenesNoLectura);
+        $examen = DB::table('tipoExamen')
+        ->select('tipoExamen.*')
+        ->get();
+        return view($this->path.'/lecturas')->with('examenesNoLectura',$examenesNoLectura)->with('examen',$examen);
 
     }
 

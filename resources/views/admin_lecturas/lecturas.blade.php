@@ -18,7 +18,28 @@
 				@endif
 					<h2 style="display: inline;">Gestionar Lecturas</h2>
 
-                    <br><br>
+                    <!--BUSCADOR DE PACIENTES-->
+					<br>
+					<div class="row" id="busquedaAvanzada">
+						{!! Form::open(['route' => 'admin_lecturas.index', 'method' =>'GET', 'class'=>'form-group']) !!}
+						<div class="form-group">
+                            <div class="col-md-6">
+                                 <select class="form-control" name="busqueda" id="busqueda" >
+                                 <option value="">Sin criterio de Seleccion</option>
+                                            @foreach($examen as $tipoExamen)
+                                            <option  value='{{ $tipoExamen->idTipoExamen }}'> {{ $tipoExamen->nombreTipoExamen }} </option>
+                                        @endforeach
+
+                                   </select>
+                            </div>
+                    </div>
+						<button type="submit" class="btn btn-default btn-sm" id="buscar"><span class="glyphicon glyphicon-search"></span>Buscar por Tipo de Examen</button>
+					</span>
+						
+
+						{!! Form::close() !!}
+					</div>
+					<!--BUSCADOR DE PACIENTES-->
 					@if(count($examenesNoLectura)>0)
 					<div class="table-responsive">
 						 <table class="table table-striped table-hover table-bordered">
