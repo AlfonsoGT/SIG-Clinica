@@ -71,6 +71,10 @@
 		</tbody>
 	</table>
 	<div class="form-group">
+	 @foreach($pdf as $pdf)
+	<a href="{{ route('seePDF',$pdf->idExamen) }}" class="btn btn-info btn-sm">
+	<span class="glyphicon glyphicon-download-alt"></span>Ver PDF</a>
+	@endforeach
 	 @foreach($reservaciones as $pac)
      <a href="{{ route('admin_pacientes.show',$pac->idPaciente) }}" class="btn btn-warning btn-sm">
      <span class="glyphicon glyphicon-list-alt"></span>Regresar a Perfil de Paciente</a>

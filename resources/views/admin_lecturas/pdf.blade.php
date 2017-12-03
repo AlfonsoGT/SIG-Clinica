@@ -51,7 +51,7 @@
     <h2>UNIVERSIDAD DE EL SALVADOR</h2>
     <h3>FACULTAD DE MEDICINA</h3>
     <h3>CLINICA DE IMAGENES Y RADIOLOGIA</h3>
-     <hr size="4px" color="black" />
+     <hr size="4" color="black" />
   </header>
   <footer>
     <table>
@@ -68,7 +68,7 @@
     </table>
   </footer>
   <div id="content">
-    @foreach($lecturas as $paciente)
+    @foreach($lectura as $paciente)
       <p>
      <table class="table table-bordered">
         <tr>
@@ -76,8 +76,12 @@
           <td align="right">{{$paciente->nombreTipoExamen}}</td>
         </tr>
         <tr>
+          <th align="left"><h3>Región Anatomica:</h3></th>
+          <td align="right">{{$paciente->nombreRegionAnatomica}}</td>
+        </tr>
+        <tr>
           <th align="left"><h3>Nombre del paciente:</h3></th>
-          <td align="right">{{$paciente->primerNombre}} {{$paciente->segundoNombre}} {{$paciente->primerApellido}} {{$paciente->segundoApellido}}</td>
+          <td align="right"> {{$paciente->primerNombre}} {{$paciente->segundoNombre}} {{$paciente->primerApellido}} {{$paciente->segundoApellido}}</td>
         </tr>
         <tr>  
           <th align="left"><h3>Sexo:</h3></th>

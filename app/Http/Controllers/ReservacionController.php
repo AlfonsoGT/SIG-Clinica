@@ -139,7 +139,13 @@ class ReservacionController extends Controller
     ->where('reservacion.idReservacion',$reservacion->idReservacion)
     ->get();
 
-    return view($this->path.'/verAsignacionCita')->with('reservaciones',$reservaciones);
+    $pdf = DB::table('reservacion')
+    ->join('examen','examen.idReservacion','=','reservacion.idReservacion')
+    ->where('reservacion.idReservacion',$reservacion->idReservacion)
+    ->select('reservacion.*','examen.*')
+    ->get();
+    //dd($pdf);
+    return view($this->path.'/verAsignacionCita')->with('reservaciones',$reservaciones)->with('pdf',$pdf);
     }
 
     /**

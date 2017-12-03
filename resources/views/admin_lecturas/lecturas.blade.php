@@ -13,38 +13,43 @@
 				@if(session()->has('msj'))
 				<div class="alert alert-success" role="alert">{{session('msj')}}</div>
 				@endif
+				@if(session()->has('msj2'))
+				<div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
+				@endif
 					<h2 style="display: inline;">Gestionar Lecturas</h2>
-					<a href="{{ route('admin_lecturas.create')}}" class="btn btn-primary btn-sm">
-                        <span class="glyphicon glyphicon-paperclip"></span>Ingresar Nueva Lectura</a>
+					
                     <br><br>
-					@if(count($pacientes)>0)
+					@if(count($examenesNoLectura)>0)
 					<div class="table-responsive">
 						 <table class="table table-striped table-hover table-bordered">
 							<thead>
 								<tr>
 									
+									<th class="text-center">Nombre de Paciente</th>
 									<th class="text-center">Tipo de Examen</th>
 									<th class="text-center">Region Anatomica</th>
-									<th class="text-center">Patologia</th>
-									<th class="text-center">Descripcion</th>
+									<th class="text-center">Fecha de Realización del Examen</th>
 									<th class="text-center">Acciones</th>
 								</tr>
 							</thead>
 							<tbody>
-							@foreach($pacientes as $paciente)
+							@foreach($examenesNoLectura as $examen)
 										<tr>
 											
-											<td class="text-center">{{ $paciente->nombreTipoExamen }}</a> </td>
-											<td class="text-center"> {{ $paciente->nombreRegionAnatomica }}</td>
-											<td class="text-center"> {{ $paciente->patologia}} </td>
-											<td class="text-center"> {{ $paciente->descripcion}} </td>
+											<td class="text-center">{{ $examen->primerNombre }} {{ $examen->segundoNombre }} {{ $examen->primerApellido }} {{ $examen->segundoApellido }}</a> </td>
+											<td class="text-center"> {{ $examen->nombreTipoExamen }}</td>
+											<td class="text-center"> {{ $examen->nombreRegionAnatomica}} </td>
+											<td class="text-center"> {{ $examen->fechaRealizacion}} </td>
 											<td>
-											<a href="{{ route('admin_lecturas.edit',$paciente->idPaciente) }}" class="btn btn-info btn-sm">
-												<span class="glyphicon glyphicon-pencil"></span>Editar</a>
-											<a href="{{action('LecturaController@seePDF', [$paciente->idPaciente, $paciente->idLecturaExamen] )}}" class="btn btn-info btn-sm">
-												<span class="glyphicon glyphicon-eye-open"></span>Ver PDF</a>	
-											<a href="{{action('LecturaController@downloadPDF', [$paciente->idPaciente,$paciente->idLecturaExamen ])}}" class="btn btn-info btn-sm">
-												<span class="glyphicon glyphicon-download-alt"></span>Descargar PDF</a>	
+												@if($examen->hayLectura == 0)
+												 <a href="{{ route('crearLectura',$examen->idExamen) }}" class="btn btn-success btn-sm">
+                        						<span class="glyphicon glyphicon-paperclip"></span>Generar Lectura</a>
+                        						@else
+                        						<a href="{{ route('seePDF',$examen->idExamen) }}" class="btn btn-info btn-sm">
+												<span class="glyphicon glyphicon-download-alt"></span>Ver PDF</a>
+                        						@endif
+
+												
 											</td>
 
 											</td>
@@ -52,7 +57,7 @@
 							@endforeach
 							</tbody>
 						</table>
-                       {!! $pacientes->render() !!}
+                       {!! $examenesNoLectura->render() !!}
 
 					</div>
 				</div>

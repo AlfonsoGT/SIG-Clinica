@@ -36,19 +36,27 @@
 						<form class="form-horizontal" role="form" method="POST" action="{{ url( '/admin_lecturas' ) }}">
 							<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
 
-
-							<div class="form-group">
-								<label for="idTipoExamen" class="col-md-4 control-label">Tipo de Examen</label>
-								<div class="col-md-6">
-									<select required class="form-control" name="idTipoExamen" id="idTipoExamen" onchange="ocul()">
-										<option value="" disabled selected>Elija una opción
-										@foreach($tExamenes as $tExamen)
-										<option  value='{{ $tExamen->idTipoExamen }}'> {{ $tExamen->nombreTipoExamen }} </option>
-										@endforeach
-									</select>
-								</div>
-							</div>
-
+						@foreach($examenesNoLectura as $examen)
+                         <input type="hidden" name="idExamen" value="{{ $examen->idExamen }}">
+						<div class="form-group {{ $errors->has('nombrePaciente') ? ' has-error' : '' }}">
+                            <label for="nombrePaciente" class="col-md-4 control-label">Nombre Completo del Paciente</label>
+                            <div class="col-md-6">
+                                <input id="nombrePaciente" type="text" class="form-control" name="nombrePaciente" value="{{ $examen->primerNombre }} {{ $examen->segundoNombre }} {{ $examen->primerApellido }} {{ $examen->segundoApellido }}" autocomplete="off" disabled="true">
+                            </div>
+                        </div>
+                        <div class="form-group {{ $errors->has('tipoExamen') ? ' has-error' : '' }}">
+                            <label for="tipoExamen" class="col-md-4 control-label">Tipo de Examen</label>
+                            <div class="col-md-6">
+                                <input id="tipoExamen" type="text" class="form-control" name="tipoExamen" value="{{ $examen->nombreTipoExamen }}" autocomplete="off" disabled="true">
+                            </div>
+                        </div>
+                        <div class="form-group {{ $errors->has('regionAnatomica') ? ' has-error' : '' }}">
+                            <label for="regionAnatomica" class="col-md-4 control-label">Region Anatomica</label>
+                            <div class="col-md-6">
+                                <input id="regionAnatomica" type="text" class="form-control" name="regionAnatomica" value="{{ $examen->nombreRegionAnatomica}}" autocomplete="off" disabled="true">
+                            </div>
+                        </div>
+                        @endforeach
                             <div class="form-group">
 								<label for="patologia" class="col-md-4 control-label">Patologia</label>
 								<div class="col-md-2">

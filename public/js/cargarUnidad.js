@@ -6,7 +6,7 @@ function onSelectTipos(){
    //alert(idTipoMaterial);
    //AJAX
    actual=window.location.host;
-   $.get('http://'+actual+'/ClinicaRadiologiaDise-o/public/unidades/'+idTipoMaterial+'',function(data){
+   $.get('/unidades/'+idTipoMaterial+'',function(data){
     //console.log(data);
 
     $("#tipoUnidad").empty();

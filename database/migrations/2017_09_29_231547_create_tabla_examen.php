@@ -18,6 +18,7 @@ class CreateTablaExamen extends Migration
           $table->integer('idusuario')->unsigned()->nullable();
           $table->foreign('idUsuario')->references('id')->on('users')->onDelete('set null');
           $table->integer('idReservacion')->unsigned();
+          $table->boolean('hayLectura')->default(false);
           $table->foreign('idReservacion')->references('idReservacion')->on('reservacion');
           $table->date('fechaRealizacion');
           });

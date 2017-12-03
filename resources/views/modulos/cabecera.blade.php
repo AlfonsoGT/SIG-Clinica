@@ -38,6 +38,7 @@
                   <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> Gestión de Citas<span class="caret"></span></button>
                   <ul class="dropdown-menu" role="menu" id="menup">
                     <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_citas.index') }}">VER TODAS LAS CITAS</a></li>
+                     <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_lecturas.index') }}">GENERAR REGISTRO DE LECTURAS</a></li>
                   </ul>
                   </li>
                 </div>

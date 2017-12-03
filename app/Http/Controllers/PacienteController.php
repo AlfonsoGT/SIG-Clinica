@@ -141,6 +141,8 @@ class PacienteController extends Controller
         ->join('regionAnatomica','reservacion.idRegionAnatomica','=','regionAnatomica.idRegionAnatomica')
         ->where('reservacion.idPaciente','=',$idPaciente)
         ->paginate(5);
+
+
     return view($this->path.'/perfilPaciente')->with('pacientes',$pacientes)->with('reservaciones',$reservaciones);
     }
 

@@ -17,9 +17,8 @@ class CrearTablaLectura extends Migration
             $table->increments('idLecturaExamen');
             $table->string('patologia');
             $table->string('descripcion');
-            $table->integer('idTipoExamen')->unsigned();
-            $table->foreign('idTipoExamen')->references('idTipoExamen')->on('tipoExamen');
-            $table->timestamps();
+            $table->integer('idExamen')->unsigned();
+            $table->foreign('idExamen')->references('idExamen')->on('examen');
         });
     }
 

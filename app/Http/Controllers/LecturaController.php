@@ -10,6 +10,7 @@ use App\TipoExamen;
 use App\LecturaExamen;
 use App\Sexo;
 use PDF;
+use App\Examen;
 
 class LecturaController extends Controller
 {
@@ -23,7 +24,15 @@ class LecturaController extends Controller
 
     public function index()
     { 
-          
+        $examenesNoLectura = DB::table('examen')
+        ->join('reservacion','reservacion.idReservacion','=','examen.idReservacion')
+        ->join('pacientes','pacientes.idPaciente','=','reservacion.idPaciente')
+        ->join('regionAnatomica','regionAnatomica.idRegionAnatomica','=','reservacion.idRegionAnatomica')
+        ->join('tipoExamen','tipoExamen.idTipoExamen','=','regionAnatomica.idTipoExamen')
+
+        ->select('examen.*','pacientes.*','reservacion.*','regionAnatomica.*','tipoExamen.*')->paginate(10);
+        return view($this->path.'/lecturas')->with('examenesNoLectura',$examenesNoLectura);
+
     }
 
     /**
@@ -31,11 +40,17 @@ class LecturaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($idExamen)
     {
-       
-         $tExamenes = DB::table('tipoExamen')->select('idTipoExamen', 'nombreTipoExamen')->get();
-        return view($this->path.'/crearLectura',compact('tExamenes'));
+        $examenesNoLectura = DB::table('examen')
+        ->join('reservacion','reservacion.idReservacion','=','examen.idReservacion')
+        ->join('pacientes','pacientes.idPaciente','=','reservacion.idPaciente')
+        ->join('regionAnatomica','regionAnatomica.idRegionAnatomica','=','reservacion.idRegionAnatomica')
+        ->join('tipoExamen','tipoExamen.idTipoExamen','=','regionAnatomica.idTipoExamen')
+        ->select('examen.*','pacientes.*','reservacion.*','regionAnatomica.*','tipoExamen.*')
+        ->where('examen.idExamen','=',$idExamen)
+        ->get();
+        return view($this->path.'/crearLectura')->with('examenesNoLectura',$examenesNoLectura);
     }
 
     /**
@@ -48,11 +63,22 @@ class LecturaController extends Controller
     {
         //
         $lectura = new LecturaExamen ();
-        $lectura->idTipoExamen = $request->idTipoExamen;
+        $lectura->idExamen = $request->idExamen;
         $lectura->patologia = $request->patologia;
         $lectura->descripcion = $request->descripcion;
+
+        $examen=Examen::findOrFail($request->idExamen);
+        if($examen->hayLectura==false){
+        $examen->hayLectura=true;
+        $examen->save();
         $lectura->save();
-        return redirect($this->path.'/lecturas');
+        return redirect()->action('LecturaController@index')->with('msj','Lectura Guardada Correctamente');
+        }else{
+        return redirect()->action('LecturaController@index')->with('msj2','El Examen ya tiene Lectura Realizada');
+        }
+
+       
+        
         
     }
 
@@ -64,19 +90,7 @@ class LecturaController extends Controller
      */
     public function show($idPaciente)
     {
-        //
-
-        $paciente = Paciente::findOrFail($idPaciente);
-        $pacientes = DB::table('pacientes')
-        ->join('reservacion', 'reservacion.idPaciente', '=', 'pacientes.idPaciente')
-        ->join('citas','citas.idCita', '=', 'reservacion.idCita')
-        ->join('tipoExamen','tipoExamen.idTipoExamen','=','citas.idTipoExamen')
-        ->join('regionAnatomica','regionAnatomica.idTipoExamen', '=', 'tipoExamen.idTipoExamen')
-        ->join('lecturaExamen','lecturaExamen.idTipoExamen','=','tipoExamen.idTipoExamen')
-        ->select('pacientes.idPaciente', 'pacientes.duiPaciente','pacientes.primerNombre','pacientes.segundoNombre', 'pacientes.primerApellido', 'pacientes.segundoApellido', 'tipoExamen.nombreTipoExamen', 'regionAnatomica.nombreRegionAnatomica', 'lecturaExamen.idLecturaExamen','lecturaExamen.patologia','lecturaExamen.descripcion')
-        ->where('pacientes.idPaciente',$paciente->idPaciente)
-        ->paginate(5);
-        return view($this->path.'/lecturas',compact('pacientes'));
+        
     }
 
     /**
@@ -87,19 +101,7 @@ class LecturaController extends Controller
      */
     public function edit($idPaciente)
     {
-        //
-        $paciente = Paciente::findOrFail($idPaciente);
-         $pacientes = DB::table('pacientes')
-        ->join('reservacion', 'reservacion.idPaciente', '=', 'pacientes.idPaciente')
-        ->join('citas','citas.idCita', '=', 'reservacion.idCita')
-        ->join('tipoExamen','tipoExamen.idTipoExamen','=','citas.idTipoExamen')
-        ->join('regionAnatomica','regionAnatomica.idTipoExamen', '=', 'tipoExamen.idTipoExamen')
-        ->join('lecturaExamen','lecturaExamen.idTipoExamen','=','tipoExamen.idTipoExamen')
-        ->select('pacientes.idPaciente', 'pacientes.duiPaciente','pacientes.primerNombre','pacientes.segundoNombre', 'pacientes.primerApellido', 'pacientes.segundoApellido', 'tipoExamen.nombreTipoExamen', 'regionAnatomica.nombreRegionAnatomica', 'lecturaExamen.idLecturaExamen','lecturaExamen.patologia','lecturaExamen.descripcion')
-        ->where('pacientes.idPaciente',$paciente->idPaciente)
-        ->get();
-        $tExamenes = TipoExamen::all();
-        return view($this->path.'/editarLectura', compact('pacientes','tExamenes','paciente'));
+       
     }
 
     /**
@@ -144,21 +146,22 @@ class LecturaController extends Controller
 
     }
 
-    public function seePDF($idPaciente,$idLecturaExamen){
+    public function seePDF($idExamen){
 
-      $paciente = Paciente::find($idPaciente);
-      $lectura = LecturaExamen::find($idLecturaExamen);
-      $lecturas = DB::table('pacientes')
-      ->join('reservacion', 'reservacion.idPaciente', '=', 'pacientes.idPaciente')
-      ->join('citas','citas.idCita', '=', 'reservacion.idCita')
-      ->join('tipoExamen','tipoExamen.idTipoExamen','=','citas.idTipoExamen')
-      ->join('lecturaExamen','lecturaExamen.idTipoExamen','=','tipoExamen.idTipoExamen')
-      ->join('sexo', 'pacientes.idSexo', '=', 'sexo.idSexo')
-        ->select('pacientes.idPaciente', 'pacientes.duiPaciente','pacientes.primerNombre','pacientes.segundoNombre', 'pacientes.primerApellido', 'pacientes.segundoApellido', 'sexo.nombreSexo', 'tipoExamen.nombreTipoExamen','lecturaExamen.patologia', 'lecturaExamen.descripcion', 'lecturaExamen.idLecturaExamen')
-        ->where('pacientes.idPaciente',$paciente->idPaciente)
-        ->where('lecturaExamen.idLecturaExamen',$lectura->idLecturaExamen)
+    
+        $lectura = DB::table('lecturaexamen')
+        ->join('examen','examen.idExamen','=','lecturaexamen.idExamen')
+        ->join('reservacion','reservacion.idReservacion','=','examen.idReservacion')
+        ->join('pacientes','pacientes.idPaciente','=','reservacion.idPaciente')
+        ->join('sexo','sexo.idSexo','=','pacientes.idSexo')
+        ->join('regionAnatomica','regionAnatomica.idRegionAnatomica','=','reservacion.idRegionAnatomica')
+        ->join('tipoExamen','tipoExamen.idTipoExamen','=','regionAnatomica.idTipoExamen')
+        ->select('examen.*','pacientes.*','reservacion.*','regionAnatomica.*','tipoExamen.*','lecturaexamen.*','sexo.*')
+        ->where('examen.idExamen','=',$idExamen)
         ->get();
-      $pdf = PDF::loadView($this->path.'/pdf', compact('lecturas'));
+       // dd($lectura);
+
+      $pdf = PDF::loadView($this->path.'/pdf', compact('lectura'));
       return $pdf->stream('lectura.pdf');
      
 

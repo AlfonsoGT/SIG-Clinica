@@ -93,8 +93,10 @@ Route::get('/graficaExamenesRealizadosRegionAnatomica', 'GraficaController@grafi
 
 //gestion de lecturas
 Route::resource('/admin_lecturas','LecturaController');
+//Para pasar parametros de la pantalla
+Route::get('/crearLectura/{idExamen}', 'LecturaController@create')->name('crearLectura');
 //descargar pdf
 Route::get('/downloadPDF/{idPaciente},{idLecturaExamen}','LecturaController@downloadPDF');
 //ver pdf
-Route::get('/seePDF/{idPaciente},{idLecturaExamen}','LecturaController@seePDF');
+Route::get('/seePDF/{idExamen}','LecturaController@seePDF')->name('seePDF');
 

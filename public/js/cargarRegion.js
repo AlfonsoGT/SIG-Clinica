@@ -10,7 +10,7 @@ function onSelectTipos(){
 
    actual=window.location.host;
 
-   $.get('http://'+actual+'/ClinicaRadiologiaDise-o/public/region/'+idTipoExamen+'',function(data){
+   $.get('/region/'+idTipoExamen+'',function(data){
     //console.log(data);
 
     $("#region").empty();
