@@ -12,6 +12,6 @@ class LecturaExamen extends Model
     ];
 
     public $timestamps = false;
-    protected $table = 'lecturaExamen';
+    protected $table = 'lectura';
     protected $primaryKey = 'idLecturaExamen';
 }

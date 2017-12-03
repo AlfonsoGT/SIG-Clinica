@@ -13,7 +13,7 @@ class CrearTablaLectura extends Migration
      */
     public function up()
     {
-        Schema::create('lecturaExamen', function (Blueprint $table) {
+        Schema::create('lectura', function (Blueprint $table) {
             $table->increments('idLecturaExamen');
             $table->string('patologia');
             $table->string('descripcion');
@@ -29,6 +29,6 @@ class CrearTablaLectura extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lecturaExamen');
+        Schema::dropIfExists('lectura');
     }
 }
