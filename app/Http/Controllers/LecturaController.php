@@ -149,7 +149,7 @@ class LecturaController extends Controller
     public function seePDF($idExamen){
 
     
-        $lectura = DB::table('lecturaExamen')
+        $lectura = DB::table('lecturaexamen')
         ->join('examen','examen.idExamen','=','lecturaexamen.idExamen')
         ->join('reservacion','reservacion.idReservacion','=','examen.idReservacion')
         ->join('pacientes','pacientes.idPaciente','=','reservacion.idPaciente')
