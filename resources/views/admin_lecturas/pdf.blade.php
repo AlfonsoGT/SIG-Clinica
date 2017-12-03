@@ -72,29 +72,27 @@
       <p>
      <table class="table table-bordered">
         <tr>
-          <th align="left"><h3>Tipo de Examen:</h3></th>
-          <td align="right">{{$paciente->nombreTipoExamen}}</td>
+          <th align="left"><h2>Nombre: {{$paciente->primerNombre}} {{$paciente->segundoNombre}} {{$paciente->primerApellido}} {{$paciente->segundoApellido}}</h2></th>
+        </tr>
+        <tr>  
+          <th align="left"><h2>Sexo: {{$paciente->nombreSexo}}</h2></th>
+          <th align="rightt"><h2>Edad: {{$paciente->nombreSexo}}</h2></th>
+        </tr>
+           <tr>  
+          <th align="center"><h2>fecha:</h2></th>
+        </tr>
+        <tr>  
+          <th align="left"><h2>Patologia: {{$paciente->patologia}}</h2></th>
         </tr>
         <tr>
-          <th align="left"><h3>Región Anatomica:</h3></th>
-          <td align="right">{{$paciente->nombreRegionAnatomica}}</td>
+          <th align="left"><h2>Tipo de Examen: {{$paciente->nombreTipoExamen}}</h2></th>
         </tr>
         <tr>
-          <th align="left"><h3>Nombre del paciente:</h3></th>
-          <td align="right"> {{$paciente->primerNombre}} {{$paciente->segundoNombre}} {{$paciente->primerApellido}} {{$paciente->segundoApellido}}</td>
+          <th align="left"><h2>Región Anatomica: {{$paciente->nombreRegionAnatomica}}</h2></th>
         </tr>
         <tr>  
-          <th align="left"><h3>Sexo:</h3></th>
-          <td align="right">{{$paciente->nombreSexo}} </td>
-        </tr>
-        <tr>  
-          <th align="left"><h3>Patologia:</h3></th>
-          <td align="right">{{$paciente->patologia}} </td>
-        </tr>
-        <tr>  
-          <th align="left"><h3>Descripción:</h3></th>
-          <td align="right">{{$paciente->descripcion}} </td>
-        </tr>
+          <th align="left"><h2>{{$paciente->descripcion}}</h2></th>
+          </tr>
       </table>
     </p>
     @endforeach
