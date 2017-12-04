@@ -105,6 +105,7 @@ class SalidasController extends Controller
             foreach ($sumaTotalEntradas as $caja) {
                 $cantidadEntrada = $caja->cantidadUnidad*$caja->cantidadSuma;
             } 
+            $cantidadSalida = 0;
             foreach ($sumaTotalSalidas as $caja) {
                 $cantidadSalida = $caja->cantidadUnidad;
             } 
