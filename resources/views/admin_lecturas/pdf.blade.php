@@ -128,7 +128,7 @@
           <td align="left"><h2>Región Anatómica: {{$paciente->nombreRegionAnatomica}}</h2></td>
         </tr>
         <tr>
-          <td  colspan="2 align="justify""><h2>{{$paciente->descripcion}}</h2></td>
+          <td  colspan="2" align="justify"><h2>{{$paciente->descripcion}}</h2></td>
         </tr>
       </table>
     </p>
