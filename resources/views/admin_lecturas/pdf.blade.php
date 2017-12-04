@@ -43,7 +43,7 @@
       color: blue;
     }
   </style>
-</head>  
+</head>
 <body>
   <header>
     <img src="img/logoUesLectura.png" align="left" >
@@ -74,23 +74,60 @@
         <tr>
           <th align="left"><h2>Nombre: {{$paciente->primerNombre}} {{$paciente->segundoNombre}} {{$paciente->primerApellido}} {{$paciente->segundoApellido}}</h2></th>
         </tr>
-        <tr>  
+        <tr>
           <th align="left"><h2>Sexo: {{$paciente->nombreSexo}}</h2></th>
-          <th align="rightt"><h2>Edad: {{$paciente->nombreSexo}}</h2></th>
+          <th align="rightt"><h2>Edad: {{$paciente->edadPaciente}} AÑOS</h2></th>
         </tr>
-           <tr>  
-          <th align="center"><h2>fecha:</h2></th>
+
+        <?php
+        if($paciente->mesR==1){
+          $mes='enero';
+        }
+        if($paciente->mesR==2){
+          $mes='febrero';
+        }
+        if($paciente->mesR==3){
+          $mes='marzo';
+        }
+        if($paciente->mesR==4){
+          $mes='abril';
+        }
+        if($paciente->mesR==5){
+          $mes='mayo';
+        }
+        if($paciente->mesR==6){
+          $mes='junio';
+        }
+        if($paciente->mesR==7){
+          $mes='julio';
+        }
+        if($paciente->mesR==8){
+          $mes='agosto';
+        }
+        if($paciente->mesR==9){
+          $mes='septiembre';
+        }
+        if($paciente->mesR==10){
+          $mes='octubre';
+        }
+        if($paciente->mesR==11){
+          $mes='noviembre';
+        }
+        if($paciente->mesR==12){
+          $mes='diciembre';
+        }
+          ?>
+           <tr>
+          <th align="center"><h2>{{$paciente->diaR}} de <?php echo($mes)?> del {{$paciente->anioR}} </h2></th>
         </tr>
-        <tr>  
-          <th align="left"><h2>Patologia: {{$paciente->patologia}}</h2></th>
+
+        <tr>
+          <th align="left"><h2>{{$paciente->nombreTipoExamen}}</h2></th>
         </tr>
         <tr>
-          <th align="left"><h2>Tipo de Examen: {{$paciente->nombreTipoExamen}}</h2></th>
+          <th align="left"><h2>Región Anatómica: {{$paciente->nombreRegionAnatomica}}</h2></th>
         </tr>
         <tr>
-          <th align="left"><h2>Región Anatomica: {{$paciente->nombreRegionAnatomica}}</h2></th>
-        </tr>
-        <tr>  
           <th align="left"><h2>{{$paciente->descripcion}}</h2></th>
           </tr>
       </table>

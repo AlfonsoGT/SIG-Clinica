@@ -140,7 +140,11 @@ class LecturaController extends Controller
         ->join('sexo','sexo.idSexo','=','pacientes.idSexo')
         ->join('regionAnatomica','regionAnatomica.idRegionAnatomica','=','reservacion.idRegionAnatomica')
         ->join('tipoExamen','tipoExamen.idTipoExamen','=','regionAnatomica.idTipoExamen')
-        ->select('examen.*','pacientes.*','reservacion.*','regionAnatomica.*','tipoExamen.*','lectura.*','sexo.*')
+        ->select('examen.*','pacientes.*','reservacion.*','regionAnatomica.*','tipoExamen.*','lectura.*','sexo.*',
+        DB::raw('year(examen.fechaRealizacion)-year(pacientes.fechaNacimiento) as edadPaciente'),
+        DB::raw('year(examen.fechaRealizacion) as anioR'),
+        DB::raw('month(examen.fechaRealizacion) as mesR' ),
+        DB::raw('day(examen.fechaRealizacion) as diaR'))
         ->where('examen.idExamen','=',$idExamen)
         ->get();
        // dd($lectura);
