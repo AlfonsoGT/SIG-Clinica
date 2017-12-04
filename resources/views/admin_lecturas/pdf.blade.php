@@ -72,7 +72,7 @@
       <p>
      <table class="table table-bordered">
         <tr>
-          <th align="left"><h2>Nombre: {{$paciente->primerNombre}} {{$paciente->segundoNombre}} {{$paciente->primerApellido}} {{$paciente->segundoApellido}}</h2></th>
+          <th colspan="2" ><h2>Nombre: {{$paciente->primerNombre}} {{$paciente->segundoNombre}} {{$paciente->primerApellido}} {{$paciente->segundoApellido}}</h2></th>
         </tr>
         <tr>
           <th align="left"><h2>Sexo: {{$paciente->nombreSexo}}</h2></th>
@@ -118,18 +118,18 @@
         }
           ?>
            <tr>
-          <th align="center"><h2>{{$paciente->diaR}} de <?php echo($mes)?> del {{$paciente->anioR}} </h2></th>
+          <td align="center"><h2>{{$paciente->diaR}} de <?php echo($mes)?> del {{$paciente->anioR}} </h2></td>
         </tr>
 
         <tr>
-          <th align="left"><h2>{{$paciente->nombreTipoExamen}}</h2></th>
+          <td align="left"><h2>{{$paciente->nombreTipoExamen}}</h2></td>
         </tr>
         <tr>
-          <th align="left"><h2>Región Anatómica: {{$paciente->nombreRegionAnatomica}}</h2></th>
+          <td align="left"><h2>Región Anatómica: {{$paciente->nombreRegionAnatomica}}</h2></td>
         </tr>
         <tr>
-          <th align="left"><h2>{{$paciente->descripcion}}</h2></th>
-          </tr>
+          <td  colspan="2 align="justify""><h2>{{$paciente->descripcion}}</h2></td>
+        </tr>
       </table>
     </p>
     @endforeach
