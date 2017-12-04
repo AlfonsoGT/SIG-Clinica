@@ -70,17 +70,18 @@
   <div id="content">
     @foreach($lectura as $paciente)
       <p>
-     <table class="table table-bordered">
+     <table class="table table-bordered" >
         <tr>
-          <th align="left"><h2>Nombre: {{$paciente->primerNombre}} {{$paciente->segundoNombre}} {{$paciente->primerApellido}} {{$paciente->segundoApellido}}</h2></th>
+          <th align="left"><h3>Nombre: {{$paciente->primerNombre}} {{$paciente->segundoNombre}} {{$paciente->primerApellido}} {{$paciente->segundoApellido}}</h3></th>
         </tr>
         <tr>  
-          <th align="left"><h2>Sexo: {{$paciente->nombreSexo}}</h2></th>
-          <th align="rightt"><h2>Edad: </h2>{{$paciente->edadPaciente}} AÑOS</th>
+          <th align="left"><h3>Sexo: {{$paciente->nombreSexo}}</h3></th>
+          <th align="rightt"><h3>Edad: {{$paciente->edadPaciente}} AÑOS</h3></th>
         </tr>
         <tr>  
-          <th align="center"><h2>fecha:</h2></th>
-          <?php
+          <td align="left"><h3>fecha:</h3></th>
+        </tr>
+        <?php
         if($paciente->mesR==1){
           $mes='enero';
         }
@@ -118,55 +119,52 @@
           $mes='diciembre';
         }
           ?>
-
-          <tr>
-        <th align="center"><h2>{{$paciente->diaR}} de <?php echo($mes)?> del {{$paciente->anioR}} </h2></th>
-
+      
+        <tr>
+          <td colspan="2" align="center"><h3>{{$paciente->diaR}} de <?php echo($mes)?> del {{$paciente->anioR}} </h3></td>
         </tr>
         <tr>  
-          <th align="left"><h2>UTERO:</h2></th>
-
+          <td align="left"><b>UTERO:</b></td>
         </tr>
         <tr>
-          <th align="left"><h2>Posición: {{ $paciente->posicionUtero }}</h2></th>
+          <td align="left"><b>Posición:</b> {{ $paciente->posicionUtero }}</td>
         </tr>
         <tr>
-          <th align="left"><h2>Medidas: {{ $paciente->medidas }}</h2></th>
+          <td align="left"><b>Medidas:</b> {{ $paciente->medidas }}</td>
         </tr>
         <tr>
-          <th align="left"><h2>Contorno: {{ $paciente->contorno }}</h2></th>
+          <td align="left"><b>Contorno:</b> {{ $paciente->contorno }}</td>
         </tr>
         <tr>
-          <th align="left"><h2>Miometrio: {{$paciente->miometrio}}</h2></th>
+          <td align="left"><b>Miometrio:</b> {{$paciente->miometrio}}</td>
         </tr>
         <tr>
-          <th align="left"><h2>Endometrio: {{$paciente->endometrio}}</h2></th>
+          <td align="left"><b>Endometrio:</b> {{$paciente->endometrio}}</td>
         </tr>
         <tr>  
-          <th align="left"><h2>OVARIOS:</h2></th>
+          <td align="left"><b>OVARIOS:</b></td>
         </tr>
         <tr>
-          <th align="left"><h2>Derecho: {{$paciente->derecho}}</h2></th>
+          <td align="left"><b>Derecho:</b> {{$paciente->derecho}}</td>
         </tr>
         <tr>
-          <th align="left"><h2>Izquierdo: {{$paciente->izquierdo}}</h2></th>
+          <td align="left"><b>Izquierdo:</b> {{$paciente->izquierdo}}</td>
         </tr>
         <tr>
-          <th align="left"><h2>Fondo de Saco: {{$paciente->fondo}}</h2></th>
+          <td align="left"><b>Fondo de Saco:</b> {{$paciente->fondo}}</td>
         </tr>
 
         <tr>  
-          <th align="left"><h2>Diagnostico:{{$paciente->descripcion}}</h2></th>
+          <td colspan="2" align="justify"><b>Diagnostico:</b>{{$paciente->descripcion}}</td>
         </tr>
         <tr>
-          <th align="left"><h2>Firma:  __________________</h2></th>
-          <th align="center"><hr color="black" size=1 width="150"></th>
+          <td colspan="2" align="center" HEIGHT="50" ><h2>Firma:  __________________</h2></td>
         </tr>
         <tr>
-          <th align="center"><h4>Dra.María Griselda Saens</h4></th>
+          <td colspan="2" align="center">Dra.María Griselda Saens</td>
         </tr>
         <tr>
-          <th align="center"><h4>GINECOLOGA ULTRASONOGRAFISTA</h4></th>
+          <td colspan="2" align="center">GINECOLOGA ULTRASONOGRAFISTA</td>
         </tr>
       </table>
     </p>
