@@ -9,7 +9,7 @@ class Examen extends Model
 
 
 protected $fillable = [
-   'idUsuario', 'idReservacion','fechaRealizacion',
+   'idUsuario', 'idReservacion','fechaRealizacion','numeroUsadas','numeroRepetidas','motivoDeRepetidas',
 ];
 protected $table = 'examen';
   protected $primaryKey = 'idExamen';

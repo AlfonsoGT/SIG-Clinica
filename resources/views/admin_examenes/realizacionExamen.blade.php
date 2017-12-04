@@ -99,9 +99,11 @@
             <div class="col-md-6">
               <select required class="form-control" name="nombrePlaca" id="nombrePlaca" onchange="ponerFecha();">
                 <option value="" disabled selected>Elija un tipo de Placa</option>
-                @foreach($tipoPlaca as $placa)
-                <option  value='{{$placa->idPlaca}}'>{{$placa->tipoPlaca}}</option>
-                @endforeach
+                <option  value='8x10'>8x10</option>
+                <option  value='10x12'>10x12</option>
+                <option  value='11x14'>11x14</option>
+                <option  value='14x14'>14x14</option>
+                <option  value='14x17'>14x17</option>
               </select>
             </div>
           </div>

@@ -35,10 +35,10 @@ class ExamenController extends Controller
       ->where('reservacion.idReservacion',$reservacionid)
       ->get();
 
-      $tipoPlaca=DB::table('placa')->select('*')->get();
 
 
-      return view($this->path.'/realizacionExamen')->with('reservacion',$reservacion)->with('tipoPlaca',$tipoPlaca);
+
+      return view($this->path.'/realizacionExamen')->with('reservacion',$reservacion);
     }
 
     /**
@@ -58,18 +58,19 @@ class ExamenController extends Controller
       $examen= new Examen();
       $examen->idusuario=$request->idUser;
       $examen->idReservacion=$request->idReservacion;
+      $examen->tipoPlaca=$request->nombrePlaca;
+      $examen->numeroUsadas=$request->cantidadUsadas;
+      $examen->numeroRepetidas=$request->cantidadRepetidas;
+      $examen->motivoDeRepetidas=$request->motivorepeticion;
       $examen->fechaRealizacion=date('Y-m-d');
       if($examen->save()){
-
-        DB::table('examen_placa')->insert(['idExamen'=>$examen->idExamen,'idPlaca' =>$request->nombrePlaca,
-        'numeroUsadas' => $request->cantidadUsadas,'numeroRepetidas' =>$request->cantidadRepetidas,'motivoDeRepetidas' =>$request->motivorepeticion,]);
         $reservacion= Reservacion::findOrFail($examen->idReservacion);
         $reservacion->realizado=true;
         $id=$reservacion->idCita;
         $reservacion->save();
         return redirect()->action('CitasController@show',['idCita' => $id])->with('msj','Examen Registrado Exitosamente');
       }else{
-        return back()->with();
+        return back()->with('msj2','Examen No Registrado, revise información proporcionada');
       }
 
 
@@ -77,7 +78,7 @@ class ExamenController extends Controller
 
     }catch(Exception $e){
         //return "Fatal error - ".$e->getMessage();
-        return back()->with('msj2','Paciente no registrado, es posible que el DUI PACIENTE ya se encuentra registrado');
+        return back()->with('msj2',' ya se encuentra registrado');
     }
 
 

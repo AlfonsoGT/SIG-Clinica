@@ -21,6 +21,10 @@ class CreateTablaExamen extends Migration
           $table->boolean('hayLectura')->default(false);
           $table->foreign('idReservacion')->references('idReservacion')->on('reservacion');
           $table->date('fechaRealizacion');
+          $table->string('tipoPlaca');
+          $table->integer('numeroUsadas')->nullable();
+          $table->integer('numeroRepetidas')->nullable();
+          $table->string('motivoDeRepetidas')->nullable();
           });
 
 
