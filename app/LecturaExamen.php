@@ -9,6 +9,9 @@ class LecturaExamen extends Model
     //
     protected $fillable = [
         'patologia', 'descripcion','idTipoExamen',
+        'posicionUtero','medidas','contorno',
+        'miometrio','endometrio','derecho',
+        'fondo','izquierdo',
     ];
 
     public $timestamps = false;

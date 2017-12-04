@@ -95,8 +95,10 @@ Route::get('/graficaExamenesRealizadosRegionAnatomica', 'GraficaController@grafi
 Route::resource('/admin_lecturas','LecturaController');
 //Para pasar parametros de la pantalla
 Route::get('/crearLectura/{idExamen}', 'LecturaController@create')->name('crearLectura');
+Route::get('/crearLecturaGinecologica/{idExamen}', 'LecturaController@createGinecologica')->name('crearLecturaGinecologica');
 //descargar pdf
 Route::get('/downloadPDF/{idPaciente},{idLecturaExamen}','LecturaController@downloadPDF');
 //ver pdf
 Route::get('/seePDF/{idExamen}','LecturaController@seePDF')->name('seePDF');
+Route::get('/seePDFGinecologica/{idExamen}','LecturaController@seePDFGinecologica')->name('seePDFGinecologica');
 

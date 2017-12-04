@@ -80,61 +80,93 @@
         </tr>
         <tr>  
           <th align="center"><h2>fecha:</h2></th>
-          +
- +        <?php
- +        if($paciente->mesR==1){
- +          $mes='enero';
- +        }
- +        if($paciente->mesR==2){
- +          $mes='febrero';
- +        }
- +        if($paciente->mesR==3){
- +          $mes='marzo';
- +        }
- +        if($paciente->mesR==4){
- +          $mes='abril';
- +        }
- +        if($paciente->mesR==5){
- +          $mes='mayo';
- +        }
- +        if($paciente->mesR==6){
- +          $mes='junio';
- +        }
- +        if($paciente->mesR==7){
- +          $mes='julio';
- +        }
- +        if($paciente->mesR==8){
- +          $mes='agosto';
- +        }
- +        if($paciente->mesR==9){
- +          $mes='septiembre';
- +        }
- +        if($paciente->mesR==10){
- +          $mes='octubre';
- +        }
- +        if($paciente->mesR==11){
- +          $mes='noviembre';
- +        }
- +        if($paciente->mesR==12){
- +          $mes='diciembre';
- +        }
- +          ?>
- +           <tr>
- +          <th align="center"><h2>{{$paciente->diaR}} de <?php echo($mes)?> del {{$paciente->anioR}} </h2></th>
+          <?php
+        if($paciente->mesR==1){
+          $mes='enero';
+        }
+        if($paciente->mesR==2){
+          $mes='febrero';
+        }
+        if($paciente->mesR==3){
+          $mes='marzo';
+        }
+        if($paciente->mesR==4){
+          $mes='abril';
+        }
+        if($paciente->mesR==5){
+          $mes='mayo';
+        }
+        if($paciente->mesR==6){
+          $mes='junio';
+        }
+        if($paciente->mesR==7){
+          $mes='julio';
+        }
+        if($paciente->mesR==8){
+          $mes='agosto';
+        }
+        if($paciente->mesR==9){
+          $mes='septiembre';
+        }
+        if($paciente->mesR==10){
+          $mes='octubre';
+        }
+        if($paciente->mesR==11){
+          $mes='noviembre';
+        }
+        if($paciente->mesR==12){
+          $mes='diciembre';
+        }
+          ?>
+
+          <tr>
+        <th align="center"><h2>{{$paciente->diaR}} de <?php echo($mes)?> del {{$paciente->anioR}} </h2></th>
 
         </tr>
         <tr>  
-          <th align="left"><h2>Diagnostico:</h2></th>
+          <th align="left"><h2>UTERO:</h2></th>
+
+        </tr>
+        <tr>
+          <th align="left"><h2>Posición: {{ $paciente->posicionUtero }}</h2></th>
+        </tr>
+        <tr>
+          <th align="left"><h2>Medidas: {{ $paciente->medidas }}</h2></th>
+        </tr>
+        <tr>
+          <th align="left"><h2>Contorno: {{ $paciente->contorno }}</h2></th>
+        </tr>
+        <tr>
+          <th align="left"><h2>Miometrio: {{$paciente->miometrio}}</h2></th>
+        </tr>
+        <tr>
+          <th align="left"><h2>Endometrio: {{$paciente->endometrio}}</h2></th>
+        </tr>
+        <tr>  
+          <th align="left"><h2>OVARIOS:</h2></th>
+        </tr>
+        <tr>
+          <th align="left"><h2>Derecho: {{$paciente->derecho}}</h2></th>
+        </tr>
+        <tr>
+          <th align="left"><h2>Izquierdo: {{$paciente->izquierdo}}</h2></th>
+        </tr>
+        <tr>
+          <th align="left"><h2>Fondo de Saco: {{$paciente->fondo}}</h2></th>
+        </tr>
+
+        <tr>  
+          <th align="left"><h2>Diagnostico:{{$paciente->descripcion}}</h2></th>
         </tr>
         <tr>
           <th align="left"><h2>Firma:  __________________</h2></th>
           <th align="center"><hr color="black" size=1 width="150"></th>
         </tr>
         <tr>
-          <th align="center"><4>Dra.María Griselda Saens</h4></th>
+          <th align="center"><h4>Dra.María Griselda Saens</h4></th>
         </tr>
         <tr>
-          <th align="center"><h4>GINECOLOGA ULTRASONOGRAFISTA></h4></th>
+          <th align="center"><h4>GINECOLOGA ULTRASONOGRAFISTA</h4></th>
         </tr>
       </table>
     </p>

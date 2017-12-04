@@ -29,10 +29,12 @@ class LecturaController extends Controller
         ->join('pacientes','pacientes.idPaciente','=','reservacion.idPaciente')
         ->join('regionAnatomica','regionAnatomica.idRegionAnatomica','=','reservacion.idRegionAnatomica')
         ->join('tipoExamen','tipoExamen.idTipoExamen','=','regionAnatomica.idTipoExamen')
-        ->select('examen.*','pacientes.*','reservacion.*','regionAnatomica.*','tipoExamen.*')->paginate(10);
+        ->select('examen.*','pacientes.*','reservacion.*','regionAnatomica.*','tipoExamen.*')
+        ->orderBy('idExamen', 'desc')->paginate(10);
         $examen = DB::table('tipoExamen')
         ->select('tipoExamen.*')
         ->get();
+
         return view($this->path.'/lecturas')->with('examenesNoLectura',$examenesNoLectura)->with('examen',$examen);
 
     }
@@ -54,6 +56,18 @@ class LecturaController extends Controller
         ->get();
         return view($this->path.'/crearLectura')->with('examenesNoLectura',$examenesNoLectura);
     }
+    public function createGinecologica($idExamen)
+    {
+        $examenesNoLectura = DB::table('examen')
+        ->join('reservacion','reservacion.idReservacion','=','examen.idReservacion')
+        ->join('pacientes','pacientes.idPaciente','=','reservacion.idPaciente')
+        ->join('regionAnatomica','regionAnatomica.idRegionAnatomica','=','reservacion.idRegionAnatomica')
+        ->join('tipoExamen','tipoExamen.idTipoExamen','=','regionAnatomica.idTipoExamen')
+        ->select('examen.*','pacientes.*','reservacion.*','regionAnatomica.*','tipoExamen.*')
+        ->where('examen.idExamen','=',$idExamen)
+        ->get();
+        return view($this->path.'/crearLecturaUltra')->with('examenesNoLectura',$examenesNoLectura);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -64,10 +78,23 @@ class LecturaController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request,[
+            'patologia' => 'required',
+            'descripcion' => 'required',
+            
+        ]);
         $lectura = new LecturaExamen ();
         $lectura->idExamen = $request->idExamen;
         $lectura->patologia = $request->patologia;
         $lectura->descripcion = $request->descripcion;
+        $lectura->posicionUtero= $request->posicionUtero;
+        $lectura->medidas = $request->medidas;
+        $lectura->contorno = $request->contorno;
+        $lectura->miometrio= $request->miometrio;
+        $lectura->endometrio =$request->endometrio;
+        $lectura->derecho =$request->derecho;
+        $lectura->izquierdo= $request->izquierdo;
+        $lectura->fondo = $request->fondo;
 
         $examen=Examen::findOrFail($request->idExamen);
         if($examen->hayLectura==false){
@@ -150,6 +177,30 @@ class LecturaController extends Controller
        // dd($lectura);
 
       $pdf = PDF::loadView($this->path.'/pdf', compact('lectura'));
+      return $pdf->stream('lectura.pdf');
+
+
+    }
+     public function seePDFGinecologica($idExamen){
+
+
+        $lectura = DB::table('lectura')
+        ->join('examen','examen.idExamen','=','lectura.idExamen')
+        ->join('reservacion','reservacion.idReservacion','=','examen.idReservacion')
+        ->join('pacientes','pacientes.idPaciente','=','reservacion.idPaciente')
+        ->join('sexo','sexo.idSexo','=','pacientes.idSexo')
+        ->join('regionAnatomica','regionAnatomica.idRegionAnatomica','=','reservacion.idRegionAnatomica')
+        ->join('tipoExamen','tipoExamen.idTipoExamen','=','regionAnatomica.idTipoExamen')
+        ->select('examen.*','pacientes.*','reservacion.*','regionAnatomica.*','tipoExamen.*','lectura.*','sexo.*',
+        DB::raw('year(examen.fechaRealizacion)-year(pacientes.fechaNacimiento) as edadPaciente'),
+        DB::raw('year(examen.fechaRealizacion) as anioR'),
+        DB::raw('month(examen.fechaRealizacion) as mesR' ),
+        DB::raw('day(examen.fechaRealizacion) as diaR'))
+        ->where('examen.idExamen','=',$idExamen)
+        ->get();
+       // dd($lectura);
+
+      $pdf = PDF::loadView($this->path.'/pdfGinecologica', compact('lectura'));
       return $pdf->stream('lectura.pdf');
 
 
