@@ -49,7 +49,7 @@ class EntradaController extends Controller
      */
     public function create()
     {
-        $tipoMaterial =DB::table('tipomaterial')->select('idTipoMaterial', 'nombreTipoMaterial')->get();
+        $tipoMaterial =DB::table('tipoMaterial')->select('idTipoMaterial', 'nombreTipoMaterial')->get();
         $tipoUnidad =DB::table('tipoUnidad')->select('idTipoUnidad', 'nombreTipoUnidad')->get();
         return view($this->path.'/crearMaterialEntrada')->with('tipoMaterial',$tipoMaterial)->with('tipoUnidad',$tipoUnidad);
     }
