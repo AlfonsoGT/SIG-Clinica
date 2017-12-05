@@ -25,7 +25,7 @@ class CreateTablaReservacion extends Migration
             $table->integer('idCita')->unsigned();
             $table->foreign('idCita')->references('idCita')->on('citas');
             $table->integer('idRegionAnatomica')->unsigned();
-            $table->foreign('idRegionAnatomica')->references('idRegionAnatomica')->on('regionAnatomica');
+            $table->foreign('idRegionAnatomica')->references('idRegionAnatomica')->on('regionanatomica');
             $table->integer('idPaciente')->unsigned();
             $table->foreign('idPaciente')->references('idPaciente')->on('pacientes');
             $table->boolean('realizado')->default(false);

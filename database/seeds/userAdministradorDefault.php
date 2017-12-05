@@ -36,7 +36,7 @@ class userAdministradorDefault extends Seeder
     DB::table('permission_role')->insert(['role_id'=>'1','permission_id'=>'17']);
     DB::table('permission_role')->insert(['role_id'=>'1','permission_id'=>'18']);
     DB::table('permission_role')->insert(['role_id'=>'1','permission_id'=>'19']);
-    DB::table('permission_role')->insert(['role_id'=>'1','permission_id'=>'20']);
+    
 
     }
 }

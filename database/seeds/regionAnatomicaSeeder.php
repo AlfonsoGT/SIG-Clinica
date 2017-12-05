@@ -12,44 +12,44 @@ class regionAnatomicaSeeder extends Seeder
     public function run()
     {
         //Torax
-         DB::table('regionAnatomica')->insert(['nombreRegionAnatomica'=>'Torax',
+         DB::table('regionanatomica')->insert(['nombreRegionAnatomica'=>'Torax',
             'idTipoExamen' => '1',]);
          //Misacelaneas
-         DB::table('regionAnatomica')->insert(['nombreRegionAnatomica'=>'Cuello',
+         DB::table('regionanatomica')->insert(['nombreRegionAnatomica'=>'Cuello',
             'idTipoExamen' => '2',]);
-         DB::table('regionAnatomica')->insert(['nombreRegionAnatomica'=>'Hombro',
+         DB::table('regionanatomica')->insert(['nombreRegionAnatomica'=>'Hombro',
             'idTipoExamen' => '2',]);
-         DB::table('regionAnatomica')->insert(['nombreRegionAnatomica'=>'Brazo',
+         DB::table('regionanatomica')->insert(['nombreRegionAnatomica'=>'Brazo',
             'idTipoExamen' => '2',]);
-         DB::table('regionAnatomica')->insert(['nombreRegionAnatomica'=>'Codo',
+         DB::table('regionanatomica')->insert(['nombreRegionAnatomica'=>'Codo',
             'idTipoExamen' => '2',]);
-         DB::table('regionAnatomica')->insert(['nombreRegionAnatomica'=>'Antebrazo',
+         DB::table('regionanatomica')->insert(['nombreRegionAnatomica'=>'Antebrazo',
             'idTipoExamen' => '2',]);
-         DB::table('regionAnatomica')->insert(['nombreRegionAnatomica'=>'Muñeca',
+         DB::table('regionanatomica')->insert(['nombreRegionAnatomica'=>'Muñeca',
             'idTipoExamen' => '2',]);
-         DB::table('regionAnatomica')->insert(['nombreRegionAnatomica'=>'Mano',
+         DB::table('regionanatomica')->insert(['nombreRegionAnatomica'=>'Mano',
             'idTipoExamen' => '2',]);
-         DB::table('regionAnatomica')->insert(['nombreRegionAnatomica'=>'Gluteo',
+         DB::table('regionanatomica')->insert(['nombreRegionAnatomica'=>'Gluteo',
             'idTipoExamen' => '2',]);
-         DB::table('regionAnatomica')->insert(['nombreRegionAnatomica'=>'Muslo',
+         DB::table('regionanatomica')->insert(['nombreRegionAnatomica'=>'Muslo',
             'idTipoExamen' => '2',]);
-         DB::table('regionAnatomica')->insert(['nombreRegionAnatomica'=>'Rodilla',
+         DB::table('regionanatomica')->insert(['nombreRegionAnatomica'=>'Rodilla',
             'idTipoExamen' => '2',]);
-         DB::table('regionAnatomica')->insert(['nombreRegionAnatomica'=>'Pierna',
+         DB::table('regionanatomica')->insert(['nombreRegionAnatomica'=>'Pierna',
             'idTipoExamen' => '2',]);
-         DB::table('regionAnatomica')->insert(['nombreRegionAnatomica'=>'Tobillo',
+         DB::table('regionanatomica')->insert(['nombreRegionAnatomica'=>'Tobillo',
             'idTipoExamen' => '2',]);
-         DB::table('regionAnatomica')->insert(['nombreRegionAnatomica'=>'Pie',
+         DB::table('regionanatomica')->insert(['nombreRegionAnatomica'=>'Pie',
             'idTipoExamen' => '2',]);
-         DB::table('regionAnatomica')->insert(['nombreRegionAnatomica'=>'Cabeza',
+         DB::table('regionanatomica')->insert(['nombreRegionAnatomica'=>'Cabeza',
             'idTipoExamen' => '2',]);
          //Ultra abdomen
-         DB::table('regionAnatomica')->insert(['nombreRegionAnatomica'=>'Abdomen',
+         DB::table('regionanatomica')->insert(['nombreRegionAnatomica'=>'Abdomen',
             'idTipoExamen' => '3',]);
          //Ultra Ginecologica
-         DB::table('regionAnatomica')->insert(['nombreRegionAnatomica'=>'Ovarios',
+         DB::table('regionanatomica')->insert(['nombreRegionAnatomica'=>'Ovarios',
             'idTipoExamen' => '4',]);
-         DB::table('regionAnatomica')->insert(['nombreRegionAnatomica'=>'Útero',
+         DB::table('regionanatomica')->insert(['nombreRegionAnatomica'=>'Útero',
             'idTipoExamen' => '4',]);
     }
 }
