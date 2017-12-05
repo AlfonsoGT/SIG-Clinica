@@ -201,9 +201,9 @@ class SalidasController extends Controller
             ->groupBy('tipoUnidad.idTipoUnidad')
             ->get();
         //dd($sumaTotal);
-            $TipoUnidadTodo = DB::table('tipoMaterial')
-            ->join('tipoUnidad','tipoUnidad.idTipoMaterial','=','tipoMaterial.idTipoMaterial')
-            ->select('tipoUnidad.*','tipoMaterial.*')
+            $TipoUnidadTodo = DB::table('tipomaterial')
+            ->join('tipoUnidad','tipoUnidad.idTipoMaterial','=','tipomaterial.idTipoMaterial')
+            ->select('tipoUnidad.*','tipomaterial.*')
             ->get();
             $sumaTotal = DB::table('material')
             ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
