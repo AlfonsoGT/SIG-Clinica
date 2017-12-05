@@ -48,8 +48,8 @@ class SalidasController extends Controller
      */
     public function create()
     {
-        $tipoMaterial =DB::table('tipoMaterial')->select('idTipoMaterial', 'nombreTipoMaterial')->get();
-        $tipoUnidad =DB::table('tipoUnidad')->select('idTipoUnidad', 'nombreTipoUnidad')->get();
+        $tipoMaterial =DB::table('tipomaterial')->select('idTipomaterial', 'nombreTipoMaterial')->get();
+        $tipoUnidad =DB::table('tipounidad')->select('idTipoUnidad', 'nombreTipoUnidad')->get();
         return view($this->path.'/crearMaterial')->with('tipoMaterial',$tipoMaterial)->with('tipoUnidad',$tipoUnidad);
 
     }
@@ -257,9 +257,9 @@ class SalidasController extends Controller
          //recuperar de la base el elemento que queremos borrar en base al ID que recibimos en la URL con el unico fin de mostrar el detalle
          $material = Material::find($idMaterial);
          $detalleMaterial = DB::table('material')
-        ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipounidad')
-        ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
-        ->select('tipoUnidad.*','tipoMaterial.*','material.*')
+        ->join('tipounidad','tipoUnidad.idTipoUnidad','=','material.idTipounidad')
+        ->join('tipomaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+        ->select('tipounidad.*','tipomaterial.*','material.*')
         ->where('material.idMaterial',$material->idMaterial)
         ->get();
         return view($this->path.'/vista_borrarMaterial')->with('material', $material)->with('detalleMaterial',$detalleMaterial);
@@ -270,9 +270,9 @@ class SalidasController extends Controller
     }
       public function getTipoUnidad($idTipoMaterial)
     {
-        $unidades= DB::table('tipoUnidad')
-        ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
-        ->where('tipoUnidad.idTipoMaterial','=',$idTipoMaterial)
+        $unidades= DB::table('tipounidad')
+        ->join('tipomaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+        ->where('tipounidad.idTipoMaterial','=',$idTipoMaterial)
         ->select('tipoUnidad.*')->get();
         return $unidades;
     }
