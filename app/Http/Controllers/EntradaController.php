@@ -131,7 +131,7 @@ class EntradaController extends Controller
         $detalleEntradas = DB::table('material')
           ->join('entrada', 'entrada.idEntrada', '=', 'material.idEntrada')
           ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
-          ->join('tipomaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+          ->join('tipomaterial','tipomaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
           ->select('tipoUnidad.*','entrada.*','material.*','tipomaterial.*')
           ->where('entrada.idEntrada',$entrada->idEntrada)
           ->paginate(5);

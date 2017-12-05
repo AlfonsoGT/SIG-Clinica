@@ -87,7 +87,7 @@ class SalidasController extends Controller
             $conteo =DB::table('entrada')
             ->join('material','material.idEntrada','=','material.idEntrada')
             ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
-            ->join('tipomaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+            ->join('tipomaterial','tipomaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
             ->select('material.cantidadMaterial','material.cantidadUnidadMaterial')
             ->where('tipoUnidad.idTipoMaterial','=',$request->tipoMaterial)
             ->where('material.idTipoUnidad','=',$request->tipoUnidad)
