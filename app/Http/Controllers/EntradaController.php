@@ -28,7 +28,7 @@ class EntradaController extends Controller
         foreach ($entradas as $entrada) {
             $aux = DB::table('material')
             ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
-            ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+            ->join('tipomaterial','tipomaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
             ->join('entrada','entrada.idEntrada','=','material.idEntrada')
             ->where([['entrada.idEntrada','=',$entrada->idEntrada]])
             ->select(DB::raw('SUM(material.cantidadMaterial) as cantidadUnidad,SUM(material.cantidadUnidadMaterial) as cantidadUn,tipoUnidad.idTipoMaterial,material.idEntrada'))
