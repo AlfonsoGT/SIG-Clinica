@@ -3,7 +3,7 @@
 @section('content')
 
 <section>
-	@can('control_pacientes')
+	@can('ver_pacientes')
 	<div class="container" id="panelAdminPacientes">
 		<div class="row">
 			<div class="panel panel-default">
@@ -36,7 +36,7 @@
 						 <table class="table table-striped table-hover table-bordered">
 							<thead>
 								<tr>
-									
+
 									<th class="text-center">DUI Paciente</th>
 									<th class="text-center">Nombre de Paciente</th>
 									<th class="text-center">Fecha de Nacimiento</th>
@@ -48,7 +48,7 @@
 							<tbody>
 							@foreach($pacientes as $paciente)
 										<tr>
-											
+
 											<td class="text-center">{{ $paciente->duiPaciente }}</a> </td>
 											<td class="text-center"> {{ $paciente->primerNombre }} {{ $paciente->segundoNombre }} {{ $paciente->primerApellido }} {{ $paciente->segundoApellido}}</td>
 											<td class="text-center">
@@ -62,7 +62,7 @@
 											<a href="{{ route('admin_pacientes.edit',$paciente->idPaciente) }}" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-pencil"></span>Editar</a>
 											<a href="{{ route('admin_pacientes.show',$paciente->idPaciente) }}" target="_blank" class="btn btn-success btn-sm">
-												<span class="glyphicon glyphicon-eye-open"></span>Ver</a>	
+												<span class="glyphicon glyphicon-eye-open"></span>Ver</a>
 
 											</td>
 										</tr>

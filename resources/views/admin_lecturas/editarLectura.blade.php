@@ -3,7 +3,7 @@
 @section('content')
 
 <section>
-	@can('control_pacientes')
+	@can('generar_lectura')
 	<div class="alert alert-info" role="alert">
 		<strong>Actualizar datos de Lectura</strong>
 	</div>
@@ -37,10 +37,10 @@
 							<input type="hidden" name="_method" value="PUT">
 							<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
 
-							
 
 
-                            
+
+
 
                             <div class="form-group">
 								<label for="tipoExamen" class="col-md-4 control-label">Tipo de Examen</label>
@@ -51,9 +51,9 @@
 										@foreach($tExamenes as $tExamen)
 										<option  value='{{ $tExamen->idTipoExamen }}'
                                              @if ($tExamen->idTipoExamen == $paciente->idTipoExamen)
-                                                   selected 
+                                                   selected
                                              @endif
-                                         
+
 										> {{ $tExamen->nombreTipoExamen }} </option>
 										@endforeach
 
@@ -75,19 +75,19 @@
 								</fieldset>
 								</div>
 							</div>
-							
-							
+
+
                            <div class="form-group">
 								<label for="descripcion" class="col-md-4 control-label">Descripción</label>
 								<div class="col-md-6">
 									<textarea id="descripcion"  class ="form-control" name="descripcion" rows="5" cols="50" value= "{{ $pacientes->descripcion }}"></textarea>
 								</div>
-								
+
 							</div>
 
 
 
-							
+
 
 							<div class="form-group">
 								<div class="col-lg-offset-4 col-lg-2">

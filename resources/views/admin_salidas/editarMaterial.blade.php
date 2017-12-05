@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+	@can('ingreso_material_salida')
 <div class="container">
     <div id="loginbox" style="margin-top:30px">
         <div class="panel panel-primary" >
@@ -27,7 +28,7 @@
                         <div class="form-group {{ $errors->has('fecha') ? ' has-error' : '' }}">
                                 <label for="fecha" class="col-md-4 control-label">Fecha de Uso</label>
                                 <div class="col-md-6">
-                                    <input id="fecha" type="date" class="form-control" name="fecha" value="{{ $material->fecha }}" " required autofocus>
+                                    <input id="fecha" type="date" class="form-control" name="fecha" value="{{ $material->fecha }}" required autofocus>
                                     @if ($errors->has('fecha'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('fecha') }}</strong>
@@ -46,7 +47,7 @@
                                        @foreach($tipoMaterialNoSeleccionado as $material)
                                         <option  value='{{ $material->idTipoMaterial}}'> {{ $material->nombreTipoMaterial }} </option>
                                         @endforeach
-                                       
+
                                     </select>
                                 </div>
                             </div>
@@ -61,7 +62,7 @@
                                        @foreach($tipoUnidadNoSeleccionado  as $unidad2)
                                         <option  value='{{ $unidad2->idTipoUnidad}}'> {{ $unidad2->nombreTipoUnidad }} </option>
                                         @endforeach
-                                       
+
                                     </select>
                                 </div>
                             </div>
@@ -72,7 +73,7 @@
                                     </button>
                                      <a href="{{ url('/admin_salidas') }}" class="btn btn-warning btn-sm">
                                     <span class="glyphicon glyphicon-list-alt"></span>Regresar a ver Registros</a>
-                                    
+
                                 </div>
                             </div>
                     </form>
@@ -80,4 +81,10 @@
     </div>
 </div>
 </div>
+@else
+<div class="alert alert-danger">
+<strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+</div>
+@endcan
+
 @endsection

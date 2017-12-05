@@ -40,17 +40,17 @@
                 </div>
                 <div class="mbr-section__container mbr-section__container--middle">
                     <div class="mbr-article mbr-article--wysiwyg">
-                        @can('control_pacientes')
+                        @can('ver_pacientes')
                         <div class="mbr-buttons mbr-buttons--center"><a href="{{ url('/admin_pacientes') }}" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">
                         <span class="glyphicon glyphicon-list-alt"></span>Gestión de Expedientes</a></div>
                         <br>
                         @endcan
-                        @can('control_citas')
+                        @can('ver_citas')
                         <div class="mbr-buttons mbr-buttons--center"><a href="{{ url('/admin_citas') }}" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">
                         <span class="glyphicon glyphicon-list-alt"></span>Gestión de Citas</a></div>
                         <br>
                         @endcan
-                        @can('control_usuarios')
+                        @can('ver_usuarios')
                         <div class="mbr-buttons mbr-buttons--center"><a href="{{ url('/admin_users') }}" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">
                         <span class="glyphicon glyphicon-list-alt"></span>Gestión de Usuarios</a></div>
                         <br>

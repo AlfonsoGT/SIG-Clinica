@@ -2,7 +2,7 @@
 
 @section('content')
 <section>
-	@can('control_pacientes')
+	@can('crear_pacientes')
 	<div class="alert alert-info" role="alert">
 		<strong>Ingresar datos del Paciente</strong>
 	</div>

@@ -4,7 +4,7 @@
 @section('content')
 
 <section>
-@can('control_pacientes')
+@can('ver_pacientes')
 <div class="container">
 	<div id="loginbox" style="margin-top:30px">
 		<div class="panel panel-primary" >
@@ -23,7 +23,7 @@
 					<table class="table table-striped table-hover table-bordered">
 						<thead>
 							<tr>
-								
+
 								<th class="text-center">DUI Paciente</th>
 								<th class="text-center">Nombres</th>
 								<th class="text-center">Apellidos</th>
@@ -35,7 +35,7 @@
 						<tbody>
 							@foreach($pacientes as $paciente)
 							<tr>
-								
+
 								<td class="text-center">{{ $paciente->duiPaciente }}</td>
 								<td class="text-center"> {{ $paciente->primerNombre }} {{ $paciente->segundoNombre }} </td>
 								<td class="text-center"> {{ $paciente->primerApellido }} {{ $paciente->segundoApellido}}</td>
@@ -82,19 +82,19 @@
 				<a href="{{ route('admin_pacientes.edit',$paciente->idPaciente) }}" class="btn btn-info btn-sm">
 					<span class="glyphicon glyphicon-pencil"></span>Editar información</a>
 
-					@can('control_citas')
+					@can('asignar_citas')
 					<a href="{{ route('tomarIdPaciente',$paciente->idPaciente) }}" class="btn btn-info btn-sm" id="asignar">
 						<span class="glyphicon glyphicon-wrench"></span>Asignar Cita</a>
 						@endcan
 
-						@can('modificar_perfil_paciente')
+						@can('inhabilitar_pacientes')
 						<a href="{{ route('inactivar',$paciente->idPaciente) }}" class="btn btn-info btn-sm" id="pac_inhabilitado">
 								<span class="glyphicon glyphicon-remove"></span>inhabilitar perfil </a>
 								@endcan
 
 								@else
 
-								@can('modificar_perfil_paciente')
+								@can('inhabilitar_pacientes')
 								<a href="{{ route('activar',$paciente->idPaciente) }}" class="btn btn-info btn-sm" id="pac_habilitado">
 									<span class="glyphicon glyphicon-link"></span>habilitar perfil </a>
 									@endcan
@@ -135,7 +135,7 @@
 													<td class="text-center"> {{ $reservacion->nombreRegionAnatomica}} </td>
 													<td>
 
-														@can('control_citas')
+														@can('asignar_citas')
 														@if($reservacion->realizado==0)
 														<a href="{{ route('tomarIdPacienteUpdate',[$paciente->idPaciente, $reservacion->idReservacion] ) }}" class="btn btn-info btn-sm">
 															<span class="glyphicon glyphicon-pencil"></span>Editar</a>
@@ -146,7 +146,7 @@
 															<a href="{{ route('admin_reservaciones.show',$reservacion->idReservacion) }}" class="btn btn-success btn-sm">
 																<span class="glyphicon glyphicon-eye-open"></span>Ver</a>
 
-																@can('control_citas')
+																@can('asignar_citas')
 																@if($reservacion->realizado==0)
 																<a href="{{ route('vista_borrar',[$reservacion->idPaciente, $reservacion->idReservacion]) }} "  class="btn btn-danger btn-sm">
 																		<span class="glyphicon glyphicon-trash"></span>Borrar</a>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-	@can('control_usuarios')
+	@can('crear_usuarios')
 @if(session()->has('msj2'))
 <div class="alert alert-success" role="alert">{{session('msj2')}}</div>
 @endif
@@ -83,7 +83,7 @@
 														</select>
 													</div>
 												</div>
-												
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                <button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-floppy-disk"></span>Guardar Usuario</button>

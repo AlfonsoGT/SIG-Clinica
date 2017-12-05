@@ -3,7 +3,7 @@
 @section('content')
 
 <section>
-	@can('control_citas')
+	@can('ver_citas')
 	<div class="container">
 		<div id="loginbox" style="margin-top:30px">
 			<div class="panel panel-primary" >
@@ -98,8 +98,10 @@
 						 @endif
 						 <td>
 							 @if($reservacion->realizado==0)
+							   @can('realizar_examen')
 						 <a href="{{ route('crearcita',$reservacion->idReservacion) }}" class="btn btn-info btn-sm">
 							 <span class="glyphicon glyphicon-pencil"></span>Realizar Examen</a>
+							 @endcan
 							 @endif
 						<a href="{{ route('admin_pacientes.show',$reservacion->idPaciente) }}" target="_blank" class="btn btn-success btn-sm">
 							<span class="glyphicon glyphicon-eye-open"></span>Ver Expediente</a>

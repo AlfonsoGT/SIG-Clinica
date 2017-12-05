@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-@can('control_citas')
+@can('asignar_citas')
 <script type="text/javascript" src="{{ asset('js/fechasCitas.js')}}"></script>
 <div class="container">
     <div id="loginbox" style="margin-top:30px">

@@ -2,7 +2,7 @@
 
 @section('content')
 <section>
-	@can('control_pacientes')
+	@can('generar_lectura')
 	<div class="alert alert-info" role="alert">
 		<strong>Ingresar datos de Lectura </strong>
 	</div>
@@ -68,15 +68,15 @@
 								</fieldset>
 								</div>
 							</div>
-							
+
 							<div class="form-group">
 								<label for="descripcion" class="col-md-4 control-label">Descripción</label>
 								<div class="col-md-6">
 									<textarea id="descripcion"  class ="form-control" name="descripcion" rows="5" cols="50"></textarea>
 								</div>
-								
+
 							</div>
-							
+
 
 							<div class="form-group">
 								<div class="col-md-6 col-md-offset-4">

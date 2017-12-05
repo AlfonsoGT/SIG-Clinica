@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+  @can('realizar_examen')
 <script type="text/javascript" src="{{ asset('js/jquery-2.1.0.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/validarFechaExamen.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/validarRepetidas.js')}}"></script>
@@ -177,5 +178,9 @@
 <strong>ESTE EXAMEN YA FUE REALIZADO Y REGISTRADO</strong>
 </div>
 @endif
-
+@else
+<div class="alert alert-danger">
+  <strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+</div>
+@endcan
 @endsection

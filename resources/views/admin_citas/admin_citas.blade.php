@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@can('control_citas')
+@can('ver_citas')
     <section>
         <div class="container" id="panelAdminRoles">
             <div class="row">
@@ -37,7 +37,7 @@
                                 <thead>
                                 <tr>
 
-                                    
+
                                     <th class="text-center">Tipo de Examen</th>
                                     <th class="text-center">Hora de Cita</th>
                                     <th class="text-center">Fecha de Cita</th>
@@ -48,7 +48,7 @@
                                 <tbody>
                                 @foreach($citas as $cita)
                                     <tr>
-                                        
+
                                         <td class="text-center">{{ $cita->nombreTipoExamen}}</td>
                                         <td class="text-center"> {{ $cita->horaCita }} </td>
                                         <td class="text-center"> <?php
@@ -75,7 +75,7 @@
                                         </td>
                                         <td>
                                         @if( $cita->habilitado == 1)
-                                            
+
                                              <a href="{{ route('admin_citas.show',$cita->idCita) }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open"></span>Ver Cita</a>
                                              <form method="POST" action="{{ route('admin_citas.destroy', $cita->idCita) }} " style='display: inline;'>
                                             <!--<input type="hidden" name="_method" value="DELETE">
@@ -83,7 +83,7 @@
                                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('está seguro que desea eliminar?')">
                                                 <span class="glyphicon glyphicon-trash"></span>Borrar</button></form>-->
                                         @else
-                                                
+
                                                 <a href="{{ route('admin_citas.show',$cita->idCita) }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open"></span>Ver Cita</a>
                                                 <!--<a class="btn btn-danger btn-sm" id="inhabilitado"><span class="glyphicon glyphicon-trash"></span>Borrar</a>-->
                                         @endif

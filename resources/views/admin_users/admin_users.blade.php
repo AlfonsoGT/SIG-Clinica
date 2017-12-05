@@ -3,11 +3,11 @@
 @section('content')
 
 <section>
-	@can('control_usuarios')
+	@can('ver_usuarios')
 	<div class="alert alert-info">
 		<strong>Lista Usuarios</strong>
 	</div>
-	
+
 
 	<div class="container" id="panelAdminUsers">
 		<div class="row">
@@ -58,13 +58,19 @@
 											<td class="text-center"> {{ $user->username }} </td>
 											<td>
 											<a href="{{ route('admin_users.edit',$user->id) }}" class="btn btn-info btn-sm">
+												@can('editar_usuarios')
 											<span class="glyphicon glyphicon-pencil"></span>Editar</a>
+											@endcan
+											@can('ver_usuarios')
 											<a href="{{ route('admin_users.show',$user->id) }}" class="btn btn-success btn-sm">
 											<span class="glyphicon glyphicon-eye-open"></span>Ver</a>
+											@endcan
+											@can('borrar_usuarios')
 											<form method="GET" action="{{ route('vista_borrarUsuarios',$user->id) }}
 											 " style='display: inline;'>
 											<button type="submit" class="btn btn-danger btn-sm">
 											<span class="glyphicon glyphicon-trash"></span>Borrar</button></form>
+											@endcan
 											</td>
 										</tr>
 							@endforeach

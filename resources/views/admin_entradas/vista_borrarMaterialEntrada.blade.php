@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+  @can('generar_graficos')
 <div class="container">
 <div class="row">
 <div class="col-lg-12">
@@ -11,8 +12,8 @@
         <form class="form" method="post" action="{{ route('admin_entradas.destroy', $material->idMaterial) }} ">
      <input type="hidden" name="_method" value="DELETE">
             {{ csrf_field() }}
-     				   
-     	@foreach($detalleMaterial as $material)    
+
+     	@foreach($detalleMaterial as $material)
            <h1>Desea eliminar el tipo de Material de :{{ $material->nombreTipoMaterial}} con fecha de Adquisición: {{$material->fecha}} , tipo de Unidad: {{$material->nombreTipoUnidad}} y cantidad de Cajas: {{$material->cantidadMaterial}}</h1>
            @endforeach
       		 <div class="form-group">
@@ -27,5 +28,9 @@
 </div>
 </div>
 </div>
-
+@else
+<div class="alert alert-danger">
+  <strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+</div>
+@endcan
 @endsection

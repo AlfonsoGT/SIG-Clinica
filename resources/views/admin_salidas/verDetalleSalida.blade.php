@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-
+	@can('ingreso_material_salida')
     <section>
         <div class="container" id="panelAdminProductos">
             <div class="row">
                 <div class="panel panel-default">
-                
+
                     <div class="panel-heading">Detalle de Materiales Usados en el mes</div>
                     <div class="panel-body">
-                       
+
 
                         <h2 style="display: inline;">Detalle de Usados Materiales</h2>
-                   
+
                         <!--tabla 1-->
                 <div class="table-responsive">
                     <table class="table table-striped table-hover table-bordered">
@@ -61,23 +61,23 @@
                                                 $cantidadTotal = $cantidadCajas*$cantidadUnidad;
                                                  print_r( $cantidadTotal );
                                                 ?>
-                                  
-                                                 @endif 
+
+                                                 @endif
                                                 @endforeach</td>
                                         <td class="text-center">
                                              @foreach($sumaTotalSalidas as $suma)
                                                 @if($suma->idTipoUnidad == $detalle->idTipoUnidad)
                                                 <?php
                                                 $cantidadCajas =  $suma->cantidadUnidad;
-                                               
+
                                                  print_r( $cantidadCajas);
                                                 ?>
-                                  
-                                                 @endif 
+
+                                                 @endif
                                                 @endforeach
                                         </td>
                                         <td class="text-center">
-                                             @foreach($sumaTotal as $suma)  
+                                             @foreach($sumaTotal as $suma)
                                                 @foreach($sumaTotalSalidas as $suma2)
                                                 @if($suma->idTipoUnidad == $detalle->idTipoUnidad && $suma2->idTipoUnidad == $detalle->idTipoUnidad)
                                                 <?php
@@ -88,20 +88,20 @@
                                                 $cantidadRestante = $cantidadTotal-$cantidad;
                                                  print_r( $cantidadRestante);
                                                 ?>
-                
-                                              @endif 
+
+                                              @endif
                                                 @endforeach
                                              @endforeach
                                         </td>
-                                       
+
                                        </tr>
                                  @endforeach
                                 </tbody>
-                                
+
                             </table>
                         </div>
                <a href="{{ route('admin_salidas.create')}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-paperclip"></span>Ingresar Uso de Material</a>
-                        
+
                          <a href="{{ url('/admin_salidas') }}" class="btn btn-warning btn-sm">
                         <span class="glyphicon glyphicon-list-alt"></span>Regresar a Registros</a>
                     <br><br>
@@ -112,7 +112,7 @@
                 @if(session()->has('msj2'))
                                     <div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
                                     @endif
-                       
+
                         <div class="table-responsive">
                             <table class="table table-striped table-hover table-bordered">
                                 <thead>
@@ -137,24 +137,24 @@
                                             print_r($newDate ); ?></td>
                                         <td class="text-center">{{ $detalle->cantidadMaterial }}</td>
                                         <td class="text-center">{{ $detalle->nombreTipoUnidad }}</td>
-                                       
+
                                         <td>
-                                            
+
                                             <form method="GET" action="{{ route('vista_borrarMaterial',[$detalle->idMaterial,$detalle->idSalida]) }}" style='display: inline;'>
                                             <button type="submit" class="btn btn-danger btn-sm">
                                             <span class="glyphicon glyphicon-trash"></span>Borrar</button></form>
-                                         
+
                                         </td>
-                                        
+
                                     </tr>
                                   @endforeach
                                 </tbody>
-                                
+
                             </table>
                             {!! $detalleSalidas->render() !!}
                         </div>
-                        
-                        
+
+
                         </div>
                     </div>
                 </div>
@@ -162,6 +162,11 @@
 
         </div>
         </div>
-       
+
     </section>
+    @else
+    <div class="alert alert-danger">
+    <strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+    </div>
+    @endcan
 @endsection

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@can('control_roles')
 @section('content')
 <div class="container">
 <div class="row">
@@ -9,8 +9,8 @@
 			<div class="table-responsive">
 		<form class="form" method="post" action="{{ route('admin_roles.destroy', $rol->id) }} ">
      <input type="hidden" name="_method" value="DELETE">
-     				{{ csrf_field() }}    
-     		 
+     				{{ csrf_field() }}
+
       		 <h1>Desea eliminar al Rol de nombre: {{$rol->name}} con descripcion : {{$rol->description}} </h1>
       		 <div class="form-group">
         <button  type="submit" class="btn btn-danger btn-sm "><span class="glyphicon glyphicon-trash"></span>Eliminar Rol </button>
@@ -24,5 +24,10 @@
 </div>
 </div>
 </div>
+@else
+<div class="alert alert-danger">
+<strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+</div>
+@endcan
 
 @endsection

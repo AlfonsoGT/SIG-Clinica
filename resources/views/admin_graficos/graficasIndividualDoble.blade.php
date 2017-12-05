@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@can('generar_graficos')
 <html>
   <head>
     <!--Load the AJAX API-->
@@ -101,6 +102,11 @@
         </div>
 
   </section>
+  @else
+  <div class="alert alert-danger">
+    <strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+  </div>
+  @endcan
   </body>
 </html>
 @endsection

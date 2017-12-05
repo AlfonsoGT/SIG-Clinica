@@ -3,7 +3,7 @@
 @section('content')
 
 <section>
-	@can('control_pacientes')
+	@can('generar_lectura')
 	<div class="container" id="panelAdminLecturas">
 		<div class="row">
 			<div class="panel panel-default">
@@ -35,7 +35,7 @@
                     </div>
 						<button type="submit" class="btn btn-default btn-sm" id="buscar"><span class="glyphicon glyphicon-search"></span>Buscar por Tipo de Examen</button>
 					</span>
-						
+
 
 						{!! Form::close() !!}
 					</div>
@@ -80,7 +80,7 @@
                         						@endif
 												@endif
 
-												
+
 
 
 											</td>

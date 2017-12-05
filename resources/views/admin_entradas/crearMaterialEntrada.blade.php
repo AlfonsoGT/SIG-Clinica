@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+  @can('generar_graficos')
 <script type="text/javascript" src="{{ asset('js/jquery-2.1.0.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/cargarUnidad.js')}}"></script>
 <div class="container">
@@ -10,7 +11,7 @@
             </div>
             <div style="padding-top:30px" class="panel-body" >
                 <form class="form-horizontal" role="form" method="POST" action="{{ url( '/admin_entradas' ) }}">
-                        
+
                         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
                          <div class="form-group">
                             <label for="id" class="col-md-4 control-label">Nombre del Encargado del examen</label>
@@ -21,7 +22,7 @@
                             </div>
                         </div>
 
-                        
+
                             <div class="form-group">
                                 <label for="tipoMaterial" class="col-md-4 control-label">Tipo Material</label>
                                 <div class="col-md-6">
@@ -38,7 +39,7 @@
                                 <div class="col-md-6">
                                     <select required class="form-control" name="tipoUnidad" id="tipoUnidad" onchange="ocul()">
                                         <option value="" disabled selected>Seleccione un Tipo de Unidad</option>
-                                        
+
                                     </select>
                                 </div>
                             </div>
@@ -84,7 +85,7 @@
                         <div class="form-group {{ $errors->has('fecha') ? ' has-error' : '' }}">
                                 <label for="fecha" class="col-md-4 control-label">Fecha de Compra de Material</label>
                                 <div class="col-md-6">
-                                    <input id="fecha" type="date" class="form-control" name="fecha" value="{{ old('fecha') }}" " required autofocus onblur="validarFecha();">
+                                    <input id="fecha" type="date" class="form-control" name="fecha" value="{{ old('fecha') }}"  required autofocus onblur="validarFecha();">
                                     @if ($errors->has('fecha'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('fecha') }}</strong>
@@ -106,4 +107,9 @@
     </div>
 </div>
 </div>
+@else
+<div class="alert alert-danger">
+  <strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>
+</div>
+@endcan
 @endsection

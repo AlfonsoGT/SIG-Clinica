@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-@can('control_citas')
+@can('asignar_citas')
 <script type="text/javascript" src="{{ asset('js/jquery-2.1.0.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/fechasCitas.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/cargarRegion.js')}}"></script>
@@ -17,7 +17,7 @@
             <div style="padding-top:30px" class="panel-body" >
                 <form class="form-horizontal" role="form" method="POST" action="{{ url( '/admin_reservaciones' ) }}">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> <!--Seguridad Otorgada por blade -->
-                     
+
                     <div class="form-group">
                             <label for="tipoExamen" class="col-md-4 control-label">Tipo de Examen</label>
                             <div class="col-md-6">
@@ -57,7 +57,7 @@
                             <div class="col-md-6">
                                  <select required class="form-control" name="region" id="region">
                                   <option value="" disabled selected>Seleccione una Region Anatomica</option>
-                                           
+
                                     </select>
                             </div>
                         </div>

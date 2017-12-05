@@ -41,7 +41,7 @@
 									<a href="{{ route('editPassword',$user->id) }} " class="btn btn-info btn-sm">
 										<span class="glyphicon glyphicon-pencil"></span>Editar mi contraseña</a>
 										@endif
-										@can('control_usuarios')
+										@can('editar_usuarios')
 										<a href="{{ route('admin_users.edit',$user->id) }}" class="btn btn-info btn-sm">
 											<span class="glyphicon glyphicon-pencil"></span>Editar información del usuario</a></td>
 											@endcan
@@ -119,7 +119,7 @@
 
 
 						<div class="form-group">
-							@can('control_usuarios')
+							@can('ver_usuarios')
 							 <a href="{{ url('/admin_users') }}" class="btn btn-warning btn-sm">
                         <span class="glyphicon glyphicon-list-alt"></span>Regresar a lista de Usuarios</a>
 												@endcan

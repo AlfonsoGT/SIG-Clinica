@@ -17,51 +17,65 @@
                 <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('login') }}">INICIAR SESIÓN</a></li>
                 @else
 
-               
 
-                  @can('control_pacientes')
+
+                  @can('ver_pacientes')
                 <div class="mbr-navbar__item btn-group">
                 <li class="mbr-navbar__item">
                   <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> Gestión de Pacientes<span class="caret"></span></button>
                   <ul class="dropdown-menu" role="menu" id="menup">
                     <li ><a class="mbr-buttons__link btn text-white" href="{{ route('admin_pacientes.index') }}">VER EXPEDIENTES</a></li>
+                      @can('crear_pacientes')
                     <li ><a class="mbr-buttons__link btn text-white" href="{{ route('admin_pacientes.create') }}">INGRESAR EXPEDIENTES</a></li>
+                    @endcan
                   </ul>
                   </li>
                 </div>
                 @endcan
 
 
-                @can('control_citas')
+                @can('ver_citas')
                 <div class="mbr-navbar__item btn-group">
                 <li class="mbr-navbar__item">
                   <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> Gestión de Citas<span class="caret"></span></button>
                   <ul class="dropdown-menu" role="menu" id="menup">
                     <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_citas.index') }}">VER TODAS LAS CITAS</a></li>
+                    @can('generar_lectura')
                      <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_lecturas.index') }}">GENERAR REGISTRO DE LECTURAS</a></li>
+                     @endcan
                   </ul>
                   </li>
                 </div>
                 @endcan
 
 
-                @can('control_usuarios')
+
                 <div class="mbr-navbar__item btn-group">
                 <li class="mbr-navbar__item">
                   <button type="buttons" class="mbr-buttons__btn btn btn-info" data-toggle="dropdown" style="color: white;"> Gestión de Usuarios<span class="caret"></span></button>
                   <ul class="dropdown-menu" role="menu"  id="menup">
+                    @can('ver_usuarios')
                     <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_users.index') }}">VER USUARIOS</a></li>
+                    @endcan
+                    @can('ver_usuarios')
                     <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_users.create') }}">CREAR USUARIOS</a></li>
+                    @endcan
                     @can('control_roles')
                     <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_roles.index') }}">GESTION DE ROLES</a></li>
                     @endcan
+                    @can('ingreso_material_salida')
                     <li  class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_salidas.index') }}">REGISTRO DE MATERIAL UTILIZADO</a></li>
+                    @endcan
+                    @can('ingreso_material_entrada')
                     <li  class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_entradas.index') }}">ADQUISICIÓN DE MATERIAL </a></li>
+                    @endcan
+                    @can('generar_graficos')
                     <li  class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="{{ route('admin_graficos.index') }}">VER SECCIÓN DE GRÁFICOS</a></li>
+                    @endcan
                   </ul>
                   </li>
                 </div>
-                @endcan
+
 
 
                 <div class="mbr-navbar__item btn-group">

@@ -2,7 +2,7 @@
 
 @section('content')
 <section>
-  @can('control_roles')
+  @can('generar_graficos')
   <div class="alert alert-info">
     <strong>Lista de Gráficos</strong>
   </div>
