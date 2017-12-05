@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TipoMaterial extends Model
 {
-     protected $table = 'tipoMaterial';
+     protected $table = 'tipomaterial';
     protected $primaryKey = 'idTipoMaterial';
     public $timestamps = false;
 }

@@ -17,7 +17,7 @@ class CrearTablaTipoUnidad extends Migration
             $table->increments('idTipoUnidad');
             $table->string('nombreTipoUnidad');
             $table->integer('idTipoMaterial')->unsigned();
-            $table->foreign('idTipoMaterial')->references('idTipoMaterial')->on('tipoMaterial');
+            $table->foreign('idTipoMaterial')->references('idTipoMaterial')->on('tipomaterial');
         });
     }
 

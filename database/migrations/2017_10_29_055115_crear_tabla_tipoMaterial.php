@@ -13,7 +13,7 @@ class CrearTablaTipoMaterial extends Migration
      */
     public function up()
     {
-        Schema::create('tipoMaterial', function (Blueprint $table) {
+        Schema::create('tipomaterial', function (Blueprint $table) {
             $table->increments('idTipoMaterial');
             $table->string('nombreTipoMaterial');
         });
@@ -26,6 +26,6 @@ class CrearTablaTipoMaterial extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipoMaterial');
+        Schema::dropIfExists('tipomaterial');
     }
 }

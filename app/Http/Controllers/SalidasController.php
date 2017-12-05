@@ -27,7 +27,7 @@ class SalidasController extends Controller
         foreach ($salidas as $sal) {
             $aux = DB::table('material')
             ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
-            ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+            ->join('tipomaterial','tipomaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
             ->join('salida','salida.idSalida','=','material.idSalida')
             ->where([['salida.idSalida','=',$sal->idSalida]])
             ->select(DB::raw('SUM(material.cantidadMaterial) as cantidadUnidad,tipoUnidad.idTipoMaterial,material.idSalida'))
@@ -48,7 +48,7 @@ class SalidasController extends Controller
      */
     public function create()
     {
-        $tipoMaterial =DB::table('tipoMaterial')->select('idTipoMaterial', 'nombreTipoMaterial')->get();
+        $tipoMaterial =DB::table('tipomaterial')->select('idTipoMaterial', 'nombreTipoMaterial')->get();
         $tipoUnidad =DB::table('tipoUnidad')->select('idTipoUnidad', 'nombreTipoUnidad')->get();
         return view($this->path.'/crearMaterial')->with('tipoMaterial',$tipoMaterial)->with('tipoUnidad',$tipoUnidad);
 
@@ -63,7 +63,7 @@ class SalidasController extends Controller
     public function store(Request $request)
     {
          $this->validate($request,[
-            
+
             'cantidadMaterial' => 'required|integer',
         ]);
        try{
@@ -76,7 +76,7 @@ class SalidasController extends Controller
             //-------------------------------------------------
         $sumaTotalEntradas = DB::table('material')
             ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
-            ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+            ->join('tipomaterial','tipomaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
             ->join('entrada','entrada.idEntrada','=','material.idEntrada')
             ->where('tipoUnidad.idTipoMaterial','=',$request->tipoMaterial)
             ->where('material.idTipoUnidad','=',$request->tipoUnidad)
@@ -87,7 +87,7 @@ class SalidasController extends Controller
             $conteo =DB::table('entrada')
             ->join('material','material.idEntrada','=','material.idEntrada')
             ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
-            ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+            ->join('tipomaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
             ->select('material.cantidadMaterial','material.cantidadUnidadMaterial')
             ->where('tipoUnidad.idTipoMaterial','=',$request->tipoMaterial)
             ->where('material.idTipoUnidad','=',$request->tipoUnidad)
@@ -95,7 +95,7 @@ class SalidasController extends Controller
             ->count();
         $sumaTotalSalidas = DB::table('material')
             ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
-            ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+            ->join('tipomaterial','tipomaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
             ->join('salida','salida.idSalida','=','material.idSalida')
             ->where('salida.añoSalida','=', $añoSalida)
             ->select(DB::raw('SUM(material.cantidadMaterial) as cantidadUnidad,tipoUnidad.idTipoUnidad'))
@@ -104,18 +104,18 @@ class SalidasController extends Controller
 
             foreach ($sumaTotalEntradas as $caja) {
                 $cantidadEntrada = $caja->cantidadUnidad*$caja->cantidadSuma;
-            } 
+            }
             $cantidadSalida = 0;
             foreach ($sumaTotalSalidas as $caja) {
                 $cantidadSalida = $caja->cantidadUnidad;
-            } 
+            }
             if($conteo>0){
               $prueba = $cantidadEntrada - $cantidadSalida - $request->cantidadMaterial;
             }else{
                $prueba =  $request->cantidadMaterial*-1;
             }
             //dd($cantidadSalida);
-           
+
             //dd($prueba);
             //---------------------------------------------------
             if($prueba>0){
@@ -160,8 +160,8 @@ class SalidasController extends Controller
             ->with('msj2','El registro de Material se pasa del limite de materiales disponibles o No hay materiales Disponibles');
             }
 
-            
-           
+
+
 
          }catch(Exception $e){
           return "Fatal error - ".$e->getMessage();
@@ -186,7 +186,7 @@ class SalidasController extends Controller
          $detalleSalidas = DB::table('material')
           ->join('salida', 'salida.idSalida', '=', 'material.idSalida')
           ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
-          ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+          ->join('tipomaterial','tipomaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
           ->select('tipoUnidad.*','salida.*','material.*','tipoMaterial.*')
           ->where('salida.idSalida',
               $salida->idSalida)
@@ -194,7 +194,7 @@ class SalidasController extends Controller
 
             $sumaTotalSalidas = DB::table('material')
             ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
-            ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+            ->join('tipomaterial','tipomaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
             ->join('salida','salida.idSalida','=','material.idSalida')
             ->where('salida.añoSalida','=',$salida->añoSalida)
             ->select(DB::raw('SUM(material.cantidadMaterial) as cantidadUnidad,tipoUnidad.idTipoUnidad'))
@@ -207,7 +207,7 @@ class SalidasController extends Controller
             ->get();
             $sumaTotal = DB::table('material')
             ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
-            ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+            ->join('tipomaterial','tipomaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
             ->join('entrada','entrada.idEntrada','=','material.idEntrada')
             ->where('entrada.año','=',$salida->añoSalida)
             ->select(DB::raw('SUM(material.cantidadMaterial) as cantidadUnidad,SUM(material.cantidadUnidadMaterial) as cantidadSuma,tipoUnidad.idTipoUnidad'))
@@ -258,8 +258,8 @@ class SalidasController extends Controller
          $material = Material::find($idMaterial);
          $detalleMaterial = DB::table('material')
         ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipounidad')
-        ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
-        ->select('tipoUnidad.*','tipoMaterial.*','material.*')
+        ->join('tipomaterial','tipomaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+        ->select('tipoUnidad.*','tipomaterial.*','material.*')
         ->where('material.idMaterial',$material->idMaterial)
         ->get();
         return view($this->path.'/vista_borrarMaterial')->with('material', $material)->with('detalleMaterial',$detalleMaterial);
@@ -271,7 +271,7 @@ class SalidasController extends Controller
       public function getTipoUnidad($idTipoMaterial)
     {
         $unidades= DB::table('tipoUnidad')
-        ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+        ->join('tipomaterial','tipomaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
         ->where('tipoUnidad.idTipoMaterial','=',$idTipoMaterial)
         ->select('tipoUnidad.*')->get();
         return $unidades;

@@ -49,7 +49,7 @@ class EntradaController extends Controller
      */
     public function create()
     {
-        $tipoMaterial =DB::table('tipoMaterial')->select('idTipoMaterial', 'nombreTipoMaterial')->get();
+        $tipoMaterial =DB::table('tipomaterial')->select('idTipoMaterial', 'nombreTipoMaterial')->get();
         $tipoUnidad =DB::table('tipoUnidad')->select('idTipoUnidad', 'nombreTipoUnidad')->get();
         return view($this->path.'/crearMaterialEntrada')->with('tipoMaterial',$tipoMaterial)->with('tipoUnidad',$tipoUnidad);
     }
@@ -66,7 +66,7 @@ class EntradaController extends Controller
             'proveedor' => 'required|max:75|regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
             'cantidadMaterial' => 'required|integer',
             'cantidadUnidadMaterial' => 'required|integer',
-            
+
         ]);
         try{
             $newDate = date("Y", strtotime($request->fecha));
@@ -81,7 +81,7 @@ class EntradaController extends Controller
                 $entrada->año = $newDate;
                 $entrada->id = $request->idUser;
                 $entrada->save();
-                
+
             }else{
                 $idEntradaExistente=DB::table('entrada')
                 ->where('año',$newDate)
@@ -131,30 +131,30 @@ class EntradaController extends Controller
         $detalleEntradas = DB::table('material')
           ->join('entrada', 'entrada.idEntrada', '=', 'material.idEntrada')
           ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
-          ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
-          ->select('tipoUnidad.*','entrada.*','material.*','tipoMaterial.*')
+          ->join('tipomaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+          ->select('tipoUnidad.*','entrada.*','material.*','tipomaterial.*')
           ->where('entrada.idEntrada',$entrada->idEntrada)
           ->paginate(5);
           //dd($detalleEntradas);
-          
+
          $sumaTotalSalidas = DB::table('material')
             ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
-            ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+            ->join('tipomaterial','tipomaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
             ->join('salida','salida.idSalida','=','material.idSalida')
             ->where('salida.añoSalida','=',$entrada->año)
             ->select(DB::raw('SUM(material.cantidadMaterial) as cantidadUnidad,tipoUnidad.idTipoUnidad'))
             ->groupBy('tipoUnidad.idTipoUnidad')
             ->get();
           //dd($sumaTotalSalidas);
-        $TipoUnidadTodo = DB::table('tipoMaterial')
-        ->join('tipoUnidad','tipoUnidad.idTipoMaterial','=','tipoMaterial.idTipoMaterial')
-        ->select('tipoUnidad.*','tipoMaterial.*')
+        $TipoUnidadTodo = DB::table('tipomaterial')
+        ->join('tipoUnidad','tipoUnidad.idTipoMaterial','=','tipomaterial.idTipoMaterial')
+        ->select('tipoUnidad.*','tipomaterial.*')
         ->get();
         //dd($TipoUnidadTodo);
 
           $sumaTotal = DB::table('material')
             ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
-            ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+            ->join('tipomaterial','tipomaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
             ->join('entrada','entrada.idEntrada','=','material.idEntrada')
             ->where('entrada.idEntrada','=',$entrada->idEntrada)
             ->select(DB::raw('SUM(material.cantidadMaterial) as cantidadUnidad,SUM(material.cantidadUnidadMaterial) as cantidadSuma,tipoUnidad.idTipoUnidad'))
@@ -204,16 +204,16 @@ class EntradaController extends Controller
          $material = Material::find($idMaterial);
          $detalleMaterial = DB::table('material')
         ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipounidad')
-        ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
-        ->select('tipoUnidad.*','tipoMaterial.*','material.*')
+        ->join('tipomaterial','tipomaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
+        ->select('tipoUnidad.*','tipomaterial.*','material.*')
         ->where('material.idMaterial',$material->idMaterial)
         ->get();
         return view($this->path.'/vista_borrarMaterialEntrada')->with('material', $material)->with('detalleMaterial',$detalleMaterial);
     }
-    
+
     public function tomarIdMaterialEliminarEntrada($idMaterial,$idEntrada)
     {
         return $this->destroy($idMaterial,$idEntrada);
     }
-    
+
 }
