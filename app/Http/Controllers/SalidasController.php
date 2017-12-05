@@ -187,7 +187,7 @@ class SalidasController extends Controller
           ->join('salida', 'salida.idSalida', '=', 'material.idSalida')
           ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
           ->join('tipomaterial','tipomaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
-          ->select('tipoUnidad.*','salida.*','material.*','tipoMaterial.*')
+          ->select('tipoUnidad.*','salida.*','material.*','tipomaterial.*')
           ->where('salida.idSalida',
               $salida->idSalida)
           ->paginate(5);
