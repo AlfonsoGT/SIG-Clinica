@@ -11,8 +11,8 @@ class tipoMaterial extends Seeder
      */
     public function run()
     {
-         DB::table('tipomaterial')->insert(['nombreTipoMaterial'=>'Placa']);
-         DB::table('tipomaterial')->insert(['nombreTipoMaterial'=>'Revelador']);
-         DB::table('tipomaterial')->insert(['nombreTipoMaterial'=>'Fijador']);
+         DB::table('tipoMaterial')->insert(['nombreTipoMaterial'=>'Placa']);
+         DB::table('tipoMaterial')->insert(['nombreTipoMaterial'=>'Revelador']);
+         DB::table('tipoMaterial')->insert(['nombreTipoMaterial'=>'Fijador']);
     }
 }

@@ -33,10 +33,10 @@ class GraficaController extends Controller
         $resultados = Paciente::join('reservacion','pacientes.idPaciente','=','reservacion.idPaciente')
         ->join('citas','citas.idCita','=','reservacion.idCita')
         ->join('tipoExamen','tipoExamen.idTipoExamen','=','citas.idTipoExamen')
-        ->join('regionanatomica','regionanatomica.idRegionAnatomica','=','reservacion.idRegionAnatomica')
-        ->select('regionanatomica.nombreRegionAnatomica as titulo',DB::raw('count(reservacion.idReservacion) as conteo'))
+        ->join('regionAnatomica','regionAnatomica.idRegionAnatomica','=','reservacion.idRegionAnatomica')
+        ->select('regionAnatomica.nombreRegionAnatomica as titulo',DB::raw('count(reservacion.idReservacion) as conteo'))
         ->where('citas.fechaCita',$anio)
-        ->groupBy('regionanatomica.nombreRegionAnatomica')->get();
+        ->groupBy('regionAnatomica.nombreRegionAnatomica')->get();
         $ejex='Region Anatómica';
 
 
@@ -117,12 +117,12 @@ class GraficaController extends Controller
         }
 
 
-        $resultados = Reservacion::join('regionanatomica','reservacion.idRegionAnatomica','=','regionanatomica.idRegionAnatomica')
+        $resultados = Reservacion::join('regionAnatomica','reservacion.idRegionAnatomica','=','regionAnatomica.idRegionAnatomica')
         ->join('examen','examen.idReservacion','=','reservacion.idReservacion')
-        ->select('regionanatomica.nombreRegionAnatomica as titulo',DB::raw('count(reservacion.idReservacion) as conteo'))
+        ->select('regionAnatomica.nombreRegionAnatomica as titulo',DB::raw('count(reservacion.idReservacion) as conteo'))
         ->where('realizado',1)
         ->where(DB::raw('year(examen.fechaRealizacion)'),$anio)
-        ->groupBy('regionanatomica.nombreRegionAnatomica')
+        ->groupBy('regionAnatomica.nombreRegionAnatomica')
         ->get();
 
         return view($this->path.'/graficasExamenesPorRegionAnio')->with('resultados',$resultados)->with('titulo',$titulo)->with('number',$number)->with('ejex',$ejex)
@@ -181,12 +181,12 @@ class GraficaController extends Controller
         }
           $newFecha = date("d-m-Y", strtotime($fecha));
 
-        $resultados = Reservacion::join('regionanatomica','reservacion.idRegionAnatomica','=','regionanatomica.idRegionAnatomica')
+        $resultados = Reservacion::join('regionAnatomica','reservacion.idRegionAnatomica','=','regionAnatomica.idRegionAnatomica')
         ->join('examen','reservacion.idReservacion','=','examen.idReservacion')
-        ->select('regionanatomica.nombreRegionAnatomica as titulo',DB::raw('count(reservacion.idReservacion) as conteo'))
+        ->select('regionAnatomica.nombreRegionAnatomica as titulo',DB::raw('count(reservacion.idReservacion) as conteo'))
         ->where('realizado',1)
         ->where('examen.fechaRealizacion',$fecha)
-        ->groupBy('regionanatomica.nombreRegionAnatomica')
+        ->groupBy('regionAnatomica.nombreRegionAnatomica')
         ->get();
 
         return view($this->path.'/graficaExamenesDiarios')->with('resultados',$resultados)->with('titulo',$titulo)->with('number',$number)

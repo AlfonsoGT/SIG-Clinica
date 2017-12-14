@@ -13,7 +13,7 @@ class CreateTablaRegionAnatomica extends Migration
      */
     public function up()
     {
-         Schema::create('regionanatomica', function (Blueprint $table) {
+         Schema::create('regionAnatomica', function (Blueprint $table) {
             $table->increments('idRegionAnatomica');
             $table->string('nombreRegionAnatomica');
              $table->integer('idTipoExamen')->unsigned();
@@ -28,6 +28,6 @@ class CreateTablaRegionAnatomica extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('regionanatomica');
+        Schema::dropIfExists('regionAnatomica');
     }
 }

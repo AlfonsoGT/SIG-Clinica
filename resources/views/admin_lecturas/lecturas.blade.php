@@ -60,7 +60,11 @@
 											<td class="text-center">{{ $examen->primerNombre }} {{ $examen->segundoNombre }} {{ $examen->primerApellido }} {{ $examen->segundoApellido }}</a> </td>
 											<td class="text-center"> {{ $examen->nombreTipoExamen }}</td>
 											<td class="text-center"> {{ $examen->nombreRegionAnatomica}} </td>
-											<td class="text-center"> {{ $examen->fechaRealizacion}} </td>
+											<td class="text-center">
+											<?php
+			                                  $newDate = date("d-m-Y", strtotime($examen->fechaRealizacion));
+			                                  print_r($newDate ); ?>
+											  </td>
 											<td>
 												@if($examen->idTipoExamen == 4)
 												@if($examen->hayLectura == 0)
