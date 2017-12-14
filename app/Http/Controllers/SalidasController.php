@@ -187,7 +187,7 @@ class SalidasController extends Controller
           ->join('salida', 'salida.idSalida', '=', 'material.idSalida')
           ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')
           ->join('tipoMaterial','tipoMaterial.idTipoMaterial','=','tipoUnidad.idTipoMaterial')
-          ->select('tipoUnidad.*','salida.*','material.*','tipomaterial.*')
+          ->select('tipoUnidad.*','salida.*','material.*','tipoMaterial.*')
           ->where('salida.idSalida',
               $salida->idSalida)
           ->paginate(5);
@@ -201,9 +201,9 @@ class SalidasController extends Controller
             ->groupBy('tipoUnidad.idTipoUnidad')
             ->get();
         //dd($sumaTotal);
-            $TipoUnidadTodo = DB::table('tipomaterial')
-            ->join('tipoUnidad','tipoUnidad.idTipoMaterial','=','tipomaterial.idTipoMaterial')
-            ->select('tipoUnidad.*','tipomaterial.*')
+            $TipoUnidadTodo = DB::table('tipoMaterial')
+            ->join('tipoUnidad','tipoUnidad.idTipoMaterial','=','tipoMaterial.idTipoMaterial')
+            ->select('tipoUnidad.*','tipoMaterial.*')
             ->get();
             $sumaTotal = DB::table('material')
             ->join('tipoUnidad','tipoUnidad.idTipoUnidad','=','material.idTipoUnidad')

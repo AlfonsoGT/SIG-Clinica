@@ -147,8 +147,8 @@ class EntradaController extends Controller
             ->get();
 
         $TipoUnidadTodo = DB::table('tipoMaterial')
-        ->join('tipoUnidad','tipoUnidad.idTipoMaterial','=','tipomaterial.idTipoMaterial')
-        ->select('tipoUnidad.*','tipomaterial.*')
+        ->join('tipoUnidad','tipoUnidad.idTipoMaterial','=','tipoMaterial.idTipoMaterial')
+        ->select('tipoUnidad.*','tipoMaterial.*')
         ->get();
 
 

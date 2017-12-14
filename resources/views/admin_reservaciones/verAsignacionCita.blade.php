@@ -20,14 +20,14 @@
 <div class="table-responsive">
 	 <table class="table table-striped table-hover table-bordered">
 		@foreach($reservaciones as $reservacion)
-		
+
 		<TR><th class="text-center">Nombre Completo del Paciente</TH>
 		<td class="text-center">{{ $reservacion->primerNombre}} {{$reservacion->segundoNombre}} {{$reservacion->primerApellido}} {{$reservacion->segundoApellido}}</TD>
 		<TR><th class="text-center">Fecha de Cita</TH>
 		<td class="text-center">
 			<?php
              $newDate = date("d-m-Y", strtotime($reservacion->fechaCita ));
-             print_r($newDate ); ?> 
+             print_r($newDate ); ?>
 			</TD>
 		<TR><th class="text-center">Hora de Cita</TH>
 		<td class="text-center">{{ $reservacion->horaCita }}</TD>
@@ -72,7 +72,7 @@
 	</table>
 	<div class="form-group">
 	 @foreach($pdf as $pdf)
-	<a href="{{ route('seePDF',$pdf->idExamen) }}" class="btn btn-info btn-sm">
+	<a href="{{ route('seePDF',$pdf->idExamen) }}" target="_blank" class="btn btn-info btn-sm">
 	<span class="glyphicon glyphicon-download-alt"></span>Ver PDF</a>
 	@endforeach
 	 @foreach($reservaciones as $pac)

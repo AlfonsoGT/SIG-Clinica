@@ -71,15 +71,15 @@
 												 <a href="{{ route('crearLecturaGinecologica',$examen->idExamen) }}" class="btn btn-success btn-sm">
                         						<span class="glyphicon glyphicon-paperclip"></span>Generar Lectura</a>
                         						@else
-                        						<a href="{{ route('seePDFGinecologica',$examen->idExamen) }}" class="btn btn-info btn-sm">
-												<span class="glyphicon glyphicon-download-alt"></span>Ver PDF</a>
+                        						<a href="{{ route('seePDFGinecologica',$examen->idExamen) }}" target="_blank" class="btn btn-info btn-sm">
+												<span class="glyphicon glyphicon-download-alt" ></span>Ver PDF</a>
                         						@endif
 												@else
 												@if($examen->hayLectura == 0)
 												 <a href="{{ route('crearLectura',$examen->idExamen) }}" class="btn btn-success btn-sm">
                         						<span class="glyphicon glyphicon-paperclip"></span>Generar Lectura</a>
                         						@else
-                        						<a href="{{ route('seePDF',$examen->idExamen) }}" class="btn btn-info btn-sm">
+                        						<a href="{{ route('seePDF',$examen->idExamen) }}" target="_blank" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-download-alt"></span>Ver PDF</a>
                         						@endif
 												@endif
