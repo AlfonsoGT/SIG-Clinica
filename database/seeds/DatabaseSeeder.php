@@ -18,16 +18,18 @@ class DatabaseSeeder extends Seeder
     $this->call(permisoSeeder::class);
     $this->call(departamentoSeeder::class);
     $this->call(userAdministradorDefault::class);
+    $this->call(tipoExamenSeeder::class);
+    $this->call(regionAnatomicaSeeder::class);
+    $this->call(tipoMaterial::class);
+    $this->call(tipoUnidad::class);
 
 
 
     // Seeders para pruebas con información (no descomentar)
 
-    $this->call(pacientes::class);
-    $this->call(tipoExamenSeeder::class);
-    $this->call(regionAnatomicaSeeder::class);
+  //  $this->call(pacientes::class);
+
     //$this->call(citaSeeder::class);
-    $this->call(tipoMaterial::class);
-    $this->call(tipoUnidad::class);
+
     }
 }
