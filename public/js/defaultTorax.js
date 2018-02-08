@@ -7,11 +7,11 @@ var mensajeTorax="La silueta cardíaca es de tamaño y configuración normal. No
 if(region===tor){
   if(value===true)
 {  console.log(true);
-  document.getElementById('descripcion').value=mensajeTorax;
+  document.getElementById('descripcion').value='';
 
 }else{
    console.log(false);
-  document.getElementById('descripcion').value='';}
+  document.getElementById('descripcion').value=mensajeTorax;}
 
 }else{
 console.log("no es torax, no hay mensaje default");
