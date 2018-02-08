@@ -2,6 +2,7 @@
 
 @section('content')
 <section>
+<script type="text/javascript" src="{{ asset('js/defaultTorax.js')}}"></script>
 	@can('generar_lectura')
 	<div class="alert alert-info" role="alert">
 		<strong>Ingresar datos de Lectura </strong>
@@ -18,7 +19,6 @@
 			@if(session()->has('msj2'))
 			<div class="alert alert-danger" role="alert">{{session('msj2')}}</div>
 			@endif
-
 
 		</div>
 		<div class="container">
@@ -53,7 +53,7 @@
                         <div class="form-group {{ $errors->has('regionAnatomica') ? ' has-error' : '' }}">
                             <label for="regionAnatomica" class="col-md-4 control-label">Region Anatomica</label>
                             <div class="col-md-6">
-                                <input id="regionAnatomica" type="text" class="form-control" name="regionAnatomica" value="{{ $examen->nombreRegionAnatomica}}" autocomplete="off" disabled="true">
+                                <input  type="text" id="regionAnatomica" class="form-control" name="regionAnatomica" value="{{ $examen->nombreRegionAnatomica}}" autocomplete="off" disabled="true">
                             </div>
                         </div>
                         @endforeach
@@ -61,9 +61,9 @@
 								<label for="patologia" class="col-md-4 control-label">Patologia</label>
 								<div class="col-md-2">
 								<fieldset class="form-control">
-									<input type="radio" id="si" name="patologia" value="Si">
+									<input type="radio" id="si" name="patologia" value="Si" onchange="defaultmsj(true);">
 									<label for="si">Si</label>
-									<input type="radio" id="no" name="patologia" value="No">
+									<input type="radio" id="no" name="patologia" value="No" onchange="defaultmsj(false);">
 									<label for="no">No</label>
 								</fieldset>
 								</div>
@@ -92,6 +92,7 @@
 				</div>
 			</div>
 		</div>
+
 		@else
 		<div class="alert alert-danger">
 		<strong>NO ESTÁ AUTORIZADO PARA VER ESTA PANTALLA </strong>

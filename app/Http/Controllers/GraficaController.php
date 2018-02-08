@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Paciente;
 use App\Reservacion;
+use App\LecturaExamen;
 class GraficaController extends Controller
 {
     /**
@@ -193,5 +194,21 @@ class GraficaController extends Controller
         ->with('newFecha',$newFecha)->with('ejex',$ejex);
       }
 
+
+      public function graficoPatologico()
+      {   $titulo='Gráfico de cantidad de examenes con patologia y sin patologia';
+        $number='Cantidad de pacientes';
+
+        /*busca las lecturas de examenes que tienen patologias*/
+        $resultado1=LecturaExamen::select(DB::raw('count(lectura.idLecturaExamen) as conteo'))
+        ->where('patologia','Si')->get();
+        /*busca las lecturas de examenes que no tienen patologias*/
+        $resultado2=LecturaExamen::select(DB::raw('count(lectura.idLecturaExamen) as conteo'))
+        ->where('patologia','No')->get();
+
+        return view($this->path.'/graficasPatologia')->with('resultado1',$resultado1)->with('resultado2',$resultado2)
+        ->with('titulo',$titulo)->with('number',$number);
+
+      }
 
 }

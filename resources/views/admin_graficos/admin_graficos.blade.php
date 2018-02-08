@@ -70,7 +70,12 @@
                         <a href="{{ url('/graficoEdades') }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open"></span>Generar Gráfico</a>
                     </td>
                 </tr>
-
+                <tr>
+                    <td class="text-center">Gráfica de examenes registrados con patologías</td>
+                    <td>
+                        <a href="{{ url('/graficoPatologico') }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open"></span>Generar Gráfico</a>
+                    </td>
+                </tr>
               </tbody>
             </table>
 

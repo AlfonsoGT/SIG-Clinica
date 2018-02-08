@@ -85,6 +85,7 @@ Route::get('/graficoEdades', 'GraficaController@graficoEdades')->name('graficoEd
 Route::get('/graficaPacientesDepartamento','GraficaController@graficaPacientesDepartamento')->name('graficaPacientesDepartamento');
 Route::get('/graficaPacientesPorSexo','GraficaController@graficaPacientesPorSexo')->name('graficaPacientesPorSexo');
 Route::get('/graficaExamenesRealizadosRegionAnatomica','GraficaController@graficaExamenesRealizadosRegionAnatomica')->name('graficaExamenesRealizadosRegionAnatomica');
+Route::get('/graficoPatologico', 'GraficaController@graficoPatologico')->name('graficoPatologico');
 
 //graficas de intervalos
 Route::get('/graficaExamenesTotalEntre', 'GraficaController@graficaExamenesTotalEntre')->name('graficaExamenesTotalEntre');
@@ -101,4 +102,3 @@ Route::get('/downloadPDF/{idPaciente},{idLecturaExamen}','LecturaController@down
 //ver pdf
 Route::get('/seePDF/{idExamen}','LecturaController@seePDF')->name('seePDF');
 Route::get('/seePDFGinecologica/{idExamen}','LecturaController@seePDFGinecologica')->name('seePDFGinecologica');
-
