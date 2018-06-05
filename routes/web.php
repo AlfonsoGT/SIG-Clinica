@@ -102,3 +102,15 @@ Route::get('/downloadPDF/{idPaciente},{idLecturaExamen}','LecturaController@down
 //ver pdf
 Route::get('/seePDF/{idExamen}','LecturaController@seePDF')->name('seePDF');
 Route::get('/seePDFGinecologica/{idExamen}','LecturaController@seePDFGinecologica')->name('seePDFGinecologica');
+
+//salidas estrategicas
+
+//Route::resource('salidas_estrategicas', 'Controllers_Estrategicos\CantidadPacientesController');
+
+Route::resource('salidas_estrategicas', 'Controllers_Estrategicos\PorcentajePacientesController');
+
+//Route::resource('salidas_estrategicas', 'Controllers_Estrategicos\CantidadPatologiasController');
+
+//Route::resource('salidas_estrategicas', 'Controllers_Estrategicos\CantidadTipoExamenController');
+
+//Route::resource('salidas_estrategicas', 'Controllers_Estrategicos\CantidadInsumosController');
