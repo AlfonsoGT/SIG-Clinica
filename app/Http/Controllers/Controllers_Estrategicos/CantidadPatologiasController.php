@@ -25,7 +25,7 @@ class CantidadPatologiasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $path = '/salidas_estrategicas';
+    private $path = '/salidas_estrategicas/cantidad_patologias';
     public function index()
     {
         //

@@ -1,31 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Controllers_Estrategicos;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\DB;
-
-use Illuminate\Support\Facades\Redirect;
-
-use App\Paciente;
-
-use App\Sexo;
-use App\procedencias;
-
-use App\Http\Requests\PacienteRequest;
-use App\Http\Controllers\Controller;
-
-use Exception;
-
-class CantidadInsumosController extends Controller
+class EstrategicoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    private $path = '/salidas_estrategicas/cantidad_insumos';
+    private $path = 'salidas_estrategicas';
     public function index()
     {
         //
@@ -47,6 +33,13 @@ class CantidadInsumosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    
+    /**Necesario para el home Estrategico*/
+     public function home()
+     {
+         return view($this->path.'/homeEstrategico');
+     }
+
     public function store(Request $request)
     {
         //

@@ -26,7 +26,7 @@ class PorcentajePacientesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $path = '/salidas_estrategicas';
+    private $path = '/salidas_estrategicas/porcentaje_pacientes';
     public function index()
     {
         //
@@ -104,4 +104,10 @@ class PorcentajePacientesController extends Controller
     {
         //
     }
+
+    //public function cantidadPac()
+    //{
+        //$pacientes = DB::table('pacientes')->count();
+         //return view($this->path.'/numero_pacientes')->with('pacientes',$pacientes) ;
+    //}
 }

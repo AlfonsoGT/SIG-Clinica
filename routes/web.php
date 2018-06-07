@@ -16,6 +16,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+
 Route::get('/homeAdministrador', 'UserController@home')->name('homeAdministrador');
 /*activación y desactivación de perfiles de pacientes*/
 Route::get('/inactivar/{id}', 'PacienteController@inactivar')->name('inactivar');
@@ -105,12 +107,15 @@ Route::get('/seePDFGinecologica/{idExamen}','LecturaController@seePDFGinecologic
 
 //salidas estrategicas
 
-//Route::resource('salidas_estrategicas', 'Controllers_Estrategicos\CantidadPacientesController');
+Route::get('/homeEstrategico', 'EstrategicoController@home')->name('homeEstrategico');
 
-Route::resource('salidas_estrategicas', 'Controllers_Estrategicos\PorcentajePacientesController');
 
-//Route::resource('salidas_estrategicas', 'Controllers_Estrategicos\CantidadPatologiasController');
+Route::resource('salidas_estrategicas/numero_pacientes', 'Controllers_Estrategicos\CantidadPacientesController');
 
-//Route::resource('salidas_estrategicas', 'Controllers_Estrategicos\CantidadTipoExamenController');
+Route::resource('salidas_estrategicas/porcentaje_pacientes', 'Controllers_Estrategicos\PorcentajePacientesController');
 
-//Route::resource('salidas_estrategicas', 'Controllers_Estrategicos\CantidadInsumosController');
+Route::resource('salidas_estrategicas/cantidad_patologias', 'Controllers_Estrategicos\CantidadPatologiasController');
+
+Route::resource('salidas_estrategicas/cantidad_tipoExamen', 'Controllers_Estrategicos\CantidadTipoExamenController');
+
+Route::resource('salidas_estrategicas/cantidad_insumos', 'Controllers_Estrategicos\CantidadInsumosController');
