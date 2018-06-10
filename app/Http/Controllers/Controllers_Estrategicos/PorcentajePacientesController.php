@@ -34,7 +34,9 @@ class PorcentajePacientesController extends Controller
         $mujeres = DB::table('pacientes')->join('sexo', 'pacientes.idSexo', '=', 'sexo.idSexo')->where('nombreSexo','femenino')->count();
         $hombres = DB::table('pacientes')->join('sexo', 'pacientes.idSexo', '=', 'sexo.idSexo')->where('nombreSexo','masculino')->count();
         $porMu = ($mujeres/$total)*100;
+        $porMu = round($porMu,2);
         $porHo = ($hombres/$total)*100;
+        $porHo = round($porHo,2);
          return view($this->path.'/porcentaje_pacientes')->with("hombres",$hombres)->with('mujeres',$mujeres)->with('porMu',$porMu)
             ->with('porHo',$porHo);//,compact('mujeres'),compact('hombres'),compact('porMu'),compact('porHo'));
     }
