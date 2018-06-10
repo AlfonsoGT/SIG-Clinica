@@ -1,13 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
-	<link rel="stylesheet" href="">
-</head>
-<body>
-	<div class="table-responsive">
+
+@extends('layouts.app')
+
+@section('content')
+  
+    <section>
+        <div class="container" id="panelCantInsumos">
+            <div class="row">
+                <div class="panel panel-default">
+
+                    <div class="panel-heading">Cantidad de Insumos Adquiridos por año</div>
+                    <div class="panel-body">
+
+                        <h2 style="display: inline;">Tipos de Insumos Adquiridos</h2>
+
+                        <div class="table-responsive">
 					<table class="table table-striped table-hover table-bordered">
 						<thead>
 							<tr>
@@ -87,5 +93,14 @@
 
 					</table>
 				</div>
-</body>
-</html>
+
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+
+    </section>
+@endsection

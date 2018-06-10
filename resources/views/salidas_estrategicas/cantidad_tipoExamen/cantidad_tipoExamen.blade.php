@@ -1,13 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
-	<link rel="stylesheet" href="">
-</head>
-<body>
-	<div class="table-responsive">
+
+
+@extends('layouts.app')
+
+@section('content')
+  
+    <section>
+        <div class="container" id="panelCantTipoExamen">
+            <div class="row">
+                <div class="panel panel-default">
+
+                    <div class="panel-heading">Cantidad de Tipos de Exámen por año</div>
+                    <div class="panel-body">
+
+                        <h2 style="display: inline;">Tipos de Exámenes</h2>
+
+                        <div class="table-responsive">
 					<table class="table table-striped table-hover table-bordered">
 						<thead>
 							<tr>
@@ -27,6 +34,23 @@
 								<td class="text-center">{{ $ginecologica }}</td>
 							</tr>
 						</tbody>
+					</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+               <div class="container" id="panelCantTipoExamenGine">
+            <div class="row">
+                <div class="panel panel-default">
+				<div class="panel-heading">Cantidad de Tipos de Exámen Ginecologicos por año</div>
+                    <div class="panel-body">
+
+                        <h2 style="display: inline;">Tipos de Exámenes Ginecologicos</h2>
+
+                        <div class="table-responsive">
+					<table class="table table-striped table-hover table-bordered">
 
                         <thead>
 							<tr>
@@ -42,7 +66,25 @@
 								<td class="text-center">{{ $utero }}</td>
 							</tr>
 						</tbody>
+					</table>
+				      </div>
+			       </div>
+			     </div>
+			  </div>
+			</div>
 
+
+
+                     <div class="container" id="panelCantTipoExamenMisc">
+            <div class="row">
+                <div class="panel panel-default">
+				<div class="panel-heading">Cantidad de Tipos de Exámen Miscelaneos por año</div>
+                    <div class="panel-body">
+
+                        <h2 style="display: inline;">Tipos de Exámenes Miscelaneos</h2>
+
+                        <div class="table-responsive">
+					<table class="table table-striped table-hover table-bordered">
 						<thead>
 							<tr>
 
@@ -84,5 +126,18 @@
 
 					</table>
 				</div>
-</body>
-</html>
+			</div>
+		</div>
+	</div>
+</div>
+
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+
+    </section>
+@endsection

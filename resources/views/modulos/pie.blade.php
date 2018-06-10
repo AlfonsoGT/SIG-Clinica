@@ -10,7 +10,7 @@
             <div class="col-sm-8">
                 <div class="row">
                     <div class="col-sm-4">
-                        <p class="mbr-contacts__text">Diseño de Sistemas I || Grupo 06</p>
+                        <p class="mbr-contacts__text">SIG-115 || Grupo 04</p>
                     </div>
                     <div class="col-sm-4">
                         <p class="mbr-contacts__text"></p>
