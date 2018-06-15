@@ -3,7 +3,7 @@
 @section('content')
 
 <section>
-    <div class="container" id="panelAdminPacientes">
+    <div class="container" id="panelAdminEstrategica">
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">Administración Estratégica</div>

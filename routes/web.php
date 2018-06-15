@@ -105,10 +105,13 @@ Route::get('/downloadPDF/{idPaciente},{idLecturaExamen}','LecturaController@down
 Route::get('/seePDF/{idExamen}','LecturaController@seePDF')->name('seePDF');
 Route::get('/seePDFGinecologica/{idExamen}','LecturaController@seePDFGinecologica')->name('seePDFGinecologica');
 
+
+
+
+
 //salidas estrategicas
 
 Route::get('/homeEstrategico', 'EstrategicoController@home')->name('homeEstrategico');
-
 
 Route::resource('salidas_estrategicas/numero_pacientes', 'Controllers_Estrategicos\CantidadPacientesController');
 
@@ -119,3 +122,19 @@ Route::resource('salidas_estrategicas/cantidad_patologias', 'Controllers_Estrate
 Route::resource('salidas_estrategicas/cantidad_tipoExamen', 'Controllers_Estrategicos\CantidadTipoExamenController');
 
 Route::resource('salidas_estrategicas/cantidad_insumos', 'Controllers_Estrategicos\CantidadInsumosController');
+
+//salidas tacticas
+
+Route::get('/homeTactico', 'TacticoController@home')->name('homeTactico');
+
+Route::resource('salidas_tacticas/costos_insumos', 'Controllers_Tacticos\CostosInsumosController');
+
+Route::resource('salidas_tacticas/presupuesto', 'Controllers_Tacticos\PresupuestoController');
+
+Route::resource('salidas_tacticas/pacientes_departamento', 'Controllers_Tacticos\PacientesDepartamentoController');
+
+Route::resource('salidas_tacticas/reservacion_citas', 'Controllers_Tacticos\ReservacionCitasController');
+
+Route::resource('salidas_tacticas/inventario_materiales', 'Controllers_Tacticos\InventarioMaterialesController');
+
+Route::resource('salidas_tacticas/ganancias_examenes', 'Controllers_Tacticos\GananciasExamenesController');

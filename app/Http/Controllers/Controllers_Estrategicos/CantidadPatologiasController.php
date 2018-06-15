@@ -66,7 +66,7 @@ class CantidadPatologiasController extends Controller
         $abdomen = DB::table('pacientes')->join('reservacion', 'pacientes.idPaciente', '=', 'reservacion.idPaciente')->join('regionAnatomica', 'reservacion.idRegionAnatomica', '=', 'regionAnatomica.idRegionAnatomica')->join('tipoExamen', 'regionAnatomica.idTipoExamen', '=', 'tipoExamen.idTipoExamen')->join('examen', 'reservacion.idReservacion', '=', 'examen.idReservacion')->join('lectura', 'examen.idExamen', '=', 'lectura.idExamen')->where('nombreRegionAnatomica','Abdomen')->where('patologia','si')->count();
 
 
-        return view($this->path.'/cantidad_patologias')->with("torax",$torax)->with('abdomen',$abdomen)->with('ovarios',$ovarios)->with('utero',$utero)->with('cuello',$cuello)->with('hombro',$hombro)->with('brazo',$brazo)->with('codo',$codo)->with('antebrazo',$antebrazo)->with('muñeca',$muñeca)->with('mano',$mano)->with('gluteo',$gluteo)->with('muslo',$muslo)->with('rodilla',$rodilla)->with('pierna',$pierna)->with('tobillo',$tobillo)->with('pie',$pie)->with('cabeza',$cabeza);;
+        return view($this->path.'/cantidad_patologias')->with("torax",$torax)->with('abdomen',$abdomen)->with('ovarios',$ovarios)->with('utero',$utero)->with('cuello',$cuello)->with('hombro',$hombro)->with('brazo',$brazo)->with('codo',$codo)->with('antebrazo',$antebrazo)->with('muñeca',$muñeca)->with('mano',$mano)->with('gluteo',$gluteo)->with('muslo',$muslo)->with('rodilla',$rodilla)->with('pierna',$pierna)->with('tobillo',$tobillo)->with('pie',$pie)->with('cabeza',$cabeza);
     }
 
     /**
