@@ -60,6 +60,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
          'admin'=>\App\Http\Middleware\adminMiddleware::class,
           'secretaria'=>\App\Http\Middleware\secretariaMiddleware::class,
+          'estrategico' => \App\Http\Middleware\estrategicoMiddleware::class,
           'roleshinobi' => \Caffeinated\Shinobi\Middleware\UserHasRole::class,
           'permissionshinobi' => \Caffeinated\Shinobi\Middleware\UserHasPermission::class,
 

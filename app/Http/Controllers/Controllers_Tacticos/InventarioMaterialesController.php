@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Controllers_Tacticos;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
+
 use App\Http\Controllers\Controller;
 
 class InventarioMaterialesController extends Controller
@@ -17,6 +19,26 @@ class InventarioMaterialesController extends Controller
     public function index()
     {
         //
+        
+         $placas6 = DB::table('users')->join('entrada', 'users.id', '=', 'entrada.id')->join('material', 'entrada.idEntrada', '=', 'material.idEntrada')->join('tipoUnidad', 'material.idTipoUnidad', '=', 'tipoUnidad.idTipoUnidad')->join('tipoMaterial', 'tipoUnidad.idTipoMaterial', '=', 'tipoMaterial.idTipoMaterial')->where('nombreTipoUnidad','6 1/2')->select(DB::raw('SUM(material.cantidadMaterial*material.cantidadUnidadMaterial)as total'))->pluck('total');
+
+        $placas8 = DB::table('users')->join('entrada', 'users.id', '=', 'entrada.id')->join('material', 'entrada.idEntrada', '=', 'material.idEntrada')->join('tipoUnidad', 'material.idTipoUnidad', '=', 'tipoUnidad.idTipoUnidad')->join('tipoMaterial', 'tipoUnidad.idTipoMaterial', '=', 'tipoMaterial.idTipoMaterial')->where('nombreTipoUnidad','8 x 10')->select(DB::raw('SUM(material.cantidadMaterial*material.cantidadUnidadMaterial)as total'))->pluck('total');
+
+        $placas10 = DB::table('users')->join('entrada', 'users.id', '=', 'entrada.id')->join('material', 'entrada.idEntrada', '=', 'material.idEntrada')->join('tipoUnidad', 'material.idTipoUnidad', '=', 'tipoUnidad.idTipoUnidad')->join('tipoMaterial', 'tipoUnidad.idTipoMaterial', '=', 'tipoMaterial.idTipoMaterial')->where('nombreTipoUnidad','10 x 12')->select(DB::raw('SUM(material.cantidadMaterial*material.cantidadUnidadMaterial)as total'))->pluck('total');
+
+        $placas11 = DB::table('users')->join('entrada', 'users.id', '=', 'entrada.id')->join('material', 'entrada.idEntrada', '=', 'material.idEntrada')->join('tipoUnidad', 'material.idTipoUnidad', '=', 'tipoUnidad.idTipoUnidad')->join('tipoMaterial', 'tipoUnidad.idTipoMaterial', '=', 'tipoMaterial.idTipoMaterial')->where('nombreTipoUnidad','11 x 14')->select(DB::raw('SUM(material.cantidadMaterial*material.cantidadUnidadMaterial)as total'))->pluck('total');
+
+        $placas14 = DB::table('users')->join('entrada', 'users.id', '=', 'entrada.id')->join('material', 'entrada.idEntrada', '=', 'material.idEntrada')->join('tipoUnidad', 'material.idTipoUnidad', '=', 'tipoUnidad.idTipoUnidad')->join('tipoMaterial', 'tipoUnidad.idTipoMaterial', '=', 'tipoMaterial.idTipoMaterial')->where('nombreTipoUnidad','14 x 14')->select(DB::raw('SUM(material.cantidadMaterial*material.cantidadUnidadMaterial)as total'))->pluck('total');
+
+        $placas17 = DB::table('users')->join('entrada', 'users.id', '=', 'entrada.id')->join('material', 'entrada.idEntrada', '=', 'material.idEntrada')->join('tipoUnidad', 'material.idTipoUnidad', '=', 'tipoUnidad.idTipoUnidad')->join('tipoMaterial', 'tipoUnidad.idTipoMaterial', '=', 'tipoMaterial.idTipoMaterial')->where('nombreTipoUnidad','14 x 17')->select(DB::raw('SUM(material.cantidadMaterial*material.cantidadUnidadMaterial)as total'))->pluck('total');
+
+        $setRevelador = DB::table('users')->join('entrada', 'users.id', '=', 'entrada.id')->join('material', 'entrada.idEntrada', '=', 'material.idEntrada')->join('tipoUnidad', 'material.idTipoUnidad', '=', 'tipoUnidad.idTipoUnidad')->join('tipoMaterial', 'tipoUnidad.idTipoMaterial', '=', 'tipoMaterial.idTipoMaterial')->where('nombreTipoUnidad','Set')->where('nombreTipoMaterial','Revelador')->select(DB::raw('SUM(material.cantidadMaterial*material.cantidadUnidadMaterial)as total'))->pluck('total');
+
+
+        $setFijador = DB::table('users')->join('entrada', 'users.id', '=', 'entrada.id')->join('material', 'entrada.idEntrada', '=', 'material.idEntrada')->join('tipoUnidad', 'material.idTipoUnidad', '=', 'tipoUnidad.idTipoUnidad')->join('tipoMaterial', 'tipoUnidad.idTipoMaterial', '=', 'tipoMaterial.idTipoMaterial')->where('nombreTipoUnidad','Set')->where('nombreTipoMaterial','Fijador')->select(DB::raw('SUM(material.cantidadMaterial*material.cantidadUnidadMaterial)as total'))->pluck('total');
+      
+        return view($this->path.'/inventario_materiales')->with("placas6",$placas6)->with("placas8",$placas8)->with("placas10",$placas10)->with("placas11",$placas11)->with("placas14",$placas14)->with("placas17",$placas17)->with("setRevelador",$setRevelador)->with("setFijador",$setFijador);
+
         return view($this->path.'/inventario_materiales');
     }
 
