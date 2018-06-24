@@ -138,3 +138,15 @@ Route::resource('salidas_tacticas/reservacion_citas', 'Controllers_Tacticos\Rese
 Route::resource('salidas_tacticas/inventario_materiales', 'Controllers_Tacticos\InventarioMaterialesController');
 
 Route::resource('salidas_tacticas/ganancias_examenes', 'Controllers_Tacticos\GananciasExamenesController');
+
+// rutas estrategicas pdf
+
+Route::get('/cantidadPacientesPDF','ReporteController@cantidadPacientesPDF')->name('cantidadPacientesPDF');
+
+Route::get('/cantidadInsumosPDF','ReporteController@cantidadInsumosPDF')->name('cantidadInsumosPDF');
+
+Route::get('/cantidadPatologiasPDF','ReporteController@cantidadPatologiasPDF')->name('cantidadPatologiasPDF');
+
+Route::get('/porcentajePacientesPDF','ReporteController@porcentajePacientesPDF')->name('porcentajePacientesPDF');
+
+Route::get('/cantidadTipoExamenPDF','ReporteController@cantidadTipoExamenPDF')->name('cantidadTipoExamenPDF');

@@ -26,6 +26,7 @@
 								<th class="text-center">Cantidad de placas tipo 14 x 17</th>
 								<th class="text-center">Cantidad de placas tipo Set Revelador</th>
 								<th class="text-center">Cantidad de placas tipo Set Fijador</th>
+								<th class="text-center">Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -87,6 +88,9 @@
                                     else
                                     	print_r($setFijador['0']);
 								?></td>
+								<td> <a href="{{ route('cantidadInsumosPDF') }}" target="_blank" class="btn btn-info btn-sm">
+												<span class="glyphicon glyphicon-download-alt"></span>Ver PDF</a> 
+								</td>
 							</tr>
 						</tbody>
 

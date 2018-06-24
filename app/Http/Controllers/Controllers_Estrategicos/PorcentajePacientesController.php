@@ -38,7 +38,7 @@ class PorcentajePacientesController extends Controller
         $porHo = ($hombres/$total)*100;
         $porHo = round($porHo,2);
          return view($this->path.'/porcentaje_pacientes')->with("hombres",$hombres)->with('mujeres',$mujeres)->with('porMu',$porMu)
-            ->with('porHo',$porHo);//,compact('mujeres'),compact('hombres'),compact('porMu'),compact('porHo'));
+            ->with('porHo',$porHo);
     }
 
     /**

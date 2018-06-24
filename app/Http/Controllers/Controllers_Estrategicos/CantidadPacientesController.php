@@ -100,9 +100,7 @@ class CantidadPacientesController extends Controller
     {
         //
     }
-
-    //$pacientes = select count(*)
-  //from usuario
- //where fecha >= '2016-07-01'
-   //and fecha < '2016-08-01'
+    
+     
+    
 }

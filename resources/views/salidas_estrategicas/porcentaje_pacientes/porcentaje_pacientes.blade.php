@@ -22,6 +22,7 @@
 								<th class="text-center">Mujeres</th>
 								<th class="text-center">Porcentaje Hombres</th>
 								<th class="text-center">Porcentaje Mujeres</th>
+								<th class="text-center">Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -31,6 +32,9 @@
 								<td class="text-center">{{ $mujeres }}</td>
 								<td class="text-center">{{ $porHo }}%</td>
 								<td class="text-center">{{ $porMu }}%</td>
+								<td> <a href="{{ route('porcentajePacientesPDF') }}" target="_blank" class="btn btn-info btn-sm">
+												<span class="glyphicon glyphicon-download-alt"></span>Ver PDF</a> 
+								</td>
 							</tr>
 						</tbody>
 					</table>

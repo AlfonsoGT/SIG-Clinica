@@ -19,13 +19,16 @@
 							<tr>
 
 								<th class="text-center">Cantidad de pacientes</th>
+								<th class="text-center">Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 
 								<td class="text-center">{{ $pacientes }}</td>
-								
+								<td> <a href="{{ route('cantidadPacientesPDF') }}" target="_blank" class="btn btn-info btn-sm">
+												<span class="glyphicon glyphicon-download-alt"></span>Ver PDF</a> 
+								</td>
 							</tr>
 						</tbody>
 					</table>
