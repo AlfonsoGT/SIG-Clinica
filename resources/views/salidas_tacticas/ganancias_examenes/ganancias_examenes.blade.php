@@ -10,7 +10,7 @@
                     <div class="panel-heading">Ganancias por Tipos de Examen</div>
                     <div class="panel-body">
 
-                        <h2 style="display: inline;">Ganancias por Tipos de Examen (en $)</h2>
+                        <h2 style="display: inline;">Ganancias por Tipos de Examen </h2>
 
                         <div class="table-responsive">
 					<table class="table table-striped table-hover table-bordered">
@@ -34,6 +34,7 @@
 								<th class="text-center">Tobillo</th>
 								<th class="text-center">Pie</th>
 								<th class="text-center">Cabeza</th>
+								<th class="text-center">Acciones</th>
 								
 							</tr>
 						</thead>
@@ -166,6 +167,9 @@
                                     else
                                     	print_r($cabeza1['0']);
 								?></td>
+								<td> <a href="{{ route('gananciasExamenesPDF') }}" target="_blank" class="btn btn-info btn-sm">
+												<span class="glyphicon glyphicon-download-alt"></span>Ver PDF</a> 
+								</td>
 							</tr>
 						</tbody>
 

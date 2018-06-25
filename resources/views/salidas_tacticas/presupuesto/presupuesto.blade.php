@@ -20,6 +20,7 @@
 								<th class="text-center">Total de Ganancias</th>
 								<th class="text-center">Total de Costos</th>
 								<th class="text-center">Presupuesto de la Clinica</th>
+								<th class="text-center">Acciones</th>
 
 							</tr>
 						</thead>
@@ -31,6 +32,9 @@
 								<td class="text-center">{{ $costos}}
 								</td>
 								<td class="text-center">{{ $presupuesto}}
+								</td>
+								<td> <a href="{{ route('presupuestoPDF') }}" target="_blank" class="btn btn-info btn-sm">
+												<span class="glyphicon glyphicon-download-alt"></span>Ver PDF</a> 
 								</td>
 								
 							</tr>

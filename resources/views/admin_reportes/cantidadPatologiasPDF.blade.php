@@ -71,24 +71,24 @@
          <br>
          <h2 style="display: inline;">CANTIDAD DE PATOLOGIAS POR TIPOS DE EXAMEN</h2>
 
-        <p class="izq">Torax:{{ $torax }}</p>
-        <p class="izq">Abdomen:{{ $abdomen }}</p>
-        <p class="text-center">Ovarios:{{$ovarios}}</p>
-        <p class="text-center">Utero:{{$utero}}</p>
-        <p class="text-center">Cuello:{{$cuello}}</p>
-        <p class="text-center">Hombro:{{$hombro}}</p>
-        <p class="text-center">Brazo:{{$brazo}}</p>
-        <p class="text-center">Codo:{{$codo}}</p>
-        <p class="text-center">Antebrazo:{{$antebrazo}}</p>
-        <p class="text-center">Muñeca:{{$muñeca}}</p>
-        <p class="text-center">Mano:{{$mano}}</p>
-        <p class="text-center">Gluteo:{{$gluteo}}</p>
-        <p class="text-center">Muslo:{{$muslo}}</p>
-        <p class="text-center">Rodilla:{{$rodilla}}</p>
-        <p class="text-center">Pierna:{{$pierna}}</p>
-        <p class="text-center">Tobillo:{{$tobillo}}</p>
-        <p class="text-center">Pie:{{$pie}}</p>
-        <p class="text-center">Cabeza:{{$cabeza}}</p>
+        <p class="izq"><B>Torax:</B>   {{ $torax }}</p>
+        <p class="izq"><B>Abdomen:</B>   {{ $abdomen }}</p>
+        <p class="text-center"><B>Ovarios:</B>   {{$ovarios}}</p>
+        <p class="text-center"><B>Utero:</B>   {{$utero}}</p>
+        <p class="text-center"><B>Cuello:</B>   {{$cuello}}</p>
+        <p class="text-center"><B>Hombro:</B>   {{$hombro}}</p>
+        <p class="text-center"><B>Brazo:</B>   {{$brazo}}</p>
+        <p class="text-center"><B>Codo:</B>   {{$codo}}</p>
+        <p class="text-center"><B>Antebrazo:</B>   {{$antebrazo}}</p>
+        <p class="text-center"><B>Muñeca:</B>   {{$muñeca}}</p>
+        <p class="text-center"><B>Mano:</B>   {{$mano}}</p>
+        <p class="text-center"><B>Gluteo:</B>   {{$gluteo}}</p>
+        <p class="text-center"><B>Muslo:</B>   {{$muslo}}</p>
+        <p class="text-center"><B>Rodilla:</B>   {{$rodilla}}</p>
+        <p class="text-center"><B>Pierna:</B>   {{$pierna}}</p>
+        <p class="text-center"><B>Tobillo:</B>   {{$tobillo}}</p>
+        <p class="text-center"><B>Pie:</B>   {{$pie}}</p>
+        <p class="text-center"><B>Cabeza:</B>   {{$cabeza}}</p>
         
    </div>
 </body>

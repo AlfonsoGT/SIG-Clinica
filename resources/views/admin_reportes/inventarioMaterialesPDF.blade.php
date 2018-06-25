@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,7 +70,7 @@
   <div id="content">
       
          <br>
-         <h2 style="display: inline;">CANTIDAD DE INSUMOS DE LA CLINICA</h2>
+         <h2 style="display: inline;">INVENTARIO DE LA CLINICA</h2>
                 <p class="text-center"><B>Cantidad de placas tipo 6 1/2:</B>   {{$placas6}}</p>
                 <p class="text-center"><B>Cantidad de placas tipo 8 x 10:</B>   {{$placas8}}</p>
                 <p class="text-center"><B>Cantidad de placas tipo 10 x 12:</B>   {{$placas10}}</p>

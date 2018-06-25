@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,20 +68,13 @@
     </table>
   </footer>
   <div id="content">
-      
          <br>
-         <h2 style="display: inline;">CANTIDAD DE INSUMOS DE LA CLINICA</h2>
-                <p class="text-center"><B>Cantidad de placas tipo 6 1/2:</B>   {{$placas6}}</p>
-                <p class="text-center"><B>Cantidad de placas tipo 8 x 10:</B>   {{$placas8}}</p>
-                <p class="text-center"><B>Cantidad de placas tipo 10 x 12:</B>   {{$placas10}}</p>
-                <p class="text-center"><B>Cantidad de placas tipo 11 x 14:</B>   {{$placas11}}</p>
-                <p class="text-center"><B>Cantidad de placas tipo 14 x 14:</B>   {{$placas14}}</p>
-                <p class="text-center"><B>Cantidad de placas tipo 14 x 17:</B>   {{$placas17}}</p>
-                <p class="text-center"><B>Cantidad de placas tipo Set Revelador:</B>   {{$setRevelador}}</p>
-                <p class="text-center"><B>Cantidad de placas tipo Set Fijador:</B>   {{$setFijador}}</p>
-             
-                        
+         <h2 style="display: inline;">GANANCIAS POR TIPOS DE EXAMEN</h2>
 
+        <p class="text-center"><B>Total de Ganancias:</B>   ${{$ganancias}}</p>
+        <p class="text-center"><B>Total de Costos:</B>   ${{$costos}}</p>
+        <p class="text-center"><B>Presupuesto:</B>   ${{$presupuesto}}</p>
+        
    </div>
 </body>
 </html>

@@ -31,6 +31,7 @@
 								<th class="text-center">Santa Ana</th>
 								<th class="text-center">Sonsonate</th>
 								<th class="text-center">Usulután</th>
+								<th class="text-center">Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -50,6 +51,9 @@
 								<td class="text-center">{{ $santaana }}</td>
 								<td class="text-center">{{ $sonsonate }}</td>
 								<td class="text-center">{{ $usulutan }}</td>
+								<td> <a href="{{ route('pacientesDepartamentoPDF') }}" target="_blank" class="btn btn-info btn-sm">
+												<span class="glyphicon glyphicon-download-alt"></span>Ver PDF</a> 
+								</td>
 							</tr>
 						</tbody>
 

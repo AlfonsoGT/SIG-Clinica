@@ -75,10 +75,10 @@
 
     
 
-                <p class="text-center">Hombres:{{$hombres}}</p>
-                <p class="text-center">Mujeres:{{$mujeres}}</p>
-                <p class="text-center">Porcentaje Hombres:{{$porHo}}%</p>
-                <p class="text-center">Porcentaje Mujeres:{{$porMu}}%</p>
+                <p class="text-center"><B>Hombres:</B>   {{$hombres}}</p>
+                <p class="text-center"><B>Mujeres:</B>   {{$mujeres}}</p>
+                <p class="text-center"><B>Porcentaje de Hombres:</B>   {{$porHo}}%</p>
+                <p class="text-center"><B>Porcentaje Mujeres:</B>   {{$porMu}}%</p>
              
              
         </div>

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,18 +70,26 @@
   <div id="content">
       
          <br>
-         <h2 style="display: inline;">CANTIDAD DE INSUMOS DE LA CLINICA</h2>
-                <p class="text-center"><B>Cantidad de placas tipo 6 1/2:</B>   {{$placas6}}</p>
-                <p class="text-center"><B>Cantidad de placas tipo 8 x 10:</B>   {{$placas8}}</p>
-                <p class="text-center"><B>Cantidad de placas tipo 10 x 12:</B>   {{$placas10}}</p>
-                <p class="text-center"><B>Cantidad de placas tipo 11 x 14:</B>   {{$placas11}}</p>
-                <p class="text-center"><B>Cantidad de placas tipo 14 x 14:</B>   {{$placas14}}</p>
-                <p class="text-center"><B>Cantidad de placas tipo 14 x 17:</B>   {{$placas17}}</p>
-                <p class="text-center"><B>Cantidad de placas tipo Set Revelador:</B>   {{$setRevelador}}</p>
-                <p class="text-center"><B>Cantidad de placas tipo Set Fijador:</B>   {{$setFijador}}</p>
-             
+         <h2 style="display: inline;">PACIENTES POR DEPARTAMENTO</h2>
+         
+                <p class="text-center"><B>Ahuachapán:</B>   {{$ahuachapan}}</p>
+                <p class="text-center"><B>Cabañas:</B>   {{$cabañas}}</p>
+                <p class="text-center"><B>Chalatenango:</B>   {{$chalatenango}}</p>
+                <p class="text-center"><B>Cuscatlán:</B>   {{$cuscatlan}}</p>
+                <p class="text-center"><B>Morazán:</B>   {{$morazan}}</p>
+                <p class="text-center"><B>La Libertad:</B>   {{$lalibertad}}</p>
+                <p class="text-center"><B>La Paz:</B>   {{$lapaz}}</p>
+                <p class="text-center"><B>La Unión:</B>   {{$launion}}</p>
+                <p class="text-center"><B>San Miguel:</B>   {{$sanmiguel}}</p>
+                <p class="text-center"><B>San Salvador:</B>   {{$sansalvador}}</p>
+                <p class="text-center"><B>San Vicente:</B>   {{$sanvicente}}</p>
+                <p class="text-center"><B>Santa Ana:</B>   {{$santaana}}</p>
+				<p class="text-center"><B>Sonsonate:</B>   {{$sonsonate}}</p>
+				<p class="text-center"><B>Usulután:</B>   {{$usulutan}}</p>				
+									
+								
                         
 
    </div>
 </body>
-</html>
+</html>								

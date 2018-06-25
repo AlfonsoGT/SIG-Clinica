@@ -150,3 +150,17 @@ Route::get('/cantidadPatologiasPDF','ReporteController@cantidadPatologiasPDF')->
 Route::get('/porcentajePacientesPDF','ReporteController@porcentajePacientesPDF')->name('porcentajePacientesPDF');
 
 Route::get('/cantidadTipoExamenPDF','ReporteController@cantidadTipoExamenPDF')->name('cantidadTipoExamenPDF');
+
+// rutas tacticas pdf
+
+Route::get('/costosInsumosPDF','ReporteController@costosInsumosPDF')->name('costosInsumosPDF');
+
+Route::get('/gananciasExamenesPDF','ReporteController@gananciasExamenesPDF')->name('gananciasExamenesPDF');
+
+Route::get('/presupuestoPDF','ReporteController@presupuestoPDF')->name('presupuestoPDF');
+
+Route::get('/reservacionCitasPDF','ReporteController@reservacionCitasPDF')->name('reservacionCitasPDF');
+
+Route::get('/pacientesDepartamentoPDF','ReporteController@pacientesDepartamentoPDF')->name('pacientesDepartamentoPDF');
+
+Route::get('/inventarioMaterialesPDF','ReporteController@inventarioMaterialesPDF')->name('inventarioMaterialesPDF');

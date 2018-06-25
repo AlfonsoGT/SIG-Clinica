@@ -35,6 +35,7 @@
 								<th class="text-center">Tobillo</th>
 								<th class="text-center">Pie</th>
 								<th class="text-center">Cabeza</th>
+								<th class="text-center">Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -58,6 +59,9 @@
 								<td class="text-center">{{ $tobillo }}</td>
 								<td class="text-center">{{ $pie }}</td>
 								<td class="text-center">{{ $cabeza }}</td>
+								<td> <a href="{{ route('reservacionCitasPDF') }}" target="_blank" class="btn btn-info btn-sm">
+												<span class="glyphicon glyphicon-download-alt"></span>Ver PDF</a> 
+								</td>
 							</tr>
 						</tbody>
 
